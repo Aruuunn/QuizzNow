@@ -1,0 +1,25 @@
+version: "3.8"
+
+services:
+  postgress:
+    image: "postgres:latest"
+    ports: 
+        - "5432:5432"
+
+  api:
+    stdin_open: true
+    tty: true
+    build:
+      dockerfile: Dockerfile.dev
+      context: ./server
+    volumes:
+      - /app/node_modules
+      - ./server:/app
+    environment:
+      - POSTGRES_HOST=postgres
+      - POSTGRES_PORT=5432
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres_password
+      - POSTGRES_DATABASE=postgres
+    ports: 
+        - "5000:5000"
