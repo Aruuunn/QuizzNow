@@ -6,22 +6,22 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.AuthModule = void 0;
+exports.GoogleGaurd = void 0;
 const common_1 = require("@nestjs/common");
 const passport_1 = require("@nestjs/passport");
-const user_module_1 = require("../user/user.module");
-const user_service_1 = require("../user/user.service");
-const google_serializer_1 = require("./googleStrategy/google.serializer");
-const google_strategy_1 = require("./googleStrategy/google.strategy");
-let AuthModule = class AuthModule {
+let GoogleGaurd = class GoogleGaurd extends passport_1.AuthGuard('google') {
+    async canActivate(context) {
+        const can = await super.canActivate(context);
+        if (can) {
+            const request = context.switchToHttp().getRequest();
+            super.logIn(request);
+        }
+        return true;
+    }
 };
-AuthModule = __decorate([
-    common_1.Module({
-        imports: [passport_1.PassportModule.register({
-                defaultStrategy: 'google'
-            }), user_module_1.UserModule],
-        providers: [google_strategy_1.GoogleStrategy, user_service_1.UserService, google_serializer_1.GoogleSerializer]
-    })
-], AuthModule);
-exports.AuthModule = AuthModule;
-//# sourceMappingURL=auth.module.js.map
+GoogleGaurd = __decorate([
+    common_1.Injectable()
+], GoogleGaurd);
+exports.GoogleGaurd = GoogleGaurd;
+exports.default = GoogleGaurd;
+//# sourceMappingURL=google.gaurd.js.map

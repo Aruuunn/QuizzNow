@@ -10,26 +10,26 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const typeorm_1 = require("typeorm");
-let UserEntity = class UserEntity extends typeorm_1.BaseEntity {
+let QAEntity = class QAEntity extends typeorm_1.BaseEntity {
 };
 __decorate([
     typeorm_1.PrimaryGeneratedColumn('uuid'),
     __metadata("design:type", String)
-], UserEntity.prototype, "id", void 0);
+], QAEntity.prototype, "id", void 0);
 __decorate([
     typeorm_1.Column(),
     __metadata("design:type", String)
-], UserEntity.prototype, "name", void 0);
+], QAEntity.prototype, "question", void 0);
 __decorate([
     typeorm_1.Column(),
-    __metadata("design:type", String)
-], UserEntity.prototype, "email", void 0);
+    __metadata("design:type", Number)
+], QAEntity.prototype, "correctAnswer", void 0);
 __decorate([
-    typeorm_1.Column(),
-    __metadata("design:type", String)
-], UserEntity.prototype, "photoURL", void 0);
-UserEntity = __decorate([
+    typeorm_1.Column('bytea', { array: true }),
+    __metadata("design:type", Array)
+], QAEntity.prototype, "answers", void 0);
+QAEntity = __decorate([
     typeorm_1.Entity()
-], UserEntity);
-exports.default = UserEntity;
-//# sourceMappingURL=user.entity.js.map
+], QAEntity);
+exports.default = QAEntity;
+//# sourceMappingURL=qa.entity.js.map

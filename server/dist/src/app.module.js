@@ -10,12 +10,14 @@ exports.AppModule = void 0;
 const common_1 = require("@nestjs/common");
 const app_controller_1 = require("./app.controller");
 const app_service_1 = require("./app.service");
-const auth_service_1 = require("./auth/auth.service");
 const auth_controller_1 = require("./auth/auth.controller");
 const user_service_1 = require("./user/user.service");
 const auth_module_1 = require("./auth/auth.module");
 const typeorm_1 = require("@nestjs/typeorm");
 const user_module_1 = require("./user/user.module");
+const qa_service_1 = require("./qa/qa.service");
+const qa_module_1 = require("./qa/qa.module");
+const quiz_module_1 = require("./quiz/quiz.module");
 const env = require("../config/env");
 let AppModule = class AppModule {
 };
@@ -30,9 +32,9 @@ AppModule = __decorate([
                 database: env.POSTGRES_DATABASE,
                 entities: ['dist/**/*.entity{.js,.ts}'],
                 synchronize: true,
-            }), auth_module_1.AuthModule, user_module_1.UserModule],
+            }), auth_module_1.AuthModule, user_module_1.UserModule, qa_module_1.QaModule, quiz_module_1.QuizModule],
         controllers: [app_controller_1.AppController, auth_controller_1.AuthController],
-        providers: [app_service_1.AppService, auth_service_1.AuthService, user_service_1.UserService],
+        providers: [app_service_1.AppService, user_service_1.UserService, qa_service_1.QaService],
     })
 ], AppModule);
 exports.AppModule = AppModule;

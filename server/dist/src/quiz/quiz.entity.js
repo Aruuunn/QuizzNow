@@ -9,27 +9,24 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.QuizEntity = void 0;
 const typeorm_1 = require("typeorm");
-let UserEntity = class UserEntity extends typeorm_1.BaseEntity {
+let QuizEntity = class QuizEntity extends typeorm_1.BaseEntity {
 };
 __decorate([
     typeorm_1.PrimaryGeneratedColumn('uuid'),
     __metadata("design:type", String)
-], UserEntity.prototype, "id", void 0);
+], QuizEntity.prototype, "id", void 0);
 __decorate([
     typeorm_1.Column(),
-    __metadata("design:type", String)
-], UserEntity.prototype, "name", void 0);
+    __metadata("design:type", Date)
+], QuizEntity.prototype, "startDatetime", void 0);
 __decorate([
     typeorm_1.Column(),
-    __metadata("design:type", String)
-], UserEntity.prototype, "email", void 0);
-__decorate([
-    typeorm_1.Column(),
-    __metadata("design:type", String)
-], UserEntity.prototype, "photoURL", void 0);
-UserEntity = __decorate([
+    __metadata("design:type", Date)
+], QuizEntity.prototype, "endDatetime", void 0);
+QuizEntity = __decorate([
     typeorm_1.Entity()
-], UserEntity);
-exports.default = UserEntity;
-//# sourceMappingURL=user.entity.js.map
+], QuizEntity);
+exports.QuizEntity = QuizEntity;
+//# sourceMappingURL=quiz.entity.js.map

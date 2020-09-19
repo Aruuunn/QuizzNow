@@ -1176,11 +1176,6 @@
         "signature": "ef022c91ea9e75ab4082f2e881f9c4db7b346be2da706e876b253bebce5e6140",
         "affectsGlobalScope": false
       },
-      "../src/auth/auth.service.ts": {
-        "version": "107ea2ffe0cd165056f46498522b0baa4db6e0a7a1f3e4082f33610af68a66d4",
-        "signature": "8fc77f803f9a22fcfa6774bc62386393e51129388118d497d0eb503ca3a9cf95",
-        "affectsGlobalScope": false
-      },
       "../node_modules/@nestjs/passport/dist/abstract.strategy.d.ts": {
         "version": "ba63131c5e91f797736444933af16ffa42f9f8c150d859ec65f568f037a416ea",
         "signature": "ba63131c5e91f797736444933af16ffa42f9f8c150d859ec65f568f037a416ea",
@@ -1504,6 +1499,16 @@
       "../node_modules/@nestjs/passport/index.d.ts": {
         "version": "8f1241f5d9f0d3d72117768b3c974e462840fbd85026fb66685078945404cf2f",
         "signature": "8f1241f5d9f0d3d72117768b3c974e462840fbd85026fb66685078945404cf2f",
+        "affectsGlobalScope": false
+      },
+      "../src/auth/googleStrategy/google.gaurd.ts": {
+        "version": "8bab8f35f9eeda387446194491d14e4a77d9fcd37d2f7e24b6e51121adfad4f4",
+        "signature": "9178ac2c523942a10e85f586af91271d24bb8852d61a03c7c3158157828a846f",
+        "affectsGlobalScope": false
+      },
+      "../src/auth/auth.controller.ts": {
+        "version": "5f94bc50deb398b1a13f1d264bcb8427aa109079917e077bb4e1a1f224eca808",
+        "signature": "02ad91eeafcfd19fc821ea1fe8b58644cf3a25ce60f4d3d6226acc84d73df953",
         "affectsGlobalScope": false
       },
       "../node_modules/typeorm/schema-builder/options/TableColumnOptions.d.ts": {
@@ -2817,8 +2822,8 @@
         "affectsGlobalScope": false
       },
       "../src/user/user.entity.ts": {
-        "version": "83ea473214797c9c168b02c1aacdee0258456c49fc2516fbeb16be907da3f906",
-        "signature": "ae3567abc861510aef65993d2b938fb081e377a22b2d44fceac62cf8e89bda7a",
+        "version": "69b2f56b69a0377a47d98f66b99c28c384beab825425f1b803d688838b05d68b",
+        "signature": "3d06448c20104d8dd2003b574232617c930feec741bfa9ab148e3021e7f2f186",
         "affectsGlobalScope": false
       },
       "../src/user/user.repository.ts": {
@@ -2831,22 +2836,12 @@
         "signature": "fdef3347c0a52d47dfecaae5e30ac624bff7ba37605523901cf80f9076be6fd6",
         "affectsGlobalScope": false
       },
-      "../src/auth/strategy/google.gaurd.ts": {
-        "version": "8bab8f35f9eeda387446194491d14e4a77d9fcd37d2f7e24b6e51121adfad4f4",
-        "signature": "9178ac2c523942a10e85f586af91271d24bb8852d61a03c7c3158157828a846f",
-        "affectsGlobalScope": false
-      },
-      "../src/auth/auth.controller.ts": {
-        "version": "df2871b905c83f35d67dba24e9fbc10f32dbfdaba2ea1b054c7649c3e67f2161",
-        "signature": "02ad91eeafcfd19fc821ea1fe8b58644cf3a25ce60f4d3d6226acc84d73df953",
-        "affectsGlobalScope": false
-      },
       "../src/user/user.module.ts": {
         "version": "5dee703416dcf03114b4a49aa6cdf29996b872c09291a5d9db33d1d2b789dbf9",
         "signature": "482b8f0d35a3d453500a15b6c6057c1e4c40baa4329b39da9e1026d8e1de4329",
         "affectsGlobalScope": false
       },
-      "../src/auth/strategy/google.serializer.ts": {
+      "../src/auth/googleStrategy/google.serializer.ts": {
         "version": "c1ebae66228a5648cb1154da4fa1bb358bc4f6537ecdda2e5381fdbfb6682d39",
         "signature": "c016e7f287142945d1aaa38e98afc27f5189e454fef66c812df52ee4de42e8dc",
         "affectsGlobalScope": false
@@ -2871,18 +2866,63 @@
         "signature": "c9ae0b351a07b52f29a28e869d8c7c8d29743bbb5eeddc7c0b5b2a69a2450528",
         "affectsGlobalScope": false
       },
-      "../src/auth/strategy/google.strategy.ts": {
-        "version": "d3c8fc98d381fe9bc5384f68f18f1c0cb4dfbf2ae4a8e342f90f83308d43bc45",
+      "../src/auth/googleStrategy/google.strategy.ts": {
+        "version": "42d0454ac52d4c6d90ca72b9cdef7c25073651dfa1e71a91da901f842eca96d0",
         "signature": "010f02f7c94866eceb4b04e3b9ddf65277116f5f419b0e00d3e39f1b5b18c00d",
         "affectsGlobalScope": false
       },
       "../src/auth/auth.module.ts": {
-        "version": "bcb332fcf388b439fd8775ec85d0beacfb9c421bbc79c41c48b555a27ef52b2c",
+        "version": "2353a5df0f8885a39e811aec2102c7fa74100cd38e50dfcb0fd5937736834db1",
         "signature": "a28b5c0c372fb375910b3fe3c3ce4331509bc18ccef7cc39c9ee9d8daf8225d1",
         "affectsGlobalScope": false
       },
+      "../src/qa/qa.entity.ts": {
+        "version": "638954bf2dde54a6ee6b1132948cb4dc958de9cb77060158734ce99a4b252372",
+        "signature": "810452c9f45f50331de21a5a902978421cc96a385ff0f635ecb5d520286bbf6e",
+        "affectsGlobalScope": false
+      },
+      "../src/qa/qa.repository.ts": {
+        "version": "b0a11d2a1a7a6a40514d08df6deae3d155b910fc5d47af580a34e70c96eca429",
+        "signature": "79cbccd56415340f4450225f528665fe897038ffb7e4c8f3f1c7afe853fc5bec",
+        "affectsGlobalScope": false
+      },
+      "../src/qa/qa.service.ts": {
+        "version": "8d0e192ebda1e44ed62e2d714c92553aa9356e64d2fc4ab2b210f770a7a28bbf",
+        "signature": "079c64bc44249b01bed8e2c81a805261736e80f29a6260b1770a8b15e43956f7",
+        "affectsGlobalScope": false
+      },
+      "../src/qa/qa.module.ts": {
+        "version": "9b8c7fb69e29642e5eec7866701840e73ba2a130a17b9a66f310d9babf4f2681",
+        "signature": "6b3ac28c9800733beecb41d8af7447e34a6b47066aa58e3627caba28e202ee94",
+        "affectsGlobalScope": false
+      },
+      "../src/quiz/quiz.controller.ts": {
+        "version": "cdf6665a17bdf9da467e35d0defb518903b32a0f4a6d3a49e39afa41ae98fad5",
+        "signature": "d14f4a73338b7dab1649fa45ab701dcf0863862aa57267dec5c034669d445571",
+        "affectsGlobalScope": false
+      },
+      "../src/quiz/quiz.entity.ts": {
+        "version": "720d1d6fec0b6b97906b03288bca8dba522c09c9849db1850f94e88ec4dad3ac",
+        "signature": "74e7ef993aa1c94ba0a6b6af815f5c7f09af7ac955576b4cccd58e4eeb7e7f80",
+        "affectsGlobalScope": false
+      },
+      "../src/quiz/quiz.repository.ts": {
+        "version": "3ac34a2ae92b875bf09a295d5b2ab58d2c8843e8868b07a6ab38ee6343d3a886",
+        "signature": "3a8e3bdbcc7c0ce26507dfa6f03625b159b1d25095dcbf6e042711ce9e759890",
+        "affectsGlobalScope": false
+      },
+      "../src/quiz/quiz.service.ts": {
+        "version": "7aa2a4bbc42bfe4e32275da27cfb5ecfad032757de9e17561e1af8c797919f91",
+        "signature": "224dbc9b8204aaf4d99802c9b467a8020fb033cd1fe36aa75e03088cf1cdc324",
+        "affectsGlobalScope": false
+      },
+      "../src/quiz/quiz.module.ts": {
+        "version": "c3e8261f4d99a7cb6e203574415bf9536ecaf3d77a8a59701e7dc2ef29df015d",
+        "signature": "598e2ea46f637c4398772085dd8caa881c8aeddf54ab58378040caec538a285a",
+        "affectsGlobalScope": false
+      },
       "../src/app.module.ts": {
-        "version": "f3afa4ac781fbddb1b86e3a56770d25efce52263ef6d87305f4e57fbaad81fde",
+        "version": "197d23e510b08eca778ed9e68395d346891381420ecca7b4fcd397d78fabe5d3",
         "signature": "b82491e2990291580288c5602d4c017238977749d52b17391f0e45d9a29be644",
         "affectsGlobalScope": false
       },
@@ -5639,7 +5679,9 @@
         "../src/app.service.ts",
         "../src/auth/auth.controller.ts",
         "../src/auth/auth.module.ts",
-        "../src/auth/auth.service.ts",
+        "../src/qa/qa.module.ts",
+        "../src/qa/qa.service.ts",
+        "../src/quiz/quiz.module.ts",
         "../src/user/user.module.ts",
         "../src/user/user.service.ts"
       ],
@@ -5648,33 +5690,28 @@
       ],
       "../src/auth/auth.controller.ts": [
         "../node_modules/@nestjs/common/index.d.ts",
-        "../node_modules/@nestjs/passport/index.d.ts",
-        "../src/auth/strategy/google.gaurd.ts",
-        "../src/user/user.service.ts"
+        "../src/auth/googleStrategy/google.gaurd.ts"
       ],
       "../src/auth/auth.module.ts": [
         "../node_modules/@nestjs/common/index.d.ts",
         "../node_modules/@nestjs/passport/index.d.ts",
-        "../src/auth/strategy/google.serializer.ts",
-        "../src/auth/strategy/google.strategy.ts",
+        "../src/auth/googleStrategy/google.serializer.ts",
+        "../src/auth/googleStrategy/google.strategy.ts",
         "../src/user/user.module.ts",
         "../src/user/user.service.ts"
       ],
-      "../src/auth/auth.service.ts": [
-        "../node_modules/@nestjs/common/index.d.ts"
-      ],
-      "../src/auth/strategy/google.gaurd.ts": [
+      "../src/auth/googleStrategy/google.gaurd.ts": [
         "../node_modules/@nestjs/common/index.d.ts",
         "../node_modules/@nestjs/passport/index.d.ts"
       ],
-      "../src/auth/strategy/google.serializer.ts": [
+      "../src/auth/googleStrategy/google.serializer.ts": [
         "../node_modules/@nestjs/common/index.d.ts",
         "../node_modules/@nestjs/passport/index.d.ts",
         "../node_modules/@types/node/assert.d.ts",
         "../src/user/user.entity.ts",
         "../src/user/user.service.ts"
       ],
-      "../src/auth/strategy/google.strategy.ts": [
+      "../src/auth/googleStrategy/google.strategy.ts": [
         "../config/domain.ts",
         "../node_modules/@nestjs/common/index.d.ts",
         "../node_modules/@nestjs/passport/index.d.ts",
@@ -5689,6 +5726,44 @@
         "../node_modules/@types/passport/index.d.ts",
         "../node_modules/dotenv/types/index.d.ts",
         "../src/app.module.ts"
+      ],
+      "../src/qa/qa.entity.ts": [
+        "../node_modules/typeorm/index.d.ts"
+      ],
+      "../src/qa/qa.module.ts": [
+        "../node_modules/@nestjs/common/index.d.ts",
+        "../node_modules/@nestjs/typeorm/index.d.ts",
+        "../src/qa/qa.repository.ts",
+        "../src/qa/qa.service.ts"
+      ],
+      "../src/qa/qa.repository.ts": [
+        "../node_modules/typeorm/index.d.ts",
+        "../src/qa/qa.entity.ts"
+      ],
+      "../src/qa/qa.service.ts": [
+        "../node_modules/@nestjs/common/index.d.ts",
+        "../node_modules/@nestjs/typeorm/index.d.ts",
+        "../src/qa/qa.repository.ts"
+      ],
+      "../src/quiz/quiz.controller.ts": [
+        "../node_modules/@nestjs/common/index.d.ts"
+      ],
+      "../src/quiz/quiz.entity.ts": [
+        "../node_modules/typeorm/index.d.ts"
+      ],
+      "../src/quiz/quiz.module.ts": [
+        "../node_modules/@nestjs/common/index.d.ts",
+        "../node_modules/@nestjs/typeorm/index.d.ts",
+        "../src/quiz/quiz.controller.ts",
+        "../src/quiz/quiz.repository.ts",
+        "../src/quiz/quiz.service.ts"
+      ],
+      "../src/quiz/quiz.repository.ts": [
+        "../node_modules/typeorm/index.d.ts",
+        "../src/quiz/quiz.entity.ts"
+      ],
+      "../src/quiz/quiz.service.ts": [
+        "../node_modules/@nestjs/common/index.d.ts"
       ],
       "../src/user/user.entity.ts": [
         "../node_modules/typeorm/index.d.ts"
@@ -8041,18 +8116,35 @@
       "../src/app.controller.ts": [
         "../src/app.service.ts"
       ],
-      "../src/auth/strategy/google.gaurd.ts": [
+      "../src/auth/googleStrategy/google.gaurd.ts": [
         "../node_modules/@nestjs/common/index.d.ts",
         "../node_modules/@nestjs/passport/index.d.ts"
       ],
-      "../src/auth/strategy/google.serializer.ts": [
+      "../src/auth/googleStrategy/google.serializer.ts": [
         "../node_modules/@nestjs/passport/index.d.ts",
         "../src/user/user.entity.ts",
         "../src/user/user.service.ts"
       ],
-      "../src/auth/strategy/google.strategy.ts": [
+      "../src/auth/googleStrategy/google.strategy.ts": [
         "../node_modules/@types/passport-google-oauth20/index.d.ts",
         "../src/user/user.service.ts"
+      ],
+      "../src/qa/qa.entity.ts": [
+        "../node_modules/typeorm/index.d.ts"
+      ],
+      "../src/qa/qa.repository.ts": [
+        "../node_modules/typeorm/index.d.ts",
+        "../src/qa/qa.entity.ts"
+      ],
+      "../src/qa/qa.service.ts": [
+        "../src/qa/qa.repository.ts"
+      ],
+      "../src/quiz/quiz.entity.ts": [
+        "../node_modules/typeorm/index.d.ts"
+      ],
+      "../src/quiz/quiz.repository.ts": [
+        "../node_modules/typeorm/index.d.ts",
+        "../src/quiz/quiz.entity.ts"
       ],
       "../src/user/user.entity.ts": [
         "../node_modules/typeorm/index.d.ts"
@@ -8714,11 +8806,19 @@
       "../src/app.service.ts",
       "../src/auth/auth.controller.ts",
       "../src/auth/auth.module.ts",
-      "../src/auth/auth.service.ts",
-      "../src/auth/strategy/google.gaurd.ts",
-      "../src/auth/strategy/google.serializer.ts",
-      "../src/auth/strategy/google.strategy.ts",
+      "../src/auth/googleStrategy/google.gaurd.ts",
+      "../src/auth/googleStrategy/google.serializer.ts",
+      "../src/auth/googleStrategy/google.strategy.ts",
       "../src/main.ts",
+      "../src/qa/qa.entity.ts",
+      "../src/qa/qa.module.ts",
+      "../src/qa/qa.repository.ts",
+      "../src/qa/qa.service.ts",
+      "../src/quiz/quiz.controller.ts",
+      "../src/quiz/quiz.entity.ts",
+      "../src/quiz/quiz.module.ts",
+      "../src/quiz/quiz.repository.ts",
+      "../src/quiz/quiz.service.ts",
       "../src/user/user.entity.ts",
       "../src/user/user.module.ts",
       "../src/user/user.repository.ts",

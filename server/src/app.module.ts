@@ -2,12 +2,14 @@ import { Module } from '@nestjs/common';
 
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { AuthService } from './auth/auth.service';
 import { AuthController } from './auth/auth.controller';
 import { UserService } from './user/user.service';
 import { AuthModule } from './auth/auth.module';
 import {TypeOrmModule} from '@nestjs/typeorm';
 import { UserModule } from './user/user.module';
+import { QaService } from './qa/qa.service';
+import { QaModule } from './qa/qa.module';
+import { QuizModule } from './quiz/quiz.module';
 
 import * as env from '../config/env';
 
@@ -21,8 +23,8 @@ import * as env from '../config/env';
     database: env.POSTGRES_DATABASE,
     entities: ['dist/**/*.entity{.js,.ts}'],
     synchronize: true,
-  }), AuthModule, UserModule],
+  }), AuthModule, UserModule, QaModule, QuizModule],
   controllers: [AppController, AuthController],
-  providers: [AppService, AuthService, UserService],
+  providers: [AppService, UserService, QaService],
 })
 export class AppModule {}

@@ -1,0 +1,1 @@
+{"version":3,"file":"quiz.entity.js","sourceRoot":"","sources":["../../../src/quiz/quiz.entity.ts"],"names":[],"mappings":";;;;;;;;;;;;AAAA,qCAA6E;AAK7E,IAAa,UAAU,GAAvB,MAAa,UAAW,SAAQ,oBAAU;CAUzC,CAAA;AARG;IADC,gCAAsB,CAAC,MAAM,CAAC;;sCACrB;AAGV;IADC,gBAAM,EAAE;8BACK,IAAI;iDAAC;AAGnB;IADC,gBAAM,EAAE;8BACG,IAAI;+CAAC;AARR,UAAU;IADtB,gBAAM,EAAE;GACI,UAAU,CAUtB;AAVY,gCAAU"}

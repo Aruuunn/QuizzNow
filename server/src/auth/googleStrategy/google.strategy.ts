@@ -28,7 +28,7 @@ export class GoogleStrategy extends PassportStrategy(Strategy, 'google') {
     profile: any,
     done: VerifyCallback,
   ): Promise<any> => {
-    const { name, emails } = profile;
+    const { name, emails, photos } = profile;
 
     if (!emails || !emails[0]) {
       done('Email should not be empty');
@@ -41,13 +41,19 @@ export class GoogleStrategy extends PassportStrategy(Strategy, 'google') {
       const newUser = new UserEntity();
       newUser.email = emails[0].value;
       newUser.name = name.givenName + ' ' + name.familyName;
+      if (photos && photos.length !== 0)
+        newUser.photoURL = photos[0].value || '';
       newUser.save();
       console.log(newUser);
       done(null, newUser);
       return;
+    } else {
+      if(photos && photos.length!==0 && user.photoURL!== photos[0].value){
+        user.photoURL = photos[0].value;
+        await user.save();
+      }
     }
 
     done(null, user);
   };
-
 }

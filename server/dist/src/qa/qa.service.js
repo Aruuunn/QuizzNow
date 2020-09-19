@@ -8,28 +8,23 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-Object.defineProperty(exports, "__esModule", { value: true });
-const typeorm_1 = require("typeorm");
-let UserEntity = class UserEntity extends typeorm_1.BaseEntity {
+var __param = (this && this.__param) || function (paramIndex, decorator) {
+    return function (target, key) { decorator(target, key, paramIndex); }
 };
-__decorate([
-    typeorm_1.PrimaryGeneratedColumn('uuid'),
-    __metadata("design:type", String)
-], UserEntity.prototype, "id", void 0);
-__decorate([
-    typeorm_1.Column(),
-    __metadata("design:type", String)
-], UserEntity.prototype, "name", void 0);
-__decorate([
-    typeorm_1.Column(),
-    __metadata("design:type", String)
-], UserEntity.prototype, "email", void 0);
-__decorate([
-    typeorm_1.Column(),
-    __metadata("design:type", String)
-], UserEntity.prototype, "photoURL", void 0);
-UserEntity = __decorate([
-    typeorm_1.Entity()
-], UserEntity);
-exports.default = UserEntity;
-//# sourceMappingURL=user.entity.js.map
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.QaService = void 0;
+const common_1 = require("@nestjs/common");
+const typeorm_1 = require("@nestjs/typeorm");
+const qa_repository_1 = require("./qa.repository");
+let QaService = class QaService {
+    constructor(qaRepo) {
+        this.qaRepo = qaRepo;
+    }
+};
+QaService = __decorate([
+    common_1.Injectable(),
+    __param(0, typeorm_1.InjectRepository(qa_repository_1.default)),
+    __metadata("design:paramtypes", [qa_repository_1.default])
+], QaService);
+exports.QaService = QaService;
+//# sourceMappingURL=qa.service.js.map
