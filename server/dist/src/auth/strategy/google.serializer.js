@@ -9,22 +9,26 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.UserService = void 0;
+exports.GoogleSerializer = void 0;
 const common_1 = require("@nestjs/common");
-const typeorm_1 = require("typeorm");
-const user_repository_1 = require("./user.repository");
-let UserService = class UserService {
-    constructor(connection) {
-        this.connection = connection;
-        this.findByEmail = async (email) => {
-            return await this.userRepo.findOne({ email });
+const passport_1 = require("@nestjs/passport");
+const user_entity_1 = require("../../user/user.entity");
+const user_service_1 = require("../../user/user.service");
+let GoogleSerializer = class GoogleSerializer extends passport_1.PassportSerializer {
+    constructor(userService) {
+        super();
+        this.userService = userService;
+        this.serializeUser = (user, done) => {
+            done(null, user.email);
         };
-        this.userRepo = this.connection.getCustomRepository(user_repository_1.default);
+        this.deserializeUser = (email, done) => {
+            return this.userService.findByEmail(email);
+        };
     }
 };
-UserService = __decorate([
+GoogleSerializer = __decorate([
     common_1.Injectable(),
-    __metadata("design:paramtypes", [typeorm_1.Connection])
-], UserService);
-exports.UserService = UserService;
-//# sourceMappingURL=user.service.js.map
+    __metadata("design:paramtypes", [user_service_1.UserService])
+], GoogleSerializer);
+exports.GoogleSerializer = GoogleSerializer;
+//# sourceMappingURL=google.serializer.js.map

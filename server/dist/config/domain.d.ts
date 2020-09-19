@@ -1,1 +1,2 @@
-export declare const BaseURL = "http://localhost:5000/api";
+export declare const baseURL: string;
+export default baseURL;

@@ -19,11 +19,7 @@ __decorate([
 __decorate([
     typeorm_1.Column(),
     __metadata("design:type", String)
-], UserEntity.prototype, "firstName", void 0);
-__decorate([
-    typeorm_1.Column(),
-    __metadata("design:type", String)
-], UserEntity.prototype, "lastName", void 0);
+], UserEntity.prototype, "name", void 0);
 __decorate([
     typeorm_1.Column(),
     __metadata("design:type", String)

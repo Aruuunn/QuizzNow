@@ -8,10 +8,20 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.AuthModule = void 0;
 const common_1 = require("@nestjs/common");
+const passport_1 = require("@nestjs/passport");
+const user_module_1 = require("../user/user.module");
+const user_service_1 = require("../user/user.service");
+const google_serializer_1 = require("./strategy/google.serializer");
+const google_strategy_1 = require("./strategy/google.strategy");
 let AuthModule = class AuthModule {
 };
 AuthModule = __decorate([
-    common_1.Module({})
+    common_1.Module({
+        imports: [passport_1.PassportModule.register({
+                defaultStrategy: 'google'
+            }), user_module_1.UserModule],
+        providers: [google_strategy_1.GoogleStrategy, user_service_1.UserService, google_serializer_1.GoogleSerializer]
+    })
 ], AuthModule);
 exports.AuthModule = AuthModule;
 //# sourceMappingURL=auth.module.js.map

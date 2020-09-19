@@ -4,7 +4,6 @@ import UserEntity from "./user.entity";
 
 @EntityRepository(UserEntity)
 class UserRepository extends Repository<UserEntity> {
-
 }
 
 
