@@ -19,10 +19,15 @@ let GoogleSerializer = class GoogleSerializer extends passport_1.PassportSeriali
         super();
         this.userService = userService;
         this.serializeUser = (user, done) => {
+            console.log('serializing....');
             done(null, user.email);
         };
         this.deserializeUser = (email, done) => {
-            return this.userService.findByEmail(email);
+            console.log('Deserializing....');
+            this.userService
+                .findByEmail(email)
+                .then(user => done(null, user))
+                .catch(err => done(err));
         };
     }
 };

@@ -1,20 +1,25 @@
-import { Controller, Get, HttpStatus, Res, UseGuards } from '@nestjs/common';
+import { Controller, Get, HttpStatus, Req, Res, UseGuards } from '@nestjs/common';
 
-import {GoogleGaurd} from './googleStrategy/google.gaurd';
+import {GoogleLoginGaurd} from './googleStrategy/google.login.gaurd';
 
 @Controller('auth')
 export class AuthController {
     constructor(){}
 
     @Get('google')
-    @UseGuards(GoogleGaurd)
+    @UseGuards(GoogleLoginGaurd)
     login(@Res() res){
         return res.status(HttpStatus.OK).send();
     }
 
+    @Get('test')
+    test(@Req() req){
+        console.log(req.user);
+        return "Hello Arun";
+    }
 
     @Get('google/redirect')
-    @UseGuards(GoogleGaurd)
+    @UseGuards(GoogleLoginGaurd)
     redirect(@Res() res){
         console.log('logged in....');
 

@@ -9,6 +9,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+const quiz_entity_1 = require("../quiz/quiz.entity");
 const typeorm_1 = require("typeorm");
 let QAEntity = class QAEntity extends typeorm_1.BaseEntity {
 };
@@ -28,6 +29,10 @@ __decorate([
     typeorm_1.Column('bytea', { array: true }),
     __metadata("design:type", Array)
 ], QAEntity.prototype, "answers", void 0);
+__decorate([
+    typeorm_1.ManyToOne(type => quiz_entity_1.QuizEntity, quiz => quiz.questions),
+    __metadata("design:type", quiz_entity_1.QuizEntity)
+], QAEntity.prototype, "quiz", void 0);
 QAEntity = __decorate([
     typeorm_1.Entity()
 ], QAEntity);

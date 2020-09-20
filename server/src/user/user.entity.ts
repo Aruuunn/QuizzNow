@@ -1,4 +1,5 @@
-import { Entity,BaseEntity, PrimaryGeneratedColumn, Column } from "typeorm";
+import { QuizEntity } from "src/quiz/quiz.entity";
+import { Entity,BaseEntity, PrimaryGeneratedColumn, Column, OneToMany } from "typeorm";
 
 
 
@@ -16,6 +17,12 @@ class UserEntity extends BaseEntity {
 
     @Column()
     photoURL:string;
+
+    @OneToMany(type => QuizEntity,quiz => quiz.author)
+    quizzes:QuizEntity[];
+
+    @OneToMany(type => QuizEntity,quiz => quiz.participants)
+    attendedQuizzes:QuizEntity[]
 }
 
 

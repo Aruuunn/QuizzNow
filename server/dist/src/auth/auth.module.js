@@ -11,6 +11,7 @@ const common_1 = require("@nestjs/common");
 const passport_1 = require("@nestjs/passport");
 const user_module_1 = require("../user/user.module");
 const user_service_1 = require("../user/user.service");
+const google_login_gaurd_1 = require("./googleStrategy/google.login.gaurd");
 const google_serializer_1 = require("./googleStrategy/google.serializer");
 const google_strategy_1 = require("./googleStrategy/google.strategy");
 let AuthModule = class AuthModule {
@@ -20,7 +21,8 @@ AuthModule = __decorate([
         imports: [passport_1.PassportModule.register({
                 defaultStrategy: 'google'
             }), user_module_1.UserModule],
-        providers: [google_strategy_1.GoogleStrategy, user_service_1.UserService, google_serializer_1.GoogleSerializer]
+        providers: [google_strategy_1.GoogleStrategy, user_service_1.UserService, google_serializer_1.GoogleSerializer, google_login_gaurd_1.default],
+        exports: [google_strategy_1.GoogleStrategy, google_serializer_1.GoogleSerializer, google_login_gaurd_1.default]
     })
 ], AuthModule);
 exports.AuthModule = AuthModule;

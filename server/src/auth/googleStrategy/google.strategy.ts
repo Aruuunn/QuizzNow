@@ -3,8 +3,6 @@ import { PassportStrategy } from '@nestjs/passport';
 import { Strategy, VerifyCallback } from 'passport-google-oauth20';
 import { config } from 'dotenv';
 
-import * as passport from 'passport';
-
 import UserEntity from 'src/user/user.entity';
 import baseURL from 'config/domain';
 import { UserService } from 'src/user/user.service';
@@ -37,6 +35,7 @@ export class GoogleStrategy extends PassportStrategy(Strategy, 'google') {
 
     const user = await this.userService.findByEmail(emails[0].value);
 
+    
     if (!user) {
       const newUser = new UserEntity();
       newUser.email = emails[0].value;

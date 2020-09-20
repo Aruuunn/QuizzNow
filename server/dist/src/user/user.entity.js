@@ -9,6 +9,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+const quiz_entity_1 = require("../quiz/quiz.entity");
 const typeorm_1 = require("typeorm");
 let UserEntity = class UserEntity extends typeorm_1.BaseEntity {
 };
@@ -28,6 +29,14 @@ __decorate([
     typeorm_1.Column(),
     __metadata("design:type", String)
 ], UserEntity.prototype, "photoURL", void 0);
+__decorate([
+    typeorm_1.OneToMany(type => quiz_entity_1.QuizEntity, quiz => quiz.author),
+    __metadata("design:type", Array)
+], UserEntity.prototype, "quizzes", void 0);
+__decorate([
+    typeorm_1.OneToMany(type => quiz_entity_1.QuizEntity, quiz => quiz.participants),
+    __metadata("design:type", Array)
+], UserEntity.prototype, "attendedQuizzes", void 0);
 UserEntity = __decorate([
     typeorm_1.Entity()
 ], UserEntity);

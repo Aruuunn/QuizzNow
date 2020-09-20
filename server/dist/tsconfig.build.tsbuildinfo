@@ -1171,8 +1171,13 @@
         "signature": "653711fba8904aa27fd8911b63cf526e7b334e13a292da4cefdbbe179ac3f3f2",
         "affectsGlobalScope": false
       },
+      "../src/auth/authenticated.gaurd.ts": {
+        "version": "89aadfff308a83a399d411737b35e105d3c8d359d9acef6c5b8b15b7b9c91625",
+        "signature": "aa7cc8015dd78b3abb54f05c1ce3cbf6047a0da94c937575fca4c419e76e3175",
+        "affectsGlobalScope": false
+      },
       "../src/app.controller.ts": {
-        "version": "260f889b9e2b69f77be1155348eb345166aec664b3efff6720053c6844a41f28",
+        "version": "6202a847148e0e5013d0cc6f0b261c73fd8a4c0511b961d9c2142198c843e891",
         "signature": "ef022c91ea9e75ab4082f2e881f9c4db7b346be2da706e876b253bebce5e6140",
         "affectsGlobalScope": false
       },
@@ -1501,14 +1506,14 @@
         "signature": "8f1241f5d9f0d3d72117768b3c974e462840fbd85026fb66685078945404cf2f",
         "affectsGlobalScope": false
       },
-      "../src/auth/googleStrategy/google.gaurd.ts": {
-        "version": "8bab8f35f9eeda387446194491d14e4a77d9fcd37d2f7e24b6e51121adfad4f4",
-        "signature": "9178ac2c523942a10e85f586af91271d24bb8852d61a03c7c3158157828a846f",
+      "../src/auth/googleStrategy/google.login.gaurd.ts": {
+        "version": "5486d1797d47e626ad196f2b2927586bdf7603645a25f1fc969f41eae1234189",
+        "signature": "4abafd6c565da833a6987c57df4a93375f28a01da6ff082b2827363022acc7e1",
         "affectsGlobalScope": false
       },
       "../src/auth/auth.controller.ts": {
-        "version": "5f94bc50deb398b1a13f1d264bcb8427aa109079917e077bb4e1a1f224eca808",
-        "signature": "02ad91eeafcfd19fc821ea1fe8b58644cf3a25ce60f4d3d6226acc84d73df953",
+        "version": "3b6d128008004a3123a148742fac113e10e2fffcf9b85890c4097038683811c7",
+        "signature": "f096e72ad851185e5f95d0ff9c76ae4fdfcb12eaf95c6945945b29d5009ddb4e",
         "affectsGlobalScope": false
       },
       "../node_modules/typeorm/schema-builder/options/TableColumnOptions.d.ts": {
@@ -2821,9 +2826,19 @@
         "signature": "8f1241f5d9f0d3d72117768b3c974e462840fbd85026fb66685078945404cf2f",
         "affectsGlobalScope": false
       },
+      "../src/qa/qa.entity.ts": {
+        "version": "4ca5dfe7b896715f562ffd02b2b8d6cdc62b54b4a1185085d974f093ffb4dd98",
+        "signature": "0839fc34d9a6074c70397363b0a9dab3a292954e6eee04c8589815eadaf8c602",
+        "affectsGlobalScope": false
+      },
+      "../src/quiz/quiz.entity.ts": {
+        "version": "825f4a672d5400aa16b243130c3effc3305a08e84452346f5948991d4859869b",
+        "signature": "9a7e2cfa18b5b1658527ac3596f02824f1db8584d0a0c6631a7bc2f6a7069c89",
+        "affectsGlobalScope": false
+      },
       "../src/user/user.entity.ts": {
-        "version": "69b2f56b69a0377a47d98f66b99c28c384beab825425f1b803d688838b05d68b",
-        "signature": "3d06448c20104d8dd2003b574232617c930feec741bfa9ab148e3021e7f2f186",
+        "version": "6958bf39b09568b43077417df98f2b86480ed570d4e1001ff09875b5cbcccf88",
+        "signature": "4c0e20e44a0727e8e6af5b9f8f02e57abfd9f35287a86aeee1e2e3daa42b56ef",
         "affectsGlobalScope": false
       },
       "../src/user/user.repository.ts": {
@@ -2842,8 +2857,8 @@
         "affectsGlobalScope": false
       },
       "../src/auth/googleStrategy/google.serializer.ts": {
-        "version": "c1ebae66228a5648cb1154da4fa1bb358bc4f6537ecdda2e5381fdbfb6682d39",
-        "signature": "c016e7f287142945d1aaa38e98afc27f5189e454fef66c812df52ee4de42e8dc",
+        "version": "bc59db3f4ac119e712db092fa114c2618af1028b1dbc996a35493a6ea22b8004",
+        "signature": "70685674c254fcbeae53a3ff1163035102dd4966d8640f04a1e35becc1501a7d",
         "affectsGlobalScope": false
       },
       "../node_modules/@types/oauth/index.d.ts": {
@@ -2867,18 +2882,13 @@
         "affectsGlobalScope": false
       },
       "../src/auth/googleStrategy/google.strategy.ts": {
-        "version": "42d0454ac52d4c6d90ca72b9cdef7c25073651dfa1e71a91da901f842eca96d0",
+        "version": "919c7bbfa1e80b41dac06f2b11b9bb814ec131ee035931906689c4d3fe6ea295",
         "signature": "010f02f7c94866eceb4b04e3b9ddf65277116f5f419b0e00d3e39f1b5b18c00d",
         "affectsGlobalScope": false
       },
       "../src/auth/auth.module.ts": {
-        "version": "2353a5df0f8885a39e811aec2102c7fa74100cd38e50dfcb0fd5937736834db1",
+        "version": "3cb845ae297283914c81a2d3ba48ff06465345a8bb235dd7e92c3015c9d8f822",
         "signature": "a28b5c0c372fb375910b3fe3c3ce4331509bc18ccef7cc39c9ee9d8daf8225d1",
-        "affectsGlobalScope": false
-      },
-      "../src/qa/qa.entity.ts": {
-        "version": "638954bf2dde54a6ee6b1132948cb4dc958de9cb77060158734ce99a4b252372",
-        "signature": "810452c9f45f50331de21a5a902978421cc96a385ff0f635ecb5d520286bbf6e",
         "affectsGlobalScope": false
       },
       "../src/qa/qa.repository.ts": {
@@ -2899,11 +2909,6 @@
       "../src/quiz/quiz.controller.ts": {
         "version": "cdf6665a17bdf9da467e35d0defb518903b32a0f4a6d3a49e39afa41ae98fad5",
         "signature": "d14f4a73338b7dab1649fa45ab701dcf0863862aa57267dec5c034669d445571",
-        "affectsGlobalScope": false
-      },
-      "../src/quiz/quiz.entity.ts": {
-        "version": "720d1d6fec0b6b97906b03288bca8dba522c09c9849db1850f94e88ec4dad3ac",
-        "signature": "74e7ef993aa1c94ba0a6b6af815f5c7f09af7ac955576b4cccd58e4eeb7e7f80",
         "affectsGlobalScope": false
       },
       "../src/quiz/quiz.repository.ts": {
@@ -3106,8 +3111,28 @@
         "signature": "7b5ed961a0e03965299591d73de8b8c41e8a68105ff4fc07a240b0dfb94a5a3d",
         "affectsGlobalScope": false
       },
+      "../node_modules/@types/express-session/index.d.ts": {
+        "version": "3e03ea3c4d568a10e41f540bc891c5fb42c036a430187132e599176f7974eaf7",
+        "signature": "3e03ea3c4d568a10e41f540bc891c5fb42c036a430187132e599176f7974eaf7",
+        "affectsGlobalScope": true
+      },
+      "../node_modules/@types/redis/index.d.ts": {
+        "version": "7693157535cbaed80aa45bbabad30af485ba602306a30fbdca2a1aa1d6905c91",
+        "signature": "7693157535cbaed80aa45bbabad30af485ba602306a30fbdca2a1aa1d6905c91",
+        "affectsGlobalScope": false
+      },
+      "../node_modules/@types/ioredis/index.d.ts": {
+        "version": "29f1c2712188aa2ec6c1f539b8d6b38a97a25b87a2eac19125fd111504472d23",
+        "signature": "29f1c2712188aa2ec6c1f539b8d6b38a97a25b87a2eac19125fd111504472d23",
+        "affectsGlobalScope": false
+      },
+      "../node_modules/@types/connect-redis/index.d.ts": {
+        "version": "ba221482780f4d23bf7ef372b48eb50e91a1aa5bd1124e9ae9542fb21ed6adb8",
+        "signature": "ba221482780f4d23bf7ef372b48eb50e91a1aa5bd1124e9ae9542fb21ed6adb8",
+        "affectsGlobalScope": false
+      },
       "../src/main.ts": {
-        "version": "adddbd68ed49a2e335d8035649d4bc7ed474ccc9ef7e6ea8b30f14d30769b0b9",
+        "version": "b14ea7bfe491ef70dd5ad5c35d1dcc249cea75b8e28de1c175699aff5b454cac",
         "signature": "8e609bb71c20b858c77f0e9f90bb1319db8477b13f9f965f1a1e18524bf50881",
         "affectsGlobalScope": false
       },
@@ -4045,6 +4070,12 @@
         "../node_modules/@types/node/http.d.ts",
         "../node_modules/@types/node/index.d.ts"
       ],
+      "../node_modules/@types/connect-redis/index.d.ts": [
+        "../node_modules/@types/express-session/index.d.ts",
+        "../node_modules/@types/express/index.d.ts",
+        "../node_modules/@types/ioredis/index.d.ts",
+        "../node_modules/@types/redis/index.d.ts"
+      ],
       "../node_modules/@types/connect/index.d.ts": [
         "../node_modules/@types/node/http.d.ts",
         "../node_modules/@types/node/index.d.ts"
@@ -4056,6 +4087,11 @@
         "../node_modules/@types/qs/index.d.ts",
         "../node_modules/@types/range-parser/index.d.ts"
       ],
+      "../node_modules/@types/express-session/index.d.ts": [
+        "../node_modules/@types/express/index.d.ts",
+        "../node_modules/@types/node/events.d.ts",
+        "../node_modules/@types/node/index.d.ts"
+      ],
       "../node_modules/@types/express/index.d.ts": [
         "../node_modules/@types/body-parser/index.d.ts",
         "../node_modules/@types/express-serve-static-core/index.d.ts",
@@ -4065,6 +4101,12 @@
       "../node_modules/@types/graceful-fs/index.d.ts": [
         "../node_modules/@types/node/fs.d.ts",
         "../node_modules/@types/node/index.d.ts"
+      ],
+      "../node_modules/@types/ioredis/index.d.ts": [
+        "../node_modules/@types/node/events.d.ts",
+        "../node_modules/@types/node/index.d.ts",
+        "../node_modules/@types/node/stream.d.ts",
+        "../node_modules/@types/node/tls.d.ts"
       ],
       "../node_modules/@types/istanbul-lib-report/index.d.ts": [
         "../node_modules/@types/istanbul-lib-coverage/index.d.ts"
@@ -4257,6 +4299,11 @@
       "../node_modules/@types/passport/index.d.ts": [
         "../node_modules/@types/express/index.d.ts",
         "../node_modules/@types/node/http.d.ts"
+      ],
+      "../node_modules/@types/redis/index.d.ts": [
+        "../node_modules/@types/node/events.d.ts",
+        "../node_modules/@types/node/index.d.ts",
+        "../node_modules/@types/node/stream.d.ts"
       ],
       "../node_modules/@types/serve-static/index.d.ts": [
         "../node_modules/@types/express-serve-static-core/index.d.ts",
@@ -5669,7 +5716,8 @@
       ],
       "../src/app.controller.ts": [
         "../node_modules/@nestjs/common/index.d.ts",
-        "../src/app.service.ts"
+        "../src/app.service.ts",
+        "../src/auth/authenticated.gaurd.ts"
       ],
       "../src/app.module.ts": [
         "../config/env.ts",
@@ -5690,24 +5738,27 @@
       ],
       "../src/auth/auth.controller.ts": [
         "../node_modules/@nestjs/common/index.d.ts",
-        "../src/auth/googleStrategy/google.gaurd.ts"
+        "../src/auth/googleStrategy/google.login.gaurd.ts"
       ],
       "../src/auth/auth.module.ts": [
         "../node_modules/@nestjs/common/index.d.ts",
         "../node_modules/@nestjs/passport/index.d.ts",
+        "../src/auth/googleStrategy/google.login.gaurd.ts",
         "../src/auth/googleStrategy/google.serializer.ts",
         "../src/auth/googleStrategy/google.strategy.ts",
         "../src/user/user.module.ts",
         "../src/user/user.service.ts"
       ],
-      "../src/auth/googleStrategy/google.gaurd.ts": [
+      "../src/auth/authenticated.gaurd.ts": [
+        "../node_modules/@nestjs/common/index.d.ts"
+      ],
+      "../src/auth/googleStrategy/google.login.gaurd.ts": [
         "../node_modules/@nestjs/common/index.d.ts",
         "../node_modules/@nestjs/passport/index.d.ts"
       ],
       "../src/auth/googleStrategy/google.serializer.ts": [
         "../node_modules/@nestjs/common/index.d.ts",
         "../node_modules/@nestjs/passport/index.d.ts",
-        "../node_modules/@types/node/assert.d.ts",
         "../src/user/user.entity.ts",
         "../src/user/user.service.ts"
       ],
@@ -5716,19 +5767,22 @@
         "../node_modules/@nestjs/common/index.d.ts",
         "../node_modules/@nestjs/passport/index.d.ts",
         "../node_modules/@types/passport-google-oauth20/index.d.ts",
-        "../node_modules/@types/passport/index.d.ts",
         "../node_modules/dotenv/types/index.d.ts",
         "../src/user/user.entity.ts",
         "../src/user/user.service.ts"
       ],
       "../src/main.ts": [
         "../node_modules/@nestjs/core/index.d.ts",
+        "../node_modules/@types/connect-redis/index.d.ts",
+        "../node_modules/@types/express-session/index.d.ts",
         "../node_modules/@types/passport/index.d.ts",
+        "../node_modules/@types/redis/index.d.ts",
         "../node_modules/dotenv/types/index.d.ts",
         "../src/app.module.ts"
       ],
       "../src/qa/qa.entity.ts": [
-        "../node_modules/typeorm/index.d.ts"
+        "../node_modules/typeorm/index.d.ts",
+        "../src/quiz/quiz.entity.ts"
       ],
       "../src/qa/qa.module.ts": [
         "../node_modules/@nestjs/common/index.d.ts",
@@ -5749,7 +5803,9 @@
         "../node_modules/@nestjs/common/index.d.ts"
       ],
       "../src/quiz/quiz.entity.ts": [
-        "../node_modules/typeorm/index.d.ts"
+        "../node_modules/typeorm/index.d.ts",
+        "../src/qa/qa.entity.ts",
+        "../src/user/user.entity.ts"
       ],
       "../src/quiz/quiz.module.ts": [
         "../node_modules/@nestjs/common/index.d.ts",
@@ -5766,7 +5822,8 @@
         "../node_modules/@nestjs/common/index.d.ts"
       ],
       "../src/user/user.entity.ts": [
-        "../node_modules/typeorm/index.d.ts"
+        "../node_modules/typeorm/index.d.ts",
+        "../src/quiz/quiz.entity.ts"
       ],
       "../src/user/user.module.ts": [
         "../node_modules/@nestjs/common/index.d.ts",
@@ -6491,6 +6548,12 @@
         "../node_modules/@types/node/http.d.ts",
         "../node_modules/@types/node/index.d.ts"
       ],
+      "../node_modules/@types/connect-redis/index.d.ts": [
+        "../node_modules/@types/express-session/index.d.ts",
+        "../node_modules/@types/express/index.d.ts",
+        "../node_modules/@types/ioredis/index.d.ts",
+        "../node_modules/@types/redis/index.d.ts"
+      ],
       "../node_modules/@types/connect/index.d.ts": [
         "../node_modules/@types/node/http.d.ts",
         "../node_modules/@types/node/index.d.ts"
@@ -6502,6 +6565,11 @@
         "../node_modules/@types/qs/index.d.ts",
         "../node_modules/@types/range-parser/index.d.ts"
       ],
+      "../node_modules/@types/express-session/index.d.ts": [
+        "../node_modules/@types/express/index.d.ts",
+        "../node_modules/@types/node/events.d.ts",
+        "../node_modules/@types/node/index.d.ts"
+      ],
       "../node_modules/@types/express/index.d.ts": [
         "../node_modules/@types/body-parser/index.d.ts",
         "../node_modules/@types/express-serve-static-core/index.d.ts",
@@ -6511,6 +6579,12 @@
       "../node_modules/@types/graceful-fs/index.d.ts": [
         "../node_modules/@types/node/fs.d.ts",
         "../node_modules/@types/node/index.d.ts"
+      ],
+      "../node_modules/@types/ioredis/index.d.ts": [
+        "../node_modules/@types/node/events.d.ts",
+        "../node_modules/@types/node/index.d.ts",
+        "../node_modules/@types/node/stream.d.ts",
+        "../node_modules/@types/node/tls.d.ts"
       ],
       "../node_modules/@types/istanbul-lib-report/index.d.ts": [
         "../node_modules/@types/istanbul-lib-coverage/index.d.ts"
@@ -6703,6 +6777,11 @@
       "../node_modules/@types/passport/index.d.ts": [
         "../node_modules/@types/express/index.d.ts",
         "../node_modules/@types/node/http.d.ts"
+      ],
+      "../node_modules/@types/redis/index.d.ts": [
+        "../node_modules/@types/node/events.d.ts",
+        "../node_modules/@types/node/index.d.ts",
+        "../node_modules/@types/node/stream.d.ts"
       ],
       "../node_modules/@types/serve-static/index.d.ts": [
         "../node_modules/@types/express-serve-static-core/index.d.ts",
@@ -8116,7 +8195,10 @@
       "../src/app.controller.ts": [
         "../src/app.service.ts"
       ],
-      "../src/auth/googleStrategy/google.gaurd.ts": [
+      "../src/auth/authenticated.gaurd.ts": [
+        "../node_modules/@nestjs/common/index.d.ts"
+      ],
+      "../src/auth/googleStrategy/google.login.gaurd.ts": [
         "../node_modules/@nestjs/common/index.d.ts",
         "../node_modules/@nestjs/passport/index.d.ts"
       ],
@@ -8130,7 +8212,8 @@
         "../src/user/user.service.ts"
       ],
       "../src/qa/qa.entity.ts": [
-        "../node_modules/typeorm/index.d.ts"
+        "../node_modules/typeorm/index.d.ts",
+        "../src/quiz/quiz.entity.ts"
       ],
       "../src/qa/qa.repository.ts": [
         "../node_modules/typeorm/index.d.ts",
@@ -8140,14 +8223,17 @@
         "../src/qa/qa.repository.ts"
       ],
       "../src/quiz/quiz.entity.ts": [
-        "../node_modules/typeorm/index.d.ts"
+        "../node_modules/typeorm/index.d.ts",
+        "../src/qa/qa.entity.ts",
+        "../src/user/user.entity.ts"
       ],
       "../src/quiz/quiz.repository.ts": [
         "../node_modules/typeorm/index.d.ts",
         "../src/quiz/quiz.entity.ts"
       ],
       "../src/user/user.entity.ts": [
-        "../node_modules/typeorm/index.d.ts"
+        "../node_modules/typeorm/index.d.ts",
+        "../src/quiz/quiz.entity.ts"
       ],
       "../src/user/user.repository.ts": [
         "../node_modules/typeorm/index.d.ts",
@@ -8358,12 +8444,15 @@
       "../node_modules/@types/babel__traverse/index.d.ts",
       "../node_modules/@types/body-parser/index.d.ts",
       "../node_modules/@types/color-name/index.d.ts",
+      "../node_modules/@types/connect-redis/index.d.ts",
       "../node_modules/@types/connect/index.d.ts",
       "../node_modules/@types/cookiejar/index.d.ts",
       "../node_modules/@types/eslint-visitor-keys/index.d.ts",
       "../node_modules/@types/express-serve-static-core/index.d.ts",
+      "../node_modules/@types/express-session/index.d.ts",
       "../node_modules/@types/express/index.d.ts",
       "../node_modules/@types/graceful-fs/index.d.ts",
+      "../node_modules/@types/ioredis/index.d.ts",
       "../node_modules/@types/istanbul-lib-coverage/index.d.ts",
       "../node_modules/@types/istanbul-lib-report/index.d.ts",
       "../node_modules/@types/istanbul-reports/index.d.ts",
@@ -8427,6 +8516,7 @@
       "../node_modules/@types/prettier/index.d.ts",
       "../node_modules/@types/qs/index.d.ts",
       "../node_modules/@types/range-parser/index.d.ts",
+      "../node_modules/@types/redis/index.d.ts",
       "../node_modules/@types/serve-static/index.d.ts",
       "../node_modules/@types/source-list-map/index.d.ts",
       "../node_modules/@types/stack-utils/index.d.ts",
@@ -8806,7 +8896,8 @@
       "../src/app.service.ts",
       "../src/auth/auth.controller.ts",
       "../src/auth/auth.module.ts",
-      "../src/auth/googleStrategy/google.gaurd.ts",
+      "../src/auth/authenticated.gaurd.ts",
+      "../src/auth/googleStrategy/google.login.gaurd.ts",
       "../src/auth/googleStrategy/google.serializer.ts",
       "../src/auth/googleStrategy/google.strategy.ts",
       "../src/main.ts",

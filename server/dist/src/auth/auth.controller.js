@@ -14,11 +14,15 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.AuthController = void 0;
 const common_1 = require("@nestjs/common");
-const google_gaurd_1 = require("./googleStrategy/google.gaurd");
+const google_login_gaurd_1 = require("./googleStrategy/google.login.gaurd");
 let AuthController = class AuthController {
     constructor() { }
     login(res) {
         return res.status(common_1.HttpStatus.OK).send();
+    }
+    test(req) {
+        console.log(req.user);
+        return "Hello Arun";
     }
     redirect(res) {
         console.log('logged in....');
@@ -27,15 +31,22 @@ let AuthController = class AuthController {
 };
 __decorate([
     common_1.Get('google'),
-    common_1.UseGuards(google_gaurd_1.GoogleGaurd),
+    common_1.UseGuards(google_login_gaurd_1.GoogleLoginGaurd),
     __param(0, common_1.Res()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", void 0)
 ], AuthController.prototype, "login", null);
 __decorate([
+    common_1.Get('test'),
+    __param(0, common_1.Req()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", void 0)
+], AuthController.prototype, "test", null);
+__decorate([
     common_1.Get('google/redirect'),
-    common_1.UseGuards(google_gaurd_1.GoogleGaurd),
+    common_1.UseGuards(google_login_gaurd_1.GoogleLoginGaurd),
     __param(0, common_1.Res()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object]),

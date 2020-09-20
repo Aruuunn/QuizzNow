@@ -5,5 +5,5 @@ export declare class GoogleSerializer extends PassportSerializer {
     private readonly userService;
     constructor(userService: UserService);
     serializeUser: (user: UserEntity, done: CallableFunction) => void;
-    deserializeUser: (email: string, done: CallableFunction) => Promise<UserEntity>;
+    deserializeUser: (email: string, done: CallableFunction) => void;
 }

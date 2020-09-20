@@ -10,6 +10,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.QuizEntity = void 0;
+const qa_entity_1 = require("../qa/qa.entity");
+const user_entity_1 = require("../user/user.entity");
 const typeorm_1 = require("typeorm");
 let QuizEntity = class QuizEntity extends typeorm_1.BaseEntity {
 };
@@ -25,6 +27,18 @@ __decorate([
     typeorm_1.Column(),
     __metadata("design:type", Date)
 ], QuizEntity.prototype, "endDatetime", void 0);
+__decorate([
+    typeorm_1.OneToMany(type => qa_entity_1.default, qa => qa.quiz, { eager: true }),
+    __metadata("design:type", Array)
+], QuizEntity.prototype, "questions", void 0);
+__decorate([
+    typeorm_1.ManyToOne(type => user_entity_1.default, user => user.quizzes, { eager: true }),
+    __metadata("design:type", user_entity_1.default)
+], QuizEntity.prototype, "author", void 0);
+__decorate([
+    typeorm_1.ManyToOne(type => user_entity_1.default, user => user.attendedQuizzes, { eager: true }),
+    __metadata("design:type", Array)
+], QuizEntity.prototype, "participants", void 0);
 QuizEntity = __decorate([
     typeorm_1.Entity()
 ], QuizEntity);
