@@ -35,7 +35,6 @@ export class GoogleStrategy extends PassportStrategy(Strategy, 'google') {
 
     const user = await this.userService.findByEmail(emails[0].value);
 
-    
     if (!user) {
       const newUser = new UserEntity();
       newUser.email = emails[0].value;

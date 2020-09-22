@@ -28,7 +28,8 @@ __decorate([
     __metadata("design:type", Date)
 ], QuizEntity.prototype, "endDatetime", void 0);
 __decorate([
-    typeorm_1.OneToMany(type => qa_entity_1.default, qa => qa.quiz, { eager: true }),
+    typeorm_1.ManyToMany(type => qa_entity_1.default, { eager: true }),
+    typeorm_1.JoinTable(),
     __metadata("design:type", Array)
 ], QuizEntity.prototype, "questions", void 0);
 __decorate([
@@ -36,7 +37,7 @@ __decorate([
     __metadata("design:type", user_entity_1.default)
 ], QuizEntity.prototype, "author", void 0);
 __decorate([
-    typeorm_1.ManyToOne(type => user_entity_1.default, user => user.attendedQuizzes, { eager: true }),
+    typeorm_1.ManyToOne(type => user_entity_1.default, user => user.attendedQuizzes, { eager: true, }),
     __metadata("design:type", Array)
 ], QuizEntity.prototype, "participants", void 0);
 QuizEntity = __decorate([

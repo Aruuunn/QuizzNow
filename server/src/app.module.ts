@@ -1,7 +1,4 @@
 import { Module } from '@nestjs/common';
-
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
 import { AuthController } from './auth/auth.controller';
 import { UserService } from './user/user.service';
 import { AuthModule } from './auth/auth.module';
@@ -24,7 +21,7 @@ import * as env from '../config/env';
     entities: ['dist/**/*.entity{.js,.ts}'],
     synchronize: true,
   }), AuthModule, UserModule, QaModule, QuizModule],
-  controllers: [AppController, AuthController],
-  providers: [AppService, UserService, QaService],
+  controllers: [ AuthController],
+  providers: [ UserService, QaService],
 })
 export class AppModule {}

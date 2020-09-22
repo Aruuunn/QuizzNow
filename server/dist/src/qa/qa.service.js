@@ -15,10 +15,31 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.QaService = void 0;
 const common_1 = require("@nestjs/common");
 const typeorm_1 = require("@nestjs/typeorm");
+const user_entity_1 = require("../user/user.entity");
+const qa_entity_1 = require("./qa.entity");
 const qa_repository_1 = require("./qa.repository");
 let QaService = class QaService {
     constructor(qaRepo) {
         this.qaRepo = qaRepo;
+        this.createQuestion = async (user, questionData) => {
+            try {
+                const newQuestion = new qa_entity_1.default();
+                newQuestion.answers = questionData.answers;
+                newQuestion.correctAnswer = questionData.correctAnswer;
+                newQuestion.author = user;
+                newQuestion.question = questionData.question;
+                await newQuestion.save();
+                console.log(newQuestion);
+                return newQuestion;
+            }
+            catch (err) {
+                console.log('Problem in creating Question');
+                console.log(err);
+            }
+        };
+        this.findbyID = async (questionID) => {
+            return this.qaRepo.findOne({ id: questionID });
+        };
     }
 };
 QaService = __decorate([

@@ -9,6 +9,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.QuizModule = void 0;
 const common_1 = require("@nestjs/common");
 const typeorm_1 = require("@nestjs/typeorm");
+const qa_module_1 = require("../qa/qa.module");
+const qa_service_1 = require("../qa/qa.service");
+const user_module_1 = require("../user/user.module");
 const quiz_controller_1 = require("./quiz.controller");
 const quiz_repository_1 = require("./quiz.repository");
 const quiz_service_1 = require("./quiz.service");
@@ -16,9 +19,9 @@ let QuizModule = class QuizModule {
 };
 QuizModule = __decorate([
     common_1.Module({
-        imports: [typeorm_1.TypeOrmModule.forFeature([quiz_repository_1.default])],
+        imports: [typeorm_1.TypeOrmModule.forFeature([quiz_repository_1.default]), user_module_1.UserModule, qa_module_1.QaModule],
         controllers: [quiz_controller_1.QuizController],
-        providers: [quiz_service_1.QuizService],
+        providers: [quiz_service_1.QuizService, qa_service_1.QaService],
     })
 ], QuizModule);
 exports.QuizModule = QuizModule;

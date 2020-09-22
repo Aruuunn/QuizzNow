@@ -1,5 +1,5 @@
-import { QuizEntity } from "src/quiz/quiz.entity";
-import { BaseEntity, Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import UserEntity from "src/user/user.entity";
+import { BaseEntity, Column, Entity, ManyToMany, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
 class QAEntity extends BaseEntity{
@@ -16,8 +16,8 @@ class QAEntity extends BaseEntity{
     @Column('bytea',{array:true})
     answers:string[]
 
-    @ManyToOne(type => QuizEntity,quiz => quiz.questions)
-    quiz:QuizEntity;
+    @ManyToOne(type => UserEntity,user => user.createdQuestion)
+    author:UserEntity;
 
 }
 

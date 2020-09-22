@@ -1,4 +1,97 @@
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable, UnauthorizedException } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import NewQuestionDto from 'src/qa/dto/new.qa';
+import QAEntity from 'src/qa/qa.entity';
+import { QaService } from 'src/qa/qa.service';
+import UserEntity from 'src/user/user.entity';
+import { NewQuizDto } from './dto/new.quiz';
+import { QuizEntity } from './quiz.entity';
+import QuizRepository from './quiz.repository';
 
 @Injectable()
-export class QuizService {}
+export class QuizService {
+  constructor(
+    private qaService:QaService,
+    @InjectRepository(QuizRepository)
+  private  quizRepo:QuizRepository
+  ) {}
+
+  createNewQuiz = async (user: UserEntity, quizData: NewQuizDto) => {
+    const newQuiz = new QuizEntity();
+
+    newQuiz.startDatetime = new Date(quizData.startDatetime);
+    newQuiz.endDatetime = new Date(quizData.endDatetime);
+    newQuiz.author = user;
+    const questions :QAEntity[]= [];
+    if(quizData.questions.length!==0)
+    for(let i of quizData.questions){
+        questions.push(await this.qaService.createQuestion(user,i));
+    }
+
+    newQuiz.questions = questions;
+
+    console.log("saving ...");
+    await newQuiz.save();
+  };
+
+
+  addNewQuestion = async(user:UserEntity,question:NewQuestionDto,quizId:string) => {
+
+      const newQuestion = await this.qaService.createQuestion(user,question);
+
+      const quiz = await this.quizRepo.findOne({id:quizId});
+
+      if(quiz.author.id!==user.id){
+        throw new UnauthorizedException();
+      }
+
+      if(!quiz){
+        throw new BadRequestException('Invalid Quiz ID');
+      }
+
+      if(!quiz.questions){
+        quiz.questions = [];
+      }
+
+      quiz.questions.push(newQuestion);
+      await quiz.save();
+  }
+
+  addOldQuestion = async (user:UserEntity,questionId:string,quizId:string) => {
+    const question =await this.qaService.findbyID(questionId);    
+    const quiz =await this.quizRepo.findOne({id:quizId});
+    if(!question || !quiz){
+      throw new BadRequestException('No Question/Quiz Found with the given ID');
+    }
+    if(!quiz.questions){
+      quiz.questions = [];
+    }
+
+    if(quiz.author.id!==user.id){
+      throw new UnauthorizedException();
+    }
+
+    quiz.questions.push(question);
+
+    await quiz.save();
+  }
+
+  removeQuestion = async (user:UserEntity,questionId:string,quizId:string) => {
+
+    const quiz =await this.quizRepo.findOne({id:quizId});
+    if( !quiz){
+      throw new BadRequestException('No Quiz Found with the given ID');
+    }
+    if(!quiz.questions){
+      quiz.questions = [];
+    }
+
+    if(quiz.author.id!==user.id){
+      throw new UnauthorizedException();
+    }
+
+    quiz.questions = quiz.questions.filter(q => q.id!==questionId);
+
+    await quiz.save();
+  }
+}

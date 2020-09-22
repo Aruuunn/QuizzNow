@@ -1,7 +1,6 @@
+import QAEntity from "src/qa/qa.entity";
 import { QuizEntity } from "src/quiz/quiz.entity";
 import { Entity,BaseEntity, PrimaryGeneratedColumn, Column, OneToMany } from "typeorm";
-
-
 
 @Entity()
 class UserEntity extends BaseEntity {
@@ -15,7 +14,7 @@ class UserEntity extends BaseEntity {
     @Column()
     email:string
 
-    @Column()
+    @Column({nullable:true})
     photoURL:string;
 
     @OneToMany(type => QuizEntity,quiz => quiz.author)
@@ -23,6 +22,9 @@ class UserEntity extends BaseEntity {
 
     @OneToMany(type => QuizEntity,quiz => quiz.participants)
     attendedQuizzes:QuizEntity[]
+
+    @OneToMany(type => QAEntity,qa => qa.author)
+    createdQuestion:QAEntity[]
 }
 
 
