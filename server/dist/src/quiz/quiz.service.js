@@ -38,6 +38,7 @@ let QuizService = class QuizService {
             newQuiz.questions = questions;
             console.log("saving ...");
             await newQuiz.save();
+            return newQuiz;
         };
         this.addNewQuestion = async (user, question, quizId) => {
             const newQuestion = await this.qaService.createQuestion(user, question);
@@ -53,6 +54,7 @@ let QuizService = class QuizService {
             }
             quiz.questions.push(newQuestion);
             await quiz.save();
+            return quiz;
         };
         this.addOldQuestion = async (user, questionId, quizId) => {
             const question = await this.qaService.findbyID(questionId);
@@ -68,6 +70,7 @@ let QuizService = class QuizService {
             }
             quiz.questions.push(question);
             await quiz.save();
+            return quiz;
         };
         this.removeQuestion = async (user, questionId, quizId) => {
             const quiz = await this.quizRepo.findOne({ id: quizId });
@@ -82,6 +85,37 @@ let QuizService = class QuizService {
             }
             quiz.questions = quiz.questions.filter(q => q.id !== questionId);
             await quiz.save();
+            return quiz;
+        };
+        this.removeAllQuestions = async (user, quizId) => {
+            const quiz = await this.quizRepo.findOne({ id: quizId });
+            if (!quiz) {
+                throw new common_1.BadRequestException('No Quiz Found with the given ID');
+            }
+            if (quiz.author.id !== user.id) {
+                throw new common_1.UnauthorizedException();
+            }
+            quiz.questions = [];
+            await quiz.save();
+            return quiz;
+        };
+        this.updateQuiz = async (user, quizId, startDatetime, endDatetime) => {
+            const quiz = await this.quizRepo.findOne({ id: quizId });
+            if (!quiz) {
+                throw new common_1.BadRequestException('No Quiz Found with the given ID');
+            }
+            if (quiz.author.id !== user.id) {
+                throw new common_1.UnauthorizedException();
+            }
+            if (!startDatetime && !endDatetime) {
+                throw new common_1.BadRequestException();
+            }
+            if (startDatetime)
+                quiz.startDatetime = new Date(startDatetime);
+            if (endDatetime)
+                quiz.endDatetime = new Date(endDatetime);
+            await quiz.save();
+            return quiz;
         };
     }
 };

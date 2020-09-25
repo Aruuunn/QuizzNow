@@ -14,47 +14,25 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.AuthController = void 0;
 const common_1 = require("@nestjs/common");
-const google_login_gaurd_1 = require("./googleStrategy/google.login.gaurd");
+const auth_service_1 = require("./auth.service");
 let AuthController = class AuthController {
-    constructor() { }
-    login(res) {
-        return res.status(common_1.HttpStatus.OK).send();
+    constructor(authService) {
+        this.authService = authService;
     }
-    test(req) {
-        console.log(req.user);
-        return "Hello Arun";
-    }
-    redirect(res) {
-        console.log('logged in....');
-        return res.status(common_1.HttpStatus.OK).send();
+    async auth(id_token) {
+        return await this.authService.authenticateUser(id_token);
     }
 };
 __decorate([
-    common_1.Get('google'),
-    common_1.UseGuards(google_login_gaurd_1.GoogleLoginGaurd),
-    __param(0, common_1.Res()),
+    common_1.Post('google'),
+    __param(0, common_1.Body('id_token')),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object]),
-    __metadata("design:returntype", void 0)
-], AuthController.prototype, "login", null);
-__decorate([
-    common_1.Get('test'),
-    __param(0, common_1.Req()),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object]),
-    __metadata("design:returntype", void 0)
-], AuthController.prototype, "test", null);
-__decorate([
-    common_1.Get('google/redirect'),
-    common_1.UseGuards(google_login_gaurd_1.GoogleLoginGaurd),
-    __param(0, common_1.Res()),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object]),
-    __metadata("design:returntype", void 0)
-], AuthController.prototype, "redirect", null);
+    __metadata("design:paramtypes", [String]),
+    __metadata("design:returntype", Promise)
+], AuthController.prototype, "auth", null);
 AuthController = __decorate([
     common_1.Controller('auth'),
-    __metadata("design:paramtypes", [])
+    __metadata("design:paramtypes", [auth_service_1.AuthService])
 ], AuthController);
 exports.AuthController = AuthController;
 //# sourceMappingURL=auth.controller.js.map

@@ -17,9 +17,10 @@ const dotenv_1 = require("dotenv");
 const user_entity_1 = require("../../user/user.entity");
 const domain_1 = require("../../../config/domain");
 const user_service_1 = require("../../user/user.service");
+const jwt_1 = require("@nestjs/jwt");
 dotenv_1.config();
 let GoogleStrategy = class GoogleStrategy extends passport_1.PassportStrategy(passport_google_oauth20_1.Strategy, 'google') {
-    constructor(userService) {
+    constructor(userService, jwtService) {
         super({
             clientID: process.env.GOOGLE_CLIENTID,
             clientSecret: process.env.GOOGLE_OAUTH_SECRET,
@@ -27,6 +28,7 @@ let GoogleStrategy = class GoogleStrategy extends passport_1.PassportStrategy(pa
             scope: ['email', 'profile'],
         });
         this.userService = userService;
+        this.jwtService = jwtService;
         this.validate = async (accessToken, refreshToken, profile, done) => {
             const { name, emails, photos } = profile;
             if (!emails || !emails[0]) {
@@ -37,7 +39,7 @@ let GoogleStrategy = class GoogleStrategy extends passport_1.PassportStrategy(pa
             if (!user) {
                 const newUser = new user_entity_1.default();
                 newUser.email = emails[0].value;
-                newUser.name = name.givenName + ' ' + name.familyName;
+                newUser.name = name.givenName + ' ' + name.familyName || '';
                 if (photos && photos.length !== 0)
                     newUser.photoURL = photos[0].value || '';
                 newUser.save();
@@ -51,13 +53,15 @@ let GoogleStrategy = class GoogleStrategy extends passport_1.PassportStrategy(pa
                     await user.save();
                 }
             }
-            done(null, user);
+            const payload = { email: user.email };
+            const jwtAccessToken = this.jwtService.sign(payload);
+            done(null, Object.assign(Object.assign({}, user), { accessToken: jwtAccessToken }));
         };
     }
 };
 GoogleStrategy = __decorate([
     common_1.Injectable(),
-    __metadata("design:paramtypes", [user_service_1.UserService])
+    __metadata("design:paramtypes", [user_service_1.UserService, jwt_1.JwtService])
 ], GoogleStrategy);
 exports.GoogleStrategy = GoogleStrategy;
 //# sourceMappingURL=google.strategy.js.map

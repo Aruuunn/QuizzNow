@@ -32,6 +32,7 @@ export class QuizService {
 
     console.log("saving ...");
     await newQuiz.save();
+    return newQuiz;
   };
 
 
@@ -55,6 +56,7 @@ export class QuizService {
 
       quiz.questions.push(newQuestion);
       await quiz.save();
+      return quiz;
   }
 
   addOldQuestion = async (user:UserEntity,questionId:string,quizId:string) => {
@@ -74,6 +76,7 @@ export class QuizService {
     quiz.questions.push(question);
 
     await quiz.save();
+    return quiz;
   }
 
   removeQuestion = async (user:UserEntity,questionId:string,quizId:string) => {
@@ -93,5 +96,52 @@ export class QuizService {
     quiz.questions = quiz.questions.filter(q => q.id!==questionId);
 
     await quiz.save();
+    return quiz;
   }
+
+  removeAllQuestions = async (user:UserEntity,quizId:string) => {
+
+    const quiz =await this.quizRepo.findOne({id:quizId});
+    if( !quiz){
+      throw new BadRequestException('No Quiz Found with the given ID');
+    }
+  
+
+    if(quiz.author.id!==user.id){
+      throw new UnauthorizedException();
+    }
+
+    quiz.questions = [];
+    await quiz.save();
+    return quiz;
+  }
+
+
+  updateQuiz = async (user:UserEntity,quizId:string,startDatetime?:string,endDatetime?:string) => {
+
+    const quiz =await this.quizRepo.findOne({id:quizId});
+    if( !quiz){
+      throw new BadRequestException('No Quiz Found with the given ID');
+    }
+  
+
+    if(quiz.author.id!==user.id){
+      throw new UnauthorizedException();
+    }
+
+    if(!startDatetime && !endDatetime){
+      throw new BadRequestException();
+    }
+    
+    if(startDatetime)
+    quiz.startDatetime = new Date(startDatetime);
+
+    if(endDatetime)
+    quiz.endDatetime = new Date(endDatetime);
+  
+    await quiz.save();
+    return quiz;
+  }
+
+  
 }

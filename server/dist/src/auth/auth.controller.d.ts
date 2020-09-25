@@ -1,6 +1,9 @@
+import { AuthService } from './auth.service';
 export declare class AuthController {
-    constructor();
-    login(res: any): any;
-    test(req: any): string;
-    redirect(res: any): any;
+    private authService;
+    constructor(authService: AuthService);
+    auth(id_token: string): Promise<{
+        user: import("../user/user.entity").default;
+        accessToken: string;
+    }>;
 }

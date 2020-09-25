@@ -1,7 +1,6 @@
 import {
   Body,
   Controller,
-  HttpCode,
   HttpStatus,
   Param,
   Post,
@@ -10,8 +9,11 @@ import {
   UseGuards,
   UsePipes,
   ValidationPipe,
+  Delete,
+  Patch,
+  Get
 } from '@nestjs/common';
-import { AuthenticatedGuard } from 'src/auth/authenticated.gaurd';
+import JwtGaurd from 'src/auth/jwt.gaurd';
 import NewQuestionDto from 'src/qa/dto/new.qa';
 import { NewQuizDto } from './dto/new.quiz';
 import { QuizService } from './quiz.service';
@@ -21,15 +23,22 @@ export class QuizController {
   constructor(private quizService: QuizService) {}
 
   @Post('new')
-  @UseGuards(AuthenticatedGuard)
+  @UseGuards(JwtGaurd)
   @UsePipes(ValidationPipe)
   async newQuiz(@Body() data: NewQuizDto, @Req() req, @Res() res) {
-    await this.quizService.createNewQuiz(req.user, data);
-    return res.sendStatus(HttpStatus.CREATED);
+    return await this.quizService.createNewQuiz(req.user, data);
+  
+  }
+
+  @Get(':id')
+  @UseGuards(JwtGaurd)
+  @UsePipes(ValidationPipe)
+  async getQuiz(@Param('id') id){
+  
   }
 
   @Post(':qid/question/new')
-  @UseGuards(AuthenticatedGuard)
+  @UseGuards(JwtGaurd)
   @UsePipes(ValidationPipe)
   async newQuestion(
     @Body() questionData: NewQuestionDto,
@@ -40,4 +49,44 @@ export class QuizController {
     await this.quizService.addNewQuestion(req.user, questionData, quizId);
     return res.sendStatus(HttpStatus.CREATED);
   }
+
+  @Delete(':qid/question/:questionID')
+  @UseGuards(JwtGaurd)
+  @UsePipes(ValidationPipe)
+  async removeQuestion(
+    @Param('questionID') questionID: string,
+    @Param('qid') quizId: string,
+    @Req() req,
+    @Res() res,
+  ) {
+    await this.quizService.removeQuestion(req.user, questionID, quizId);
+    return res.sendStatus(HttpStatus.OK);
+  }
+
+  @Delete(':qid/all/questions')
+  @UseGuards(JwtGaurd)
+  @UsePipes(ValidationPipe)
+  async removeAllQuestions(
+    @Param('qid') quizId: string,
+    @Req() req,
+    @Res() res,
+  ) {
+    await this.quizService.removeAllQuestions(req.user, quizId);
+    return res.sendStatus(HttpStatus.OK);
+  }
+
+  @Patch(':qid')
+  @UseGuards(JwtGaurd)
+  @UsePipes(ValidationPipe)
+  async updateQuizTime(
+    @Body('startDatetime') startDatetime: string,
+    @Body('endDatetime') endDatetime: string,
+    @Param('qid') quizId,
+    @Req() req,
+    @Res() res,
+  ) {
+    await this.quizService.updateQuiz(req.user,quizId,startDatetime,endDatetime );
+    return res.sendStatus(HttpStatus.OK);
+  }
+
 }

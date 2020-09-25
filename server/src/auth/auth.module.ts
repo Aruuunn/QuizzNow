@@ -1,17 +1,24 @@
 import { Module } from '@nestjs/common';
+import { JwtModule } from '@nestjs/jwt';
 import { PassportModule } from '@nestjs/passport';
 import { UserModule } from 'src/user/user.module';
 import { UserService } from 'src/user/user.service';
-import GoogleLoginGaurd from './googleStrategy/google.login.gaurd';
-import { GoogleSerializer } from './googleStrategy/google.serializer';
-import { GoogleStrategy } from './googleStrategy/google.strategy';
+import {JWT_SECRET,JWT_EXPIRES_IN} from 'config/env';
+import { JwtStrategy } from './Jwt.strategy';
+import { AuthService } from './auth.service';
 
 @Module({
     imports:[PassportModule.register({
-        defaultStrategy:'google'
-    }),UserModule]
+        defaultStrategy:'jwt',
+        session:false,
+    }),UserModule,JwtModule.register({
+        secret:JWT_SECRET,
+        signOptions:{
+            expiresIn:JWT_EXPIRES_IN,
+        }
+    })]
     ,
-    providers:[GoogleStrategy,UserService,GoogleSerializer,GoogleLoginGaurd],
-    exports:[GoogleStrategy,GoogleSerializer,GoogleLoginGaurd]
+    providers:[UserService,JwtStrategy, AuthService],
+    exports:[JwtStrategy,AuthService]
 })
 export class AuthModule {}

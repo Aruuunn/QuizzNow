@@ -10,10 +10,9 @@ services:
     ports: 
         - "5432:5432"
 
-  sessionStore:
+  cache:
     image: "redis:latest"
     restart: always
-    command: --port 8000
 
 
   api:
@@ -30,7 +29,7 @@ services:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres_password
       - POSTGRES_DATABASE=QIF
-      - REDIS_SESSION_STORE_HOST=sessionStore
-      - REDIS_SESSION_STORE_PORT=8000
+      - REDIS_SESSION_STORE_HOST=cache
+      - REDIS_SESSION_STORE_PORT=6379
     ports: 
         - "5000:5000"

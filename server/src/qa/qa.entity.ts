@@ -18,7 +18,6 @@ class QAEntity extends BaseEntity{
 
     @ManyToOne(type => UserEntity,user => user.createdQuestion)
     author:UserEntity;
-
 }
 
 export default QAEntity;
