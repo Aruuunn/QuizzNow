@@ -1,10 +1,19 @@
 version: "3.8"
 
 services:
-  postgress:
+  db:
+    restart: always
     image: "postgres:latest"
+    environment: 
+      - POSTGRES_PASSWORD=postgres_password
+      - POSTGRES_DB=QIF
     ports: 
         - "5432:5432"
+
+  cache:
+    image: "redis:latest"
+    restart: always
+
 
   api:
     stdin_open: true
@@ -13,13 +22,14 @@ services:
       dockerfile: Dockerfile.dev
       context: ./server
     volumes:
-      - /app/node_modules
       - ./server:/app
     environment:
-      - POSTGRES_HOST=postgres
+      - POSTGRES_HOST=db
       - POSTGRES_PORT=5432
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres_password
-      - POSTGRES_DATABASE=postgres
+      - POSTGRES_DATABASE=QIF
+      - REDIS_SESSION_STORE_HOST=cache
+      - REDIS_SESSION_STORE_PORT=6379
     ports: 
         - "5000:5000"
