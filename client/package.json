@@ -8,9 +8,19 @@
     "start": "next start"
   },
   "dependencies": {
+    "@material-ui/core": "^4.11.0",
+    "@types/node": "^14.11.2",
+    "@types/react": "^16.9.49",
     "next": "9.5.3",
+    "next-redux-wrapper": "^6.0.2",
     "react": "16.13.1",
     "react-dom": "16.13.1",
-    "react-google-login": "^5.1.21"
+    "react-google-login": "^5.1.21",
+    "react-redux": "^7.2.1",
+    "redux": "^4.0.5",
+    "redux-devtools-extension": "^2.13.8",
+    "redux-persist": "^6.0.0",
+    "redux-thunk": "^2.3.0",
+    "typescript": "^4.0.3"
   }
 }
