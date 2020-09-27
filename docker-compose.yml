@@ -14,6 +14,15 @@ services:
     image: "redis:latest"
     restart: always
 
+  client:
+    build: 
+      dockerfile: Dockerfile.dev
+      context: ./client
+    volumes:
+      - ./client:/app
+    ports: 
+      - "3000:3000"
+
 
   api:
     stdin_open: true
@@ -33,3 +42,5 @@ services:
       - REDIS_SESSION_STORE_PORT=6379
     ports: 
         - "5000:5000"
+
+

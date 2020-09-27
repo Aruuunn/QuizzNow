@@ -3767,7 +3767,7 @@
         "affectsGlobalScope": false
       },
       "../src/main.ts": {
-        "version": "e82fc00b0c61506f9c3e3ed698c39b9e441ed40cba835f78ebb9eb89df7ddf50",
+        "version": "cd3cfa39c9d117e8ee19b7d86598f3ceb492adf92cef5c958ffad7ae3d229242",
         "signature": "8e609bb71c20b858c77f0e9f90bb1319db8477b13f9f965f1a1e18524bf50881",
         "affectsGlobalScope": false
       },
