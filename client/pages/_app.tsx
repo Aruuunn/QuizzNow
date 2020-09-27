@@ -1,5 +1,4 @@
-import React from "react";
-import App, { AppInitialProps, AppContext } from "next/app";
+import React  from "react";
 import { PersistGate } from 'redux-persist/integration/react'
 import { ThemeProvider } from "@material-ui/core/styles";
 
@@ -9,22 +8,11 @@ import "../styles/globals.css";
 
 const { wrapper, persistor } = init();
 
-class MyApp extends App<AppInitialProps> {
-  public static getInitialProps = async ({ Component, ctx }: AppContext) => {
-    return {
-      pageProps: {
-        // Call page-level getInitialProps
-        ...(Component.getInitialProps
-          ? await Component.getInitialProps(ctx)
-          : {}),
-        // Some custom thing for all pages
-        pathname: ctx.pathname,
-      },
-    };
-  };
 
-  public render() {
-    const { Component, pageProps } = this.props;
+const  MyApp  = (props) =>  {
+    const {Component,pageProps} = props;
+
+    console.log("PROPS",props);
 
     return (
       <React.Fragment>
@@ -33,9 +21,20 @@ class MyApp extends App<AppInitialProps> {
             <Component {...pageProps} />
           </ThemeProvider>
         </PersistGate>
+
+       
       </React.Fragment>
     );
-  }
+}
+
+MyApp.getInitialProps = async (props)  => {
+
+  const {Component ,ctx} = props;
+
+  const pageProps = Component.getInitialProps ? await Component.getInitialProps(ctx) : {};
+
+  return {pageProps};
+
 }
 
 export default wrapper.withRedux(MyApp);
