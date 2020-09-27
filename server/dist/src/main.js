@@ -9,6 +9,7 @@ async function bootstrap() {
     const app = await core_1.NestFactory.create(app_module_1.AppModule);
     app.use(passport.initialize());
     app.setGlobalPrefix('/api');
+    app.enableCors();
     await app.listen(5000);
 }
 bootstrap();
