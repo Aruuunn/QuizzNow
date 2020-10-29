@@ -57,7 +57,7 @@ class Auth extends Component<Props, State> {
           style={{ position: "fixed", top: "40vh", zIndex: 1, width: "100%" }}
         >
           <Grid component={Paper} style={{ padding: "20px", width: "300px" }}>
-            <Typography variant="h6" color="secondary" align="center">
+            <Typography variant="h6" color="secondary" align="center" style={{fontFamily:"'Fredoka One', cursive"}}>
               Continue with
             </Typography>
 

@@ -1,5 +1,6 @@
 import { BadRequestException, Injectable, UnauthorizedException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { IPaginationOptions, paginate } from 'nestjs-typeorm-paginate';
 import NewQuestionDto from 'src/qa/dto/new.qa';
 import QAEntity from 'src/qa/qa.entity';
 import { QaService } from 'src/qa/qa.service';
@@ -118,13 +119,11 @@ export class QuizService {
 
 
   updateQuiz = async (user:UserEntity,quizId:string,startDatetime?:string,endDatetime?:string) => {
-
     const quiz =await this.quizRepo.findOne({id:quizId});
     if( !quiz){
       throw new BadRequestException('No Quiz Found with the given ID');
     }
   
-
     if(quiz.author.id!==user.id){
       throw new UnauthorizedException();
     }
@@ -143,5 +142,13 @@ export class QuizService {
     return quiz;
   }
 
-  
+  async getQuizzes(user: UserEntity,options:IPaginationOptions) {
+    const q = this.quizRepo.createQueryBuilder('q');
+    q.where('q.author= :userId', { userId: user.id });
+    q.orderBy('q.updatedAt', 'DESC');
+
+    return await paginate<QuizEntity>(q, options);
+  }
 }
+
+

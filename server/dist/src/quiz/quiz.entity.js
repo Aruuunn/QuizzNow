@@ -40,6 +40,14 @@ __decorate([
     typeorm_1.ManyToOne(type => user_entity_1.default, user => user.attendedQuizzes, { eager: true, }),
     __metadata("design:type", Array)
 ], QuizEntity.prototype, "participants", void 0);
+__decorate([
+    typeorm_1.CreateDateColumn(),
+    __metadata("design:type", Date)
+], QuizEntity.prototype, "createdAt", void 0);
+__decorate([
+    typeorm_1.UpdateDateColumn(),
+    __metadata("design:type", Date)
+], QuizEntity.prototype, "updatedAt", void 0);
 QuizEntity = __decorate([
     typeorm_1.Entity()
 ], QuizEntity);

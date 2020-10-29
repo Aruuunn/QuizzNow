@@ -15,6 +15,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.QuizService = void 0;
 const common_1 = require("@nestjs/common");
 const typeorm_1 = require("@nestjs/typeorm");
+const nestjs_typeorm_paginate_1 = require("nestjs-typeorm-paginate");
 const new_qa_1 = require("../qa/dto/new.qa");
 const qa_entity_1 = require("../qa/qa.entity");
 const qa_service_1 = require("../qa/qa.service");
@@ -117,6 +118,12 @@ let QuizService = class QuizService {
             await quiz.save();
             return quiz;
         };
+    }
+    async getQuizzes(user, options) {
+        const q = this.quizRepo.createQueryBuilder('q');
+        q.where('q.author= :userId', { userId: user.id });
+        q.orderBy('q.updatedAt', 'DESC');
+        return await nestjs_typeorm_paginate_1.paginate(q, options);
     }
 };
 QuizService = __decorate([

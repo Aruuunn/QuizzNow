@@ -8,4 +8,6 @@ export declare class QuizEntity extends BaseEntity {
     questions: QAEntity[];
     author: UserEntity;
     participants: UserEntity[];
+    createdAt: Date;
+    updatedAt: Date;
 }

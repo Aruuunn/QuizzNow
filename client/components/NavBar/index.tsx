@@ -1,9 +1,7 @@
 import React from "react";
 import { AppBar, Toolbar, useTheme, Typography } from "@material-ui/core";
 
-interface Props {}
-
-const NavBar = (props: Props) => {
+const NavBar = () => {
   const theme = useTheme();
   return (
     <div>
@@ -16,9 +14,9 @@ const NavBar = (props: Props) => {
         <Toolbar>
           <Typography
             variant="h5"
-            style={{ color: theme.palette.secondary.main }}
+            style={{ color: theme.palette.secondary.main ,fontFamily:"'Fredoka One', cursive"}}
           >
-            QIF
+            Quiz Now
           </Typography>
         </Toolbar>
       </AppBar>

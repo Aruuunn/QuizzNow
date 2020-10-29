@@ -6,7 +6,7 @@ services:
     image: "postgres:latest"
     environment: 
       - POSTGRES_PASSWORD=postgres_password
-      - POSTGRES_DB=QIF
+      - POSTGRES_DB=QN
     ports: 
         - "5432:5432"
 
@@ -37,7 +37,7 @@ services:
       - POSTGRES_PORT=5432
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres_password
-      - POSTGRES_DATABASE=QIF
+      - POSTGRES_DATABASE=QN
       - REDIS_SESSION_STORE_HOST=cache
       - REDIS_SESSION_STORE_PORT=6379
     ports: 
