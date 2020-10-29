@@ -1,6 +1,6 @@
 import QAEntity from "src/qa/qa.entity";
 import UserEntity from "src/user/user.entity";
-import { BaseEntity, Column, Entity, JoinTable, ManyToMany, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { BaseEntity, Column, CreateDateColumn, Entity, JoinTable, ManyToMany, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 
 
 @Entity()
@@ -22,5 +22,11 @@ export class QuizEntity extends BaseEntity {
     author:UserEntity;
 
     @ManyToOne(type => UserEntity,user=> user.attendedQuizzes,{eager:true,})
-    participants:UserEntity[];
+    participants: UserEntity[];
+    
+    @CreateDateColumn()
+    createdAt: Date;
+
+    @UpdateDateColumn()
+    updatedAt: Date;
 }

@@ -1,3 +1,4 @@
+import { IPaginationOptions } from 'nestjs-typeorm-paginate';
 import NewQuestionDto from 'src/qa/dto/new.qa';
 import { QaService } from 'src/qa/qa.service';
 import UserEntity from 'src/user/user.entity';
@@ -14,4 +15,5 @@ export declare class QuizService {
     removeQuestion: (user: UserEntity, questionId: string, quizId: string) => Promise<QuizEntity>;
     removeAllQuestions: (user: UserEntity, quizId: string) => Promise<QuizEntity>;
     updateQuiz: (user: UserEntity, quizId: string, startDatetime?: string, endDatetime?: string) => Promise<QuizEntity>;
+    getQuizzes(user: UserEntity, options: IPaginationOptions): Promise<import("nestjs-typeorm-paginate").Pagination<QuizEntity>>;
 }

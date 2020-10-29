@@ -11,8 +11,10 @@ import {
   ValidationPipe,
   Delete,
   Patch,
-  Get
+  Get,
+  Query
 } from '@nestjs/common';
+import { IPaginationOptions } from 'nestjs-typeorm-paginate';
 import JwtGaurd from 'src/auth/jwt.gaurd';
 import NewQuestionDto from 'src/qa/dto/new.qa';
 import { NewQuizDto } from './dto/new.quiz';
@@ -26,8 +28,8 @@ export class QuizController {
   @UseGuards(JwtGaurd)
   @UsePipes(ValidationPipe)
   async newQuiz(@Body() data: NewQuizDto, @Req() req, @Res() res) {
-    return await this.quizService.createNewQuiz(req.user, data);
-  
+   await this.quizService.createNewQuiz(req.user, data);
+    return res.sendStatus(HttpStatus.CREATED);
   }
 
   @Get(':id')
@@ -87,6 +89,12 @@ export class QuizController {
   ) {
     await this.quizService.updateQuiz(req.user,quizId,startDatetime,endDatetime );
     return res.sendStatus(HttpStatus.OK);
+  }
+
+  @Get()
+  @UseGuards(JwtGaurd)
+ async get(@Query() options:IPaginationOptions,@Req() req) {
+    return await this.quizService.getQuizzes(req.user, options);
   }
 
 }

@@ -23,6 +23,7 @@ export class AuthService {
       );
 
       if (!data.email || !data.name) {
+        console.log("DATA",data);
         throw new BadRequestException();
       }
 
@@ -42,6 +43,7 @@ export class AuthService {
         return { user: newUser, accessToken: this.jwtService.sign(payload) };
       }
     } catch (e) {
+      console.log(e);
       throw new UnauthorizedException();
     }
   };

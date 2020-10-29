@@ -23,7 +23,8 @@ let QuizController = class QuizController {
         this.quizService = quizService;
     }
     async newQuiz(data, req, res) {
-        return await this.quizService.createNewQuiz(req.user, data);
+        await this.quizService.createNewQuiz(req.user, data);
+        return res.sendStatus(common_1.HttpStatus.CREATED);
     }
     async getQuiz(id) {
     }
@@ -42,6 +43,9 @@ let QuizController = class QuizController {
     async updateQuizTime(startDatetime, endDatetime, quizId, req, res) {
         await this.quizService.updateQuiz(req.user, quizId, startDatetime, endDatetime);
         return res.sendStatus(common_1.HttpStatus.OK);
+    }
+    async get(options, req) {
+        return await this.quizService.getQuizzes(req.user, options);
     }
 };
 __decorate([
@@ -110,6 +114,14 @@ __decorate([
     __metadata("design:paramtypes", [String, String, Object, Object, Object]),
     __metadata("design:returntype", Promise)
 ], QuizController.prototype, "updateQuizTime", null);
+__decorate([
+    common_1.Get(),
+    common_1.UseGuards(jwt_gaurd_1.default),
+    __param(0, common_1.Query()), __param(1, common_1.Req()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object, Object]),
+    __metadata("design:returntype", Promise)
+], QuizController.prototype, "get", null);
 QuizController = __decorate([
     common_1.Controller('quiz'),
     __metadata("design:paramtypes", [quiz_service_1.QuizService])
