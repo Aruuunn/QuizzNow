@@ -11,7 +11,7 @@ const { wrapper, persistor } = init();
 
 const  MyApp  = (props) =>  {
     const {Component,pageProps} = props;
-
+   
     return (
       <React.Fragment>
         <PersistGate loading={"Loading.."} persistor={persistor}>
