@@ -1,7 +1,7 @@
 import React from "react";
-import { AppBar, Toolbar, useTheme, Typography } from "@material-ui/core";
+import { AppBar, Toolbar, useTheme, Typography, Grid } from "@material-ui/core";
 
-const NavBar = () => {
+const NavBar = ({ children }:{children?:any}) => {
   const theme = useTheme();
   return (
     <div>
@@ -12,15 +12,21 @@ const NavBar = () => {
         }}
       >
         <Toolbar>
-          <Typography
-            variant="h5"
-            style={{ color: theme.palette.secondary.main ,fontFamily:"'Fredoka One', cursive"}}
-          >
-            Quiz Now
-          </Typography>
+          <Grid container justify="space-between">
+            <Typography
+              variant="h5"
+              style={{
+                color: theme.palette.secondary.main,
+                fontFamily: "'Fredoka One', cursive",
+              }}
+            >
+              Quiz Now
+            </Typography>
+
+            {children}
+          </Grid>
         </Toolbar>
       </AppBar>
-     
     </div>
   );
 };
