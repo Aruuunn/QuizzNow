@@ -1,28 +1,30 @@
 import React, { Component } from "react";
-import { withRouter,Router } from 'next/router';
+import { withRouter,RouteComponentProps } from 'react-router-dom';
 import GoogleLogin, {
   GoogleLoginResponse,
+  GoogleLoginResponseOffline
 } from "react-google-login";
 import { connect, ConnectedProps } from "react-redux";
 import { Grid, Paper, Typography, Button ,CircularProgress } from "@material-ui/core";
 
-import { AuthActionTypes } from "../reduxStore/types";
-import { NavBar } from "../components";
 import axios from "../common/axios";
+import { AuthActionTypes, UserActionTypes } from "../reduxStore/types";
+import { NavBar } from "../components";
+import { UserState } from "../reduxStore";
 
 const mapDispatchToProps = {
   saveAccessToken: (token: string) => ({
     type: AuthActionTypes.SAVE_ACCESS_TOKEN,
     payload: token,
   }),
+  setUser:(user:UserState) => ({type:UserActionTypes.SET_USER,payload:user})
 };
 
 const connector = connect(null, mapDispatchToProps);
 
 type ReduxProps = ConnectedProps<typeof connector>;
-type Props = ReduxProps & {
-  router:Router
-};
+type Props = ReduxProps & RouteComponentProps;
+
 interface State {
   loading: boolean;
 }
@@ -32,17 +34,21 @@ class Auth extends Component<Props, State> {
     loading: false,
   };
 
-  handleSucces = (response: GoogleLoginResponse) => {
-    const id_token = response.tokenObj.id_token;
+  handleSucces = (response: GoogleLoginResponse | GoogleLoginResponseOffline) => {
+    if (!(response as GoogleLoginResponse).tokenObj) {
+      return;
+    }
+    const id_token =(response as GoogleLoginResponse).tokenObj.id_token;
     this.setState({ loading: true });
     axios
       .post("/auth/google", {
         id_token,
       })
       .then((res) => {
+        this.props.setUser(res.data.user);
         this.props.saveAccessToken(res.data.accessToken);
         this.setState({ loading: false }, () => {
-          this.props.router.replace('/');
+          this.props.history.replace('/');
         });
       });
   };
@@ -89,6 +95,7 @@ class Auth extends Component<Props, State> {
             bottom: 0,
             left: 0,
           }}
+          alt=""
         />
       </div>
     );

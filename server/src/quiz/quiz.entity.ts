@@ -9,7 +9,10 @@ export class QuizEntity extends BaseEntity {
     id:string;
 
     @Column()
-    startDatetime:Date;
+    startDatetime: Date;
+    
+    @Column()
+    title: string;
 
     @Column()
     endDatetime:Date;

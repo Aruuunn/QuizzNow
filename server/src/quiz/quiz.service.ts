@@ -23,6 +23,8 @@ export class QuizService {
     newQuiz.startDatetime = new Date(quizData.startDatetime);
     newQuiz.endDatetime = new Date(quizData.endDatetime);
     newQuiz.author = user;
+    newQuiz.title = quizData.title;
+    
     const questions :QAEntity[]= [];
     if(quizData.questions.length!==0)
     for(let i of quizData.questions){
@@ -118,11 +120,16 @@ export class QuizService {
   }
 
 
-  updateQuiz = async (user:UserEntity,quizId:string,startDatetime?:string,endDatetime?:string) => {
+  updateQuiz = async (user:UserEntity,quizId:string,startDatetime?:string,endDatetime?:string,title?:string) => {
     const quiz =await this.quizRepo.findOne({id:quizId});
     if( !quiz){
       throw new BadRequestException('No Quiz Found with the given ID');
     }
+
+    if (title) {
+      quiz.title = title;
+    }
+
   
     if(quiz.author.id!==user.id){
       throw new UnauthorizedException();

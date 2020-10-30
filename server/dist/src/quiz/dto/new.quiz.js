@@ -16,6 +16,10 @@ class NewQuizDto {
 }
 __decorate([
     class_validator_1.IsNotEmpty(),
+    __metadata("design:type", String)
+], NewQuizDto.prototype, "title", void 0);
+__decorate([
+    class_validator_1.IsNotEmpty(),
     class_validator_1.IsDateString(),
     __metadata("design:type", Date)
 ], NewQuizDto.prototype, "startDatetime", void 0);

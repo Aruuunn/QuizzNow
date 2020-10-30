@@ -31,6 +31,7 @@ let QuizService = class QuizService {
             newQuiz.startDatetime = new Date(quizData.startDatetime);
             newQuiz.endDatetime = new Date(quizData.endDatetime);
             newQuiz.author = user;
+            newQuiz.title = quizData.title;
             const questions = [];
             if (quizData.questions.length !== 0)
                 for (let i of quizData.questions) {
@@ -100,10 +101,13 @@ let QuizService = class QuizService {
             await quiz.save();
             return quiz;
         };
-        this.updateQuiz = async (user, quizId, startDatetime, endDatetime) => {
+        this.updateQuiz = async (user, quizId, startDatetime, endDatetime, title) => {
             const quiz = await this.quizRepo.findOne({ id: quizId });
             if (!quiz) {
                 throw new common_1.BadRequestException('No Quiz Found with the given ID');
+            }
+            if (title) {
+                quiz.title = title;
             }
             if (quiz.author.id !== user.id) {
                 throw new common_1.UnauthorizedException();
