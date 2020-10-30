@@ -23,12 +23,14 @@ let AuthService = class AuthService {
             try {
                 const { data } = await axios_1.default.get(`https://www.googleapis.com/oauth2/v3/tokeninfo?id_token=${id_token.trim()}`);
                 if (!data.email || !data.name) {
-                    console.log("DATA", data);
                     throw new common_1.BadRequestException();
                 }
                 const user = await this.userService.findByEmail(data.email);
                 if (user) {
                     const payload = { email: user.email };
+                    delete user.createdQuestions;
+                    delete user.quizzes;
+                    delete user.attendedQuizzes;
                     return { user, accessToken: this.jwtService.sign(payload) };
                 }
                 else {

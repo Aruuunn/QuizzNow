@@ -1,4 +1,3 @@
-import { HYDRATE } from 'next-redux-wrapper';
 import { AnyAction } from 'redux';
 import {AuthActionTypes} from '../types';
 
@@ -14,13 +13,11 @@ const initialState ={
 
 export const AuthReducer = (state:AuthState = initialState,action:AnyAction) :AuthState=> {
 switch(action.type){
-    case HYDRATE:
-        return {...state,...action.payload};
     case AuthActionTypes.SAVE_ACCESS_TOKEN:
         localStorage.setItem('accessToken',action.payload);
         return { ...state, accessToken: action.payload };
     case AuthActionTypes.LOG_OUT:
-        localStorage.setItem('accessToken', null);
+        localStorage.clear();
         return { ...state, accessToken: null };
     default:
         return state;

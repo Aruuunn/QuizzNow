@@ -4,6 +4,7 @@ import { BaseEntity } from "typeorm";
 export declare class QuizEntity extends BaseEntity {
     id: string;
     startDatetime: Date;
+    title: string;
     endDatetime: Date;
     questions: QAEntity[];
     author: UserEntity;

@@ -24,7 +24,7 @@ class UserEntity extends BaseEntity {
     attendedQuizzes:QuizEntity[]
 
     @OneToMany(type => QAEntity,qa => qa.author)
-    createdQuestion:QAEntity[]
+    createdQuestions:QAEntity[]
 }
 
 

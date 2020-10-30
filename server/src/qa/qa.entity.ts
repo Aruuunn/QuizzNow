@@ -16,7 +16,7 @@ class QAEntity extends BaseEntity{
     @Column('bytea',{array:true})
     answers:string[]
 
-    @ManyToOne(type => UserEntity,user => user.createdQuestion)
+    @ManyToOne(type => UserEntity,user => user.createdQuestions)
     author:UserEntity;
 }
 

@@ -25,6 +25,10 @@ __decorate([
 ], QuizEntity.prototype, "startDatetime", void 0);
 __decorate([
     typeorm_1.Column(),
+    __metadata("design:type", String)
+], QuizEntity.prototype, "title", void 0);
+__decorate([
+    typeorm_1.Column(),
     __metadata("design:type", Date)
 ], QuizEntity.prototype, "endDatetime", void 0);
 __decorate([

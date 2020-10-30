@@ -23,7 +23,6 @@ export class AuthService {
       );
 
       if (!data.email || !data.name) {
-        console.log("DATA",data);
         throw new BadRequestException();
       }
 
@@ -31,6 +30,9 @@ export class AuthService {
 
       if (user) {
         const payload: JwtPayload = { email: user.email };
+        delete user.createdQuestions;
+        delete user.quizzes;
+        delete user.attendedQuizzes;
         return { user, accessToken: this.jwtService.sign(payload) };
       } else {
         const newUser = new UserEntity();

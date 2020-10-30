@@ -41,7 +41,7 @@ __decorate([
 __decorate([
     typeorm_1.OneToMany(type => qa_entity_1.default, qa => qa.author),
     __metadata("design:type", Array)
-], UserEntity.prototype, "createdQuestion", void 0);
+], UserEntity.prototype, "createdQuestions", void 0);
 UserEntity = __decorate([
     typeorm_1.Entity()
 ], UserEntity);
