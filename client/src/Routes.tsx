@@ -1,18 +1,18 @@
-import React, { ReactElement } from 'react'
-import { Route, Switch } from 'react-router-dom'
+import React, { ReactElement } from "react";
+import { Route, Switch } from "react-router-dom";
 
-import  Home , {AuthView } from './pages';
-import { PrivateRoute } from './Route/index';
+import { AuthView, HomeView } from "./Pages/index";
+import { PrivateRoute } from "./Route";
 
 function Routes(): ReactElement {
   return (
     <div>
       <Switch>
         <Route path="/auth" component={AuthView} />
-        <PrivateRoute path="/" exact component={Home} />
-      </Switch>      
+        <PrivateRoute path="/" exact component={HomeView} />
+      </Switch>
     </div>
-  )
+  );
 }
 
 export default Routes;

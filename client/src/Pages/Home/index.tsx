@@ -1,14 +1,20 @@
 import React, { Component } from "react";
 import { connect, ConnectedProps } from "react-redux";
-import { Button } from "@material-ui/core";
+import {
+  Button,
+  Card,
+  Typography,
+  CardContent,
+  Container,
+} from "@material-ui/core";
 import { RouteComponentProps, withRouter } from "react-router-dom";
 
-import axios from "../common/axios";
-import { NavBar } from "../components";
-import { RootState, Quiz } from "../reduxStore/reducers";
-import { AuthActionTypes } from "../reduxStore/types";
+import axios from "../../common/axios";
+import { NavBar } from "../../components";
+import { RootState, Quiz } from "../../reduxStore/reducers";
+import { AuthActionTypes } from "../../reduxStore/types";
 
-export { default as AuthView } from "./auth";
+export { default as AuthView } from "../Auth";
 
 const mapStateToProps = (state: RootState) => state;
 const mapDispatchToProps = {
@@ -53,7 +59,6 @@ class Home extends Component<Props, State> {
   }
 
   render() {
-    console.log(this.props);
     return (
       <div>
         <NavBar>
@@ -78,12 +83,15 @@ class Home extends Component<Props, State> {
           )}
         </NavBar>
         {this.state.loading ? "Loading..." : null}
-        {this.state.quizzes &&
-          this.state.quizzes.map((o:Quiz, i) => (
-            <div key={i} style={{ color: "white" }}>
-              {o.title}
-            </div>
+        <Container style={{marginTop:'30px'}}>
+          {(this.state.quizzes as Quiz[]).map((o, i) => (
+            <Card key={i} style={{padding:'10px',color:'white',margin:'10px',maxWidth:'500px'}}>
+              <CardContent>
+                <Typography variant="h5">{o.title}</Typography>
+              </CardContent>
+            </Card>
           ))}
+        </Container>
       </div>
     );
   }

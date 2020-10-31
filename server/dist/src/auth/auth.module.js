@@ -19,17 +19,21 @@ let AuthModule = class AuthModule {
 };
 AuthModule = __decorate([
     common_1.Module({
-        imports: [passport_1.PassportModule.register({
+        imports: [
+            passport_1.PassportModule.register({
                 defaultStrategy: 'jwt',
                 session: false,
-            }), user_module_1.UserModule, jwt_1.JwtModule.register({
+            }),
+            user_module_1.UserModule,
+            jwt_1.JwtModule.register({
                 secret: env_1.JWT_SECRET,
                 signOptions: {
-                    expiresIn: env_1.JWT_EXPIRES_IN,
-                }
-            })],
+                    expiresIn: '168h',
+                },
+            }),
+        ],
         providers: [user_service_1.UserService, Jwt_strategy_1.JwtStrategy, auth_service_1.AuthService],
-        exports: [Jwt_strategy_1.JwtStrategy, auth_service_1.AuthService]
+        exports: [Jwt_strategy_1.JwtStrategy, auth_service_1.AuthService],
     })
 ], AuthModule);
 exports.AuthModule = AuthModule;

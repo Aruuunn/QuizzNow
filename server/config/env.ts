@@ -9,5 +9,4 @@ export const {
   POSTGRES_PASSWORD,
   POSTGRES_DATABASE,
   JWT_SECRET,
-  JWT_EXPIRES_IN
 } = process.env;

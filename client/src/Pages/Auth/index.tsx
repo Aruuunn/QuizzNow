@@ -7,10 +7,10 @@ import GoogleLogin, {
 import { connect, ConnectedProps } from "react-redux";
 import { Grid, Paper, Typography, Button ,CircularProgress } from "@material-ui/core";
 
-import axios from "../common/axios";
-import { AuthActionTypes, UserActionTypes } from "../reduxStore/types";
-import { NavBar } from "../components";
-import { UserState } from "../reduxStore";
+import axios from "../../common/axios";
+import { AuthActionTypes, UserActionTypes } from "../../reduxStore/types";
+import { NavBar } from "../../components";
+import { UserState } from "../../reduxStore";
 
 const mapDispatchToProps = {
   saveAccessToken: (token: string) => ({

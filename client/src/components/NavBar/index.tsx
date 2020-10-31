@@ -7,6 +7,7 @@ const NavBar = ({ children }:{children?:any}) => {
     <div>
       <AppBar
         elevation={0}
+        position="static"
         style={{
           backgroundColor: theme.palette.background.default,
         }}
