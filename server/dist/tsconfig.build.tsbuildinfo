@@ -2902,7 +2902,7 @@
         "affectsGlobalScope": false
       },
       "../src/auth/auth.module.ts": {
-        "version": "cb3beaca8fce41fcd7d4e800e3893699b37d497200c4f928204c43cfdfd63e7e",
+        "version": "5cf2151bcb1913ba8d940845de268ade7cc87e2693d4fdf8dc911bced7d7b481",
         "signature": "a28b5c0c372fb375910b3fe3c3ce4331509bc18ccef7cc39c9ee9d8daf8225d1",
         "affectsGlobalScope": false
       },

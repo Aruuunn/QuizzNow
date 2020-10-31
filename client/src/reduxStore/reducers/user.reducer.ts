@@ -2,7 +2,7 @@ import { UserActionTypes } from "../types";
 
 export interface Quiz {
   id: string;
-  startDate: string;
+  startDatetime: string;
   title: string;
   endDatetime: string;
   createdAt: string;

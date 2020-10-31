@@ -1,6 +1,6 @@
 import QAEntity from "src/qa/qa.entity";
 import { QuizEntity } from "src/quiz/quiz.entity";
-import { Entity,BaseEntity, PrimaryGeneratedColumn, Column, OneToMany } from "typeorm";
+import { Entity,BaseEntity, PrimaryGeneratedColumn, Column, OneToMany,Index } from "typeorm";
 
 @Entity()
 class UserEntity extends BaseEntity {
@@ -11,6 +11,7 @@ class UserEntity extends BaseEntity {
     @Column()
     name:string;
 
+    @Index()
     @Column({unique:true})
     email:string
 
