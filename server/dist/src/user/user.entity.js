@@ -23,6 +23,7 @@ __decorate([
     __metadata("design:type", String)
 ], UserEntity.prototype, "name", void 0);
 __decorate([
+    typeorm_1.Index(),
     typeorm_1.Column({ unique: true }),
     __metadata("design:type", String)
 ], UserEntity.prototype, "email", void 0);

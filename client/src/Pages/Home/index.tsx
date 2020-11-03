@@ -1,11 +1,12 @@
 import React, { Component } from "react";
 import { connect, ConnectedProps } from "react-redux";
 import {
-  Button,
   Card,
   Typography,
   CardContent,
   Container,
+  IconButton,
+  SvgIcon,
 } from "@material-ui/core";
 import { RouteComponentProps, withRouter } from "react-router-dom";
 
@@ -62,26 +63,27 @@ class Home extends Component<Props, State> {
     return (
       <div>
         <NavBar>
-          {this.props.auth.accessToken !== null ? (
-            <Button
-              variant="outlined"
-              color="secondary"
-              onClick={() => this.props.logout()}
-            >
-              Logout
-            </Button>
-          ) : (
-            <Button
-              variant="outlined"
-              color="secondary"
-              onClick={() => {
-                this.props.history.replace("/auth");
-              }}
-            >
-              Login
-            </Button>
-          )}
+          <IconButton
+            color="secondary"
+            style={{ marginRight: "20px" }}
+            onClick={() => {
+              this.props.history.push("/new");
+            }}
+          >
+            <SvgIcon>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                height="24"
+                viewBox="0 0 24 24"
+                width="24"
+              >
+                <path d="M0 0h24v24H0z" fill="none" />
+                <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z" />
+              </svg>
+            </SvgIcon>
+          </IconButton>
         </NavBar>
+
         {this.state.loading ? "Loading..." : null}
         <Container style={{ marginTop: "30px" }}>
           <Typography
@@ -139,9 +141,17 @@ class Home extends Component<Props, State> {
             </div>
           )}
         </Container>
-        <svg  style={{position:'fixed',bottom:0,left:0,zIndex:-1}} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
-  <path fill="#072540" fill-opacity="1" d="M0,224L48,208C96,192,192,160,288,160C384,160,480,192,576,218.7C672,245,768,267,864,272C960,277,1056,267,1152,240C1248,213,1344,171,1392,149.3L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
-</svg>
+        <svg
+          style={{ position: "fixed", bottom: 0, left: 0, zIndex: -1 }}
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 1440 320"
+        >
+          <path
+            fill="#072540"
+            fill-opacity="1"
+            d="M0,224L48,208C96,192,192,160,288,160C384,160,480,192,576,218.7C672,245,768,267,864,272C960,277,1056,267,1152,240C1248,213,1344,171,1392,149.3L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"
+          ></path>
+        </svg>
       </div>
     );
   }

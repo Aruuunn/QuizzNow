@@ -5,7 +5,7 @@ import {Route, RouteProps, useHistory} from 'react-router-dom'
 import { RootState } from '../reduxStore';
 
 
-const mapStateToProps = (state: RootState) => ({ isLoggedIn: !!state.auth.accessToken });
+const mapStateToProps = (state: RootState) => ({ isLoggedIn: state.auth.isLoggedIn });
 
 
 const PrivateRoute = (props: {isLoggedIn:boolean} & RouteProps) => {

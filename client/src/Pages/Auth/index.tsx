@@ -1,11 +1,17 @@
 import React, { Component } from "react";
-import { withRouter,RouteComponentProps } from 'react-router-dom';
+import { withRouter, RouteComponentProps } from "react-router-dom";
 import GoogleLogin, {
   GoogleLoginResponse,
-  GoogleLoginResponseOffline
+  GoogleLoginResponseOffline,
 } from "react-google-login";
 import { connect, ConnectedProps } from "react-redux";
-import { Grid, Paper, Typography, Button ,CircularProgress } from "@material-ui/core";
+import {
+  Grid,
+  Paper,
+  Typography,
+  Button,
+  CircularProgress,
+} from "@material-ui/core";
 
 import axios from "../../common/axios";
 import { AuthActionTypes, UserActionTypes } from "../../reduxStore/types";
@@ -17,7 +23,10 @@ const mapDispatchToProps = {
     type: AuthActionTypes.SAVE_ACCESS_TOKEN,
     payload: token,
   }),
-  setUser:(user:UserState) => ({type:UserActionTypes.SET_USER,payload:user})
+  setUser: (user: UserState) => ({
+    type: UserActionTypes.SET_USER,
+    payload: user,
+  }),
 };
 
 const connector = connect(null, mapDispatchToProps);
@@ -34,11 +43,13 @@ class Auth extends Component<Props, State> {
     loading: false,
   };
 
-  handleSucces = (response: GoogleLoginResponse | GoogleLoginResponseOffline) => {
+  handleSucces = (
+    response: GoogleLoginResponse | GoogleLoginResponseOffline
+  ) => {
     if (!(response as GoogleLoginResponse).tokenObj) {
       return;
     }
-    const id_token =(response as GoogleLoginResponse).tokenObj.id_token;
+    const id_token = (response as GoogleLoginResponse).tokenObj.id_token;
     this.setState({ loading: true });
     axios
       .post("/auth/google", {
@@ -48,7 +59,7 @@ class Auth extends Component<Props, State> {
         this.props.setUser(res.data.user);
         this.props.saveAccessToken(res.data.accessToken);
         this.setState({ loading: false }, () => {
-          this.props.history.replace('/');
+          this.props.history.replace("/");
         });
       });
   };
@@ -63,7 +74,12 @@ class Auth extends Component<Props, State> {
           style={{ position: "fixed", top: "40vh", zIndex: 1, width: "100%" }}
         >
           <Grid component={Paper} style={{ padding: "20px", width: "300px" }}>
-            <Typography variant="h6" color="secondary" align="center" style={{fontFamily:"'Fredoka One', cursive"}}>
+            <Typography
+              variant="h6"
+              color="secondary"
+              align="center"
+              style={{ fontFamily: "'Fredoka One', cursive" }}
+            >
               Continue with
             </Typography>
 
@@ -78,7 +94,11 @@ class Auth extends Component<Props, State> {
                   onClick={renderProps.onClick}
                   disabled={renderProps.disabled || this.state.loading}
                 >
-                  { this.state.loading ? <CircularProgress size={25}/>: "Google"}
+                  {this.state.loading ? (
+                    <CircularProgress size={25} />
+                  ) : (
+                    "Google"
+                  )}
                 </Button>
               )}
               buttonText="Login"

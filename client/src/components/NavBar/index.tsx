@@ -1,7 +1,31 @@
-import React from "react";
-import { AppBar, Toolbar, useTheme, Typography, Grid } from "@material-ui/core";
+import React, { ReactElement } from "react";
+import {
+  AppBar,
+  Toolbar,
+  useTheme,
+  Typography,
+  Grid,
+  Button,
+} from "@material-ui/core";
+import { connect, ConnectedProps } from "react-redux";
+import { RouteComponentProps, withRouter } from "react-router-dom";
 
-const NavBar = ({ children }:{children?:any}) => {
+import { RootState, AuthActionTypes } from "../../reduxStore";
+
+const mapStateToProps = (state: RootState) => state;
+const mapDispatchToProps = {
+  logout: () => ({ type: AuthActionTypes.LOG_OUT }),
+};
+
+const connector = connect(mapStateToProps, mapDispatchToProps);
+type reduxProps = ConnectedProps<typeof connector>;
+
+type Props = reduxProps &
+  RouteComponentProps & {
+    children?: ReactElement | ReactElement[];
+  };
+
+const NavBar = (props: Props) => {
   const theme = useTheme();
   return (
     <div>
@@ -23,8 +47,29 @@ const NavBar = ({ children }:{children?:any}) => {
             >
               Quiz Now
             </Typography>
+            <div>
+              {props.children}
 
-            {children}
+              {props.auth.accessToken !== null ? (
+                <Button
+                  variant="outlined"
+                  color="secondary"
+                  onClick={() => props.logout()}
+                >
+                  Logout
+                </Button>
+              ) : (
+                <Button
+                  variant="outlined"
+                  color="secondary"
+                  onClick={() => {
+                    props.history.replace("/auth");
+                  }}
+                >
+                  Login
+                </Button>
+              )}
+            </div>
           </Grid>
         </Toolbar>
       </AppBar>
@@ -32,4 +77,4 @@ const NavBar = ({ children }:{children?:any}) => {
   );
 };
 
-export default NavBar;
+export default withRouter(connector(NavBar));
