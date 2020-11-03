@@ -2712,7 +2712,7 @@
         "affectsGlobalScope": false
       },
       "../src/user/user.entity.ts": {
-        "version": "da7514eb66a5d38505c30d3f8d35fe1e620470e760a967d1a531c2ae60891234",
+        "version": "240e46a50f83dddc288f89f62dabe814ed2127b873d008d0901a34865f29080f",
         "signature": "70386776b88dc45b8b0b2e9722466bde4840c895039a0612988fb8b9ba4d2819",
         "affectsGlobalScope": false
       },
@@ -3592,7 +3592,7 @@
         "affectsGlobalScope": false
       },
       "../src/quiz/quiz.controller.ts": {
-        "version": "2bc382cd80d384392018e885948ab5c4be0f9373230bf4b06bc1ad5820ec8928",
+        "version": "3b6439d1d87351c5a430aed1a37966dc5ee0baa27760b73557ad509c0fa4c5e2",
         "signature": "c99ad5758c18d7e6286110ae5d4f51f9e46a5a99d36efa5794ca7fd79c7ceb6d",
         "affectsGlobalScope": false
       },

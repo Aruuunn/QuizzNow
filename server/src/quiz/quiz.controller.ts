@@ -20,6 +20,7 @@ import NewQuestionDto from 'src/qa/dto/new.qa';
 import { NewQuizDto } from './dto/new.quiz';
 import { QuizService } from './quiz.service';
 
+
 @Controller('quiz')
 export class QuizController {
   constructor(private quizService: QuizService) {}
