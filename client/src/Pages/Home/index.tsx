@@ -126,14 +126,10 @@ class Home extends Component<Props, State> {
               {" "}
               <Typography
                 variant="h3"
-                style={{ fontFamily: "'Fredoka One', cursive" }}
               >
                 Nothing Here....Yet
               </Typography>
               <Typography
-                style={{
-                  fontFamily: "'Fredoka One', cursive",
-                }}
                 variant="h4"
               >
                 The Quizzes you created will show up here
