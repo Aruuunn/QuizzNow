@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import MomentUtils from '@date-io/moment';
 import {
   Grid,
   TextField,
@@ -6,6 +7,7 @@ import {
   FormControlLabel,
   Container,
 } from "@material-ui/core";
+import { DateTimePicker, MuiPickersUtilsProvider } from "@material-ui/pickers";
 
 import { NavBar } from "../../components";
 
@@ -45,45 +47,23 @@ const NewQuiz = () => {
             control={<Switch />}
           />
           <Grid container alignItems="center">
-            {" "}
-            <FormControlLabel
-              label="Start Date time "
-              style={{
-                color: "#7a8a9c",
-                marginRight: "20px",
-              }}
-              labelPlacement="start"
-              control={
-                <TextField
-                  type="datetime-local"
-                  inputProps={{
-                    style: {
-                      color: "white",
-
-                      marginLeft: "20px",
-                    },
-                  }}
-                />
-              }
-            />
-            <FormControlLabel
-              label="End Date time "
-              labelPlacement="start"
-              style={{ color: "#7a8a9c", marginTop: "10px" }}
-              control={
-                <TextField
-                  onChange={(e) => console.log(e.target.value)}
-                  type="datetime-local"
-                  inputProps={{
-                    style: {
-                      color: "white",
-
-                      marginLeft: "20px",
-                    },
-                  }}
-                />
-              }
-            />
+            <MuiPickersUtilsProvider utils={MomentUtils}>
+              <FormControlLabel
+                label="Start Date time "
+                style={{
+                  color: "#7a8a9c",
+                  marginRight: "20px",
+                }}
+                labelPlacement="start"
+                control={<DateTimePicker color="secondary" inputProps={{style:{color:'white',marginLeft:'10px'}}} value={new Date()} onChange={() => null} />}
+              />
+              <FormControlLabel
+                label="End Date time "
+                labelPlacement="start"
+                style={{ color: "#7a8a9c", marginTop: "10px" }}
+                control={<DateTimePicker  color="secondary" inputProps={{style:{color:'white',marginLeft:'10px'}}} value={new Date()} onChange={() => null}/>}
+              />
+            </MuiPickersUtilsProvider>{" "}
           </Grid>
         </Grid>
       </Container>

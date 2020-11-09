@@ -7299,7 +7299,7 @@
         "../node_modules/@nestjs/common/interfaces/index.d.ts"
       ],
       "../node_modules/@nestjs/common/http/http.service.d.ts": [
-        "../node_modules/axios/index.d.ts",
+        "../node_modules/@nestjs/common/node_modules/axios/index.d.ts",
         "../node_modules/rxjs/index.d.ts"
       ],
       "../node_modules/@nestjs/common/http/index.d.ts": [
@@ -7309,7 +7309,7 @@
       ],
       "../node_modules/@nestjs/common/http/interfaces/http-module.interface.d.ts": [
         "../node_modules/@nestjs/common/interfaces/index.d.ts",
-        "../node_modules/axios/index.d.ts"
+        "../node_modules/@nestjs/common/node_modules/axios/index.d.ts"
       ],
       "../node_modules/@nestjs/common/http/interfaces/index.d.ts": [
         "../node_modules/@nestjs/common/http/interfaces/http-module.interface.d.ts"
@@ -7759,6 +7759,9 @@
       "../node_modules/@nestjs/passport/dist/passport.module.d.ts": [
         "../node_modules/@nestjs/common/index.d.ts",
         "../node_modules/@nestjs/passport/dist/interfaces/auth-module.options.d.ts"
+      ],
+      "../node_modules/@nestjs/passport/dist/passport/passport.serializer.d.ts": [
+        "../node_modules/@types/passport/index.d.ts"
       ],
       "../node_modules/@nestjs/passport/dist/passport/passport.strategy.d.ts": [
         "../node_modules/@nestjs/passport/dist/interfaces/index.d.ts"
