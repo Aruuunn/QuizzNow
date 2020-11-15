@@ -13,6 +13,7 @@ import {
   IconButton,
 } from "@material-ui/core";
 import { DateTimePicker, MuiPickersUtilsProvider } from "@material-ui/pickers";
+import MuiAlert from "@material-ui/lab/Alert";
 
 import { NavBar } from "../../components";
 
@@ -37,8 +38,12 @@ const NewQuiz = () => {
     addOptionMode: false,
     input: "",
   };
-  const [open, setOpen] = useState(true);
 
+  const [open, setOpen] = useState(false);
+  const [errorDialogState, setErrorDialogState] = useState({
+    open: false,
+    title: "",
+  });
   const [newQuestionState, setNewQuestionState] = useState<
     Question & { addOptionMode: boolean; input: string }
   >(initialNewQuestionState);
@@ -48,6 +53,13 @@ const NewQuiz = () => {
     activeNow: false,
     questions: [],
   });
+
+  const Alert = (title: string) => {
+    setErrorDialogState((s) => ({ ...s, open: true, title }));
+    setTimeout(() => {
+      setErrorDialogState((s) => ({ ...s, open: false, title: "" }));
+    }, 5000);
+  };
 
   const isOptionValid = () =>
     newQuestionState.input.trim() !== "" &&
@@ -61,13 +73,24 @@ const NewQuiz = () => {
     setNewQuestionState(initialNewQuestionState);
 
   const isNewQuestionValid = () =>
-    newQuestionState.correctAnswer &&
+    newQuestionState.correctAnswer !== null &&
     newQuestionState.correctAnswer < newQuestionState.answers.length &&
     newQuestionState.answers.length >= 2 &&
     newQuestionState.question.trim() !== "";
 
   const addNewQuestion = () => {
-    if (isNewQuestionValid()) {
+    if (
+      newQuestionState.correctAnswer === null ||
+      newQuestionState.correctAnswer >= newQuestionState.answers.length
+    ) {
+      Alert(
+        "Provide a Correct Answer for the Question. Click a Option to make it the correct answer!"
+      );
+    } else if (newQuestionState.answers.length < 2) {
+      Alert("Provide atleast Two Options for the Question");
+    } else if (newQuestionState.question.trim() === "") {
+      Alert("Provide a Valid Question!");
+    } else if (isNewQuestionValid()) {
       setState((s) => ({
         ...s,
         questions: [
@@ -82,9 +105,38 @@ const NewQuiz = () => {
       resetNewQuestionState();
     }
   };
+
   return (
     <div>
-      <NavBar />
+      {errorDialogState.open ? (
+        <Grid
+          container
+          style={{ position: "fixed", width: "100%", top: "10px", left: 0 }}
+          justify="center"
+        >
+          <MuiAlert
+            elevation={6}
+            variant="filled"
+            onClose={() => {
+              setErrorDialogState((s) => ({ ...s, open: false }));
+            }}
+            severity="error"
+          >
+            {errorDialogState.title}
+          </MuiAlert>
+        </Grid>
+      ) : null}
+
+      <NavBar>
+        <Button
+          variant="contained"
+          color="primary"
+          style={{ marginRight: "10px" }}
+        >
+          Finish
+        </Button>
+      </NavBar>
+
       <Container>
         <Grid
           container
@@ -222,28 +274,6 @@ const NewQuiz = () => {
                 <Grid container justify="space-between">
                   <Typography>{o}</Typography>
                   <div>
-                    {" "}
-                    <IconButton
-                      size="small"
-                      onClick={() =>
-                        setNewQuestionState((s) => ({ ...s, correctAnswer: i }))
-                      }
-                    >
-                      <SvgIcon fontSize="small">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          height="24"
-                          viewBox="0 0 24 24"
-                          width="24"
-                        >
-                          <path d="M0 0h24v24H0V0z" fill="none" />
-                          <path
-                            d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"
-                            fill="lightgreen"
-                          />
-                        </svg>
-                      </SvgIcon>
-                    </IconButton>
                     <IconButton
                       size="small"
                       onClick={() =>
@@ -269,7 +299,7 @@ const NewQuiz = () => {
                           <path d="M0 0h24v24H0V0z" fill="none" />
                           <path
                             d="M6 21h12V7H6v14zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"
-                            fill="red"
+                            fill="#9C4668"
                           />
                         </svg>
                       </SvgIcon>
@@ -377,10 +407,67 @@ const NewQuiz = () => {
         ) : null}
 
         {state.questions.map((o, i) => (
-          <Paper key={i} style={{ padding: "15px",marginTop:'10px' }}>
-            <Typography variant="h5" style={{ color: "white" }}>
-              {o.question}
-            </Typography>
+          <Paper key={i} style={{ padding: "15px", marginTop: "10px" }}>
+            <Grid container justify="space-between">
+              {" "}
+              <Typography variant="h5" style={{ color: "white" }}>
+                {o.question}
+              </Typography>
+              <div>
+                {" "}
+                <IconButton
+                  size="small"
+                  onClick={() => {
+                    setState((s) => ({
+                      ...s,
+                      questions: s.questions.filter((e) => e !== o),
+                    }));
+                    setOpen(true);
+                    setNewQuestionState((s) => ({ ...s, ...o }));
+                  }}
+                >
+                  <SvgIcon fontSize="small">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      width="24"
+                    >
+                      <path d="M0 0h24v24H0z" fill="none" />
+                      <path
+                        d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"
+                        fill="#0069FF"
+                      />
+                    </svg>
+                  </SvgIcon>
+                </IconButton>
+                <IconButton
+                  size="small"
+                  onClick={() => {
+                    setState((s) => ({
+                      ...s,
+                      questions: s.questions.filter((e) => e !== o),
+                    }));
+                  }}
+                >
+                  <SvgIcon fontSize="small">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      width="24"
+                    >
+                      <path d="M0 0h24v24H0V0z" fill="none" />
+                      <path
+                        d="M6 21h12V7H6v14zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"
+                        fill="#9C4668"
+                      />
+                    </svg>
+                  </SvgIcon>
+                </IconButton>
+              </div>
+            </Grid>
+
             {o.answers.map((e, i) => (
               <Paper
                 key={i}
