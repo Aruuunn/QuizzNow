@@ -33,12 +33,6 @@ export class QuizController {
     return res.sendStatus(HttpStatus.CREATED);
   }
 
-  @Get(':id')
-  @UseGuards(JwtGaurd)
-  @UsePipes(ValidationPipe)
-  async getQuiz(@Param('id') id){
-  
-  }
 
   @Post(':qid/question/new')
   @UseGuards(JwtGaurd)

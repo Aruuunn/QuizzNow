@@ -9,11 +9,11 @@ export class NewQuizDto {
     
     @IsNotEmpty()
     @IsDateString()
-    startDatetime:Date;
+    startDatetime:string;
 
     @IsNotEmpty()
     @IsDateString()
-    endDatetime:Date;
+    endDatetime:string;
 
     @IsNotEmpty()
     questions: NewQuestionDto[];

@@ -26,8 +26,6 @@ let QuizController = class QuizController {
         await this.quizService.createNewQuiz(req.user, data);
         return res.sendStatus(common_1.HttpStatus.CREATED);
     }
-    async getQuiz(id) {
-    }
     async newQuestion(questionData, quizId, req, res) {
         await this.quizService.addNewQuestion(req.user, questionData, quizId);
         return res.sendStatus(common_1.HttpStatus.CREATED);
@@ -57,15 +55,6 @@ __decorate([
     __metadata("design:paramtypes", [new_quiz_1.NewQuizDto, Object, Object]),
     __metadata("design:returntype", Promise)
 ], QuizController.prototype, "newQuiz", null);
-__decorate([
-    common_1.Get(':id'),
-    common_1.UseGuards(jwt_gaurd_1.default),
-    common_1.UsePipes(common_1.ValidationPipe),
-    __param(0, common_1.Param('id')),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object]),
-    __metadata("design:returntype", Promise)
-], QuizController.prototype, "getQuiz", null);
 __decorate([
     common_1.Post(':qid/question/new'),
     common_1.UseGuards(jwt_gaurd_1.default),
