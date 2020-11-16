@@ -14,8 +14,10 @@ import {
 } from "@material-ui/core";
 import { DateTimePicker, MuiPickersUtilsProvider } from "@material-ui/pickers";
 import MuiAlert from "@material-ui/lab/Alert";
+import { useHistory } from "react-router-dom";
 
 import { NavBar } from "../../components";
+import axios from "../../common/axios";
 
 interface Question {
   question: string;
@@ -25,8 +27,8 @@ interface Question {
 interface State {
   title: string;
   activeNow: boolean;
-  startDatetime?: Date;
-  endDatetime?: Date;
+  startDatetime: Date;
+  endDatetime: Date;
   questions: Question[];
 }
 
@@ -39,7 +41,9 @@ const NewQuiz = () => {
     input: "",
   };
 
+  const history = useHistory();
   const [open, setOpen] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [errorDialogState, setErrorDialogState] = useState({
     open: false,
     title: "",
@@ -52,6 +56,8 @@ const NewQuiz = () => {
     title: "",
     activeNow: false,
     questions: [],
+    startDatetime: new Date(Date.now() + 600000),
+    endDatetime: new Date(Date.now() + 2400000),
   });
 
   const Alert = (title: string) => {
@@ -106,6 +112,51 @@ const NewQuiz = () => {
     }
   };
 
+  const handleFinish = async () => {
+    if (state.title.trim() === "") {
+      Alert("Quiz Title Should not be Empty");
+    } else if (state.questions.length === 0) {
+      Alert("Create Atleast one question");
+    } else if (
+      state.endDatetime.getTime() -
+        (state.activeNow ? Date.now() : state.startDatetime.getTime()) <
+      0
+    ) {
+      Alert("End Datetime has to be after Start Datetime");
+    } else if (
+      !state.activeNow &&
+      state.startDatetime.getTime() - Date.now() < 0
+    ) {
+      Alert("Start Datetime has to be after current Date time");
+    } else {
+      setLoading(true);
+      try {
+        const data = {
+          title: state.title,
+          startDatetime: state.activeNow
+            ? new Date()
+            : state.startDatetime,
+          endDatetime: state.endDatetime,
+          questions: state.questions,
+        };
+     
+        await axios.post("/quiz/new", data, {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+          },
+        });
+        setTimeout(() => {
+          history.push("/");
+        }, 0);
+      } catch (e) {
+        Alert("Something went Wrong. Try again");
+        console.log("ERR", e);
+      } finally {
+        setLoading(false);
+      }
+    }
+  };
+
   return (
     <div>
       {errorDialogState.open ? (
@@ -131,6 +182,8 @@ const NewQuiz = () => {
         <Button
           variant="contained"
           color="primary"
+          disabled={loading}
+          onClick={() => handleFinish()}
           style={{ marginRight: "10px" }}
         >
           Finish
@@ -149,8 +202,14 @@ const NewQuiz = () => {
           <TextField
             placeholder="Title"
             required
+            disabled={loading}
             inputProps={{
               style: { color: "white", padding: "20px", fontSize: "26px" },
+            }}
+            value={state.title}
+            onChange={(e) => {
+              e.persist();
+              setState((s) => ({ ...s, title: e.target.value }));
             }}
             color="secondary"
             style={{ marginBottom: "20px" }}
@@ -159,6 +218,7 @@ const NewQuiz = () => {
           <FormControlLabel
             labelPlacement="start"
             label="Active now"
+            disabled={loading}
             style={{ color: "#7a8a9c", display: "block", marginBottom: "20px" }}
             control={
               <Switch
@@ -174,6 +234,7 @@ const NewQuiz = () => {
               {!state.activeNow ? (
                 <FormControlLabel
                   label="Start Date time "
+                  disabled={loading}
                   style={{
                     color: "#7a8a9c",
                     marginRight: "20px",
@@ -182,9 +243,14 @@ const NewQuiz = () => {
                   control={
                     <DateTimePicker
                       value={state.startDatetime}
-                      onChange={(e) =>
-                        setState((s) => ({ ...s, startDatetime: e?.toDate() }))
-                      }
+                      onChange={(e) => {
+                        if (e) {
+                          setState((s) => ({
+                            ...s,
+                            startDatetime: e.toDate(),
+                          }));
+                        }
+                      }}
                       color="secondary"
                       inputProps={{
                         style: { color: "white", marginLeft: "10px" },
@@ -195,6 +261,7 @@ const NewQuiz = () => {
               ) : null}
               <FormControlLabel
                 label="End Date time "
+                disabled={loading}
                 labelPlacement="start"
                 style={{ color: "#7a8a9c", marginTop: "10px" }}
                 control={
@@ -204,9 +271,11 @@ const NewQuiz = () => {
                       style: { color: "white", marginLeft: "10px" },
                     }}
                     value={state.endDatetime}
-                    onChange={(e) =>
-                      setState((s) => ({ ...s, endDatetime: e?.toDate() }))
-                    }
+                    onChange={(e) => {
+                      if (e) {
+                        setState((s) => ({ ...s, endDatetime: e.toDate() }));
+                      }
+                    }}
                   />
                 }
               />
@@ -215,6 +284,7 @@ const NewQuiz = () => {
         </Grid>
         {!open ? (
           <Button
+            disabled={loading}
             onClick={() => {
               resetNewQuestionState();
               setOpen(true);
@@ -257,9 +327,11 @@ const NewQuiz = () => {
             {newQuestionState.answers.map((o, i) => (
               <Paper
                 key={i}
-                onClick={() =>
-                  setNewQuestionState((s) => ({ ...s, correctAnswer: i }))
-                }
+                onClick={() => {
+                  if (!loading) {
+                    setNewQuestionState((s) => ({ ...s, correctAnswer: i }));
+                  }
+                }}
                 variant="outlined"
                 style={{
                   color: "white",
@@ -275,6 +347,7 @@ const NewQuiz = () => {
                   <Typography>{o}</Typography>
                   <div>
                     <IconButton
+                      disabled={loading}
                       size="small"
                       onClick={() =>
                         setNewQuestionState((s) => ({
@@ -318,6 +391,7 @@ const NewQuiz = () => {
                 }}
               >
                 <TextField
+                  disabled={loading}
                   fullWidth
                   multiline
                   value={newQuestionState.input}
@@ -345,7 +419,8 @@ const NewQuiz = () => {
               <div>
                 {newQuestionState.addOptionMode ? (
                   <Button
-                    variant="outlined"
+                    disabled={loading}
+                    variant="contained"
                     color="secondary"
                     onClick={() => {
                       if (isOptionValid()) {
@@ -363,6 +438,7 @@ const NewQuiz = () => {
                   </Button>
                 ) : (
                   <Button
+                    disabled={loading}
                     color="secondary"
                     onClick={() =>
                       setNewQuestionState((s) => ({
@@ -378,6 +454,7 @@ const NewQuiz = () => {
               </div>
               <div>
                 <Button
+                  disabled={loading}
                   onClick={() => {
                     if (newQuestionState.addOptionMode) {
                       setNewQuestionState((s) => ({
@@ -392,7 +469,10 @@ const NewQuiz = () => {
                   Cancel
                 </Button>
                 <Button
-                  variant="contained"
+                  disabled={loading}
+                  variant={
+                    newQuestionState.addOptionMode ? "outlined" : "contained"
+                  }
                   color="secondary"
                   onClick={() => {
                     addNewQuestion();
