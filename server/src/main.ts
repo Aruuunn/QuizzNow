@@ -9,7 +9,7 @@ async function bootstrap() {
 
   app.use(passport.initialize());
 
-  app.setGlobalPrefix('/api')
+  app.setGlobalPrefix('/api');
 
   app.enableCors();
 

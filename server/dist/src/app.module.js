@@ -16,6 +16,7 @@ const user_module_1 = require("./user/user.module");
 const qa_service_1 = require("./qa/qa.service");
 const qa_module_1 = require("./qa/qa.module");
 const quiz_module_1 = require("./quiz/quiz.module");
+const quiz_attempt_gateway_1 = require("./quiz-attempt.gateway");
 const env = require("../config/env");
 let AppModule = class AppModule {
 };
@@ -32,7 +33,7 @@ AppModule = __decorate([
                 synchronize: true,
             }), auth_module_1.AuthModule, user_module_1.UserModule, qa_module_1.QaModule, quiz_module_1.QuizModule],
         controllers: [auth_controller_1.AuthController],
-        providers: [user_service_1.UserService, qa_service_1.QaService],
+        providers: [user_service_1.UserService, qa_service_1.QaService, quiz_attempt_gateway_1.QuizAttemptGateway],
     })
 ], AppModule);
 exports.AppModule = AppModule;

@@ -1,7 +1,7 @@
 import React, { ReactElement } from "react";
-import { Route, Switch } from "react-router-dom";
+import { Redirect, Route, Switch } from "react-router-dom";
 
-import { AuthView, HomeView, NewQuizView } from "./Pages/index";
+import { AuthView, HomeView, NewQuizView ,QuizView ,NotFoundView} from "./Pages/index";
 import { PrivateRoute } from "./Route";
 
 function Routes(): ReactElement {
@@ -9,9 +9,11 @@ function Routes(): ReactElement {
     <div>
       <Switch>
         <Route path="/auth" component={AuthView} />
-        <PrivateRoute path="/new" component={NewQuizView}/>
+        <PrivateRoute path="/new" component={NewQuizView} />
+        <PrivateRoute path="/attempt/:id" component={QuizView}/>
         <PrivateRoute path="/" exact component={HomeView} />
-
+        <Route path="/not-found" exact component={NotFoundView} />
+        <Redirect to="/not-found"/>
       </Switch>
     </div>
   );

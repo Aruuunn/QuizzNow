@@ -15,10 +15,17 @@ const jwt_1 = require("@nestjs/jwt");
 const axios_1 = require("axios");
 const user_entity_1 = require("../user/user.entity");
 const user_service_1 = require("../user/user.service");
+const env_1 = require("../../config/env");
 let AuthService = class AuthService {
     constructor(userService, jwtService) {
         this.userService = userService;
         this.jwtService = jwtService;
+        this.verifyJwt = (token) => {
+            return this.jwtService.verify(token, {
+                ignoreExpiration: false,
+                secret: env_1.JWT_SECRET,
+            });
+        };
         this.authenticateUser = async (id_token) => {
             try {
                 const { data } = await axios_1.default.get(`https://www.googleapis.com/oauth2/v3/tokeninfo?id_token=${id_token.trim()}`);

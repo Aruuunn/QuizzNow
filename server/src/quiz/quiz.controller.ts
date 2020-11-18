@@ -20,7 +20,6 @@ import NewQuestionDto from 'src/qa/dto/new.qa';
 import { NewQuizDto } from './dto/new.quiz';
 import { QuizService } from './quiz.service';
 
-
 @Controller('quiz')
 export class QuizController {
   constructor(private quizService: QuizService) {}
@@ -89,6 +88,7 @@ export class QuizController {
   @Get()
   @UseGuards(JwtGaurd)
   async get(@Query() options: IPaginationOptions, @Req() req) {
+   
     return await this.quizService.getQuizzes(req.user, options);
   }
 
