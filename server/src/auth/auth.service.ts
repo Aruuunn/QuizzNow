@@ -8,6 +8,7 @@ import axios from 'axios';
 import UserEntity from 'src/user/user.entity';
 import { UserService } from 'src/user/user.service';
 import { JwtPayload } from './jwt.payload';
+import { JWT_SECRET } from '../../config/env';
 
 @Injectable()
 export class AuthService {
@@ -15,6 +16,13 @@ export class AuthService {
     private userService: UserService,
     private jwtService: JwtService,
   ) {}
+
+  verifyJwt =  (token: string) => {
+    return this.jwtService.verify(token, {
+      ignoreExpiration: false,
+      secret: JWT_SECRET,
+    });
+  };
 
   authenticateUser = async (id_token: string) => {
     try {
