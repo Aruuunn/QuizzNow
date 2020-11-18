@@ -49,7 +49,6 @@ const NavBar = (props: Props) => {
             </Typography>
             <div>
               {props.children}
-
               {props.auth.accessToken !== null ? (
                 <Button
                   variant="outlined"

@@ -12,6 +12,7 @@ import {
   Button,
   CircularProgress,
 } from "@material-ui/core";
+import queryString from "query-string";
 
 import axios from "../../common/axios";
 import { AuthActionTypes, UserActionTypes } from "../../reduxStore/types";
@@ -59,12 +60,18 @@ class Auth extends Component<Props, State> {
         this.props.setUser(res.data.user);
         this.props.saveAccessToken(res.data.accessToken);
         this.setState({ loading: false }, () => {
-          this.props.history.replace("/");
+          const query = queryString.parse(this.props.location.search);
+          if (query.next) {
+            this.props.history.replace(query.next as string);
+          } else {
+            this.props.history.replace("/");
+          }
         });
       });
   };
 
   render() {
+    console.log(this.props);
     return (
       <div>
         <NavBar />

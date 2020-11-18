@@ -5,5 +5,5 @@ export declare class WsGuard implements CanActivate {
     private userService;
     private authService;
     constructor(userService: UserService, authService: AuthService);
-    canActivate(context: any): boolean | any | Promise<boolean | any>;
+    canActivate(context: any): Promise<boolean | any>;
 }

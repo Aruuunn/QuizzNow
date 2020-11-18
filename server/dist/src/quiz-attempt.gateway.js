@@ -17,10 +17,6 @@ let QuizAttemptGateway = class QuizAttemptGateway {
     constructor() {
         this.logger = new common_1.Logger('AppGateway');
     }
-    handleMessage(client, payload) {
-        this.logger.log('Received a Message from Client');
-        this.server.emit('msgToClient', payload);
-    }
     afterInit(server) {
         this.logger.log('Init');
     }
@@ -35,14 +31,8 @@ __decorate([
     websockets_1.WebSocketServer(),
     __metadata("design:type", Object)
 ], QuizAttemptGateway.prototype, "server", void 0);
-__decorate([
-    common_1.UseGuards(ws_gaurd_1.WsGuard),
-    websockets_1.SubscribeMessage('msgToServer'),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object, String]),
-    __metadata("design:returntype", void 0)
-], QuizAttemptGateway.prototype, "handleMessage", null);
 QuizAttemptGateway = __decorate([
+    common_1.UseGuards(ws_gaurd_1.WsGuard),
     websockets_1.WebSocketGateway(undefined, { transports: ['websocket', 'polling'] })
 ], QuizAttemptGateway);
 exports.QuizAttemptGateway = QuizAttemptGateway;

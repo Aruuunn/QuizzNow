@@ -1,10 +1,11 @@
 import React, { Component } from "react";
 import io from "socket.io-client";
+import { RouteComponentProps ,withRouter} from 'react-router-dom';
 
 import { NavBar } from "../../components";
 
 
-interface Props {}
+type Props = RouteComponentProps;
 interface State {
   socket: null | SocketIOClient.Socket;
 }
@@ -20,17 +21,17 @@ class Quiz extends Component<Props, State> {
         token: localStorage.getItem("accessToken")
       }
     });
-
     socket.on("connect", () => {
       console.log("Connected");
     });
     socket.on("disconnect", () => {
       console.log("Disconnected");
     });
-     socket.emit("msgToServer", "Hey Server");
-    socket.on("msgToClient", (e: any) => {
-      console.log(e);
-    });
+    socket.on("400", () => {
+      this.props.history.push(`/auth?next=${window.location.href}`);
+    })
+    
+    socket.emit("fetchDetails", (this.props.match.params as { id: string }).id);
 
     this.setState({ socket });
   }
@@ -44,4 +45,4 @@ class Quiz extends Component<Props, State> {
   }
 }
 
-export default Quiz;
+export default withRouter(Quiz);
