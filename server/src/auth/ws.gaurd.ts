@@ -1,4 +1,5 @@
-import { Injectable, CanActivate } from '@nestjs/common';
+import { Injectable, CanActivate, BadRequestException } from '@nestjs/common';
+import { UNAUTHORIZED } from 'common/ws.event.types';
 import { UserService } from 'src/user/user.service';
 import { AuthService } from './auth.service';
 
@@ -15,13 +16,13 @@ export class WsGuard implements CanActivate {
     try {
       const decoded = this.authService.verifyJwt(bearerToken) as any;
       const user = await this.userService.findByEmail(decoded.email);
-      if (!user) {
-        throw Error('User Not Found');
-      }
-      context.switchToWs().getData().user = user;
+      let data = context.switchToWs().getData();
+      data.user = user;
       return true;
     } catch (ex) {
-      context.args[0]?.server?.emit('400');
+      console.log(ex);
+      context.args[0]?.server?.emit(UNAUTHORIZED);
+    
       return false;
     }
   }

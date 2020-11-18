@@ -12,9 +12,10 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.QuizAttemptGateway = void 0;
 const websockets_1 = require("@nestjs/websockets");
 const common_1 = require("@nestjs/common");
-const ws_gaurd_1 = require("./auth/ws.gaurd");
-const ws_event_types_1 = require("../common/ws.event.types");
-const quiz_service_1 = require("./quiz/quiz.service");
+const ws_gaurd_1 = require("../auth/ws.gaurd");
+const ws_event_types_1 = require("../../common/ws.event.types");
+const quiz_service_1 = require("./quiz.service");
+const class_transformer_1 = require("class-transformer");
 let QuizAttemptGateway = class QuizAttemptGateway {
     constructor(quizService) {
         this.quizService = quizService;
@@ -29,8 +30,17 @@ let QuizAttemptGateway = class QuizAttemptGateway {
     handleConnection(client, ...args) {
         this.logger.log(`Client connected: ${client.id}`);
     }
-    fetchQuizDetails(server, data) {
-        this.logger.log(`Fetching Quiz Details of ${data.payload}`);
+    async fetchQuizDetails(server, data) {
+        try {
+            const quiz = await this.quizService.getQuiz(data.payload);
+            if (Date.now() < new Date(quiz.startDatetime).getTime() || Date.now() > new Date(quiz.endDatetime).getTime()) {
+                delete quiz.questions;
+            }
+            server.emit(ws_event_types_1.RECEIVED_QUIZ_DETAILS, class_transformer_1.classToPlain(quiz));
+        }
+        catch (e) {
+            server.emit(ws_event_types_1.RECEIVED_QUIZ_DETAILS, null);
+        }
     }
 };
 __decorate([
@@ -41,7 +51,7 @@ __decorate([
     websockets_1.SubscribeMessage(ws_event_types_1.FETCH_QUIZ_DETAILS),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object, Object]),
-    __metadata("design:returntype", void 0)
+    __metadata("design:returntype", Promise)
 ], QuizAttemptGateway.prototype, "fetchQuizDetails", null);
 QuizAttemptGateway = __decorate([
     common_1.UseGuards(ws_gaurd_1.WsGuard),

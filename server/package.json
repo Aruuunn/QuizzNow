@@ -36,6 +36,7 @@
     "@types/redis": "^2.8.27",
     "axios": "^0.20.0",
     "class-transformer": "^0.3.1",
+    "class-transformer-validator": "^0.9.1",
     "class-validator": "^0.12.2",
     "connect-redis": "^5.0.0",
     "dotenv": "^8.2.0",

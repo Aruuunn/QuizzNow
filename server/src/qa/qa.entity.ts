@@ -1,23 +1,33 @@
-import UserEntity from "src/user/user.entity";
-import { BaseEntity, Column, Entity, ManyToMany, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Exclude } from 'class-transformer';
+import UserEntity from 'src/user/user.entity';
+import {
+  BaseEntity,
+  Column,
+  Entity,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 
 @Entity()
-class QAEntity extends BaseEntity{
+class QAEntity extends BaseEntity {
+  @PrimaryGeneratedColumn('uuid')
+  id: string;
 
-    @PrimaryGeneratedColumn('uuid')
-    id:string;
+  @Column()
+  question: string;
 
-    @Column()
-    question:string;
+  @Column()
+  @Exclude()
+  correctAnswer: number;
 
-    @Column()
-    correctAnswer:number;
+  @Column('bytea', { array: true })
+  answers: string[];
 
-    @Column('bytea',{array:true})
-    answers:string[]
-
-    @ManyToOne(type => UserEntity,user => user.createdQuestions)
-    author:UserEntity;
+  @ManyToOne(
+    type => UserEntity,
+    user => user.createdQuestions,
+  )
+  author: UserEntity;
 }
 
 export default QAEntity;

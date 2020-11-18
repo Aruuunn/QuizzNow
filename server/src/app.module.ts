@@ -7,7 +7,7 @@ import { UserModule } from './user/user.module';
 import { QaService } from './qa/qa.service';
 import { QaModule } from './qa/qa.module';
 import { QuizModule } from './quiz/quiz.module';
-import { QuizAttemptGateway } from './quiz-attempt.gateway';
+import { QuizAttemptGateway } from './quiz/quiz-attempt.gateway';
 
 
 import * as env from '../config/env';

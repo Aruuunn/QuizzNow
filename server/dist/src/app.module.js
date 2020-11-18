@@ -16,7 +16,7 @@ const user_module_1 = require("./user/user.module");
 const qa_service_1 = require("./qa/qa.service");
 const qa_module_1 = require("./qa/qa.module");
 const quiz_module_1 = require("./quiz/quiz.module");
-const quiz_attempt_gateway_1 = require("./quiz-attempt.gateway");
+const quiz_attempt_gateway_1 = require("./quiz/quiz-attempt.gateway");
 const env = require("../config/env");
 let AppModule = class AppModule {
 };

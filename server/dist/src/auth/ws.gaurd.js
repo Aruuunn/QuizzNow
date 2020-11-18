@@ -11,6 +11,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.WsGuard = void 0;
 const common_1 = require("@nestjs/common");
+const ws_event_types_1 = require("../../common/ws.event.types");
 const user_service_1 = require("../user/user.service");
 const auth_service_1 = require("./auth.service");
 let WsGuard = class WsGuard {
@@ -24,14 +25,13 @@ let WsGuard = class WsGuard {
         try {
             const decoded = this.authService.verifyJwt(bearerToken);
             const user = await this.userService.findByEmail(decoded.email);
-            if (!user) {
-                throw Error('User Not Found');
-            }
-            context.switchToWs().getData().user = user;
+            let data = context.switchToWs().getData();
+            data.user = user;
             return true;
         }
         catch (ex) {
-            (_e = (_d = context.args[0]) === null || _d === void 0 ? void 0 : _d.server) === null || _e === void 0 ? void 0 : _e.emit('400');
+            console.log(ex);
+            (_e = (_d = context.args[0]) === null || _d === void 0 ? void 0 : _d.server) === null || _e === void 0 ? void 0 : _e.emit(ws_event_types_1.UNAUTHORIZED);
             return false;
         }
     }

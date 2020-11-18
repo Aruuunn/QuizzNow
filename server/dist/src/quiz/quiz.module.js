@@ -22,6 +22,7 @@ QuizModule = __decorate([
         imports: [typeorm_1.TypeOrmModule.forFeature([quiz_repository_1.default]), user_module_1.UserModule, qa_module_1.QaModule],
         controllers: [quiz_controller_1.QuizController],
         providers: [quiz_service_1.QuizService, qa_service_1.QaService],
+        exports: [quiz_service_1.QuizService]
     })
 ], QuizModule);
 exports.QuizModule = QuizModule;

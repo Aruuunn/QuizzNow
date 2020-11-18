@@ -10,6 +10,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.QuizEntity = void 0;
+const class_transformer_1 = require("class-transformer");
 const qa_entity_1 = require("../qa/qa.entity");
 const user_entity_1 = require("../user/user.entity");
 const typeorm_1 = require("typeorm");
@@ -41,6 +42,7 @@ __decorate([
     __metadata("design:type", user_entity_1.default)
 ], QuizEntity.prototype, "author", void 0);
 __decorate([
+    class_transformer_1.Exclude(),
     typeorm_1.ManyToOne(type => user_entity_1.default, user => user.attendedQuizzes, { eager: true, }),
     __metadata("design:type", Array)
 ], QuizEntity.prototype, "participants", void 0);
