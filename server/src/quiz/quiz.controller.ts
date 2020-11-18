@@ -89,7 +89,7 @@ export class QuizController {
   @UseGuards(JwtGaurd)
   async get(@Query() options: IPaginationOptions, @Req() req) {
    
-    return await this.quizService.getQuizzes(req.user, options);
+    return await  this.quizService.getQuizzes(req.user, options);
   }
 
 }

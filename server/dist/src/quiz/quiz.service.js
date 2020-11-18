@@ -26,6 +26,9 @@ let QuizService = class QuizService {
     constructor(qaService, quizRepo) {
         this.qaService = qaService;
         this.quizRepo = quizRepo;
+        this.getQuiz = async (id) => {
+            return await this.quizRepo.findOneOrFail(id);
+        };
         this.createNewQuiz = async (user, quizData) => {
             const newQuiz = new quiz_entity_1.QuizEntity();
             newQuiz.startDatetime = new Date(quizData.startDatetime);

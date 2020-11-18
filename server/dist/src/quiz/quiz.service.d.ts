@@ -9,6 +9,7 @@ export declare class QuizService {
     private qaService;
     private quizRepo;
     constructor(qaService: QaService, quizRepo: QuizRepository);
+    getQuiz: (id: string) => Promise<QuizEntity>;
     createNewQuiz: (user: UserEntity, quizData: NewQuizDto) => Promise<QuizEntity>;
     addNewQuestion: (user: UserEntity, question: NewQuestionDto, quizId: string) => Promise<QuizEntity>;
     addOldQuestion: (user: UserEntity, questionId: string, quizId: string) => Promise<QuizEntity>;

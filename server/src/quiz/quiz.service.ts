@@ -15,7 +15,11 @@ export class QuizService {
     private qaService:QaService,
     @InjectRepository(QuizRepository)
   private  quizRepo:QuizRepository
-  ) {}
+  ) { }
+  
+  getQuiz = async (id:string) => {
+    return await this.quizRepo.findOneOrFail(id);
+  }
 
   createNewQuiz = async (user: UserEntity, quizData: NewQuizDto) => {
     const newQuiz = new QuizEntity();
