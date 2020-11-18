@@ -3737,13 +3737,13 @@
         "affectsGlobalScope": false
       },
       "../src/auth/ws.gaurd.ts": {
-        "version": "ec9cf299e04e230a08d5c40526f2a044721d2d3b9e7cb4f3621ac1307f0b097e",
-        "signature": "8f6d153bb228e69d556a2f506e16313e31a52fb517a7018ed585aa38ef61726f",
+        "version": "de9f4633e395497c2843424647bbb87039e021476278cd7170e0c92565524f77",
+        "signature": "6f9701c2f6ac63be17db180e79ba063923abce4e93c74e20079cef1369dea5ff",
         "affectsGlobalScope": false
       },
       "../src/quiz-attempt.gateway.ts": {
-        "version": "9d9a12f45aa5f684b486d475714b101633ddb7764f7205188a8effd8ba28e9d8",
-        "signature": "2140520fedcd694ae93ebfb08c9f3545cebc259628e58cb19e4683485cd371a4",
+        "version": "448fe03dffc115a3d9480b0001afc5b2de5c692eed643a52bd65caf8a1a2db5d",
+        "signature": "0d92b83f44213f16a77cc0f2d4ac9d845b11bf3d4f40bf05c9ebe4431ceddd6a",
         "affectsGlobalScope": false
       },
       "../src/app.module.ts": {

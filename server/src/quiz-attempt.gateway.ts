@@ -10,20 +10,14 @@ import {
  import { Socket, Server } from 'socket.io';
 import { WsGuard } from './auth/ws.gaurd';
  
+@UseGuards(WsGuard)
  @WebSocketGateway(undefined,{transports:['websocket', 'polling']})
  export class QuizAttemptGateway implements OnGatewayInit, OnGatewayConnection, OnGatewayDisconnect {
  
   @WebSocketServer() server: Server;
   private logger: Logger = new Logger('AppGateway');
  
-  @UseGuards(WsGuard)
-  @SubscribeMessage('msgToServer')
-  handleMessage(client: Socket, payload: string): void {
-    this.logger.log('Received a Message from Client');
-    this.server.emit('msgToClient', payload);
-   
-  }
- 
+
   afterInit(server: Server) {
    this.logger.log('Init');
   }

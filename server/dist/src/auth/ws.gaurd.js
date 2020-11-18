@@ -18,27 +18,20 @@ let WsGuard = class WsGuard {
         this.userService = userService;
         this.authService = authService;
     }
-    canActivate(context) {
-        var _a, _b, _c;
+    async canActivate(context) {
+        var _a, _b, _c, _d, _e;
         const bearerToken = (_c = (_b = (_a = context.args[0]) === null || _a === void 0 ? void 0 : _a.handshake) === null || _b === void 0 ? void 0 : _b.query) === null || _c === void 0 ? void 0 : _c.token;
-        if (!bearerToken) {
-            return false;
-        }
         try {
             const decoded = this.authService.verifyJwt(bearerToken);
-            return new Promise((resolve, reject) => {
-                this.userService.findByEmail(decoded.email).then(user => {
-                    if (user) {
-                        resolve(user);
-                    }
-                    else {
-                        reject(false);
-                    }
-                });
-            });
+            const user = await this.userService.findByEmail(decoded.email);
+            if (!user) {
+                throw Error('User Not Found');
+            }
+            context.switchToWs().getData().user = user;
+            return true;
         }
         catch (ex) {
-            console.log(ex);
+            (_e = (_d = context.args[0]) === null || _d === void 0 ? void 0 : _d.server) === null || _e === void 0 ? void 0 : _e.emit('400');
             return false;
         }
     }

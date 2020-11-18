@@ -9,26 +9,19 @@ export class WsGuard implements CanActivate {
     private authService: AuthService,
   ) {}
 
-  canActivate(context: any): boolean | any | Promise<boolean | any> {
-    const bearerToken = context.args[0]?.handshake?.query?.token
-
-    if (!bearerToken) {
-      return false;
-    }
+  async canActivate(context: any): Promise<boolean | any> {
+    const bearerToken = context.args[0]?.handshake?.query?.token;
 
     try {
       const decoded = this.authService.verifyJwt(bearerToken) as any;
-      return new Promise((resolve, reject) => {
-         this.userService.findByEmail(decoded.email).then(user => {
-          if (user) {
-            resolve(user);
-          } else {
-            reject(false);
-          }
-        });
-      });
+      const user = await this.userService.findByEmail(decoded.email);
+      if (!user) {
+        throw Error('User Not Found');
+      }
+      context.switchToWs().getData().user = user;
+      return true;
     } catch (ex) {
-      console.log(ex);
+      context.args[0]?.server?.emit('400');
       return false;
     }
   }
