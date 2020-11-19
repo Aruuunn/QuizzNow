@@ -20,7 +20,7 @@ export class QaService {
   createQuestion = async (user: UserEntity, questionData: NewQuestionDto) => {
     try {
       const newQuestion = new QAEntity();
-      newQuestion.answers = questionData.answers;
+      newQuestion.options = questionData.options;
       newQuestion.correctAnswer = questionData.correctAnswer;
       newQuestion.author = user;
       newQuestion.question = questionData.question;
@@ -38,7 +38,7 @@ export class QaService {
     questionData: UpdateQuestionDto,
     questionID: string,
   ) => {
-    const question = await this.qaRepo.findOne({ id: questionID });
+    const question = await this.qaRepo.findOne({ id: questionID },{cache:true});
 
     if (!question) {
       throw new BadRequestException();
@@ -48,7 +48,7 @@ export class QaService {
       throw new UnauthorizedException();
     }
 
-    if (questionData.answers) question.answers = questionData.answers;
+    if (questionData.options) question.options = questionData.options;
 
     if (questionData.correctAnswer)
       question.correctAnswer = questionData.correctAnswer;
@@ -65,6 +65,6 @@ export class QaService {
   };
 
   findbyID = async (questionID: string) => {
-    return this.qaRepo.findOne({ id: questionID });
+    return this.qaRepo.findOne({ id: questionID },{cache:true});
   };
 }

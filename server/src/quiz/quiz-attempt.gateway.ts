@@ -6,7 +6,7 @@ import {
   OnGatewayConnection,
   OnGatewayDisconnect,
 } from '@nestjs/websockets';
-import { ClassSerializerInterceptor, Logger, UseGuards, UseInterceptors } from '@nestjs/common';
+import { Logger, UseGuards } from '@nestjs/common';
 import { Socket, Server } from 'socket.io';
 
 import { WsGuard } from '../auth/ws.gaurd';
@@ -33,11 +33,11 @@ export class QuizAttemptGateway
   }
 
   handleDisconnect(client: Socket) {
-    this.logger.log(`Client disconnected: ${client.id}`);
+    this.logger.log(`Client disconnected: ${client.id} ${client.conn.remoteAddress}`);
   }
 
   handleConnection(client: Socket, ...args: any[]) {
-    this.logger.log(`Client connected: ${client.id}`);
+    this.logger.log(`Client connected: ${client.id} ${client.conn.remoteAddress}`);
   }
 
   @SubscribeMessage(FETCH_QUIZ_DETAILS)
@@ -47,9 +47,13 @@ export class QuizAttemptGateway
   ) {
     try {
       const quiz = await this.quizService.getQuiz(data.payload);
-      if (Date.now() < new Date(quiz.startDatetime).getTime() || Date.now() > new Date(quiz.endDatetime).getTime()) {
+      if (
+        Date.now() < new Date(quiz.startDatetime).getTime() ||
+        Date.now() > new Date(quiz.endDatetime).getTime()
+      ) {
         delete quiz.questions;
       }
+      this.logger.log(`Sending Details of Quiz with Id - ${data.payload}`);
       server.emit(RECEIVED_QUIZ_DETAILS, classToPlain(quiz));
     } catch (e) {
       server.emit(RECEIVED_QUIZ_DETAILS, null);

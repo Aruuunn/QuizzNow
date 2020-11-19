@@ -21,7 +21,7 @@ import axios from "../../common/axios";
 
 interface Question {
   question: string;
-  answers: string[];
+  options: string[];
   correctAnswer: number | null;
 }
 interface State {
@@ -35,7 +35,7 @@ interface State {
 const NewQuiz = () => {
   const initialNewQuestionState = {
     question: "",
-    answers: [],
+    options: [],
     correctAnswer: null,
     addOptionMode: false,
     input: "",
@@ -69,7 +69,7 @@ const NewQuiz = () => {
 
   const isOptionValid = () =>
     newQuestionState.input.trim() !== "" &&
-    newQuestionState.answers.reduce((t, c) => {
+    newQuestionState.options.reduce((t, c) => {
       if (c.trim() === newQuestionState.input.trim()) {
         return false;
       } else return t;
@@ -80,19 +80,19 @@ const NewQuiz = () => {
 
   const isNewQuestionValid = () =>
     newQuestionState.correctAnswer !== null &&
-    newQuestionState.correctAnswer < newQuestionState.answers.length &&
-    newQuestionState.answers.length >= 2 &&
+    newQuestionState.correctAnswer < newQuestionState.options.length &&
+    newQuestionState.options.length >= 2 &&
     newQuestionState.question.trim() !== "";
 
   const addNewQuestion = () => {
     if (
       newQuestionState.correctAnswer === null ||
-      newQuestionState.correctAnswer >= newQuestionState.answers.length
+      newQuestionState.correctAnswer >= newQuestionState.options.length
     ) {
       Alert(
         "Provide a Correct Answer for the Question. Click a Option to make it the correct answer!"
       );
-    } else if (newQuestionState.answers.length < 2) {
+    } else if (newQuestionState.options.length < 2) {
       Alert("Provide atleast Two Options for the Question");
     } else if (newQuestionState.question.trim() === "") {
       Alert("Provide a Valid Question!");
@@ -103,7 +103,7 @@ const NewQuiz = () => {
           ...s.questions,
           {
             question: newQuestionState.question,
-            answers: newQuestionState.answers,
+            options: newQuestionState.options,
             correctAnswer: newQuestionState.correctAnswer,
           },
         ],
@@ -324,7 +324,7 @@ const NewQuiz = () => {
               }}
             />
 
-            {newQuestionState.answers.map((o, i) => (
+            {newQuestionState.options.map((o, i) => (
               <Paper
                 key={i}
                 onClick={() => {
@@ -358,7 +358,7 @@ const NewQuiz = () => {
                               : s.correctAnswer > i
                               ? s.correctAnswer - 1
                               : s.correctAnswer,
-                          answers: s.answers.filter((e) => e !== o),
+                          options: s.options.filter((e) => e !== o),
                         }))
                       }
                     >
@@ -427,7 +427,7 @@ const NewQuiz = () => {
                         setNewQuestionState((s) => ({
                           ...s,
                           addOptionMode: false,
-                          answers: [...s.answers, s.input.trim()],
+                          options: [...s.options, s.input.trim()],
                           input: "",
                         }));
                       }
@@ -548,7 +548,7 @@ const NewQuiz = () => {
               </div>
             </Grid>
 
-            {o.answers.map((e, i) => (
+            {o.options.map((e, i) => (
               <Paper
                 key={i}
                 variant="outlined"

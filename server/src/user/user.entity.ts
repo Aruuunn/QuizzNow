@@ -1,32 +1,48 @@
-import QAEntity from "src/qa/qa.entity";
-import { QuizEntity } from "src/quiz/quiz.entity";
-import { Entity,BaseEntity, PrimaryGeneratedColumn, Column, OneToMany,Index } from "typeorm";
+import { Exclude } from 'class-transformer';
+import QAEntity from 'src/qa/qa.entity';
+import { QuizEntity } from 'src/quiz/quiz.entity';
+import {
+  Entity,
+  BaseEntity,
+  PrimaryGeneratedColumn,
+  Column,
+  OneToMany,
+  Index,
+} from 'typeorm';
 
 @Entity()
 class UserEntity extends BaseEntity {
+  @PrimaryGeneratedColumn('uuid')
+  id: string;
 
-    @PrimaryGeneratedColumn('uuid')
-    id:string
+  @Column()
+  name: string;
 
-    @Column()
-    name:string;
+  @Exclude()
+  @Index()
+  @Column({ unique: true })
+  email: string;
 
-    @Index()
-    @Column({unique:true})
-    email:string
+  @Column({ nullable: true })
+  photoURL: string;
 
-    @Column({nullable:true})
-    photoURL:string;
+  @OneToMany(
+    type => QuizEntity,
+    quiz => quiz.author,
+  )
+  quizzes: QuizEntity[];
 
-    @OneToMany(type => QuizEntity,quiz => quiz.author)
-    quizzes:QuizEntity[];
+  @OneToMany(
+    type => QuizEntity,
+    quiz => quiz.participants,
+  )
+  attendedQuizzes: QuizEntity[];
 
-    @OneToMany(type => QuizEntity,quiz => quiz.participants)
-    attendedQuizzes:QuizEntity[]
-
-    @OneToMany(type => QAEntity,qa => qa.author)
-    createdQuestions:QAEntity[]
+  @OneToMany(
+    type => QAEntity,
+    qa => qa.author,
+  )
+  createdQuestions: QAEntity[];
 }
-
 
 export default UserEntity;

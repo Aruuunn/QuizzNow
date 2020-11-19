@@ -14,6 +14,6 @@ export class UserService {
 
   findByEmail = async (email: string) => {
   
-    return await this.userRepo.findOne({email});
+    return await this.userRepo.findOne({email},{cache:true,});
   };
 }

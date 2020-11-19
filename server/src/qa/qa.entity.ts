@@ -21,7 +21,7 @@ class QAEntity extends BaseEntity {
   correctAnswer: number;
 
   @Column('bytea', { array: true })
-  answers: string[];
+  options: string[];
 
   @ManyToOne(
     type => UserEntity,

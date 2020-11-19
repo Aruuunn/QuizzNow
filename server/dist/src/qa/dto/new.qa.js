@@ -14,14 +14,21 @@ const class_validator_1 = require("class-validator");
 class NewQuestionDto {
 }
 __decorate([
+    class_validator_1.IsNotEmpty(),
     class_validator_1.IsNumber(),
     class_validator_1.Min(0),
     __metadata("design:type", Number)
 ], NewQuestionDto.prototype, "correctAnswer", void 0);
 __decorate([
+    class_validator_1.IsNotEmpty(),
     class_validator_1.MinLength(5),
     __metadata("design:type", String)
 ], NewQuestionDto.prototype, "question", void 0);
+__decorate([
+    class_validator_1.IsNotEmpty(),
+    class_validator_1.ArrayMinSize(2),
+    __metadata("design:type", Array)
+], NewQuestionDto.prototype, "options", void 0);
 exports.NewQuestionDto = NewQuestionDto;
 exports.default = NewQuestionDto;
 //# sourceMappingURL=new.qa.js.map

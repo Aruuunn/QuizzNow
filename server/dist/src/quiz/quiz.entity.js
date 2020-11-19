@@ -47,10 +47,12 @@ __decorate([
     __metadata("design:type", Array)
 ], QuizEntity.prototype, "participants", void 0);
 __decorate([
+    class_transformer_1.Exclude(),
     typeorm_1.CreateDateColumn(),
     __metadata("design:type", Date)
 ], QuizEntity.prototype, "createdAt", void 0);
 __decorate([
+    class_transformer_1.Exclude(),
     typeorm_1.UpdateDateColumn(),
     __metadata("design:type", Date)
 ], QuizEntity.prototype, "updatedAt", void 0);

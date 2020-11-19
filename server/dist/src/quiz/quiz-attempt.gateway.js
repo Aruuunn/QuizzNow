@@ -25,17 +25,19 @@ let QuizAttemptGateway = class QuizAttemptGateway {
         this.logger.log('Init');
     }
     handleDisconnect(client) {
-        this.logger.log(`Client disconnected: ${client.id}`);
+        this.logger.log(`Client disconnected: ${client.id} ${client.conn.remoteAddress}`);
     }
     handleConnection(client, ...args) {
-        this.logger.log(`Client connected: ${client.id}`);
+        this.logger.log(`Client connected: ${client.id} ${client.conn.remoteAddress}`);
     }
     async fetchQuizDetails(server, data) {
         try {
             const quiz = await this.quizService.getQuiz(data.payload);
-            if (Date.now() < new Date(quiz.startDatetime).getTime() || Date.now() > new Date(quiz.endDatetime).getTime()) {
+            if (Date.now() < new Date(quiz.startDatetime).getTime() ||
+                Date.now() > new Date(quiz.endDatetime).getTime()) {
                 delete quiz.questions;
             }
+            this.logger.log(`Sending Details of Quiz with Id - ${data.payload}`);
             server.emit(ws_event_types_1.RECEIVED_QUIZ_DETAILS, class_transformer_1.classToPlain(quiz));
         }
         catch (e) {
