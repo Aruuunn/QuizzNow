@@ -3767,8 +3767,8 @@
         "affectsGlobalScope": false
       },
       "../src/quiz/quiz.service.ts": {
-        "version": "a17089c49e6a0cbdde838c8be5fde6591cb33a972d53675fd6421efee70d075d",
-        "signature": "4330fed5a789a089bc75a04e936374bbec005254d8134b1b9a89d7e7b9610d5f",
+        "version": "29163eaf5a95be198a936c910fbbe1c3887060a8b4b18a1a8b291a1986d11a25",
+        "signature": "7f91866c85990dfeeebb4fd197f877b54ade80aca1e9382710e48b56d152b20c",
         "affectsGlobalScope": false
       },
       "../src/quiz/quiz-attempt.gateway.ts": {
@@ -3777,8 +3777,8 @@
         "affectsGlobalScope": false
       },
       "../src/quiz/quiz.controller.ts": {
-        "version": "96b93622df68825e7d3047e8f17fab3acf9a0dcf15bbfe80d7c13c12f40b3bc0",
-        "signature": "25b3b944f784ee1f12cfb75410a3ef94257e471ec05111c312e5a52aadf4bea4",
+        "version": "9fe951594ee6e73ee0233ec82cdc641941f46b61cd76bfec6f00757adf7c48f4",
+        "signature": "e18075febb9b82760e4a2308836e9c11c5f627c3efce09081592b83ca0545702",
         "affectsGlobalScope": false
       },
       "../src/quiz/quiz.module.ts": {
@@ -3969,6 +3969,11 @@
       "../src/main.ts": {
         "version": "ab0796875a7346ebf01b5bb9f49b1ae8166d4487d9c2d8cb0e647a67fc4ee59a",
         "signature": "8e609bb71c20b858c77f0e9f90bb1319db8477b13f9f965f1a1e18524bf50881",
+        "affectsGlobalScope": false
+      },
+      "../src/quiz/quiz_attempts.entity.ts": {
+        "version": "a13dc98824521bbc19b2beab215308267518169eeab4a58051411ffb33a4ba5c",
+        "signature": "fee6e3ca60f0fa41f721a42689c177fe4141a22d60f8a5ed7e0d0eb9ca88d000",
         "affectsGlobalScope": false
       },
       "../node_modules/@types/anymatch/index.d.ts": {
@@ -7363,6 +7368,9 @@
         "../src/quiz/quiz.entity.ts",
         "../src/quiz/quiz.repository.ts",
         "../src/user/user.entity.ts"
+      ],
+      "../src/quiz/quiz_attempts.entity.ts": [
+        "../node_modules/typeorm/index.d.ts"
       ],
       "../src/user/user.entity.ts": [
         "../node_modules/class-transformer/index.d.ts",
@@ -11297,6 +11305,7 @@
       "../src/quiz/quiz.module.ts",
       "../src/quiz/quiz.repository.ts",
       "../src/quiz/quiz.service.ts",
+      "../src/quiz/quiz_attempts.entity.ts",
       "../src/user/user.entity.ts",
       "../src/user/user.module.ts",
       "../src/user/user.repository.ts",

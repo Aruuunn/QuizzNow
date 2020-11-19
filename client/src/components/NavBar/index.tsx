@@ -11,7 +11,6 @@ import { connect, ConnectedProps } from "react-redux";
 import { RouteComponentProps, withRouter,Link } from "react-router-dom";
 
 import { RootState, AuthActionTypes } from "../../reduxStore";
-import { isObjectLiteralElementLike } from "typescript";
 
 const mapStateToProps = (state: RootState) => state;
 const mapDispatchToProps = {
