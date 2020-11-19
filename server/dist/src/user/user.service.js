@@ -17,7 +17,7 @@ let UserService = class UserService {
     constructor(connection) {
         this.connection = connection;
         this.findByEmail = async (email) => {
-            return await this.userRepo.findOne({ email });
+            return await this.userRepo.findOne({ email }, { cache: true, });
         };
         this.userRepo = this.connection.getCustomRepository(user_repository_1.default);
     }

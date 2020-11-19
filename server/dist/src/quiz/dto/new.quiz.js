@@ -30,6 +30,7 @@ __decorate([
 ], NewQuizDto.prototype, "endDatetime", void 0);
 __decorate([
     class_validator_1.IsNotEmpty(),
+    class_validator_1.ArrayMinSize(1),
     __metadata("design:type", Array)
 ], NewQuizDto.prototype, "questions", void 0);
 exports.NewQuizDto = NewQuizDto;

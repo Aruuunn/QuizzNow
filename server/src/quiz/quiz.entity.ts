@@ -22,7 +22,6 @@ export class QuizEntity extends BaseEntity {
     @JoinTable()
     questions:QAEntity[]
 
-    
     @ManyToOne(type => UserEntity,user=> user.quizzes,{eager:true})
     author:UserEntity;
 
@@ -30,9 +29,11 @@ export class QuizEntity extends BaseEntity {
     @ManyToOne(type => UserEntity,user=> user.attendedQuizzes,{eager:true,})
     participants: UserEntity[];
     
+    @Exclude()
     @CreateDateColumn()
     createdAt: Date;
 
+    @Exclude()
     @UpdateDateColumn()
     updatedAt: Date;
 }

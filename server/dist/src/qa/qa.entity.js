@@ -30,7 +30,7 @@ __decorate([
 __decorate([
     typeorm_1.Column('bytea', { array: true }),
     __metadata("design:type", Array)
-], QAEntity.prototype, "answers", void 0);
+], QAEntity.prototype, "options", void 0);
 __decorate([
     typeorm_1.ManyToOne(type => user_entity_1.default, user => user.createdQuestions),
     __metadata("design:type", user_entity_1.default)

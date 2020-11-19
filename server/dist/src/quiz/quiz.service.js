@@ -27,7 +27,7 @@ let QuizService = class QuizService {
         this.qaService = qaService;
         this.quizRepo = quizRepo;
         this.getQuiz = async (id) => {
-            return await this.quizRepo.findOneOrFail(id);
+            return await this.quizRepo.findOneOrFail(id, { cache: true });
         };
         this.createNewQuiz = async (user, quizData) => {
             const newQuiz = new quiz_entity_1.QuizEntity();
@@ -47,7 +47,7 @@ let QuizService = class QuizService {
         };
         this.addNewQuestion = async (user, question, quizId) => {
             const newQuestion = await this.qaService.createQuestion(user, question);
-            const quiz = await this.quizRepo.findOne({ id: quizId });
+            const quiz = await this.quizRepo.findOne({ id: quizId }, { cache: true });
             if (quiz.author.id !== user.id) {
                 throw new common_1.UnauthorizedException();
             }
@@ -63,7 +63,7 @@ let QuizService = class QuizService {
         };
         this.addOldQuestion = async (user, questionId, quizId) => {
             const question = await this.qaService.findbyID(questionId);
-            const quiz = await this.quizRepo.findOne({ id: quizId });
+            const quiz = await this.quizRepo.findOne({ id: quizId }, { cache: true });
             if (!question || !quiz) {
                 throw new common_1.BadRequestException('No Question/Quiz Found with the given ID');
             }
@@ -78,7 +78,7 @@ let QuizService = class QuizService {
             return quiz;
         };
         this.removeQuestion = async (user, questionId, quizId) => {
-            const quiz = await this.quizRepo.findOne({ id: quizId });
+            const quiz = await this.quizRepo.findOne({ id: quizId }, { cache: true });
             if (!quiz) {
                 throw new common_1.BadRequestException('No Quiz Found with the given ID');
             }
@@ -93,7 +93,7 @@ let QuizService = class QuizService {
             return quiz;
         };
         this.removeAllQuestions = async (user, quizId) => {
-            const quiz = await this.quizRepo.findOne({ id: quizId });
+            const quiz = await this.quizRepo.findOne({ id: quizId }, { cache: true });
             if (!quiz) {
                 throw new common_1.BadRequestException('No Quiz Found with the given ID');
             }

@@ -8,9 +8,10 @@ import {
   Button,
 } from "@material-ui/core";
 import { connect, ConnectedProps } from "react-redux";
-import { RouteComponentProps, withRouter } from "react-router-dom";
+import { RouteComponentProps, withRouter,Link } from "react-router-dom";
 
 import { RootState, AuthActionTypes } from "../../reduxStore";
+import { isObjectLiteralElementLike } from "typescript";
 
 const mapStateToProps = (state: RootState) => state;
 const mapDispatchToProps = {
@@ -39,10 +40,13 @@ const NavBar = (props: Props) => {
         <Toolbar>
           <Grid container justify="space-between">
             <Typography
+              component={Link}
+              to="/"
               variant="h5"
               style={{
                 color: theme.palette.secondary.main,
                 fontFamily: "'Fredoka One', cursive",
+                textDecoration:'none'
               }}
             >
               Quiz Now

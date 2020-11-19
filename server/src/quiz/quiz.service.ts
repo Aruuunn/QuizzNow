@@ -18,7 +18,7 @@ export class QuizService {
   ) { }
   
   getQuiz = async (id:string) => {
-    return await this.quizRepo.findOneOrFail(id);
+    return await this.quizRepo.findOneOrFail(id,{cache:true});
   }
 
   createNewQuiz = async (user: UserEntity, quizData: NewQuizDto) => {
@@ -47,7 +47,7 @@ export class QuizService {
 
       const newQuestion = await this.qaService.createQuestion(user,question);
 
-      const quiz = await this.quizRepo.findOne({id:quizId});
+      const quiz = await this.quizRepo.findOne({id:quizId},{cache:true});
 
       if(quiz.author.id!==user.id){
         throw new UnauthorizedException();
@@ -68,7 +68,7 @@ export class QuizService {
 
   addOldQuestion = async (user:UserEntity,questionId:string,quizId:string) => {
     const question =await this.qaService.findbyID(questionId);    
-    const quiz =await this.quizRepo.findOne({id:quizId});
+    const quiz =await this.quizRepo.findOne({id:quizId},{cache:true});
     if(!question || !quiz){
       throw new BadRequestException('No Question/Quiz Found with the given ID');
     }
@@ -88,7 +88,7 @@ export class QuizService {
 
   removeQuestion = async (user:UserEntity,questionId:string,quizId:string) => {
 
-    const quiz =await this.quizRepo.findOne({id:quizId});
+    const quiz =await this.quizRepo.findOne({id:quizId},{cache:true});
     if( !quiz){
       throw new BadRequestException('No Quiz Found with the given ID');
     }
@@ -108,7 +108,7 @@ export class QuizService {
 
   removeAllQuestions = async (user:UserEntity,quizId:string) => {
 
-    const quiz =await this.quizRepo.findOne({id:quizId});
+    const quiz =await this.quizRepo.findOne({id:quizId},{cache:true});
     if( !quiz){
       throw new BadRequestException('No Quiz Found with the given ID');
     }

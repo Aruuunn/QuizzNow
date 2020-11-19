@@ -22,7 +22,8 @@ let AppModule = class AppModule {
 };
 AppModule = __decorate([
     common_1.Module({
-        imports: [typeorm_1.TypeOrmModule.forRoot({
+        imports: [
+            typeorm_1.TypeOrmModule.forRoot({
                 type: 'postgres',
                 host: env.POSTGRES_HOST,
                 port: parseInt(env.POSTGRES_PORT),
@@ -30,8 +31,21 @@ AppModule = __decorate([
                 password: env.POSTGRES_PASSWORD,
                 database: env.POSTGRES_DATABASE,
                 entities: ['dist/**/*.entity{.js,.ts}'],
+                cache: {
+                    type: 'redis',
+                    duration: 60000,
+                    options: {
+                        port: 6379,
+                        host: 'cache',
+                    },
+                },
                 synchronize: true,
-            }), auth_module_1.AuthModule, user_module_1.UserModule, qa_module_1.QaModule, quiz_module_1.QuizModule],
+            }),
+            auth_module_1.AuthModule,
+            user_module_1.UserModule,
+            qa_module_1.QaModule,
+            quiz_module_1.QuizModule,
+        ],
         controllers: [auth_controller_1.AuthController],
         providers: [user_service_1.UserService, qa_service_1.QaService, quiz_attempt_gateway_1.QuizAttemptGateway],
     })

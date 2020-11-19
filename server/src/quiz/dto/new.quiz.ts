@@ -1,4 +1,4 @@
-import {IsNotEmpty,IsDateString,MinLength} from 'class-validator';
+import {IsNotEmpty,IsDateString,MinLength, ArrayMinSize} from 'class-validator';
 
 import NewQuestionDto from "src/qa/dto/new.qa";
 
@@ -16,5 +16,6 @@ export class NewQuizDto {
     endDatetime:string;
 
     @IsNotEmpty()
+    @ArrayMinSize(1)
     questions: NewQuestionDto[];
 }

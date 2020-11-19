@@ -9,6 +9,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+const class_transformer_1 = require("class-transformer");
 const qa_entity_1 = require("../qa/qa.entity");
 const quiz_entity_1 = require("../quiz/quiz.entity");
 const typeorm_1 = require("typeorm");
@@ -23,6 +24,7 @@ __decorate([
     __metadata("design:type", String)
 ], UserEntity.prototype, "name", void 0);
 __decorate([
+    class_transformer_1.Exclude(),
     typeorm_1.Index(),
     typeorm_1.Column({ unique: true }),
     __metadata("design:type", String)

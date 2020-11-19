@@ -24,7 +24,7 @@ let QaService = class QaService {
         this.createQuestion = async (user, questionData) => {
             try {
                 const newQuestion = new qa_entity_1.default();
-                newQuestion.answers = questionData.answers;
+                newQuestion.options = questionData.options;
                 newQuestion.correctAnswer = questionData.correctAnswer;
                 newQuestion.author = user;
                 newQuestion.question = questionData.question;
@@ -38,15 +38,15 @@ let QaService = class QaService {
             }
         };
         this.updateQuestion = async (user, questionData, questionID) => {
-            const question = await this.qaRepo.findOne({ id: questionID });
+            const question = await this.qaRepo.findOne({ id: questionID }, { cache: true });
             if (!question) {
                 throw new common_1.BadRequestException();
             }
             if (user.id !== question.author.id) {
                 throw new common_1.UnauthorizedException();
             }
-            if (questionData.answers)
-                question.answers = questionData.answers;
+            if (questionData.options)
+                question.options = questionData.options;
             if (questionData.correctAnswer)
                 question.correctAnswer = questionData.correctAnswer;
             if (questionData.question)
@@ -58,7 +58,7 @@ let QaService = class QaService {
             await this.qaRepo.delete({ id: questionID, author: { id: user.id } });
         };
         this.findbyID = async (questionID) => {
-            return this.qaRepo.findOne({ id: questionID });
+            return this.qaRepo.findOne({ id: questionID }, { cache: true });
         };
     }
 };

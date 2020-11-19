@@ -12,7 +12,7 @@ export class UpdateQuestionDto {
     question?:string;
 
     
-    answers?:string[]
+    options?:string[]
 }
 
 export default UpdateQuestionDto;

@@ -1,6 +1,6 @@
 export declare class UpdateQuestionDto {
     correctAnswer?: number;
     question?: string;
-    answers?: string[];
+    options?: string[];
 }
 export default UpdateQuestionDto;
