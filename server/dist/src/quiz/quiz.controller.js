@@ -45,6 +45,10 @@ let QuizController = class QuizController {
     async get(options, req) {
         return await this.quizService.getQuizzes(req.user, options);
     }
+    async deleteQuiz(id, req, res) {
+        await this.quizService.deleteQuiz(id, req.user.id);
+        return res.sendStatus(common_1.HttpStatus.OK);
+    }
 };
 __decorate([
     common_1.Post('new'),
@@ -111,6 +115,14 @@ __decorate([
     __metadata("design:paramtypes", [Object, Object]),
     __metadata("design:returntype", Promise)
 ], QuizController.prototype, "get", null);
+__decorate([
+    common_1.Delete(':id'),
+    common_1.UseGuards(jwt_gaurd_1.default),
+    __param(0, common_1.Param('id')), __param(1, common_1.Req()), __param(2, common_1.Res()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String, Object, Object]),
+    __metadata("design:returntype", Promise)
+], QuizController.prototype, "deleteQuiz", null);
 QuizController = __decorate([
     common_1.Controller('quiz'),
     __metadata("design:paramtypes", [quiz_service_1.QuizService])

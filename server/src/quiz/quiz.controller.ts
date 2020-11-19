@@ -92,4 +92,11 @@ export class QuizController {
     return await  this.quizService.getQuizzes(req.user, options);
   }
 
+  @Delete(':id')
+  @UseGuards(JwtGaurd)
+  async deleteQuiz(@Param('id') id:string,@Req() req,@Res() res) {
+    await this.quizService.deleteQuiz(id, req.user.id);
+    return res.sendStatus(HttpStatus.OK);
+  }
+
 }

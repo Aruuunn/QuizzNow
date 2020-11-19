@@ -41,7 +41,7 @@ let QuizService = class QuizService {
                     questions.push(await this.qaService.createQuestion(user, i));
                 }
             newQuiz.questions = questions;
-            console.log("saving ...");
+            console.log('saving ...');
             await newQuiz.save();
             return newQuiz;
         };
@@ -124,6 +124,18 @@ let QuizService = class QuizService {
                 quiz.endDatetime = new Date(endDatetime);
             await quiz.save();
             return quiz;
+        };
+        this.deleteQuiz = async (id, userId) => {
+            const quiz = await this.quizRepo.findOne(id);
+            if (!quiz) {
+                throw new common_1.BadRequestException();
+            }
+            if (quiz.author.id === userId) {
+                await this.quizRepo.delete(id);
+            }
+            else {
+                throw new common_1.UnauthorizedException();
+            }
         };
     }
     async getQuizzes(user, options) {
