@@ -30,14 +30,14 @@ let QuizService = class QuizService {
         this.qaService = qaService;
         this.quizRepo = quizRepo;
         this.quizAttemptRepo = quizAttemptRepo;
-        this.getQuiz = async (id) => {
-            return await this.quizRepo.findOneOrFail(id, { cache: true });
+        this.getQuiz = async (id, relations = []) => {
+            return await this.quizRepo.findOneOrFail(id, { cache: true, relations });
         };
         this.createNewQuiz = async (user, quizData) => {
             const newQuiz = new quiz_entity_1.QuizEntity();
             newQuiz.startDatetime = new Date(quizData.startDatetime);
             newQuiz.endDatetime = new Date(quizData.endDatetime);
-            newQuiz.author = user;
+            newQuiz.createdBy = user;
             newQuiz.title = quizData.title;
             const questions = [];
             if (quizData.questions.length !== 0)
@@ -51,7 +51,7 @@ let QuizService = class QuizService {
         this.addNewQuestion = async (user, question, quizId) => {
             const newQuestion = await this.qaService.createQuestion(user, question);
             const quiz = await this.quizRepo.findOne({ id: quizId }, { cache: true });
-            if (quiz.author.id !== user.id) {
+            if (quiz.createdBy.id !== user.id) {
                 throw new common_1.UnauthorizedException();
             }
             if (!quiz) {
@@ -73,7 +73,7 @@ let QuizService = class QuizService {
             if (!quiz.questions) {
                 quiz.questions = [];
             }
-            if (quiz.author.id !== user.id) {
+            if (quiz.createdBy.id !== user.id) {
                 throw new common_1.UnauthorizedException();
             }
             quiz.questions.push(question);
@@ -88,7 +88,7 @@ let QuizService = class QuizService {
             if (!quiz.questions) {
                 quiz.questions = [];
             }
-            if (quiz.author.id !== user.id) {
+            if (quiz.createdBy.id !== user.id) {
                 throw new common_1.UnauthorizedException();
             }
             quiz.questions = quiz.questions.filter(q => q.id !== questionId);
@@ -100,7 +100,7 @@ let QuizService = class QuizService {
             if (!quiz) {
                 throw new common_1.BadRequestException('No Quiz Found with the given ID');
             }
-            if (quiz.author.id !== user.id) {
+            if (quiz.createdBy.id !== user.id) {
                 throw new common_1.UnauthorizedException();
             }
             quiz.questions = [];
@@ -115,7 +115,7 @@ let QuizService = class QuizService {
             if (title) {
                 quiz.title = title;
             }
-            if (quiz.author.id !== user.id) {
+            if (quiz.createdBy.id !== user.id) {
                 throw new common_1.UnauthorizedException();
             }
             if (!startDatetime && !endDatetime) {
@@ -133,7 +133,7 @@ let QuizService = class QuizService {
             if (!quiz) {
                 throw new common_1.BadRequestException();
             }
-            if (quiz.author.id === userId) {
+            if (quiz.createdBy.id === userId) {
                 await this.quizRepo.delete(id);
             }
             else {
@@ -141,23 +141,34 @@ let QuizService = class QuizService {
             }
         };
     }
-    canAttemptQuiz(quiz, user) {
+    canAttemptQuiz(quiz, user, checkForPreviousAttempts = true) {
         return (quiz &&
             quiz.startDatetime.getTime() < Date.now() &&
             quiz.endDatetime.getTime() > Date.now() &&
-            quiz.attempts.reduce((t, c) => {
+            (!checkForPreviousAttempts || quiz.attempts.reduce((t, c) => {
                 if (c.user.id === user.id) {
-                    return false;
+                    return c.attemptFinished ? false : true;
                 }
                 else {
                     return t;
                 }
-            }, true));
+            }, true)));
     }
     async attemptQuiz(user, quizId) {
-        const quiz = await this.quizRepo.findOne(quizId, { cache: true });
+        const quiz = await this.quizRepo.findOne(quizId, { cache: true, relations: ["attempts"] });
+        const quizAttempt = quiz.attempts.reduce((t, c) => {
+            if (c.user.id === user.id && c.quiz.id === quiz.id) {
+                return c;
+            }
+            else {
+                return t;
+            }
+        }, undefined);
         if (!this.canAttemptQuiz(quiz, user)) {
             throw new common_1.BadRequestException();
+        }
+        if (quizAttempt) {
+            return quizAttempt.id;
         }
         const newQuizAttempt = new quiz_attempts_entity_1.QuizAttemptEntity();
         newQuizAttempt.user = user;
@@ -175,7 +186,7 @@ let QuizService = class QuizService {
         const question = await this.qaService.findbyID(questionId);
         if (!question ||
             !quizAttempt ||
-            !this.canAttemptQuiz(quizAttempt.quiz, user)) {
+            !this.canAttemptQuiz(quizAttempt.quiz, user, false)) {
             throw new common_1.BadRequestException();
         }
         let questionAttempt = quizAttempt.questionAttempts.reduce((t, c) => {

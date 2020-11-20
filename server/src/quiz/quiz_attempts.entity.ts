@@ -19,4 +19,7 @@ export class QuizAttemptEntity extends BaseEntity {
 
   @Column({ default: 0 })
   totalScore: number;
+
+  @Column({ default: false })
+  attemptFinished: boolean;
 }

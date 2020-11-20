@@ -26,26 +26,41 @@ export class QuizService {
     private quizAttemptRepo: Repository<QuizAttemptEntity>,
   ) {}
 
-  canAttemptQuiz(quiz: QuizEntity, user: UserEntity) {
+  canAttemptQuiz(quiz: QuizEntity, user: UserEntity,checkForPreviousAttempts:boolean=true) {
     return (
       quiz &&
       quiz.startDatetime.getTime() < Date.now() &&
       quiz.endDatetime.getTime() > Date.now() &&
-      quiz.attempts.reduce((t, c) => {
+     (!checkForPreviousAttempts || quiz.attempts.reduce((t, c) => {
         if (c.user.id === user.id) {
-          return false;
+          return c.attemptFinished? false:true;
         } else {
           return t;
         }
-      }, true)
+      }, true))
     );
   }
+  
 
   async attemptQuiz(user: UserEntity, quizId: string): Promise<string> {
-    const quiz = await this.quizRepo.findOne(quizId, { cache: true });
+    const quiz = await this.quizRepo.findOne(quizId, { cache: true, relations: ["attempts"] });
+    
+    const quizAttempt = quiz.attempts.reduce((t, c) => {
+      if (c.user.id === user.id && c.quiz.id === quiz.id) {
+        return c;
+      } else {
+        return t;
+      }
+    }, undefined);
+
     if (!this.canAttemptQuiz(quiz, user)) {
       throw new BadRequestException();
     }
+
+    if (quizAttempt) {
+      return quizAttempt.id;
+    }
+
     const newQuizAttempt = new QuizAttemptEntity();
     newQuizAttempt.user = user;
     newQuizAttempt.quiz = quiz;
@@ -70,7 +85,7 @@ export class QuizService {
     if (
       !question ||
       !quizAttempt ||
-      !this.canAttemptQuiz(quizAttempt.quiz, user)
+      !this.canAttemptQuiz(quizAttempt.quiz, user,false)
     ) {
       throw new BadRequestException();
     }
@@ -81,7 +96,7 @@ export class QuizService {
         return t;
       }
     }, undefined);
-
+    
     if (!questionAttempt) {
       isNew = true;
       questionAttempt = new QuestionAttemptEntity();
@@ -103,8 +118,8 @@ export class QuizService {
     quizAttempt.save();
   }
 
-  getQuiz = async (id: string) => {
-    return await this.quizRepo.findOneOrFail(id, { cache: true });
+  getQuiz = async (id: string,relations:string[]=[]) => {
+    return await this.quizRepo.findOneOrFail(id, { cache: true,relations });
   };
 
   createNewQuiz = async (user: UserEntity, quizData: NewQuizDto) => {
@@ -112,7 +127,7 @@ export class QuizService {
 
     newQuiz.startDatetime = new Date(quizData.startDatetime);
     newQuiz.endDatetime = new Date(quizData.endDatetime);
-    newQuiz.author = user;
+    newQuiz.createdBy = user;
     newQuiz.title = quizData.title;
 
     const questions: QAEntity[] = [];
@@ -135,7 +150,7 @@ export class QuizService {
 
     const quiz = await this.quizRepo.findOne({ id: quizId }, { cache: true });
 
-    if (quiz.author.id !== user.id) {
+    if (quiz.createdBy.id !== user.id) {
       throw new UnauthorizedException();
     }
 
@@ -166,7 +181,7 @@ export class QuizService {
       quiz.questions = [];
     }
 
-    if (quiz.author.id !== user.id) {
+    if (quiz.createdBy.id !== user.id) {
       throw new UnauthorizedException();
     }
 
@@ -189,7 +204,7 @@ export class QuizService {
       quiz.questions = [];
     }
 
-    if (quiz.author.id !== user.id) {
+    if (quiz.createdBy.id !== user.id) {
       throw new UnauthorizedException();
     }
 
@@ -205,7 +220,7 @@ export class QuizService {
       throw new BadRequestException('No Quiz Found with the given ID');
     }
 
-    if (quiz.author.id !== user.id) {
+    if (quiz.createdBy.id !== user.id) {
       throw new UnauthorizedException();
     }
 
@@ -230,7 +245,7 @@ export class QuizService {
       quiz.title = title;
     }
 
-    if (quiz.author.id !== user.id) {
+    if (quiz.createdBy.id !== user.id) {
       throw new UnauthorizedException();
     }
 
@@ -261,7 +276,7 @@ export class QuizService {
       throw new BadRequestException();
     }
 
-    if (quiz.author.id === userId) {
+    if (quiz.createdBy.id === userId) {
       await this.quizRepo.delete(id);
     } else {
       throw new UnauthorizedException();

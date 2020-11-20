@@ -6,14 +6,16 @@ import {
   OnGatewayConnection,
   OnGatewayDisconnect,
 } from '@nestjs/websockets';
-import { Logger, UseGuards } from '@nestjs/common';
+import { Bind, Logger, UseGuards } from '@nestjs/common';
 import { Socket, Server } from 'socket.io';
 
 import { WsGuard } from '../auth/ws.gaurd';
 import {
   ERROR,
+  FETCH_ATTEMPT_ID,
   FETCH_QUIZ_DETAILS,
   RECEIVED_QUIZ_DETAILS,
+  START,
 } from '../../common/ws.event.types';
 import UserEntity from '../user/user.entity';
 import { QuizService } from './quiz.service';
@@ -33,11 +35,15 @@ export class QuizAttemptGateway
   }
 
   handleDisconnect(client: Socket) {
-    this.logger.log(`Client disconnected: ${client.id} ${client.conn.remoteAddress}`);
+    this.logger.log(
+      `Client disconnected: ${client.id} ${client.conn.remoteAddress}`,
+    );
   }
 
   handleConnection(client: Socket, ...args: any[]) {
-    this.logger.log(`Client connected: ${client.id} ${client.conn.remoteAddress}`);
+    this.logger.log(
+      `Client connected: ${client.id} ${client.conn.remoteAddress}`,
+    );
   }
 
   @SubscribeMessage(FETCH_QUIZ_DETAILS)
@@ -46,17 +52,36 @@ export class QuizAttemptGateway
     data: { payload: string; user: UserEntity },
   ) {
     try {
-      const quiz = await this.quizService.getQuiz(data.payload);
-      if (
-        Date.now() < new Date(quiz.startDatetime).getTime() ||
-        Date.now() > new Date(quiz.endDatetime).getTime()
-      ) {
-        delete quiz.questions;
-      }
+      const quiz = await this.quizService.getQuiz(data.payload, ['attempts']);
+
       this.logger.log(`Sending Details of Quiz with Id - ${data.payload}`);
-      server.emit(RECEIVED_QUIZ_DETAILS, classToPlain(quiz));
+
+      server.emit(RECEIVED_QUIZ_DETAILS, {
+        payload: {
+          ...classToPlain(quiz),
+          canAttemptQuiz: this.quizService.canAttemptQuiz(quiz, data.user),
+          totalQuestions: quiz.questions.length,
+        },
+      });
     } catch (e) {
-      server.emit(RECEIVED_QUIZ_DETAILS, null);
+      console.log(e);
+      server.emit(RECEIVED_QUIZ_DETAILS, { payload: null });
+    }
+  }
+
+  @SubscribeMessage(START)
+  async startQuiz(
+    server: Server,
+    data: { payload: { quizId: string }; user: UserEntity },
+  ) {
+    try {
+      const attemptId = await this.quizService.attemptQuiz(
+        data.user,
+        data.payload.quizId,
+      );
+      server.emit(FETCH_ATTEMPT_ID, { payload: attemptId });
+    } catch (_) {
+      server.emit(ERROR);
     }
   }
 }

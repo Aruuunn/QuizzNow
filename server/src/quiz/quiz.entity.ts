@@ -19,13 +19,15 @@ export class QuizEntity extends BaseEntity {
     @Column()
     endDatetime:Date;
 
+    @Exclude()
     @ManyToMany(type => QAEntity,{eager:true})
     @JoinTable()
     questions:QAEntity[]
 
     @ManyToOne(type => UserEntity,user=> user.quizzes,{eager:true})
-    author: UserEntity;
+    createdBy: UserEntity;
     
+    @Exclude()
     @OneToMany(type => QuizAttemptEntity,quizAttempt => quizAttempt.quiz)
     attempts:QuizAttemptEntity[]
     

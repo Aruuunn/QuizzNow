@@ -4,3 +4,7 @@ export declare const DISCONNECT = "disconnect";
 export declare const FETCH_QUIZ_DETAILS = "FETCH_QUIZ_DETAILS";
 export declare const UNAUTHORIZED = "UNAUTHORIZED";
 export declare const RECEIVED_QUIZ_DETAILS = "RECEIVED_QUIZ_DETAILS";
+export declare const START = "START";
+export declare const FINISH = "FINISH";
+export declare const ATTEMPT_QUESTION = "ATTEMPT_QUESTION";
+export declare const FETCH_ATTEMPT_ID = "FETCH_ATTEMPT_ID";
