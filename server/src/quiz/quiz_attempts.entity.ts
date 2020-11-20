@@ -1,15 +1,22 @@
-import { Column, PrimaryGeneratedColumn } from "typeorm";
+import UserEntity from "src/user/user.entity";
+import { BaseEntity, Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { QuizEntity } from "./quiz.entity";
+import { QuestionAttemptEntity } from './question_attempt.entity';
 
-export class QuizAttemptEntity {
+@Entity()
+export class QuizAttemptEntity extends BaseEntity {
   @PrimaryGeneratedColumn('uuid')
   id: string
 
-  @Column("uuid")
-  qid:string
+  @ManyToOne(type=> QuizEntity,quiz => quiz.attempts,{eager:true})
+  quiz:QuizEntity
 
-  @Column("bytea")
-  answeredQuestions:{id:string,option:number}[]
- 
-  @Column({default:0})
-  totalScore:number
+  @ManyToOne(type => UserEntity,user => user.attempts)
+  user: UserEntity;
+
+  @OneToMany(type => QuestionAttemptEntity,questionAttempt => questionAttempt.attempt)
+  questionAttempts: QuestionAttemptEntity[];
+
+  @Column({ default: 0 })
+  totalScore: number;
 }

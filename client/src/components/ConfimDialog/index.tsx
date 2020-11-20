@@ -11,32 +11,56 @@ interface Props {
   description: string;
   open: boolean;
   onClose: () => void;
-  onSuccess: () => void;
+  onSuccess: () => Promise<void>;
   successButtonText?: string;
   cancelButtonText?: string;
 }
 export default function AlertDialog(props: Props) {
-  const { open, onClose, onSuccess, successButtonText,cancelButtonText ,title,description} = props;
+  const {
+    open,
+    onClose,
+    onSuccess,
+    successButtonText,
+    cancelButtonText,
+    title,
+    description,
+  } = props;
+  const [loading, setLoading] = React.useState(false);
 
   return (
     <div>
-      <Dialog
-        open={open}
-        onClose={onClose}
-      >
-        <DialogTitle>
-          {title}
-        </DialogTitle>
+      <Dialog open={open} onClose={onClose}>
+        <DialogTitle>{title}</DialogTitle>
         <DialogContent>
-          <DialogContentText>
+          <DialogContentText style={{ color: "grey" }}>
             {description}
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={onClose} color="primary">
+          <Button
+            variant="outlined"
+            disabled={loading}
+            onClick={onClose}
+            color="primary"
+          >
             {cancelButtonText || "Disagree"}
           </Button>
-          <Button onClick={onSuccess} color="primary" autoFocus>
+          <Button
+            disabled={loading}
+            onClick={async () => {
+              setLoading(true);
+              try {
+                await onSuccess();
+              } catch (e) {
+                console.log(e);
+              } finally {
+                setLoading(false);
+                onClose();
+              }
+            }}
+            color="primary"
+            autoFocus
+          >
             {successButtonText || "Agree"}
           </Button>
         </DialogActions>

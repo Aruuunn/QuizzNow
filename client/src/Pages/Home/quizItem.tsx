@@ -11,7 +11,8 @@ import {
 import moment from "moment";
 
 import CopyToClipboard from "react-copy-to-clipboard";
-
+import { ConfirmDialog } from "../../components";
+import axios from '../../common/axios';
 
 export const QuizListItem = (props: {
   key: any;
@@ -19,8 +20,21 @@ export const QuizListItem = (props: {
   startDatetime: string;
   endDatetime: string;
   id: string;
+  fetchData: () => Promise<void>;
 }) => {
   const [isCopied, setCopied] = React.useState(false);
+  const [deleteIt, setDelete] = React.useState(false);
+
+  const onDelete = async () :Promise<void> => {
+   
+    await axios.delete(`/quiz/${props.id}`, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("accessToken")}`
+      }
+    });
+    
+    await props.fetchData();
+  }
 
   return (
     <Card
@@ -32,12 +46,23 @@ export const QuizListItem = (props: {
         maxWidth: "500px",
       }}
     >
+      <ConfirmDialog
+        open={deleteIt}
+        onClose={() => setDelete(false)}
+        title={`Delete ${props.title} ?`}
+        description="There is no going back after you have deleted the Quiz"
+        successButtonText="Delete"
+        onSuccess={onDelete}
+        cancelButtonText="Cancel"
+      />
       <CardContent>
         <Grid container justify="space-between" alignItems="center">
           <Typography variant="h5">{props.title}</Typography>
           <div>
             {" "}
-            <IconButton size="small">
+            <IconButton size="small" onClick={() => {
+              setDelete(true);
+            }}>
               <SvgIcon fontSize="small">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -97,6 +122,5 @@ export const QuizListItem = (props: {
     </Card>
   );
 };
-
 
 export default QuizListItem;

@@ -1,6 +1,7 @@
 import QAEntity from "src/qa/qa.entity";
 import UserEntity from "src/user/user.entity";
 import { BaseEntity } from "typeorm";
+import { QuizAttemptEntity } from "./quiz_attempts.entity";
 export declare class QuizEntity extends BaseEntity {
     id: string;
     startDatetime: Date;
@@ -8,7 +9,7 @@ export declare class QuizEntity extends BaseEntity {
     endDatetime: Date;
     questions: QAEntity[];
     author: UserEntity;
-    participants: UserEntity[];
+    attempts: QuizAttemptEntity[];
     createdAt: Date;
     updatedAt: Date;
 }

@@ -1,6 +1,7 @@
 import { Exclude } from 'class-transformer';
 import QAEntity from 'src/qa/qa.entity';
 import { QuizEntity } from 'src/quiz/quiz.entity';
+import { QuizAttemptEntity } from 'src/quiz/quiz_attempts.entity';
 import {
   Entity,
   BaseEntity,
@@ -33,10 +34,10 @@ class UserEntity extends BaseEntity {
   quizzes: QuizEntity[];
 
   @OneToMany(
-    type => QuizEntity,
-    quiz => quiz.participants,
+    type => QuizAttemptEntity,
+    quizAttempt => quizAttempt.user,
   )
-  attendedQuizzes: QuizEntity[];
+  attempts: QuizAttemptEntity[];
 
   @OneToMany(
     type => QAEntity,

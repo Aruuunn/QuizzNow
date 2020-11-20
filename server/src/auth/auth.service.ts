@@ -40,7 +40,7 @@ export class AuthService {
         const payload: JwtPayload = { email: user.email };
         delete user.createdQuestions;
         delete user.quizzes;
-        delete user.attendedQuizzes;
+        delete user.attempts;
         return { user, accessToken: this.jwtService.sign(payload) };
       } else {
         const newUser = new UserEntity();

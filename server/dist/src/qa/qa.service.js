@@ -29,7 +29,6 @@ let QaService = class QaService {
                 newQuestion.author = user;
                 newQuestion.question = questionData.question;
                 await newQuestion.save();
-                console.log(newQuestion);
                 return newQuestion;
             }
             catch (err) {
