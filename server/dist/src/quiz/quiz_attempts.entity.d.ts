@@ -8,4 +8,5 @@ export declare class QuizAttemptEntity extends BaseEntity {
     user: UserEntity;
     questionAttempts: QuestionAttemptEntity[];
     totalScore: number;
+    attemptFinished: boolean;
 }

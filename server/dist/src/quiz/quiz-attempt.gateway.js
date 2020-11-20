@@ -32,16 +32,24 @@ let QuizAttemptGateway = class QuizAttemptGateway {
     }
     async fetchQuizDetails(server, data) {
         try {
-            const quiz = await this.quizService.getQuiz(data.payload);
-            if (Date.now() < new Date(quiz.startDatetime).getTime() ||
-                Date.now() > new Date(quiz.endDatetime).getTime()) {
-                delete quiz.questions;
-            }
+            const quiz = await this.quizService.getQuiz(data.payload, ['attempts']);
             this.logger.log(`Sending Details of Quiz with Id - ${data.payload}`);
-            server.emit(ws_event_types_1.RECEIVED_QUIZ_DETAILS, class_transformer_1.classToPlain(quiz));
+            server.emit(ws_event_types_1.RECEIVED_QUIZ_DETAILS, {
+                payload: Object.assign(Object.assign({}, class_transformer_1.classToPlain(quiz)), { canAttemptQuiz: this.quizService.canAttemptQuiz(quiz, data.user), totalQuestions: quiz.questions.length }),
+            });
         }
         catch (e) {
-            server.emit(ws_event_types_1.RECEIVED_QUIZ_DETAILS, null);
+            console.log(e);
+            server.emit(ws_event_types_1.RECEIVED_QUIZ_DETAILS, { payload: null });
+        }
+    }
+    async startQuiz(server, data) {
+        try {
+            const attemptId = await this.quizService.attemptQuiz(data.user, data.payload.quizId);
+            server.emit(ws_event_types_1.FETCH_ATTEMPT_ID, { payload: attemptId });
+        }
+        catch (_) {
+            server.emit(ws_event_types_1.ERROR);
         }
     }
 };
@@ -55,6 +63,12 @@ __decorate([
     __metadata("design:paramtypes", [Object, Object]),
     __metadata("design:returntype", Promise)
 ], QuizAttemptGateway.prototype, "fetchQuizDetails", null);
+__decorate([
+    websockets_1.SubscribeMessage(ws_event_types_1.START),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object, Object]),
+    __metadata("design:returntype", Promise)
+], QuizAttemptGateway.prototype, "startQuiz", null);
 QuizAttemptGateway = __decorate([
     common_1.UseGuards(ws_gaurd_1.WsGuard),
     websockets_1.WebSocketGateway(undefined, { transports: ['websocket', 'polling'] }),

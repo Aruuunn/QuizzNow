@@ -36,6 +36,10 @@ __decorate([
     typeorm_1.Column({ default: 0 }),
     __metadata("design:type", Number)
 ], QuizAttemptEntity.prototype, "totalScore", void 0);
+__decorate([
+    typeorm_1.Column({ default: false }),
+    __metadata("design:type", Boolean)
+], QuizAttemptEntity.prototype, "attemptFinished", void 0);
 QuizAttemptEntity = __decorate([
     typeorm_1.Entity()
 ], QuizAttemptEntity);

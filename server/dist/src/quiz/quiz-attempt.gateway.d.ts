@@ -14,4 +14,10 @@ export declare class QuizAttemptGateway implements OnGatewayInit, OnGatewayConne
         payload: string;
         user: UserEntity;
     }): Promise<void>;
+    startQuiz(server: Server, data: {
+        payload: {
+            quizId: string;
+        };
+        user: UserEntity;
+    }): Promise<void>;
 }

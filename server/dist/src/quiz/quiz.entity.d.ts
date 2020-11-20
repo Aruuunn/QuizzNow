@@ -8,7 +8,7 @@ export declare class QuizEntity extends BaseEntity {
     title: string;
     endDatetime: Date;
     questions: QAEntity[];
-    author: UserEntity;
+    createdBy: UserEntity;
     attempts: QuizAttemptEntity[];
     createdAt: Date;
     updatedAt: Date;

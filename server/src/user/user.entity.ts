@@ -29,7 +29,7 @@ class UserEntity extends BaseEntity {
 
   @OneToMany(
     type => QuizEntity,
-    quiz => quiz.author,
+    quiz => quiz.createdBy,
   )
   quizzes: QuizEntity[];
 

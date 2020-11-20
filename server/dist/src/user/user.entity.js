@@ -35,7 +35,7 @@ __decorate([
     __metadata("design:type", String)
 ], UserEntity.prototype, "photoURL", void 0);
 __decorate([
-    typeorm_1.OneToMany(type => quiz_entity_1.QuizEntity, quiz => quiz.author),
+    typeorm_1.OneToMany(type => quiz_entity_1.QuizEntity, quiz => quiz.createdBy),
     __metadata("design:type", Array)
 ], UserEntity.prototype, "quizzes", void 0);
 __decorate([
