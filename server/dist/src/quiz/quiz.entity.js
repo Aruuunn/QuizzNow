@@ -14,6 +14,7 @@ const class_transformer_1 = require("class-transformer");
 const qa_entity_1 = require("../qa/qa.entity");
 const user_entity_1 = require("../user/user.entity");
 const typeorm_1 = require("typeorm");
+const quiz_attempts_entity_1 = require("./quiz_attempts.entity");
 let QuizEntity = class QuizEntity extends typeorm_1.BaseEntity {
 };
 __decorate([
@@ -42,10 +43,9 @@ __decorate([
     __metadata("design:type", user_entity_1.default)
 ], QuizEntity.prototype, "author", void 0);
 __decorate([
-    class_transformer_1.Exclude(),
-    typeorm_1.ManyToOne(type => user_entity_1.default, user => user.attendedQuizzes, { eager: true, }),
+    typeorm_1.OneToMany(type => quiz_attempts_entity_1.QuizAttemptEntity, quizAttempt => quizAttempt.quiz),
     __metadata("design:type", Array)
-], QuizEntity.prototype, "participants", void 0);
+], QuizEntity.prototype, "attempts", void 0);
 __decorate([
     class_transformer_1.Exclude(),
     typeorm_1.CreateDateColumn(),

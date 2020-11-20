@@ -20,12 +20,16 @@ const new_qa_1 = require("../qa/dto/new.qa");
 const qa_entity_1 = require("../qa/qa.entity");
 const qa_service_1 = require("../qa/qa.service");
 const user_entity_1 = require("../user/user.entity");
+const typeorm_2 = require("typeorm");
+const question_attempt_entity_1 = require("./question_attempt.entity");
 const quiz_entity_1 = require("./quiz.entity");
 const quiz_repository_1 = require("./quiz.repository");
+const quiz_attempts_entity_1 = require("./quiz_attempts.entity");
 let QuizService = class QuizService {
-    constructor(qaService, quizRepo) {
+    constructor(qaService, quizRepo, quizAttemptRepo) {
         this.qaService = qaService;
         this.quizRepo = quizRepo;
+        this.quizAttemptRepo = quizAttemptRepo;
         this.getQuiz = async (id) => {
             return await this.quizRepo.findOneOrFail(id, { cache: true });
         };
@@ -41,7 +45,6 @@ let QuizService = class QuizService {
                     questions.push(await this.qaService.createQuestion(user, i));
                 }
             newQuiz.questions = questions;
-            console.log('saving ...');
             await newQuiz.save();
             return newQuiz;
         };
@@ -138,6 +141,70 @@ let QuizService = class QuizService {
             }
         };
     }
+    canAttemptQuiz(quiz, user) {
+        return (quiz &&
+            quiz.startDatetime.getTime() < Date.now() &&
+            quiz.endDatetime.getTime() > Date.now() &&
+            quiz.attempts.reduce((t, c) => {
+                if (c.user.id === user.id) {
+                    return false;
+                }
+                else {
+                    return t;
+                }
+            }, true));
+    }
+    async attemptQuiz(user, quizId) {
+        const quiz = await this.quizRepo.findOne(quizId, { cache: true });
+        if (!this.canAttemptQuiz(quiz, user)) {
+            throw new common_1.BadRequestException();
+        }
+        const newQuizAttempt = new quiz_attempts_entity_1.QuizAttemptEntity();
+        newQuizAttempt.user = user;
+        newQuizAttempt.quiz = quiz;
+        newQuizAttempt.questionAttempts = [];
+        await newQuizAttempt.save();
+        return newQuizAttempt.id;
+    }
+    async attemptQuestion(user, questionId, choosedOption, attemptId) {
+        let isNew = false;
+        const quizAttempt = await this.quizAttemptRepo.findOne(attemptId, {
+            cache: true,
+            lock: { mode: 'pessimistic_write' },
+        });
+        const question = await this.qaService.findbyID(questionId);
+        if (!question ||
+            !quizAttempt ||
+            !this.canAttemptQuiz(quizAttempt.quiz, user)) {
+            throw new common_1.BadRequestException();
+        }
+        let questionAttempt = quizAttempt.questionAttempts.reduce((t, c) => {
+            if (c.id === questionId) {
+                return c;
+            }
+            else {
+                return t;
+            }
+        }, undefined);
+        if (!questionAttempt) {
+            isNew = true;
+            questionAttempt = new question_attempt_entity_1.QuestionAttemptEntity();
+            questionAttempt.question = question;
+            questionAttempt.attempt = quizAttempt;
+        }
+        else {
+            quizAttempt.totalScore -=
+                questionAttempt.optionChoosed === question.correctAnswer ? 1 : 0;
+        }
+        questionAttempt.optionChoosed = choosedOption;
+        questionAttempt.save();
+        if (isNew) {
+            quizAttempt.questionAttempts.push(questionAttempt);
+            quizAttempt.totalScore +=
+                questionAttempt.optionChoosed === question.correctAnswer ? 1 : 0;
+        }
+        quizAttempt.save();
+    }
     async getQuizzes(user, options) {
         const q = this.quizRepo.createQueryBuilder('q');
         q.where('q.author= :userId', { userId: user.id });
@@ -148,8 +215,10 @@ let QuizService = class QuizService {
 QuizService = __decorate([
     common_1.Injectable(),
     __param(1, typeorm_1.InjectRepository(quiz_repository_1.default)),
+    __param(2, typeorm_1.InjectRepository(quiz_attempts_entity_1.QuizAttemptEntity)),
     __metadata("design:paramtypes", [qa_service_1.QaService,
-        quiz_repository_1.default])
+        quiz_repository_1.default,
+        typeorm_2.Repository])
 ], QuizService);
 exports.QuizService = QuizService;
 //# sourceMappingURL=quiz.service.js.map

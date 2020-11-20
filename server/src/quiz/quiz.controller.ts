@@ -29,7 +29,7 @@ export class QuizController {
   @UsePipes(ValidationPipe)
   async newQuiz(@Body() data: NewQuizDto, @Req() req, @Res() res) {
    await this.quizService.createNewQuiz(req.user, data);
-    return res.sendStatus(HttpStatus.CREATED);
+  return res.sendStatus(HttpStatus.CREATED);
   }
 
 

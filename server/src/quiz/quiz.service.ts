@@ -9,9 +9,12 @@ import NewQuestionDto from 'src/qa/dto/new.qa';
 import QAEntity from 'src/qa/qa.entity';
 import { QaService } from 'src/qa/qa.service';
 import UserEntity from 'src/user/user.entity';
+import { Repository } from 'typeorm';
 import { NewQuizDto } from './dto/new.quiz';
+import { QuestionAttemptEntity } from './question_attempt.entity';
 import { QuizEntity } from './quiz.entity';
 import QuizRepository from './quiz.repository';
+import { QuizAttemptEntity } from './quiz_attempts.entity';
 
 @Injectable()
 export class QuizService {
@@ -19,7 +22,86 @@ export class QuizService {
     private qaService: QaService,
     @InjectRepository(QuizRepository)
     private quizRepo: QuizRepository,
+    @InjectRepository(QuizAttemptEntity)
+    private quizAttemptRepo: Repository<QuizAttemptEntity>,
   ) {}
+
+  canAttemptQuiz(quiz: QuizEntity, user: UserEntity) {
+    return (
+      quiz &&
+      quiz.startDatetime.getTime() < Date.now() &&
+      quiz.endDatetime.getTime() > Date.now() &&
+      quiz.attempts.reduce((t, c) => {
+        if (c.user.id === user.id) {
+          return false;
+        } else {
+          return t;
+        }
+      }, true)
+    );
+  }
+
+  async attemptQuiz(user: UserEntity, quizId: string): Promise<string> {
+    const quiz = await this.quizRepo.findOne(quizId, { cache: true });
+    if (!this.canAttemptQuiz(quiz, user)) {
+      throw new BadRequestException();
+    }
+    const newQuizAttempt = new QuizAttemptEntity();
+    newQuizAttempt.user = user;
+    newQuizAttempt.quiz = quiz;
+    newQuizAttempt.questionAttempts = [];
+    await newQuizAttempt.save();
+    return newQuizAttempt.id;
+  }
+
+  async attemptQuestion(
+    user: UserEntity,
+    questionId: string,
+    choosedOption: number,
+    attemptId: string,
+  ) {
+    let isNew = false;
+    const quizAttempt = await this.quizAttemptRepo.findOne(attemptId, {
+      cache: true,
+      lock: { mode: 'pessimistic_write' },
+    });
+    const question = await this.qaService.findbyID(questionId);
+
+    if (
+      !question ||
+      !quizAttempt ||
+      !this.canAttemptQuiz(quizAttempt.quiz, user)
+    ) {
+      throw new BadRequestException();
+    }
+    let questionAttempt = quizAttempt.questionAttempts.reduce((t, c) => {
+      if (c.id === questionId) {
+        return c;
+      } else {
+        return t;
+      }
+    }, undefined);
+
+    if (!questionAttempt) {
+      isNew = true;
+      questionAttempt = new QuestionAttemptEntity();
+      questionAttempt.question = question;
+      questionAttempt.attempt = quizAttempt;
+    } else {
+      quizAttempt.totalScore -=
+        questionAttempt.optionChoosed === question.correctAnswer ? 1 : 0;
+    }
+
+    questionAttempt.optionChoosed = choosedOption;
+    questionAttempt.save();
+
+    if (isNew) {
+      quizAttempt.questionAttempts.push(questionAttempt);
+      quizAttempt.totalScore +=
+        questionAttempt.optionChoosed === question.correctAnswer ? 1 : 0;
+    }
+    quizAttempt.save();
+  }
 
   getQuiz = async (id: string) => {
     return await this.quizRepo.findOneOrFail(id, { cache: true });
@@ -40,8 +122,6 @@ export class QuizService {
       }
 
     newQuiz.questions = questions;
-
-    console.log('saving ...');
     await newQuiz.save();
     return newQuiz;
   };

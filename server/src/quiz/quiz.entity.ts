@@ -1,7 +1,8 @@
 import { Exclude } from "class-transformer";
 import QAEntity from "src/qa/qa.entity";
 import UserEntity from "src/user/user.entity";
-import { BaseEntity, Column, CreateDateColumn, Entity, JoinTable, ManyToMany, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { BaseEntity, Column, CreateDateColumn, Entity, JoinTable, ManyToMany, ManyToOne, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { QuizAttemptEntity } from "./quiz_attempts.entity";
 
 
 @Entity()
@@ -23,11 +24,10 @@ export class QuizEntity extends BaseEntity {
     questions:QAEntity[]
 
     @ManyToOne(type => UserEntity,user=> user.quizzes,{eager:true})
-    author:UserEntity;
-
-    @Exclude()
-    @ManyToOne(type => UserEntity,user=> user.attendedQuizzes,{eager:true,})
-    participants: UserEntity[];
+    author: UserEntity;
+    
+    @OneToMany(type => QuizAttemptEntity,quizAttempt => quizAttempt.quiz)
+    attempts:QuizAttemptEntity[]
     
     @Exclude()
     @CreateDateColumn()

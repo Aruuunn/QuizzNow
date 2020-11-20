@@ -5,7 +5,7 @@ import { RouteComponentProps, withRouter } from "react-router-dom";
 
 import axios from "../../common/axios";
 import { NavBar } from "../../components";
-import QuizListItem from './quizItem';
+import QuizListItem from "./quizItem";
 import { RootState, Quiz } from "../../reduxStore/reducers";
 import { AuthActionTypes } from "../../reduxStore/types";
 
@@ -36,21 +36,27 @@ class Home extends Component<Props, State> {
     loading: false,
   };
 
-  componentDidMount() {
-    axios
-      .get(`/quiz?limit=10&page=1`, {
+  fetchData = async () => {
+    try {
+      const res = await axios.get(`/quiz?limit=10&page=1`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
         },
-      })
-      .then((res) => {
-        this.setState({ quizzes: res.data.items });
-      })
-      .catch((err) => {
-        if (err.response && err.response.status === 401) {
-          this.props.history.push("/auth");
-        }
       });
+
+      this.setState(
+        (s) => ({ ...s, quizzes: res.data.items }),
+        () => console.log("Received Quizzes")
+      );
+    } catch (err) {
+      if (err.response && err.response.status === 401) {
+        this.props.history.push("/auth");
+      }
+      console.log(err);
+    }
+  };
+  componentDidMount() {
+    this.fetchData();
   }
 
   render() {
@@ -93,7 +99,7 @@ class Home extends Component<Props, State> {
             Created Quizzes
           </Typography>
           {(this.state.quizzes as Quiz[]).map((o, i) => {
-            return <QuizListItem key={i} {...o} />;
+            return <QuizListItem fetchData={this.fetchData} key={i} {...o} />;
           })}
           {this.state.quizzes.length === 0 && (
             <div

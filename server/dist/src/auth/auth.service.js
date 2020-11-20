@@ -37,7 +37,7 @@ let AuthService = class AuthService {
                     const payload = { email: user.email };
                     delete user.createdQuestions;
                     delete user.quizzes;
-                    delete user.attendedQuizzes;
+                    delete user.attempts;
                     return { user, accessToken: this.jwtService.sign(payload) };
                 }
                 else {

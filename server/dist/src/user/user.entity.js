@@ -12,6 +12,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const class_transformer_1 = require("class-transformer");
 const qa_entity_1 = require("../qa/qa.entity");
 const quiz_entity_1 = require("../quiz/quiz.entity");
+const quiz_attempts_entity_1 = require("../quiz/quiz_attempts.entity");
 const typeorm_1 = require("typeorm");
 let UserEntity = class UserEntity extends typeorm_1.BaseEntity {
 };
@@ -38,9 +39,9 @@ __decorate([
     __metadata("design:type", Array)
 ], UserEntity.prototype, "quizzes", void 0);
 __decorate([
-    typeorm_1.OneToMany(type => quiz_entity_1.QuizEntity, quiz => quiz.participants),
+    typeorm_1.OneToMany(type => quiz_attempts_entity_1.QuizAttemptEntity, quizAttempt => quizAttempt.user),
     __metadata("design:type", Array)
-], UserEntity.prototype, "attendedQuizzes", void 0);
+], UserEntity.prototype, "attempts", void 0);
 __decorate([
     typeorm_1.OneToMany(type => qa_entity_1.default, qa => qa.author),
     __metadata("design:type", Array)
