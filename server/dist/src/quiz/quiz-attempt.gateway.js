@@ -30,6 +30,16 @@ let QuizAttemptGateway = class QuizAttemptGateway {
     handleConnection(client, ...args) {
         this.logger.log(`Client connected: ${client.id} ${client.conn.remoteAddress}`);
     }
+    async finishQuiz(server, data) {
+        try {
+            const { payload: { attemptId }, user } = data;
+            await this.quizService.finishQuizAttempt(attemptId, user);
+        }
+        catch (e) {
+            console.log(e);
+            server.emit(ws_event_types_1.ERROR);
+        }
+    }
     async fetchQuizDetails(server, data) {
         const { user, payload: { quizzId }, } = data;
         try {
@@ -93,6 +103,12 @@ __decorate([
     websockets_1.WebSocketServer(),
     __metadata("design:type", Object)
 ], QuizAttemptGateway.prototype, "server", void 0);
+__decorate([
+    websockets_1.SubscribeMessage(ws_event_types_1.FINISH),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object, Object]),
+    __metadata("design:returntype", Promise)
+], QuizAttemptGateway.prototype, "finishQuiz", null);
 __decorate([
     websockets_1.SubscribeMessage(ws_event_types_1.FETCH_QUIZ_DETAILS),
     __metadata("design:type", Function),

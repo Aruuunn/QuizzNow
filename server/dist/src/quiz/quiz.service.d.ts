@@ -32,4 +32,5 @@ export declare class QuizService {
     updateQuiz: (user: UserEntity, quizId: string, startDatetime?: string, endDatetime?: string, title?: string) => Promise<QuizEntity>;
     getQuizzes(user: UserEntity, options: IPaginationOptions): Promise<import("nestjs-typeorm-paginate").Pagination<QuizEntity>>;
     deleteQuiz: (id: string, userId: string) => Promise<void>;
+    finishQuizAttempt: (attemptId: string, user: UserEntity) => Promise<void>;
 }

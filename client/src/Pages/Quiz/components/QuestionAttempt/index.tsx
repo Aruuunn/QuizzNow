@@ -9,6 +9,8 @@ interface Props {
   attemptQuestion: (selectedOption: number) => void;
   onNextQuestion: () => void;
   onPreviousQuestion: () => void;
+  isLastQuestion: () => boolean;
+  onFinish: () => void;
 }
 
 function QuestionAttempt(props: Props): ReactElement {
@@ -20,6 +22,8 @@ function QuestionAttempt(props: Props): ReactElement {
     selectedOption,
     onNextQuestion,
     onPreviousQuestion,
+    onFinish,
+    isLastQuestion
   } = props;
 
   return (
@@ -53,9 +57,15 @@ function QuestionAttempt(props: Props): ReactElement {
           ))}
         </Paper>
         <div style={{ marginTop: "15px" }}>
-          <Button size="large" variant="contained" color="primary" onClick={onNextQuestion}>
-            Next
+        <Button size="large" style={{marginRight:'20px'}} variant="text" color="secondary" onClick={onPreviousQuestion}>
+            Previous
           </Button>
+          {isLastQuestion() ?
+            <Button size="large" variant="outlined" color="secondary" onClick={onFinish}>
+            Finish
+          </Button>:<Button size="large" variant="contained" color="secondary" onClick={onNextQuestion}>
+            Next
+          </Button>}
         </div>
       </Container>
     </div>

@@ -5,7 +5,6 @@ import { NavBar, LoadingIndicator } from "../../components";
 import { QuizInfo } from "./components";
 import * as ws from "./ws";
 import QuestionAttempt from "./components/QuestionAttempt";
-import { Socket } from "socket.io-client";
 
 type Props = RouteComponentProps;
 interface State {
@@ -141,6 +140,19 @@ class Quiz extends Component<Props, State> {
     }));
   };
 
+  isLastQuestion = () =>
+    this.state.questionNumber === this.state.totalQuestions - 1;
+
+  onFinish = () => {
+    this.socket = ws.finishQuizAttempt(
+      this.socket,
+      this.state.attemptId,
+      () => {
+        this.setState({ isFinished: true });
+      }
+    );
+  };
+
   getQuestion = () => this.state.questions[this.state.questionNumber];
 
   render() {
@@ -173,6 +185,8 @@ class Quiz extends Component<Props, State> {
             attemptQuestion={(selectedOption: number) =>
               this.attemptQuestion(selectedOption, this.getQuestion().id)
             }
+            onFinish={this.onFinish}
+            isLastQuestion={this.isLastQuestion}
           />
         ) : null}
       </div>

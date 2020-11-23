@@ -2747,8 +2747,8 @@
         "affectsGlobalScope": false
       },
       "../src/quiz/entities/question_attempt.entity.ts": {
-        "version": "ed364ce9b8ca97b7ab46b9a78fb91af18bbdeb22fa5816bc2f5177792512b005",
-        "signature": "ca81f6d610c09b6817ccefe0591b309a6601805a556e797032bce829e59d839c",
+        "version": "6332656ac22d2a100c3d8a8d8f9025963dcdc43507b7cd575afb746325c602cc",
+        "signature": "6694b7d07f4f9ed724c715b168ff201de8ce47ad317b6690ee94f2be4451c825",
         "affectsGlobalScope": false
       },
       "../src/quiz/entities/quiz_attempts.entity.ts": {
@@ -3636,21 +3636,6 @@
         "signature": "feb40f64e2e7433378a9b6357daf650356e5031d26b8ed8a726f0958cc004eaa",
         "affectsGlobalScope": false
       },
-      "../src/quiz/quiz.service.ts": {
-        "version": "c47b9ca2cabaf6abd42e50a2c5ebd6b27fe21068268a9419419341375b9ea72d",
-        "signature": "833870b040db2dd9f48c2f43629ce736d96d0410b7733a3e4db04f2688b16e48",
-        "affectsGlobalScope": false
-      },
-      "../src/quiz/quiz.controller.ts": {
-        "version": "2ebec0f15901bfdc9d5091f826730c0515b9e800defbc0c644e3e65a12220694",
-        "signature": "e7d839472ce62503046950f9434b4b8e528d3ed7dc8755170eda6a87df08ab69",
-        "affectsGlobalScope": false
-      },
-      "../src/quiz/quiz.module.ts": {
-        "version": "196a8852a51f3e11222ad4a754e540ee48e8495f2d809c094e3867aad3983526",
-        "signature": "598e2ea46f637c4398772085dd8caa881c8aeddf54ab58378040caec538a285a",
-        "affectsGlobalScope": false
-      },
       "../node_modules/@nestjs/websockets/adapters/ws-adapter.d.ts": {
         "version": "7d2eed7cce648593302069d3fabed797a0a83c05f696e9ba92b1a8df2a0cbcf9",
         "signature": "7d2eed7cce648593302069d3fabed797a0a83c05f696e9ba92b1a8df2a0cbcf9",
@@ -3776,6 +3761,21 @@
         "signature": "4bc4c7612f5cc6298b01f76f7a21674181ae6e199a0b07c518107c15bde32344",
         "affectsGlobalScope": false
       },
+      "../src/quiz/quiz.service.ts": {
+        "version": "bfcc2b57e41d6e5592fda197bf747398a07ac13e6282d94afc04513231bf83fc",
+        "signature": "071c224f87ffb1065e1b93c475402f15d06aaf0a9d3fd14699cabc59b0b4bd39",
+        "affectsGlobalScope": false
+      },
+      "../src/quiz/quiz.controller.ts": {
+        "version": "2ebec0f15901bfdc9d5091f826730c0515b9e800defbc0c644e3e65a12220694",
+        "signature": "e7d839472ce62503046950f9434b4b8e528d3ed7dc8755170eda6a87df08ab69",
+        "affectsGlobalScope": false
+      },
+      "../src/quiz/quiz.module.ts": {
+        "version": "196a8852a51f3e11222ad4a754e540ee48e8495f2d809c094e3867aad3983526",
+        "signature": "598e2ea46f637c4398772085dd8caa881c8aeddf54ab58378040caec538a285a",
+        "affectsGlobalScope": false
+      },
       "../node_modules/@types/engine.io/index.d.ts": {
         "version": "2bc5a885dc91b4006192c477dfae4f2856e5809c6ffbf62cc242ac010f15ab51",
         "signature": "2bc5a885dc91b4006192c477dfae4f2856e5809c6ffbf62cc242ac010f15ab51",
@@ -3792,8 +3792,8 @@
         "affectsGlobalScope": false
       },
       "../src/quiz/quiz-attempt.gateway.ts": {
-        "version": "62d7078ca41d5d6a88a5173fd8ae71f1806951886e951ce92f3ed09441ccfbea",
-        "signature": "c823da655771c12da7bdd2b45ec626712c163f8ef5b68bf4852fea2db7fa8b43",
+        "version": "c4b922df25a5a71df4271f3f255a3bd09b18f439b704380bcacbfbc9d03ad779",
+        "signature": "e57d6c12693feebeebf6de7824ed6f89b44440300185e5eef28199f472a23760",
         "affectsGlobalScope": false
       },
       "../src/app.module.ts": {
@@ -7380,6 +7380,7 @@
       "../src/quiz/quiz.service.ts": [
         "../node_modules/@nestjs/common/index.d.ts",
         "../node_modules/@nestjs/typeorm/index.d.ts",
+        "../node_modules/@nestjs/websockets/index.d.ts",
         "../node_modules/nestjs-typeorm-paginate/dist/index.d.ts",
         "../node_modules/typeorm/index.d.ts",
         "../src/qa/dto/new.qa.ts",
@@ -7618,7 +7619,7 @@
         "../node_modules/@nestjs/common/interfaces/index.d.ts"
       ],
       "../node_modules/@nestjs/common/http/http.service.d.ts": [
-        "../node_modules/@nestjs/common/node_modules/axios/index.d.ts",
+        "../node_modules/axios/index.d.ts",
         "../node_modules/rxjs/index.d.ts"
       ],
       "../node_modules/@nestjs/common/http/index.d.ts": [
@@ -7628,7 +7629,7 @@
       ],
       "../node_modules/@nestjs/common/http/interfaces/http-module.interface.d.ts": [
         "../node_modules/@nestjs/common/interfaces/index.d.ts",
-        "../node_modules/@nestjs/common/node_modules/axios/index.d.ts"
+        "../node_modules/axios/index.d.ts"
       ],
       "../node_modules/@nestjs/common/http/interfaces/index.d.ts": [
         "../node_modules/@nestjs/common/http/interfaces/http-module.interface.d.ts"

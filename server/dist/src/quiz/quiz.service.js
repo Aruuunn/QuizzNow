@@ -25,6 +25,7 @@ const question_attempt_entity_1 = require("./entities/question_attempt.entity");
 const quiz_entity_1 = require("./entities/quiz.entity");
 const quiz_repository_1 = require("./quiz.repository");
 const quiz_attempts_entity_1 = require("./entities/quiz_attempts.entity");
+const websockets_1 = require("@nestjs/websockets");
 let QuizService = class QuizService {
     constructor(qaService, quizRepo, quizAttemptRepo, questionAttemptRepo) {
         this.qaService = qaService;
@@ -143,6 +144,19 @@ let QuizService = class QuizService {
                 throw new common_1.UnauthorizedException();
             }
         };
+        this.finishQuizAttempt = async (attemptId, user) => {
+            const quizAttempt = await this.quizAttemptRepo.findOne(attemptId, {
+                relations: ['user'],
+            });
+            if (user.id !== quizAttempt.user.id) {
+                throw new websockets_1.WsException('Forbidden');
+            }
+            if (!quizAttempt) {
+                throw new websockets_1.WsException('No Quiz Attempt Found');
+            }
+            quizAttempt.attemptFinished = true;
+            quizAttempt.save();
+        };
     }
     canAttemptQuiz(quiz, user, checkForPreviousAttempts = true) {
         const result = quiz &&
@@ -232,6 +246,7 @@ let QuizService = class QuizService {
             if (!questionAttempt) {
                 isNew = true;
                 questionAttempt = new question_attempt_entity_1.QuestionAttemptEntity();
+                this.logger.debug(question, "Question");
                 questionAttempt.questionId = question.id;
                 questionAttempt.attempt = quizAttempt;
             }

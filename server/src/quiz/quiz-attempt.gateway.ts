@@ -19,6 +19,7 @@ import {
   RECEIVED_QUIZ_DETAILS,
   START,
   RECEIVED_QUESTION,
+  FINISH,
 } from '../../common/ws.event.types';
 import UserEntity from '../user/user.entity';
 import { QuizService } from './quiz.service';
@@ -48,6 +49,21 @@ export class QuizAttemptGateway
     this.logger.log(
       `Client connected: ${client.id} ${client.conn.remoteAddress}`,
     );
+  }
+
+  @SubscribeMessage(FINISH)
+  async finishQuiz(
+    server: Server,
+    data: { payload: { attemptId: string }; user: UserEntity },
+  ) {
+    try 
+  {  const {payload :{ attemptId} ,user } = data;
+      await this.quizService.finishQuizAttempt(attemptId, user);
+    }
+    catch (e) {
+      console.log(e);
+      server.emit(ERROR);
+    }
   }
 
   @SubscribeMessage(FETCH_QUIZ_DETAILS)

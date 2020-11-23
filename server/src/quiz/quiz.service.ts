@@ -16,6 +16,7 @@ import { QuestionAttemptEntity } from './entities/question_attempt.entity';
 import { QuizEntity } from './entities/quiz.entity';
 import QuizRepository from './quiz.repository';
 import { QuizAttemptEntity } from './entities/quiz_attempts.entity';
+import { WsException } from '@nestjs/websockets';
 
 @Injectable()
 export class QuizService {
@@ -77,7 +78,7 @@ export class QuizService {
         } else {
           return t;
         }
-      },undefined);
+      }, undefined);
       this.logger.debug(
         question,
         `Question returned by fetchQuestionForQuizAttempt for Question Number - ${questionNumber}`,
@@ -153,6 +154,7 @@ export class QuizService {
       if (!questionAttempt) {
         isNew = true;
         questionAttempt = new QuestionAttemptEntity();
+        this.logger.debug(question,"Question")
         questionAttempt.questionId = question.id;
         questionAttempt.attempt = quizAttempt;
       } else {
@@ -353,5 +355,19 @@ export class QuizService {
     } else {
       throw new UnauthorizedException();
     }
+  };
+
+  finishQuizAttempt = async (attemptId: string, user: UserEntity) => {
+    const quizAttempt = await this.quizAttemptRepo.findOne(attemptId, {
+      relations: ['user'],
+    });
+    if (user.id !== quizAttempt.user.id) {
+      throw new WsException('Forbidden');
+    }
+    if (!quizAttempt) {
+      throw new WsException('No Quiz Attempt Found');
+    }
+    quizAttempt.attemptFinished = true;
+    quizAttempt.save();
   };
 }

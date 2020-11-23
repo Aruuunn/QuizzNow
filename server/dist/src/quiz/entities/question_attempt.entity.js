@@ -20,7 +20,7 @@ __decorate([
     __metadata("design:type", String)
 ], QuestionAttemptEntity.prototype, "id", void 0);
 __decorate([
-    typeorm_1.Column("uuid"),
+    typeorm_1.Column('uuid'),
     __metadata("design:type", String)
 ], QuestionAttemptEntity.prototype, "questionId", void 0);
 __decorate([
