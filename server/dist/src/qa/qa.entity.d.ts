@@ -5,6 +5,6 @@ declare class QAEntity extends BaseEntity {
     question: string;
     correctAnswer: number;
     options: string[];
-    author: UserEntity;
+    createdBy: UserEntity;
 }
 export default QAEntity;

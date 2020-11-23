@@ -49,6 +49,7 @@ class Home extends Component<Props, State> {
         () => console.log("Received Quizzes")
       );
     } catch (err) {
+      
       if (err.response && err.response.status === 401) {
         this.props.history.push("/auth");
       }

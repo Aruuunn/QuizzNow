@@ -8,3 +8,6 @@ export declare const START = "START";
 export declare const FINISH = "FINISH";
 export declare const ATTEMPT_QUESTION = "ATTEMPT_QUESTION";
 export declare const FETCH_ATTEMPT_ID = "FETCH_ATTEMPT_ID";
+export declare const FETCH_QUESTION = "FETCH_QUESTION";
+export declare const RECEIVED_QUESTION = "RECEIVED_QUESTION";
+export declare const FINISHED = "FINISHED";

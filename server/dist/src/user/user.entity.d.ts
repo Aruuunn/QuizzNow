@@ -1,6 +1,6 @@
 import QAEntity from 'src/qa/qa.entity';
-import { QuizEntity } from 'src/quiz/quiz.entity';
-import { QuizAttemptEntity } from 'src/quiz/quiz_attempts.entity';
+import { QuizEntity } from 'src/quiz/entities/quiz.entity';
+import { QuizAttemptEntity } from 'src/quiz/entities/quiz_attempts.entity';
 import { BaseEntity } from 'typeorm';
 declare class UserEntity extends BaseEntity {
     id: string;

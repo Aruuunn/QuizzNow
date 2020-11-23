@@ -11,8 +11,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const class_transformer_1 = require("class-transformer");
 const qa_entity_1 = require("../qa/qa.entity");
-const quiz_entity_1 = require("../quiz/quiz.entity");
-const quiz_attempts_entity_1 = require("../quiz/quiz_attempts.entity");
+const quiz_entity_1 = require("../quiz/entities/quiz.entity");
+const quiz_attempts_entity_1 = require("../quiz/entities/quiz_attempts.entity");
 const typeorm_1 = require("typeorm");
 let UserEntity = class UserEntity extends typeorm_1.BaseEntity {
 };
@@ -39,11 +39,12 @@ __decorate([
     __metadata("design:type", Array)
 ], UserEntity.prototype, "quizzes", void 0);
 __decorate([
-    typeorm_1.OneToMany(type => quiz_attempts_entity_1.QuizAttemptEntity, quizAttempt => quizAttempt.user),
+    class_transformer_1.Exclude(),
+    typeorm_1.OneToMany(type => quiz_attempts_entity_1.QuizAttemptEntity, quizAttempt => quizAttempt.user, { eager: true }),
     __metadata("design:type", Array)
 ], UserEntity.prototype, "attempts", void 0);
 __decorate([
-    typeorm_1.OneToMany(type => qa_entity_1.default, qa => qa.author),
+    typeorm_1.OneToMany(type => qa_entity_1.default, qa => qa.createdBy),
     __metadata("design:type", Array)
 ], UserEntity.prototype, "createdQuestions", void 0);
 UserEntity = __decorate([

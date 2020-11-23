@@ -31,11 +31,23 @@ let QuizAttemptGateway = class QuizAttemptGateway {
         this.logger.log(`Client connected: ${client.id} ${client.conn.remoteAddress}`);
     }
     async fetchQuizDetails(server, data) {
+        const { user, payload: { quizzId }, } = data;
         try {
-            const quiz = await this.quizService.getQuiz(data.payload, ['attempts']);
-            this.logger.log(`Sending Details of Quiz with Id - ${data.payload}`);
+            const quiz = await this.quizService.getQuiz(quizzId);
+            this.logger.log(`Sending Details of Quiz with Id - ${quizzId}`);
+            console.log(quiz, user);
             server.emit(ws_event_types_1.RECEIVED_QUIZ_DETAILS, {
-                payload: Object.assign(Object.assign({}, class_transformer_1.classToPlain(quiz)), { canAttemptQuiz: this.quizService.canAttemptQuiz(quiz, data.user), totalQuestions: quiz.questions.length }),
+                payload: Object.assign(Object.assign({}, class_transformer_1.classToPlain(quiz)), { canAttemptQuiz: this.quizService.canAttemptQuiz(quiz, data.user), totalQuestions: quiz.questions.length, hasAttempted: user.attempts.reduce((t, c) => {
+                        if (c.quiz.id === quizzId) {
+                            return c.attemptFinished ||
+                                quiz.endDatetime.getTime() < Date.now()
+                                ? true
+                                : false;
+                        }
+                        else {
+                            return t;
+                        }
+                    }, false) }),
             });
         }
         catch (e) {
@@ -46,9 +58,33 @@ let QuizAttemptGateway = class QuizAttemptGateway {
     async startQuiz(server, data) {
         try {
             const attemptId = await this.quizService.attemptQuiz(data.user, data.payload.quizId);
-            server.emit(ws_event_types_1.FETCH_ATTEMPT_ID, { payload: attemptId });
+            server.emit(ws_event_types_1.FETCH_ATTEMPT_ID, { payload: { attemptId } });
         }
         catch (_) {
+            console.log(_);
+            server.emit(ws_event_types_1.ERROR);
+        }
+    }
+    async fetchQuestion(server, data) {
+        try {
+            const { payload: { attemptId, questionNumber }, user, } = data;
+            const { question, selectedOption, } = await this.quizService.fetchQuestionForQuizAttempt(attemptId, questionNumber, user);
+            server.emit(ws_event_types_1.RECEIVED_QUESTION, {
+                payload: { question: class_transformer_1.classToPlain(question), selectedOption },
+            });
+        }
+        catch (e) {
+            console.log(e);
+            server.emit(ws_event_types_1.ERROR);
+        }
+    }
+    async attemptQuestion(server, data) {
+        try {
+            const { payload: { selectedOption, questionId, attemptId }, user, } = data;
+            await this.quizService.attemptQuestion(user, questionId, selectedOption, attemptId);
+        }
+        catch (e) {
+            this.logger.error(e);
             server.emit(ws_event_types_1.ERROR);
         }
     }
@@ -69,6 +105,18 @@ __decorate([
     __metadata("design:paramtypes", [Object, Object]),
     __metadata("design:returntype", Promise)
 ], QuizAttemptGateway.prototype, "startQuiz", null);
+__decorate([
+    websockets_1.SubscribeMessage(ws_event_types_1.FETCH_QUESTION),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object, Object]),
+    __metadata("design:returntype", Promise)
+], QuizAttemptGateway.prototype, "fetchQuestion", null);
+__decorate([
+    websockets_1.SubscribeMessage(ws_event_types_1.ATTEMPT_QUESTION),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object, Object]),
+    __metadata("design:returntype", Promise)
+], QuizAttemptGateway.prototype, "attemptQuestion", null);
 QuizAttemptGateway = __decorate([
     common_1.UseGuards(ws_gaurd_1.WsGuard),
     websockets_1.WebSocketGateway(undefined, { transports: ['websocket', 'polling'] }),

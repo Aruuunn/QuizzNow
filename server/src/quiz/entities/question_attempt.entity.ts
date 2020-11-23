@@ -8,11 +8,10 @@ export class QuestionAttemptEntity extends BaseEntity {
   @PrimaryGeneratedColumn('uuid')
   id: string;
   
-  @ManyToMany(type => QAEntity)
-  @JoinTable()
-  question: QAEntity;
+  @Column("uuid")
+  questionId: string;
 
-  @ManyToOne(type => QuizAttemptEntity,quizAttempt => quizAttempt.questionAttempts)
+  @ManyToOne(type => QuizAttemptEntity,quizAttempt => quizAttempt.questionAttempts,{onDelete:'CASCADE'})
   attempt: QuizAttemptEntity;
 
   @Column()

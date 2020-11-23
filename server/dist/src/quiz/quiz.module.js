@@ -12,11 +12,11 @@ const typeorm_1 = require("@nestjs/typeorm");
 const qa_module_1 = require("../qa/qa.module");
 const qa_service_1 = require("../qa/qa.service");
 const user_module_1 = require("../user/user.module");
-const question_attempt_entity_1 = require("./question_attempt.entity");
+const question_attempt_entity_1 = require("./entities/question_attempt.entity");
 const quiz_controller_1 = require("./quiz.controller");
 const quiz_repository_1 = require("./quiz.repository");
 const quiz_service_1 = require("./quiz.service");
-const quiz_attempts_entity_1 = require("./quiz_attempts.entity");
+const quiz_attempts_entity_1 = require("./entities/quiz_attempts.entity");
 let QuizModule = class QuizModule {
 };
 QuizModule = __decorate([

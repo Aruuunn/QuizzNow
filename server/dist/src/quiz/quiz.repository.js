@@ -8,7 +8,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.QuizRepository = void 0;
 const typeorm_1 = require("typeorm");
-const quiz_entity_1 = require("./quiz.entity");
+const quiz_entity_1 = require("./entities/quiz.entity");
 let QuizRepository = class QuizRepository extends typeorm_1.Repository {
 };
 QuizRepository = __decorate([

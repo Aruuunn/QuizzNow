@@ -22,6 +22,7 @@ __decorate([
 __decorate([
     class_validator_1.IsNotEmpty(),
     class_validator_1.MinLength(5),
+    class_validator_1.MaxLength(100),
     __metadata("design:type", String)
 ], UpdateQuestionDto.prototype, "question", void 0);
 exports.UpdateQuestionDto = UpdateQuestionDto;

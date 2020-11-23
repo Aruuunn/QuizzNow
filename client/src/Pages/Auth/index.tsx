@@ -57,6 +57,7 @@ class Auth extends Component<Props, State> {
         id_token,
       })
       .then((res) => {
+        console.log(res.data);
         this.props.setUser(res.data.user);
         this.props.saveAccessToken(res.data.accessToken);
         this.setState({ loading: false }, () => {

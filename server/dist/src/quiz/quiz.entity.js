@@ -40,12 +40,12 @@ __decorate([
     __metadata("design:type", Array)
 ], QuizEntity.prototype, "questions", void 0);
 __decorate([
-    typeorm_1.ManyToOne(type => user_entity_1.default, user => user.quizzes, { eager: true }),
+    typeorm_1.ManyToOne(type => user_entity_1.default, user => user.quizzes, { onDelete: 'CASCADE' }),
     __metadata("design:type", user_entity_1.default)
 ], QuizEntity.prototype, "createdBy", void 0);
 __decorate([
     class_transformer_1.Exclude(),
-    typeorm_1.OneToMany(type => quiz_attempts_entity_1.QuizAttemptEntity, quizAttempt => quizAttempt.quiz),
+    typeorm_1.OneToMany(type => quiz_attempts_entity_1.QuizAttemptEntity, quizAttempt => quizAttempt.quiz, { onDelete: 'CASCADE' }),
     __metadata("design:type", Array)
 ], QuizEntity.prototype, "attempts", void 0);
 __decorate([

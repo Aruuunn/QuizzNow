@@ -21,17 +21,19 @@ const qa_entity_1 = require("../qa/qa.entity");
 const qa_service_1 = require("../qa/qa.service");
 const user_entity_1 = require("../user/user.entity");
 const typeorm_2 = require("typeorm");
-const question_attempt_entity_1 = require("./question_attempt.entity");
-const quiz_entity_1 = require("./quiz.entity");
+const question_attempt_entity_1 = require("./entities/question_attempt.entity");
+const quiz_entity_1 = require("./entities/quiz.entity");
 const quiz_repository_1 = require("./quiz.repository");
-const quiz_attempts_entity_1 = require("./quiz_attempts.entity");
+const quiz_attempts_entity_1 = require("./entities/quiz_attempts.entity");
 let QuizService = class QuizService {
-    constructor(qaService, quizRepo, quizAttemptRepo) {
+    constructor(qaService, quizRepo, quizAttemptRepo, questionAttemptRepo) {
         this.qaService = qaService;
         this.quizRepo = quizRepo;
         this.quizAttemptRepo = quizAttemptRepo;
+        this.questionAttemptRepo = questionAttemptRepo;
+        this.logger = new common_1.Logger('QuizService');
         this.getQuiz = async (id, relations = []) => {
-            return await this.quizRepo.findOneOrFail(id, { cache: true, relations });
+            return await this.quizRepo.findOneOrFail(id, { relations });
         };
         this.createNewQuiz = async (user, quizData) => {
             const newQuiz = new quiz_entity_1.QuizEntity();
@@ -50,7 +52,7 @@ let QuizService = class QuizService {
         };
         this.addNewQuestion = async (user, question, quizId) => {
             const newQuestion = await this.qaService.createQuestion(user, question);
-            const quiz = await this.quizRepo.findOne({ id: quizId }, { cache: true });
+            const quiz = await this.quizRepo.findOne({ id: quizId }, { relations: ['createdBy'] });
             if (quiz.createdBy.id !== user.id) {
                 throw new common_1.UnauthorizedException();
             }
@@ -66,7 +68,7 @@ let QuizService = class QuizService {
         };
         this.addOldQuestion = async (user, questionId, quizId) => {
             const question = await this.qaService.findbyID(questionId);
-            const quiz = await this.quizRepo.findOne({ id: quizId }, { cache: true });
+            const quiz = await this.quizRepo.findOne({ id: quizId }, { relations: ['createdBy'] });
             if (!question || !quiz) {
                 throw new common_1.BadRequestException('No Question/Quiz Found with the given ID');
             }
@@ -81,7 +83,7 @@ let QuizService = class QuizService {
             return quiz;
         };
         this.removeQuestion = async (user, questionId, quizId) => {
-            const quiz = await this.quizRepo.findOne({ id: quizId }, { cache: true });
+            const quiz = await this.quizRepo.findOne({ id: quizId }, { relations: ['createdBy'] });
             if (!quiz) {
                 throw new common_1.BadRequestException('No Quiz Found with the given ID');
             }
@@ -96,7 +98,7 @@ let QuizService = class QuizService {
             return quiz;
         };
         this.removeAllQuestions = async (user, quizId) => {
-            const quiz = await this.quizRepo.findOne({ id: quizId }, { cache: true });
+            const quiz = await this.quizRepo.findOne({ id: quizId }, { relations: ['createdBy'] });
             if (!quiz) {
                 throw new common_1.BadRequestException('No Quiz Found with the given ID');
             }
@@ -108,7 +110,7 @@ let QuizService = class QuizService {
             return quiz;
         };
         this.updateQuiz = async (user, quizId, startDatetime, endDatetime, title) => {
-            const quiz = await this.quizRepo.findOne({ id: quizId });
+            const quiz = await this.quizRepo.findOne({ id: quizId }, { relations: ['createdBy'] });
             if (!quiz) {
                 throw new common_1.BadRequestException('No Quiz Found with the given ID');
             }
@@ -129,7 +131,8 @@ let QuizService = class QuizService {
             return quiz;
         };
         this.deleteQuiz = async (id, userId) => {
-            const quiz = await this.quizRepo.findOne(id);
+            const quiz = await this.quizRepo.findOne(id, { relations: ['createdBy'] });
+            console.log(quiz);
             if (!quiz) {
                 throw new common_1.BadRequestException();
             }
@@ -142,22 +145,53 @@ let QuizService = class QuizService {
         };
     }
     canAttemptQuiz(quiz, user, checkForPreviousAttempts = true) {
-        return (quiz &&
+        const result = quiz &&
             quiz.startDatetime.getTime() < Date.now() &&
             quiz.endDatetime.getTime() > Date.now() &&
-            (!checkForPreviousAttempts || quiz.attempts.reduce((t, c) => {
-                if (c.user.id === user.id) {
-                    return c.attemptFinished ? false : true;
+            (!checkForPreviousAttempts ||
+                user.attempts.reduce((t, c) => {
+                    if (quiz.id === c.quiz.id) {
+                        return c.attemptFinished ? false : true;
+                    }
+                    else {
+                        return t;
+                    }
+                }, true));
+        this.logger.debug(result, 'canAttemptQuiz');
+        return result;
+    }
+    async fetchQuestionForQuizAttempt(attemptId, questionNumber, user) {
+        const quizAttempt = await this.quizAttemptRepo.findOne(attemptId, {
+            relations: ['user'],
+        });
+        this.logger.debug(quizAttempt, 'fetchQuestionForQuizAttempt');
+        if (this.canAttemptQuiz(quizAttempt.quiz, user, false) &&
+            !quizAttempt.attemptFinished &&
+            quizAttempt.user.id === user.id &&
+            questionNumber >= 0 &&
+            questionNumber < quizAttempt.quiz.questions.length) {
+            const question = quizAttempt.quiz.questions[questionNumber];
+            const selectedOption = quizAttempt.questionAttempts.reduce((t, c) => {
+                if (question && c.questionId === question.id) {
+                    return c.optionChoosed;
                 }
                 else {
                     return t;
                 }
-            }, true)));
+            }, undefined);
+            this.logger.debug(question, `Question returned by fetchQuestionForQuizAttempt for Question Number - ${questionNumber}`);
+            return { question, selectedOption };
+        }
+        else {
+            throw new common_1.BadRequestException();
+        }
     }
     async attemptQuiz(user, quizId) {
-        const quiz = await this.quizRepo.findOne(quizId, { cache: true, relations: ["attempts"] });
-        const quizAttempt = quiz.attempts.reduce((t, c) => {
-            if (c.user.id === user.id && c.quiz.id === quiz.id) {
+        const quiz = await this.quizRepo.findOne(quizId, {
+            relations: ['attempts'],
+        });
+        const quizAttempt = user.attempts.reduce((t, c) => {
+            if (c.quiz.id === quiz.id) {
                 return c;
             }
             else {
@@ -178,47 +212,49 @@ let QuizService = class QuizService {
         return newQuizAttempt.id;
     }
     async attemptQuestion(user, questionId, choosedOption, attemptId) {
-        let isNew = false;
-        const quizAttempt = await this.quizAttemptRepo.findOne(attemptId, {
-            cache: true,
-            lock: { mode: 'pessimistic_write' },
-        });
-        const question = await this.qaService.findbyID(questionId);
-        if (!question ||
-            !quizAttempt ||
-            !this.canAttemptQuiz(quizAttempt.quiz, user, false)) {
-            throw new common_1.BadRequestException();
-        }
-        let questionAttempt = quizAttempt.questionAttempts.reduce((t, c) => {
-            if (c.id === questionId) {
-                return c;
+        try {
+            let isNew = false;
+            const quizAttempt = await this.quizAttemptRepo.findOne(attemptId, {
+                relations: [],
+            });
+            const question = await this.qaService.findbyID(questionId);
+            if (!question ||
+                !quizAttempt ||
+                !this.canAttemptQuiz(quizAttempt.quiz, user, false)) {
+                this.logger.error('Cannot Attempt Question');
+                throw new common_1.BadRequestException();
+            }
+            let questionAttempt = await this.questionAttemptRepo.findOne({
+                questionId,
+                attempt: { id: quizAttempt.id },
+            }, { relations: ['attempt'] });
+            this.logger.debug({ question, quizAttempt, questionAttempt }, 'attemptQuestion()');
+            if (!questionAttempt) {
+                isNew = true;
+                questionAttempt = new question_attempt_entity_1.QuestionAttemptEntity();
+                questionAttempt.questionId = question.id;
+                questionAttempt.attempt = quizAttempt;
             }
             else {
-                return t;
+                quizAttempt.totalScore -=
+                    questionAttempt.optionChoosed === question.correctAnswer ? 1 : 0;
             }
-        }, undefined);
-        if (!questionAttempt) {
-            isNew = true;
-            questionAttempt = new question_attempt_entity_1.QuestionAttemptEntity();
-            questionAttempt.question = question;
-            questionAttempt.attempt = quizAttempt;
-        }
-        else {
-            quizAttempt.totalScore -=
-                questionAttempt.optionChoosed === question.correctAnswer ? 1 : 0;
-        }
-        questionAttempt.optionChoosed = choosedOption;
-        questionAttempt.save();
-        if (isNew) {
-            quizAttempt.questionAttempts.push(questionAttempt);
+            questionAttempt.optionChoosed = choosedOption;
+            if (isNew) {
+                quizAttempt.questionAttempts.push(questionAttempt);
+            }
             quizAttempt.totalScore +=
                 questionAttempt.optionChoosed === question.correctAnswer ? 1 : 0;
+            questionAttempt.save();
+            quizAttempt.save();
         }
-        quizAttempt.save();
+        catch (e) {
+            console.log(e);
+        }
     }
     async getQuizzes(user, options) {
         const q = this.quizRepo.createQueryBuilder('q');
-        q.where('q.author= :userId', { userId: user.id });
+        q.where('q.createdBy= :userId', { userId: user.id });
         q.orderBy('q.updatedAt', 'DESC');
         return await nestjs_typeorm_paginate_1.paginate(q, options);
     }
@@ -227,8 +263,10 @@ QuizService = __decorate([
     common_1.Injectable(),
     __param(1, typeorm_1.InjectRepository(quiz_repository_1.default)),
     __param(2, typeorm_1.InjectRepository(quiz_attempts_entity_1.QuizAttemptEntity)),
+    __param(3, typeorm_1.InjectRepository(question_attempt_entity_1.QuestionAttemptEntity)),
     __metadata("design:paramtypes", [qa_service_1.QaService,
         quiz_repository_1.default,
+        typeorm_2.Repository,
         typeorm_2.Repository])
 ], QuizService);
 exports.QuizService = QuizService;

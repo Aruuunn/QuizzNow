@@ -16,8 +16,11 @@ const user_repository_1 = require("./user.repository");
 let UserService = class UserService {
     constructor(connection) {
         this.connection = connection;
-        this.findByEmail = async (email) => {
-            return await this.userRepo.findOne({ email }, { cache: true, });
+        this.logger = new common_1.Logger("UserService");
+        this.findByEmail = async (email, relations = []) => {
+            const user = await this.userRepo.findOne({ email }, { relations });
+            this.logger.log(`[findByEmail] ${user ? "Found" : "Did not find"} a user with email ${email} ${user ? user.id : null}`);
+            return user;
         };
         this.userRepo = this.connection.getCustomRepository(user_repository_1.default);
     }

@@ -21,7 +21,9 @@ __decorate([
 ], NewQuestionDto.prototype, "correctAnswer", void 0);
 __decorate([
     class_validator_1.IsNotEmpty(),
+    class_validator_1.IsString(),
     class_validator_1.MinLength(5),
+    class_validator_1.MaxLength(100),
     __metadata("design:type", String)
 ], NewQuestionDto.prototype, "question", void 0);
 __decorate([

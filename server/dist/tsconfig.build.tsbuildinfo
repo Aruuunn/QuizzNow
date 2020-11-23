@@ -162,8 +162,8 @@
         "affectsGlobalScope": false
       },
       "../common/ws.event.types.ts": {
-        "version": "544a9bc4fa23277c7aabd82223156e648a56ea53f8ffbba3796db1d8c6170946",
-        "signature": "788f946bc00214e9da10235531feb4c4b2bc58785095adb5d82a469e68623a93",
+        "version": "1fa941d0e6451c0f5478d5e83f6cda1f2074eee0bf30cf01a671dd1188d23d34",
+        "signature": "a3b15e80d287bd3996dd9bcbf1c68c02114d1d802ded8ef2016645d9271ecfc5",
         "affectsGlobalScope": false
       },
       "../config/domain.ts": {
@@ -2742,73 +2742,28 @@
         "affectsGlobalScope": false
       },
       "../src/qa/qa.entity.ts": {
-        "version": "1b3327e6309eb3478c5cf55cb53d17180abec2e7c63f8741e92e084b5af4296e",
-        "signature": "91ae484ba5c1ce1d890e7200bf63f97c561d4949972afc90be8039ee71e344d9",
+        "version": "bdc15d574e85a0fa6ca47b3be18cdeb96c4caa4f5e0d5e88cfc059aca450bd98",
+        "signature": "fd40726ca4f9356d3ab235948497cd1333fa0e2588470f026bb2b9c3c51a38f2",
         "affectsGlobalScope": false
       },
-      "../src/quiz/question_attempt.entity.ts": {
-        "version": "e9c3ecd82d4e1bb3ab666be9dfb314289715702785482ca7a0dafb8cedf12d21",
-        "signature": "1f534d7e5f9f333c74b7c5fd745fd144a3ce843cfafed814aadc39cb139030d1",
+      "../src/quiz/entities/question_attempt.entity.ts": {
+        "version": "ed364ce9b8ca97b7ab46b9a78fb91af18bbdeb22fa5816bc2f5177792512b005",
+        "signature": "ca81f6d610c09b6817ccefe0591b309a6601805a556e797032bce829e59d839c",
         "affectsGlobalScope": false
       },
-      "../src/quiz/quiz_attempts.entity.ts": {
-        "version": "606bbe96e92bcc8403d651b69a437a7eadf3a44f1f5c95187dbad2641d7f0503",
-        "signature": "0ed26e7ab3ba435d3bcad2d20f1fbf1ae349d07ef62b68344385c4bbae3eb23b",
+      "../src/quiz/entities/quiz_attempts.entity.ts": {
+        "version": "618b95005d23e5a6fa29621a22461da4a29c046af3f7d2b1f73653fbd2534e16",
+        "signature": "f4a34cc1d4f39e43eef267e6cf2aea5d1cf04308f0d388210eac64e8cb9918c3",
         "affectsGlobalScope": false
       },
-      "../src/quiz/quiz.entity.ts": {
-        "version": "349aaa2e307823095f9413cc99358d1a1df3d0a49b1a3c8e53886c5d3bf19570",
-        "signature": "9af8d7106b2909f451b4a4a21d3391d19251dfe0d52001d0e488b369e0f84474",
+      "../src/quiz/entities/quiz.entity.ts": {
+        "version": "d46123979a3fd323f5dc4a8eaae6137660b098c1e63106023a7131712aec0dcd",
+        "signature": "5255d6516e51b1c5eef90c391c193890d188e821e1bced7045f03fd20a8940ec",
         "affectsGlobalScope": false
       },
       "../src/user/user.entity.ts": {
-        "version": "d1251471e2b82f61b7ea53fd861059f8d32aa6f0f0af3d0ce56e5a0e28bfda0a",
-        "signature": "6bc8803c98e9b341317c2c5f5a9f75670d3e9c44328197dfd69963f4d35ff822",
-        "affectsGlobalScope": false
-      },
-      "../node_modules/@nestjs/typeorm/dist/interfaces/entity-class-or-schema.type.d.ts": {
-        "version": "e15db0d01139d39213a40639352debd92786f311e0421c21ac97c2ca4003a299",
-        "signature": "e15db0d01139d39213a40639352debd92786f311e0421c21ac97c2ca4003a299",
-        "affectsGlobalScope": false
-      },
-      "../node_modules/@nestjs/typeorm/dist/common/typeorm.decorators.d.ts": {
-        "version": "cd2afab7b5206a624ef3a603568ce42a7c65e7e4958f1c9518b70580523db653",
-        "signature": "cd2afab7b5206a624ef3a603568ce42a7c65e7e4958f1c9518b70580523db653",
-        "affectsGlobalScope": false
-      },
-      "../node_modules/@nestjs/typeorm/dist/common/typeorm.utils.d.ts": {
-        "version": "2682ba5d13c2358a76e5d2a0920503226c720f502d6c5b12dde3b5bcdf7cb53c",
-        "signature": "2682ba5d13c2358a76e5d2a0920503226c720f502d6c5b12dde3b5bcdf7cb53c",
-        "affectsGlobalScope": false
-      },
-      "../node_modules/@nestjs/typeorm/dist/common/index.d.ts": {
-        "version": "9a7638d62db8cfa1466093d7d413fdf85c5e4a7c663ed76f2bfc8739c8e01505",
-        "signature": "9a7638d62db8cfa1466093d7d413fdf85c5e4a7c663ed76f2bfc8739c8e01505",
-        "affectsGlobalScope": false
-      },
-      "../node_modules/@nestjs/typeorm/dist/interfaces/typeorm-options.interface.d.ts": {
-        "version": "67c2337be292ac0b1efd7795b957c1c25cd074ddfe814c36c650ffdaf267750f",
-        "signature": "67c2337be292ac0b1efd7795b957c1c25cd074ddfe814c36c650ffdaf267750f",
-        "affectsGlobalScope": false
-      },
-      "../node_modules/@nestjs/typeorm/dist/interfaces/index.d.ts": {
-        "version": "c338859b98f8a11f80e3e47e33767299e7a4facdf0870c01c8694fa8fa048d16",
-        "signature": "c338859b98f8a11f80e3e47e33767299e7a4facdf0870c01c8694fa8fa048d16",
-        "affectsGlobalScope": false
-      },
-      "../node_modules/@nestjs/typeorm/dist/typeorm.module.d.ts": {
-        "version": "506ddc141d91c4155d39ce3125a92b4636ed10db070c0cfdac7e54376178c30c",
-        "signature": "506ddc141d91c4155d39ce3125a92b4636ed10db070c0cfdac7e54376178c30c",
-        "affectsGlobalScope": false
-      },
-      "../node_modules/@nestjs/typeorm/dist/index.d.ts": {
-        "version": "b113e9770d5be136c5e2add9e6cdf40d85051762ff2391f71d552975e66b1500",
-        "signature": "b113e9770d5be136c5e2add9e6cdf40d85051762ff2391f71d552975e66b1500",
-        "affectsGlobalScope": false
-      },
-      "../node_modules/@nestjs/typeorm/index.d.ts": {
-        "version": "8f1241f5d9f0d3d72117768b3c974e462840fbd85026fb66685078945404cf2f",
-        "signature": "8f1241f5d9f0d3d72117768b3c974e462840fbd85026fb66685078945404cf2f",
+        "version": "21a3113e9b57e498ff4a72c6d27c774c1727a081b8a1cb9cc0eac625ef412e40",
+        "signature": "ac254689eb92b13043f4c2cbfb9adc5cf06bde03de48f4205fda9283cb76eb56",
         "affectsGlobalScope": false
       },
       "../src/user/user.repository.ts": {
@@ -2817,8 +2772,8 @@
         "affectsGlobalScope": false
       },
       "../src/user/user.service.ts": {
-        "version": "319e1fd5df50a7eba035a49463808f5b16beef9ba9352f38b1b69319a2daf7a0",
-        "signature": "fdef3347c0a52d47dfecaae5e30ac624bff7ba37605523901cf80f9076be6fd6",
+        "version": "8b3928c3ec5d0a8ffa10b025f6999f58e13842c6a1565b5305c8e2d1b29c681d",
+        "signature": "a815d05ad2d1dd23ff8f408ca9da292e9da19901e669169be742778eb8e90e7c",
         "affectsGlobalScope": false
       },
       "../src/auth/jwt.payload.ts": {
@@ -2927,6 +2882,51 @@
         "affectsGlobalScope": false
       },
       "../node_modules/@nestjs/passport/index.d.ts": {
+        "version": "8f1241f5d9f0d3d72117768b3c974e462840fbd85026fb66685078945404cf2f",
+        "signature": "8f1241f5d9f0d3d72117768b3c974e462840fbd85026fb66685078945404cf2f",
+        "affectsGlobalScope": false
+      },
+      "../node_modules/@nestjs/typeorm/dist/interfaces/entity-class-or-schema.type.d.ts": {
+        "version": "e15db0d01139d39213a40639352debd92786f311e0421c21ac97c2ca4003a299",
+        "signature": "e15db0d01139d39213a40639352debd92786f311e0421c21ac97c2ca4003a299",
+        "affectsGlobalScope": false
+      },
+      "../node_modules/@nestjs/typeorm/dist/common/typeorm.decorators.d.ts": {
+        "version": "cd2afab7b5206a624ef3a603568ce42a7c65e7e4958f1c9518b70580523db653",
+        "signature": "cd2afab7b5206a624ef3a603568ce42a7c65e7e4958f1c9518b70580523db653",
+        "affectsGlobalScope": false
+      },
+      "../node_modules/@nestjs/typeorm/dist/common/typeorm.utils.d.ts": {
+        "version": "2682ba5d13c2358a76e5d2a0920503226c720f502d6c5b12dde3b5bcdf7cb53c",
+        "signature": "2682ba5d13c2358a76e5d2a0920503226c720f502d6c5b12dde3b5bcdf7cb53c",
+        "affectsGlobalScope": false
+      },
+      "../node_modules/@nestjs/typeorm/dist/common/index.d.ts": {
+        "version": "9a7638d62db8cfa1466093d7d413fdf85c5e4a7c663ed76f2bfc8739c8e01505",
+        "signature": "9a7638d62db8cfa1466093d7d413fdf85c5e4a7c663ed76f2bfc8739c8e01505",
+        "affectsGlobalScope": false
+      },
+      "../node_modules/@nestjs/typeorm/dist/interfaces/typeorm-options.interface.d.ts": {
+        "version": "67c2337be292ac0b1efd7795b957c1c25cd074ddfe814c36c650ffdaf267750f",
+        "signature": "67c2337be292ac0b1efd7795b957c1c25cd074ddfe814c36c650ffdaf267750f",
+        "affectsGlobalScope": false
+      },
+      "../node_modules/@nestjs/typeorm/dist/interfaces/index.d.ts": {
+        "version": "c338859b98f8a11f80e3e47e33767299e7a4facdf0870c01c8694fa8fa048d16",
+        "signature": "c338859b98f8a11f80e3e47e33767299e7a4facdf0870c01c8694fa8fa048d16",
+        "affectsGlobalScope": false
+      },
+      "../node_modules/@nestjs/typeorm/dist/typeorm.module.d.ts": {
+        "version": "506ddc141d91c4155d39ce3125a92b4636ed10db070c0cfdac7e54376178c30c",
+        "signature": "506ddc141d91c4155d39ce3125a92b4636ed10db070c0cfdac7e54376178c30c",
+        "affectsGlobalScope": false
+      },
+      "../node_modules/@nestjs/typeorm/dist/index.d.ts": {
+        "version": "b113e9770d5be136c5e2add9e6cdf40d85051762ff2391f71d552975e66b1500",
+        "signature": "b113e9770d5be136c5e2add9e6cdf40d85051762ff2391f71d552975e66b1500",
+        "affectsGlobalScope": false
+      },
+      "../node_modules/@nestjs/typeorm/index.d.ts": {
         "version": "8f1241f5d9f0d3d72117768b3c974e462840fbd85026fb66685078945404cf2f",
         "signature": "8f1241f5d9f0d3d72117768b3c974e462840fbd85026fb66685078945404cf2f",
         "affectsGlobalScope": false
@@ -3572,12 +3572,12 @@
         "affectsGlobalScope": false
       },
       "../src/qa/dto/new.qa.ts": {
-        "version": "de47e6d217d88150427beaf150e32f737743d2a030189ebe2903becd600a10d7",
+        "version": "670bed9a61bbc3c6fb29d392bff621f159b24b8faf4862d09baf2424827e64bc",
         "signature": "4707f8186d1113f2d8928b65d15ee8fb370929856289edfb4da72900d0cab857",
         "affectsGlobalScope": false
       },
       "../src/qa/dto/update.qa.ts": {
-        "version": "104be81660653142a978c714372d5573218bf04995caf85e3b0d03e714f8b137",
+        "version": "4438937c354cdc480861787de0060e09a0cba4c874842f611dcbd58a4d81239a",
         "signature": "3ba3407aa9957203041f1699d564ac567daf4a086bce516a272f69ba08dc3672",
         "affectsGlobalScope": false
       },
@@ -3587,8 +3587,8 @@
         "affectsGlobalScope": false
       },
       "../src/qa/qa.service.ts": {
-        "version": "db8542b49d11dfc9686c0d33b8feec88d3f99e3a385b63489c492714308bde67",
-        "signature": "9f555a1d6cbfbc096be2c0924e6ef8c719311c8c8f0050fb36f9b3a8ec6e11cb",
+        "version": "5a2277d30ceeabd1522f06d6ae88fcf732c525e63857864c2912dbf193aeff8f",
+        "signature": "d8d85a50804f5ab20d211389bbde1056b5e45b7990fa6559d0499f77aef88358",
         "affectsGlobalScope": false
       },
       "../src/auth/jwt.gaurd.ts": {
@@ -3627,27 +3627,27 @@
         "affectsGlobalScope": false
       },
       "../src/quiz/dto/new.quiz.ts": {
-        "version": "e1af83ecda477c61cb55bb36b37ce80d8d8cd2da2a8a05fe750c8a105742ef74",
-        "signature": "38f4e349fd52a681b617d9620f8f845488139d6dc814cbfc69a9355c5ecceee8",
+        "version": "e6f9a3e967965de28c6f3735b2355bf0f5d86ae116d0803e2f309ddec015718a",
+        "signature": "fe46fd704d0e73269f7a89d7e88a491335dd5f8ea7c252fa3dc1dea7db9a0b02",
         "affectsGlobalScope": false
       },
       "../src/quiz/quiz.repository.ts": {
-        "version": "dcc4fc529db2a66e081ddb80a56098cbcf96a508a40989ff0542d89bdde005e2",
-        "signature": "3a8e3bdbcc7c0ce26507dfa6f03625b159b1d25095dcbf6e042711ce9e759890",
+        "version": "00b2f1d88a9303b3a60532012af99ab4afe4346716ed225ff76a7b7988170b98",
+        "signature": "feb40f64e2e7433378a9b6357daf650356e5031d26b8ed8a726f0958cc004eaa",
         "affectsGlobalScope": false
       },
       "../src/quiz/quiz.service.ts": {
-        "version": "3d7d63cebbf564016b0fb1fcea4fddc44f66b9221908e87d603a70ed20878d35",
-        "signature": "aeca202aab6ff68a1dbbdef33240c6e4dd72cdb5de409ba52b42d20f1321d19b",
+        "version": "c47b9ca2cabaf6abd42e50a2c5ebd6b27fe21068268a9419419341375b9ea72d",
+        "signature": "833870b040db2dd9f48c2f43629ce736d96d0410b7733a3e4db04f2688b16e48",
         "affectsGlobalScope": false
       },
       "../src/quiz/quiz.controller.ts": {
         "version": "2ebec0f15901bfdc9d5091f826730c0515b9e800defbc0c644e3e65a12220694",
-        "signature": "e18075febb9b82760e4a2308836e9c11c5f627c3efce09081592b83ca0545702",
+        "signature": "e7d839472ce62503046950f9434b4b8e528d3ed7dc8755170eda6a87df08ab69",
         "affectsGlobalScope": false
       },
       "../src/quiz/quiz.module.ts": {
-        "version": "eb9071b6c01ca1a644f44db85eb0c14a598be55f6150a73e0e0392ecef0e0511",
+        "version": "196a8852a51f3e11222ad4a754e540ee48e8495f2d809c094e3867aad3983526",
         "signature": "598e2ea46f637c4398772085dd8caa881c8aeddf54ab58378040caec538a285a",
         "affectsGlobalScope": false
       },
@@ -3787,13 +3787,13 @@
         "affectsGlobalScope": false
       },
       "../src/auth/ws.gaurd.ts": {
-        "version": "b3ba13a9b6d98d2eccaf90dfcecec3dacdbfa604e38da12acf6932322d447888",
+        "version": "a03d09030904678d1686e25d18dce6dbfa198f30ecefdf3138639d0279afe43e",
         "signature": "6f9701c2f6ac63be17db180e79ba063923abce4e93c74e20079cef1369dea5ff",
         "affectsGlobalScope": false
       },
       "../src/quiz/quiz-attempt.gateway.ts": {
-        "version": "4d49e0c323a0bcbf7788dba2f7bccc01fe8d3c182d77d1a7eeeadef831554dee",
-        "signature": "28a36341e5828df29d2010db1d226b4ef101924426da7c9335ba8e51737e26b2",
+        "version": "62d7078ca41d5d6a88a5173fd8ae71f1806951886e951ce92f3ed09441ccfbea",
+        "signature": "c823da655771c12da7bdd2b45ec626712c163f8ef5b68bf4852fea2db7fa8b43",
         "affectsGlobalScope": false
       },
       "../src/app.module.ts": {
@@ -3977,7 +3977,7 @@
         "affectsGlobalScope": false
       },
       "../src/main.ts": {
-        "version": "ab0796875a7346ebf01b5bb9f49b1ae8166d4487d9c2d8cb0e647a67fc4ee59a",
+        "version": "afcdb6481ab12f0e8ca8b1e60b530dc07400fdc54d581a4c51a37a1394e7be3e",
         "signature": "8e609bb71c20b858c77f0e9f90bb1319db8477b13f9f965f1a1e18524bf50881",
         "affectsGlobalScope": false
       },
@@ -7313,6 +7313,7 @@
       "../src/qa/qa.service.ts": [
         "../node_modules/@nestjs/common/index.d.ts",
         "../node_modules/@nestjs/typeorm/index.d.ts",
+        "../node_modules/typeorm/index.d.ts",
         "../src/qa/dto/new.qa.ts",
         "../src/qa/dto/update.qa.ts",
         "../src/qa/qa.entity.ts",
@@ -7323,10 +7324,23 @@
         "../node_modules/class-validator/types/index.d.ts",
         "../src/qa/dto/new.qa.ts"
       ],
-      "../src/quiz/question_attempt.entity.ts": [
+      "../src/quiz/entities/question_attempt.entity.ts": [
         "../node_modules/typeorm/index.d.ts",
         "../src/qa/qa.entity.ts",
-        "../src/quiz/quiz_attempts.entity.ts"
+        "../src/quiz/entities/quiz_attempts.entity.ts"
+      ],
+      "../src/quiz/entities/quiz.entity.ts": [
+        "../node_modules/class-transformer/index.d.ts",
+        "../node_modules/typeorm/index.d.ts",
+        "../src/qa/qa.entity.ts",
+        "../src/quiz/entities/quiz_attempts.entity.ts",
+        "../src/user/user.entity.ts"
+      ],
+      "../src/quiz/entities/quiz_attempts.entity.ts": [
+        "../node_modules/typeorm/index.d.ts",
+        "../src/quiz/entities/question_attempt.entity.ts",
+        "../src/quiz/entities/quiz.entity.ts",
+        "../src/user/user.entity.ts"
       ],
       "../src/quiz/quiz-attempt.gateway.ts": [
         "../common/ws.event.types.ts",
@@ -7335,6 +7349,7 @@
         "../node_modules/@types/socket.io/index.d.ts",
         "../node_modules/class-transformer/index.d.ts",
         "../src/auth/ws.gaurd.ts",
+        "../src/quiz/entities/quiz_attempts.entity.ts",
         "../src/quiz/quiz.service.ts",
         "../src/user/user.entity.ts"
       ],
@@ -7346,28 +7361,21 @@
         "../src/quiz/dto/new.quiz.ts",
         "../src/quiz/quiz.service.ts"
       ],
-      "../src/quiz/quiz.entity.ts": [
-        "../node_modules/class-transformer/index.d.ts",
-        "../node_modules/typeorm/index.d.ts",
-        "../src/qa/qa.entity.ts",
-        "../src/quiz/quiz_attempts.entity.ts",
-        "../src/user/user.entity.ts"
-      ],
       "../src/quiz/quiz.module.ts": [
         "../node_modules/@nestjs/common/index.d.ts",
         "../node_modules/@nestjs/typeorm/index.d.ts",
         "../src/qa/qa.module.ts",
         "../src/qa/qa.service.ts",
-        "../src/quiz/question_attempt.entity.ts",
+        "../src/quiz/entities/question_attempt.entity.ts",
+        "../src/quiz/entities/quiz_attempts.entity.ts",
         "../src/quiz/quiz.controller.ts",
         "../src/quiz/quiz.repository.ts",
         "../src/quiz/quiz.service.ts",
-        "../src/quiz/quiz_attempts.entity.ts",
         "../src/user/user.module.ts"
       ],
       "../src/quiz/quiz.repository.ts": [
         "../node_modules/typeorm/index.d.ts",
-        "../src/quiz/quiz.entity.ts"
+        "../src/quiz/entities/quiz.entity.ts"
       ],
       "../src/quiz/quiz.service.ts": [
         "../node_modules/@nestjs/common/index.d.ts",
@@ -7378,24 +7386,18 @@
         "../src/qa/qa.entity.ts",
         "../src/qa/qa.service.ts",
         "../src/quiz/dto/new.quiz.ts",
-        "../src/quiz/question_attempt.entity.ts",
-        "../src/quiz/quiz.entity.ts",
+        "../src/quiz/entities/question_attempt.entity.ts",
+        "../src/quiz/entities/quiz.entity.ts",
+        "../src/quiz/entities/quiz_attempts.entity.ts",
         "../src/quiz/quiz.repository.ts",
-        "../src/quiz/quiz_attempts.entity.ts",
-        "../src/user/user.entity.ts"
-      ],
-      "../src/quiz/quiz_attempts.entity.ts": [
-        "../node_modules/typeorm/index.d.ts",
-        "../src/quiz/question_attempt.entity.ts",
-        "../src/quiz/quiz.entity.ts",
         "../src/user/user.entity.ts"
       ],
       "../src/user/user.entity.ts": [
         "../node_modules/class-transformer/index.d.ts",
         "../node_modules/typeorm/index.d.ts",
         "../src/qa/qa.entity.ts",
-        "../src/quiz/quiz.entity.ts",
-        "../src/quiz/quiz_attempts.entity.ts"
+        "../src/quiz/entities/quiz.entity.ts",
+        "../src/quiz/entities/quiz_attempts.entity.ts"
       ],
       "../src/user/user.module.ts": [
         "../node_modules/@nestjs/common/index.d.ts",
@@ -7409,7 +7411,6 @@
       ],
       "../src/user/user.service.ts": [
         "../node_modules/@nestjs/common/index.d.ts",
-        "../node_modules/@nestjs/typeorm/index.d.ts",
         "../node_modules/typeorm/index.d.ts",
         "../src/user/user.repository.ts"
       ]
@@ -10430,19 +10431,30 @@
         "../src/qa/qa.entity.ts"
       ],
       "../src/qa/qa.service.ts": [
+        "../node_modules/typeorm/index.d.ts",
         "../src/qa/dto/new.qa.ts",
         "../src/qa/dto/update.qa.ts",
         "../src/qa/qa.entity.ts",
-        "../src/qa/qa.repository.ts",
         "../src/user/user.entity.ts"
       ],
       "../src/quiz/dto/new.quiz.ts": [
         "../src/qa/dto/new.qa.ts"
       ],
-      "../src/quiz/question_attempt.entity.ts": [
+      "../src/quiz/entities/question_attempt.entity.ts": [
+        "../node_modules/typeorm/index.d.ts",
+        "../src/quiz/entities/quiz_attempts.entity.ts"
+      ],
+      "../src/quiz/entities/quiz.entity.ts": [
         "../node_modules/typeorm/index.d.ts",
         "../src/qa/qa.entity.ts",
-        "../src/quiz/quiz_attempts.entity.ts"
+        "../src/quiz/entities/quiz_attempts.entity.ts",
+        "../src/user/user.entity.ts"
+      ],
+      "../src/quiz/entities/quiz_attempts.entity.ts": [
+        "../node_modules/typeorm/index.d.ts",
+        "../src/quiz/entities/question_attempt.entity.ts",
+        "../src/quiz/entities/quiz.entity.ts",
+        "../src/user/user.entity.ts"
       ],
       "../src/quiz/quiz-attempt.gateway.ts": [
         "../node_modules/@nestjs/websockets/index.d.ts",
@@ -10454,41 +10466,31 @@
         "../node_modules/nestjs-typeorm-paginate/dist/index.d.ts",
         "../src/qa/dto/new.qa.ts",
         "../src/quiz/dto/new.quiz.ts",
-        "../src/quiz/quiz.entity.ts",
+        "../src/quiz/entities/quiz.entity.ts",
         "../src/quiz/quiz.service.ts"
-      ],
-      "../src/quiz/quiz.entity.ts": [
-        "../node_modules/typeorm/index.d.ts",
-        "../src/qa/qa.entity.ts",
-        "../src/quiz/quiz_attempts.entity.ts",
-        "../src/user/user.entity.ts"
       ],
       "../src/quiz/quiz.repository.ts": [
         "../node_modules/typeorm/index.d.ts",
-        "../src/quiz/quiz.entity.ts"
+        "../src/quiz/entities/quiz.entity.ts"
       ],
       "../src/quiz/quiz.service.ts": [
         "../node_modules/nestjs-typeorm-paginate/dist/index.d.ts",
         "../node_modules/typeorm/index.d.ts",
         "../src/qa/dto/new.qa.ts",
+        "../src/qa/qa.entity.ts",
         "../src/qa/qa.service.ts",
         "../src/quiz/dto/new.quiz.ts",
-        "../src/quiz/quiz.entity.ts",
+        "../src/quiz/entities/question_attempt.entity.ts",
+        "../src/quiz/entities/quiz.entity.ts",
+        "../src/quiz/entities/quiz_attempts.entity.ts",
         "../src/quiz/quiz.repository.ts",
-        "../src/quiz/quiz_attempts.entity.ts",
-        "../src/user/user.entity.ts"
-      ],
-      "../src/quiz/quiz_attempts.entity.ts": [
-        "../node_modules/typeorm/index.d.ts",
-        "../src/quiz/question_attempt.entity.ts",
-        "../src/quiz/quiz.entity.ts",
         "../src/user/user.entity.ts"
       ],
       "../src/user/user.entity.ts": [
         "../node_modules/typeorm/index.d.ts",
         "../src/qa/qa.entity.ts",
-        "../src/quiz/quiz.entity.ts",
-        "../src/quiz/quiz_attempts.entity.ts"
+        "../src/quiz/entities/quiz.entity.ts",
+        "../src/quiz/entities/quiz_attempts.entity.ts"
       ],
       "../src/user/user.repository.ts": [
         "../node_modules/typeorm/index.d.ts",
@@ -11333,14 +11335,14 @@
       "../src/qa/qa.repository.ts",
       "../src/qa/qa.service.ts",
       "../src/quiz/dto/new.quiz.ts",
-      "../src/quiz/question_attempt.entity.ts",
+      "../src/quiz/entities/question_attempt.entity.ts",
+      "../src/quiz/entities/quiz.entity.ts",
+      "../src/quiz/entities/quiz_attempts.entity.ts",
       "../src/quiz/quiz-attempt.gateway.ts",
       "../src/quiz/quiz.controller.ts",
-      "../src/quiz/quiz.entity.ts",
       "../src/quiz/quiz.module.ts",
       "../src/quiz/quiz.repository.ts",
       "../src/quiz/quiz.service.ts",
-      "../src/quiz/quiz_attempts.entity.ts",
       "../src/user/user.entity.ts",
       "../src/user/user.module.ts",
       "../src/user/user.repository.ts",

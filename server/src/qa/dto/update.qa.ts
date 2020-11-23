@@ -1,18 +1,23 @@
-import {IsNotEmpty,Min,MinLength,IsNumber} from 'class-validator';
+import {
+  IsNotEmpty,
+  Min,
+  MinLength,
+  IsNumber,
+  MaxLength,
+} from 'class-validator';
 
 export class UpdateQuestionDto {
+  @IsNotEmpty()
+  @IsNumber()
+  @Min(0)
+  correctAnswer?: number;
 
-    @IsNotEmpty()
-    @IsNumber()
-    @Min(0)
-    correctAnswer?:number;
+  @IsNotEmpty()
+  @MinLength(5)
+  @MaxLength(100)
+  question?: string;
 
-    @IsNotEmpty()
-    @MinLength(5)
-    question?:string;
-
-    
-    options?:string[]
+  options?: string[];
 }
 
 export default UpdateQuestionDto;

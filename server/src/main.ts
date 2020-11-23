@@ -5,6 +5,7 @@ import * as dotenv from 'dotenv';
 
 async function bootstrap() {
   dotenv.config();
+  
   const app = await NestFactory.create(AppModule);
 
   app.use(passport.initialize());

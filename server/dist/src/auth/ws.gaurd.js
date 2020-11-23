@@ -26,7 +26,9 @@ let WsGuard = class WsGuard {
             const decoded = this.authService.verifyJwt(bearerToken);
             const user = await this.userService.findByEmail(decoded.email);
             let data = context.switchToWs().getData();
-            data.user = user;
+            if (typeof data === 'object') {
+                data.user = user;
+            }
             return true;
         }
         catch (ex) {

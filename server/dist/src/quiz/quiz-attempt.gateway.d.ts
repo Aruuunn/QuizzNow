@@ -11,12 +11,29 @@ export declare class QuizAttemptGateway implements OnGatewayInit, OnGatewayConne
     handleDisconnect(client: Socket): void;
     handleConnection(client: Socket, ...args: any[]): void;
     fetchQuizDetails(server: Server, data: {
-        payload: string;
+        payload: {
+            quizzId: string;
+        };
         user: UserEntity;
     }): Promise<void>;
     startQuiz(server: Server, data: {
         payload: {
             quizId: string;
+        };
+        user: UserEntity;
+    }): Promise<void>;
+    fetchQuestion(server: Server, data: {
+        payload: {
+            attemptId: string;
+            questionNumber: number;
+        };
+        user: UserEntity;
+    }): Promise<void>;
+    attemptQuestion(server: Server, data: {
+        payload: {
+            selectedOption: number;
+            questionId: string;
+            attemptId: string;
         };
         user: UserEntity;
     }): Promise<void>;

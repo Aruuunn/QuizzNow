@@ -20,6 +20,7 @@ interface Props {
   totalQuestions: number;
   canAttemptQuizz: boolean;
   createdBy: string;
+  onQuizzStart: () => void;
 }
 
 function QuizInfo(props: Props): ReactElement {
@@ -100,6 +101,9 @@ function QuizInfo(props: Props): ReactElement {
             style={{ marginTop: "20px" }}
             color="primary"
             size="large"
+            onClick={() => {
+              props.onQuizzStart();
+            }}
           >
             Start Quiz
           </Button>

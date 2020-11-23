@@ -21,7 +21,7 @@ __decorate([
     __metadata("design:type", String)
 ], QuizAttemptEntity.prototype, "id", void 0);
 __decorate([
-    typeorm_1.ManyToOne(type => quiz_entity_1.QuizEntity, quiz => quiz.attempts, { eager: true }),
+    typeorm_1.ManyToOne(type => quiz_entity_1.QuizEntity, quiz => quiz.attempts, { eager: true, onDelete: 'CASCADE' }),
     __metadata("design:type", quiz_entity_1.QuizEntity)
 ], QuizAttemptEntity.prototype, "quiz", void 0);
 __decorate([
@@ -29,7 +29,7 @@ __decorate([
     __metadata("design:type", user_entity_1.default)
 ], QuizAttemptEntity.prototype, "user", void 0);
 __decorate([
-    typeorm_1.OneToMany(type => question_attempt_entity_1.QuestionAttemptEntity, questionAttempt => questionAttempt.attempt),
+    typeorm_1.OneToMany(type => question_attempt_entity_1.QuestionAttemptEntity, questionAttempt => questionAttempt.attempt, { onDelete: 'CASCADE' }),
     __metadata("design:type", Array)
 ], QuizAttemptEntity.prototype, "questionAttempts", void 0);
 __decorate([

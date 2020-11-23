@@ -6,6 +6,11 @@ import {
   FETCH_QUIZ_DETAILS,
   RECEIVED_QUIZ_DETAILS,
   UNAUTHORIZED,
+  FETCH_QUESTION,
+  RECEIVED_QUESTION,
+  START,
+  FETCH_ATTEMPT_ID,
+  ATTEMPT_QUESTION,
 } from "../../common/ws.event.types";
 import { wsApiURL } from "../../config/domain";
 
@@ -36,22 +41,55 @@ export const onUnAuthorized = (
 export const fetchQuizzDetails = (
   socket: SocketIOClient.Socket,
   quizzId: string,
-  callback: (args:any) => void
+  callback: (args: any) => void
 ) => {
   socket.emit(FETCH_QUIZ_DETAILS, {
-    payload: quizzId,
+    payload: { quizzId },
   });
 
   socket.on(RECEIVED_QUIZ_DETAILS, callback);
-
   return socket;
 };
 
-export const removeEventListener = (
-  socket:SocketIOClient.Socket,
-  event:string
+export const fetchQuestion = (
+  socket: SocketIOClient.Socket,
+  attemptId: string,
+  questionNumber: number,
+  callback: (data: {
+    payload: {
+      question: { id: string; question: string; options: string[] };
+      selectedOption?: number;
+    };
+  }) => void
 ) => {
-  socket.removeEventListener(event);
+  socket.emit(FETCH_QUESTION, { payload: { attemptId, questionNumber } });
+  socket.on(RECEIVED_QUESTION, callback);
   return socket;
 };
 
+export const startQuizz = (
+  socket: SocketIOClient.Socket,
+  quizId: string,
+  callback: (data: { payload: { attemptId: string } }) => void
+) => {
+  socket.emit(START, { payload: { quizId } });
+  socket.on(FETCH_ATTEMPT_ID, callback);
+  return socket;
+};
+
+export const attemptQuestion = (
+  socket: SocketIOClient.Socket,
+  selectedOption: number,
+  questionId: string,
+  attemptId: string
+) => {
+  socket.emit(ATTEMPT_QUESTION, {
+    payload: {
+      selectedOption,
+      questionId,
+      attemptId,
+    },
+  });
+
+  return socket;
+};
