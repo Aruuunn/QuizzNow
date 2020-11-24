@@ -27,7 +27,7 @@ export const QuizListItem = (props: {
 
   const onDelete = async () :Promise<void> => {
    
-    await axios.delete(`/quiz/${props.id}`, {
+    await axios.delete(`/quizz/${props.id}`, {
       headers: {
         Authorization: `Bearer ${localStorage.getItem("accessToken")}`
       }

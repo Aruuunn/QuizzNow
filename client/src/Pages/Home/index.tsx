@@ -38,7 +38,7 @@ class Home extends Component<Props, State> {
 
   fetchData = async () => {
     try {
-      const res = await axios.get(`/quiz?limit=10&page=1`, {
+      const res = await axios.get(`/quizz?limit=10&page=1`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
         },

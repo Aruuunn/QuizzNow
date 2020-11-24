@@ -10,10 +10,12 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.NewQuestionDto = void 0;
+const swagger_1 = require("@nestjs/swagger");
 const class_validator_1 = require("class-validator");
 class NewQuestionDto {
 }
 __decorate([
+    swagger_1.ApiProperty(),
     class_validator_1.IsNotEmpty(),
     class_validator_1.IsString(),
     class_validator_1.MinLength(5),
@@ -21,6 +23,7 @@ __decorate([
     __metadata("design:type", String)
 ], NewQuestionDto.prototype, "correctAnswer", void 0);
 __decorate([
+    swagger_1.ApiProperty(),
     class_validator_1.IsNotEmpty(),
     class_validator_1.IsString(),
     class_validator_1.MinLength(5),
@@ -28,6 +31,7 @@ __decorate([
     __metadata("design:type", String)
 ], NewQuestionDto.prototype, "questionTitle", void 0);
 __decorate([
+    swagger_1.ApiProperty(),
     class_validator_1.IsNotEmpty(),
     class_validator_1.IsArray(),
     class_validator_1.ArrayMinSize(2),

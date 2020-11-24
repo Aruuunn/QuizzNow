@@ -10,26 +10,31 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.NewQuizDto = void 0;
+const swagger_1 = require("@nestjs/swagger");
 const class_validator_1 = require("class-validator");
 const new_question_1 = require("../../question/dto/new.question");
 class NewQuizDto {
 }
 __decorate([
+    swagger_1.ApiProperty(),
     class_validator_1.IsNotEmpty(),
     class_validator_1.IsString(),
     __metadata("design:type", String)
 ], NewQuizDto.prototype, "quizztitle", void 0);
 __decorate([
+    swagger_1.ApiProperty(),
     class_validator_1.IsNotEmpty(),
     class_validator_1.IsDateString(),
     __metadata("design:type", String)
 ], NewQuizDto.prototype, "startDatetime", void 0);
 __decorate([
+    swagger_1.ApiProperty(),
     class_validator_1.IsNotEmpty(),
     class_validator_1.IsDateString(),
     __metadata("design:type", String)
 ], NewQuizDto.prototype, "endDatetime", void 0);
 __decorate([
+    swagger_1.ApiProperty(),
     class_validator_1.IsNotEmpty(),
     class_validator_1.ArrayMinSize(1),
     __metadata("design:type", Array)
