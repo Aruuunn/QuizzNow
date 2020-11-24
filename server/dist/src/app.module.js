@@ -9,45 +9,26 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.AppModule = void 0;
 const common_1 = require("@nestjs/common");
 const auth_controller_1 = require("./auth/auth.controller");
-const user_service_1 = require("./user/user.service");
 const auth_module_1 = require("./auth/auth.module");
 const typeorm_1 = require("@nestjs/typeorm");
 const user_module_1 = require("./user/user.module");
-const qa_service_1 = require("./qa/qa.service");
-const qa_module_1 = require("./qa/qa.module");
-const quiz_module_1 = require("./quiz/quiz.module");
-const quiz_attempt_gateway_1 = require("./quiz/quiz-attempt.gateway");
-const env = require("../config/env");
+const question_module_1 = require("./question/question.module");
+const quizz_module_1 = require("./quizz/quizz.module");
+const quizz_attempt_gateway_1 = require("./quizz/quizz-attempt.gateway");
+const typeorm_config_1 = require("../config/typeorm.config");
 let AppModule = class AppModule {
 };
 AppModule = __decorate([
     common_1.Module({
         imports: [
-            typeorm_1.TypeOrmModule.forRoot({
-                type: 'postgres',
-                host: env.POSTGRES_HOST,
-                port: parseInt(env.POSTGRES_PORT),
-                username: env.POSTGRES_USER,
-                password: env.POSTGRES_PASSWORD,
-                database: env.POSTGRES_DATABASE,
-                entities: ['dist/**/*.entity{.js,.ts}'],
-                cache: {
-                    type: 'redis',
-                    duration: 60000,
-                    options: {
-                        port: 6379,
-                        host: 'cache',
-                    },
-                },
-                synchronize: true,
-            }),
+            typeorm_1.TypeOrmModule.forRoot(typeorm_config_1.default),
             auth_module_1.AuthModule,
             user_module_1.UserModule,
-            qa_module_1.QaModule,
-            quiz_module_1.QuizModule,
+            question_module_1.QuestionModule,
+            quizz_module_1.QuizzModule,
         ],
         controllers: [auth_controller_1.AuthController],
-        providers: [user_service_1.UserService, qa_service_1.QaService, quiz_attempt_gateway_1.QuizAttemptGateway],
+        providers: [quizz_attempt_gateway_1.QuizAttemptGateway],
     })
 ], AppModule);
 exports.AppModule = AppModule;

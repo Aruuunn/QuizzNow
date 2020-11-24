@@ -1,18 +1,18 @@
-import { Injectable, Logger } from '@nestjs/common';
-import { Connection } from 'typeorm';
-import UserRepository from './user.repository';
+import { Injectable, } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import {  Repository } from 'typeorm';
+import UserEntity from './user.entity';
 
 @Injectable()
 export class UserService {
-  private userRepo: UserRepository;
-  private logger:Logger = new Logger("UserService")
-  constructor(private readonly connection: Connection) {
-    this.userRepo = this.connection.getCustomRepository(UserRepository);
+
+  constructor(
+    @InjectRepository(UserEntity)
+    private userEntityRepository: Repository<UserEntity>) {
   }
 
-  findByEmail = async (email: string, relations: string[] = []) => {
-    const user = await this.userRepo.findOne({ email }, {  relations });
-    this.logger.log(`[findByEmail] ${user ? "Found" : "Did not find"} a user with email ${email} ${user ? user.id : null}`);
+  findByEmail = async (userEmail: string, relations: string[] = []) => {
+    const user = await this.userEntityRepository.findOne({ userEmail }, {  relations });
     return user;
   };
 }

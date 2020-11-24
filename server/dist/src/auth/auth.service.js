@@ -34,19 +34,16 @@ let AuthService = class AuthService {
                 }
                 const user = await this.userService.findByEmail(data.email);
                 if (user) {
-                    const payload = { email: user.email };
-                    delete user.createdQuestions;
-                    delete user.quizzes;
-                    delete user.attempts;
+                    const payload = { email: user.userEmail };
                     return { user, accessToken: this.jwtService.sign(payload) };
                 }
                 else {
                     const newUser = new user_entity_1.default();
-                    newUser.email = data.email;
-                    newUser.name = data.name;
-                    newUser.photoURL = data.picture || '';
+                    newUser.userEmail = data.email;
+                    newUser.userName = data.name;
+                    newUser.userPhotoURL = data.picture || '';
                     newUser.save();
-                    const payload = { email: newUser.email };
+                    const payload = { email: newUser.userEmail };
                     return { user: newUser, accessToken: this.jwtService.sign(payload) };
                 }
             }

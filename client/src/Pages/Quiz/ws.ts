@@ -45,7 +45,18 @@ export const onUnAuthorized = (
 export const fetchQuizzDetails = (
   socket: SocketIOClient.Socket,
   quizzId: string,
-  callback: (args: any) => void
+  callback: (data: {
+    payload: {
+      id: string;
+      title: string,
+      createdBy: {
+        name: string,
+        photoURL?:string
+      },
+      startDatetime: string;
+      endDatetime: string;
+    }
+  }) => void
 ) => {
   const socketClone = clone(socket);
   socketClone.emit(FETCH_QUIZ_DETAILS, {

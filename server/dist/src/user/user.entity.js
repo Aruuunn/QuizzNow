@@ -10,43 +10,43 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const class_transformer_1 = require("class-transformer");
-const qa_entity_1 = require("../qa/qa.entity");
-const quiz_entity_1 = require("../quiz/entities/quiz.entity");
-const quiz_attempts_entity_1 = require("../quiz/entities/quiz_attempts.entity");
+const question_entity_1 = require("../question/question.entity");
+const quizz_entity_1 = require("../quizz/entities/quizz.entity");
+const quizz_attempts_entity_1 = require("../quizz/entities/quizz_attempts.entity");
 const typeorm_1 = require("typeorm");
 let UserEntity = class UserEntity extends typeorm_1.BaseEntity {
 };
 __decorate([
     typeorm_1.PrimaryGeneratedColumn('uuid'),
     __metadata("design:type", String)
-], UserEntity.prototype, "id", void 0);
+], UserEntity.prototype, "userId", void 0);
 __decorate([
     typeorm_1.Column(),
     __metadata("design:type", String)
-], UserEntity.prototype, "name", void 0);
+], UserEntity.prototype, "userName", void 0);
 __decorate([
     class_transformer_1.Exclude(),
     typeorm_1.Index(),
     typeorm_1.Column({ unique: true }),
     __metadata("design:type", String)
-], UserEntity.prototype, "email", void 0);
+], UserEntity.prototype, "userEmail", void 0);
 __decorate([
     typeorm_1.Column({ nullable: true }),
     __metadata("design:type", String)
-], UserEntity.prototype, "photoURL", void 0);
+], UserEntity.prototype, "userPhotoURL", void 0);
 __decorate([
-    typeorm_1.OneToMany(type => quiz_entity_1.QuizEntity, quiz => quiz.createdBy),
+    typeorm_1.OneToMany(type => quizz_entity_1.QuizzEntity, quiz => quiz.createdBy),
     __metadata("design:type", Array)
-], UserEntity.prototype, "quizzes", void 0);
+], UserEntity.prototype, "userCreatedQuizzes", void 0);
 __decorate([
     class_transformer_1.Exclude(),
-    typeorm_1.OneToMany(type => quiz_attempts_entity_1.QuizAttemptEntity, quizAttempt => quizAttempt.user, { eager: true }),
+    typeorm_1.OneToMany(type => quizz_attempts_entity_1.QuizzAttemptEntity, quizAttempt => quizAttempt.user, { eager: true }),
     __metadata("design:type", Array)
-], UserEntity.prototype, "attempts", void 0);
+], UserEntity.prototype, "userAttemptedQuizzes", void 0);
 __decorate([
-    typeorm_1.OneToMany(type => qa_entity_1.default, qa => qa.createdBy),
+    typeorm_1.OneToMany(type => question_entity_1.default, qa => qa.createdBy),
     __metadata("design:type", Array)
-], UserEntity.prototype, "createdQuestions", void 0);
+], UserEntity.prototype, "userCreatedQuestions", void 0);
 UserEntity = __decorate([
     typeorm_1.Entity()
 ], UserEntity);

@@ -21,7 +21,7 @@ import { AuthService } from './auth.service';
       },
     }),
   ],
-  providers: [UserService, JwtStrategy, AuthService],
+  providers: [ JwtStrategy, AuthService],
   exports: [JwtStrategy, AuthService],
 })
 export class AuthModule {}

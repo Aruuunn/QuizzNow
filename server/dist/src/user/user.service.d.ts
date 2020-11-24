@@ -1,8 +1,7 @@
-import { Connection } from 'typeorm';
+import { Repository } from 'typeorm';
+import UserEntity from './user.entity';
 export declare class UserService {
-    private readonly connection;
-    private userRepo;
-    private logger;
-    constructor(connection: Connection);
-    findByEmail: (email: string, relations?: string[]) => Promise<import("./user.entity").default>;
+    private userEntityRepository;
+    constructor(userEntityRepository: Repository<UserEntity>);
+    findByEmail: (userEmail: string, relations?: string[]) => Promise<UserEntity>;
 }

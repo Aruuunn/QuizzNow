@@ -37,18 +37,15 @@ export class AuthService {
       const user = await this.userService.findByEmail(data.email);
 
       if (user) {
-        const payload: JwtPayload = { email: user.email };
-        delete user.createdQuestions;
-        delete user.quizzes;
-        delete user.attempts;
+        const payload: JwtPayload = { email: user.userEmail };
         return { user, accessToken: this.jwtService.sign(payload) };
       } else {
         const newUser = new UserEntity();
-        newUser.email = data.email;
-        newUser.name = data.name;
-        newUser.photoURL = data.picture || '';
+        newUser.userEmail = data.email;
+        newUser.userName = data.name;
+        newUser.userPhotoURL = data.picture || '';
         newUser.save();
-        const payload: JwtPayload = { email: newUser.email };
+        const payload: JwtPayload = { email: newUser.userEmail };
 
         return { user: newUser, accessToken: this.jwtService.sign(payload) };
       }

@@ -32,7 +32,7 @@ AuthModule = __decorate([
                 },
             }),
         ],
-        providers: [user_service_1.UserService, Jwt_strategy_1.JwtStrategy, auth_service_1.AuthService],
+        providers: [Jwt_strategy_1.JwtStrategy, auth_service_1.AuthService],
         exports: [Jwt_strategy_1.JwtStrategy, auth_service_1.AuthService],
     })
 ], AuthModule);

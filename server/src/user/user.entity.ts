@@ -1,7 +1,7 @@
 import { Exclude } from 'class-transformer';
-import QAEntity from 'src/qa/qa.entity';
-import { QuizEntity } from 'src/quiz/entities/quiz.entity';
-import { QuizAttemptEntity } from 'src/quiz/entities/quiz_attempts.entity';
+import QAEntity from 'src/question/question.entity';
+import { QuizzEntity } from 'src/quizz/entities/quizz.entity';
+import { QuizzAttemptEntity} from 'src/quizz/entities/quizz_attempts.entity';
 import {
   Entity,
   BaseEntity,
@@ -14,38 +14,38 @@ import {
 @Entity()
 class UserEntity extends BaseEntity {
   @PrimaryGeneratedColumn('uuid')
-  id: string;
+  userId: string;
 
   @Column()
-  name: string;
+  userName: string;
 
   @Exclude()
   @Index()
   @Column({ unique: true })
-  email: string;
+  userEmail: string;
 
   @Column({ nullable: true })
-  photoURL: string;
+  userPhotoURL: string;
 
   @OneToMany(
-    type => QuizEntity,
+    type => QuizzEntity,
     quiz => quiz.createdBy,
   )
-  quizzes: QuizEntity[];
+  userCreatedQuizzes: QuizzEntity[];
 
   @Exclude()
   @OneToMany(
-    type => QuizAttemptEntity,
+    type => QuizzAttemptEntity,
     quizAttempt => quizAttempt.user,
     { eager: true },
   )
-  attempts: QuizAttemptEntity[];
+  userAttemptedQuizzes: QuizzAttemptEntity[];
 
   @OneToMany(
     type => QAEntity,
     qa => qa.createdBy,
   )
-  createdQuestions: QAEntity[];
+  userCreatedQuestions: QAEntity[];
 }
 
 export default UserEntity;

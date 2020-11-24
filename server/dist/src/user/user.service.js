@@ -8,26 +8,28 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+var __param = (this && this.__param) || function (paramIndex, decorator) {
+    return function (target, key) { decorator(target, key, paramIndex); }
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.UserService = void 0;
 const common_1 = require("@nestjs/common");
-const typeorm_1 = require("typeorm");
-const user_repository_1 = require("./user.repository");
+const typeorm_1 = require("@nestjs/typeorm");
+const typeorm_2 = require("typeorm");
+const user_entity_1 = require("./user.entity");
 let UserService = class UserService {
-    constructor(connection) {
-        this.connection = connection;
-        this.logger = new common_1.Logger("UserService");
-        this.findByEmail = async (email, relations = []) => {
-            const user = await this.userRepo.findOne({ email }, { relations });
-            this.logger.log(`[findByEmail] ${user ? "Found" : "Did not find"} a user with email ${email} ${user ? user.id : null}`);
+    constructor(userEntityRepository) {
+        this.userEntityRepository = userEntityRepository;
+        this.findByEmail = async (userEmail, relations = []) => {
+            const user = await this.userEntityRepository.findOne({ userEmail }, { relations });
             return user;
         };
-        this.userRepo = this.connection.getCustomRepository(user_repository_1.default);
     }
 };
 UserService = __decorate([
     common_1.Injectable(),
-    __metadata("design:paramtypes", [typeorm_1.Connection])
+    __param(0, typeorm_1.InjectRepository(user_entity_1.default)),
+    __metadata("design:paramtypes", [typeorm_2.Repository])
 ], UserService);
 exports.UserService = UserService;
 //# sourceMappingURL=user.service.js.map

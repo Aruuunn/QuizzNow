@@ -1,42 +1,22 @@
 import { Module } from '@nestjs/common';
 import { AuthController } from './auth/auth.controller';
-import { UserService } from './user/user.service';
 import { AuthModule } from './auth/auth.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { UserModule } from './user/user.module';
-import { QaService } from './qa/qa.service';
-import { QaModule } from './qa/qa.module';
-import { QuizModule } from './quiz/quiz.module';
-import { QuizAttemptGateway } from './quiz/quiz-attempt.gateway';
-
-import * as env from '../config/env';
+import { QuestionModule } from './question/question.module';
+import { QuizzModule } from './quizz/quizz.module';
+import { QuizAttemptGateway } from './quizz/quizz-attempt.gateway';
+import TypeOrmConfig from 'config/typeorm.config';
 
 @Module({
   imports: [
-    TypeOrmModule.forRoot({
-      type: 'postgres',
-      host: env.POSTGRES_HOST,
-      port: parseInt(env.POSTGRES_PORT),
-      username: env.POSTGRES_USER,
-      password: env.POSTGRES_PASSWORD,
-      database: env.POSTGRES_DATABASE,
-      entities: ['dist/**/*.entity{.js,.ts}'],
-      cache: {
-        type: 'redis',
-        duration: 60000,
-        options: {
-          port: 6379,
-          host: 'cache',
-        },
-      },
-      synchronize: true,
-    }),
+    TypeOrmModule.forRoot(TypeOrmConfig),
     AuthModule,
     UserModule,
-    QaModule,
-    QuizModule,
+    QuestionModule,
+    QuizzModule,
   ],
   controllers: [AuthController],
-  providers: [UserService, QaService, QuizAttemptGateway],
+  providers: [QuizAttemptGateway],
 })
 export class AppModule {}

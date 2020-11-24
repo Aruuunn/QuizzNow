@@ -1,14 +1,14 @@
-import QAEntity from 'src/qa/qa.entity';
-import { QuizEntity } from 'src/quiz/entities/quiz.entity';
-import { QuizAttemptEntity } from 'src/quiz/entities/quiz_attempts.entity';
+import QAEntity from 'src/question/question.entity';
+import { QuizzEntity } from 'src/quizz/entities/quizz.entity';
+import { QuizzAttemptEntity } from 'src/quizz/entities/quizz_attempts.entity';
 import { BaseEntity } from 'typeorm';
 declare class UserEntity extends BaseEntity {
-    id: string;
-    name: string;
-    email: string;
-    photoURL: string;
-    quizzes: QuizEntity[];
-    attempts: QuizAttemptEntity[];
-    createdQuestions: QAEntity[];
+    userId: string;
+    userName: string;
+    userEmail: string;
+    userPhotoURL: string;
+    userCreatedQuizzes: QuizzEntity[];
+    userAttemptedQuizzes: QuizzAttemptEntity[];
+    userCreatedQuestions: QAEntity[];
 }
 export default UserEntity;
