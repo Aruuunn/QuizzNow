@@ -1,4 +1,3 @@
-import QAEntity from 'src/question/question.entity';
 import {
   BaseEntity,
   Column,

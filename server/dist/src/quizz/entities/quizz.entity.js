@@ -11,9 +11,9 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.QuizzEntity = void 0;
 const class_transformer_1 = require("class-transformer");
+const typeorm_1 = require("typeorm");
 const question_entity_1 = require("../../question/question.entity");
 const user_entity_1 = require("../../user/user.entity");
-const typeorm_1 = require("typeorm");
 const quizz_attempts_entity_1 = require("./quizz_attempts.entity");
 let QuizzEntity = class QuizzEntity extends typeorm_1.BaseEntity {
 };

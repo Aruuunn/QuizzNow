@@ -15,8 +15,8 @@ import {
   Query
 } from '@nestjs/common';
 import { IPaginationOptions } from 'nestjs-typeorm-paginate';
-import JwtGaurd from 'src/auth/jwt.gaurd';
-import NewQuestionDto from 'src/question/dto/new.question';
+import JwtGaurd from '../auth/jwt.gaurd';
+import NewQuestionDto from '../question/dto/new.question';
 import { NewQuizDto } from './dto/new.quiz';
 import { QuizzService } from './quizz.service';
 

@@ -1,4 +1,4 @@
-import UserEntity from 'src/user/user.entity';
+import UserEntity from '../user/user.entity';
 import { Repository } from 'typeorm';
 import NewQuestionDto from './dto/new.question';
 import UpdateQuestionDto from './dto/update.question';

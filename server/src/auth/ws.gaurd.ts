@@ -1,6 +1,6 @@
-import { Injectable, CanActivate, BadRequestException } from '@nestjs/common';
-import { UNAUTHORIZED } from 'common/ws.event.types';
-import { UserService } from 'src/user/user.service';
+import { Injectable, CanActivate,  } from '@nestjs/common';
+import { UNAUTHORIZED } from '../../common/ws.event.types';
+import { UserService } from '../user/user.service';
 import { AuthService } from './auth.service';
 
 @Injectable()

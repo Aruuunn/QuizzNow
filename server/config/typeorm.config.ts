@@ -1,7 +1,7 @@
 import { TypeOrmModuleOptions } from '@nestjs/typeorm';
 import * as env from './env';
 
-export const TypeOrmConfig:TypeOrmModuleOptions = {
+export const TypeOrmConfig: TypeOrmModuleOptions = {
   type: 'postgres',
   host: env.POSTGRES_HOST,
   port: parseInt(env.POSTGRES_PORT),
@@ -13,11 +13,11 @@ export const TypeOrmConfig:TypeOrmModuleOptions = {
     type: 'redis',
     duration: 60000,
     options: {
-      port: 6379,
-      host: 'cache',
+      port: parseInt(env.DB_CACHE_PORT),
+      host: env.DB_CACHE_HOST,
     },
   },
   synchronize: true,
-}
+};
 
 export default TypeOrmConfig;

@@ -1,6 +1,6 @@
-import QuestionEntity from 'src/question/question.entity';
-import UserEntity from 'src/user/user.entity';
 import { BaseEntity } from 'typeorm';
+import QuestionEntity from '../../question/question.entity';
+import UserEntity from '../../user/user.entity';
 import QuizAttemptEntity from './quizz_attempts.entity';
 export declare class QuizzEntity extends BaseEntity {
     quizzId: string;

@@ -16,6 +16,8 @@ const question_module_1 = require("./question/question.module");
 const quizz_module_1 = require("./quizz/quizz.module");
 const quizz_attempt_gateway_1 = require("./quizz/quizz-attempt.gateway");
 const typeorm_config_1 = require("../config/typeorm.config");
+const question_controller_1 = require("./question/question.controller");
+const quizz_controller_1 = require("./quizz/quizz.controller");
 let AppModule = class AppModule {
 };
 AppModule = __decorate([
@@ -27,7 +29,7 @@ AppModule = __decorate([
             question_module_1.QuestionModule,
             quizz_module_1.QuizzModule,
         ],
-        controllers: [auth_controller_1.AuthController],
+        controllers: [auth_controller_1.AuthController, question_controller_1.QuestionController, quizz_controller_1.QuizController],
         providers: [quizz_attempt_gateway_1.QuizAttemptGateway],
     })
 ], AppModule);

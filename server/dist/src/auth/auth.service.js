@@ -29,7 +29,7 @@ let AuthService = class AuthService {
         this.authenticateUser = async (id_token) => {
             try {
                 const { data } = await axios_1.default.get(`https://www.googleapis.com/oauth2/v3/tokeninfo?id_token=${id_token.trim()}`);
-                if (!data.email || !data.name) {
+                if (!data || !data.email || !data.name) {
                     throw new common_1.BadRequestException();
                 }
                 const user = await this.userService.findByEmail(data.email);
@@ -48,8 +48,7 @@ let AuthService = class AuthService {
                 }
             }
             catch (e) {
-                console.log(e);
-                throw new common_1.UnauthorizedException();
+                throw new common_1.BadRequestException();
             }
         };
     }

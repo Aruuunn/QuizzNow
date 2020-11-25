@@ -6,10 +6,10 @@ import {
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { IPaginationOptions, paginate } from 'nestjs-typeorm-paginate';
-import NewQuestionDto from 'src/question/dto/new.question';
-import QAEntity from 'src/question/question.entity';
-import { QuestionService } from 'src/question/question.service';
-import UserEntity from 'src/user/user.entity';
+import NewQuestionDto from '../question/dto/new.question';
+import QAEntity from '../question/question.entity';
+import { QuestionService } from '../question/question.service';
+import UserEntity from '../user/user.entity';
 import { Repository } from 'typeorm';
 import { NewQuizDto } from './dto/new.quiz';
 import { QuestionAttemptEntity } from './entities/question_attempt.entity';

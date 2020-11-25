@@ -1,4 +1,4 @@
-import UserEntity from 'src/user/user.entity';
+import UserEntity from '../user/user.entity';
 import { BaseEntity } from 'typeorm';
 declare class QuestionEntity extends BaseEntity {
     questionId: string;

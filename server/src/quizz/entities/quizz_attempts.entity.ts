@@ -1,4 +1,3 @@
-import UserEntity from 'src/user/user.entity';
 import {
   BaseEntity,
   Column,
@@ -9,6 +8,7 @@ import {
 } from 'typeorm';
 import { QuizzEntity } from './quizz.entity';
 import { QuestionAttemptEntity } from './question_attempt.entity';
+import UserEntity from '../../user/user.entity';
 
 @Entity()
 export class QuizzAttemptEntity extends BaseEntity {

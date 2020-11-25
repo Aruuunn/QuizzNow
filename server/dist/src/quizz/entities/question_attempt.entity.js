@@ -10,7 +10,6 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.QuestionAttemptEntity = void 0;
-const question_entity_1 = require("../../question/question.entity");
 const typeorm_1 = require("typeorm");
 const quizz_attempts_entity_1 = require("./quizz_attempts.entity");
 let QuestionAttemptEntity = class QuestionAttemptEntity extends typeorm_1.BaseEntity {

@@ -14,8 +14,8 @@ exports.TypeOrmConfig = {
         type: 'redis',
         duration: 60000,
         options: {
-            port: 6379,
-            host: 'cache',
+            port: parseInt(env.DB_CACHE_PORT),
+            host: env.DB_CACHE_HOST,
         },
     },
     synchronize: true,

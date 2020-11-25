@@ -1,12 +1,11 @@
 import {
   BadRequestException,
   Injectable,
-  UnauthorizedException,
 } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import axios from 'axios';
-import UserEntity from 'src/user/user.entity';
-import { UserService } from 'src/user/user.service';
+import UserEntity from '../user/user.entity';
+import { UserService } from '../user/user.service';
 import { JwtPayload } from './jwt.payload';
 import { JWT_SECRET } from '../../config/env';
 
@@ -30,7 +29,7 @@ export class AuthService {
         `https://www.googleapis.com/oauth2/v3/tokeninfo?id_token=${id_token.trim()}`,
       );
 
-      if (!data.email || !data.name) {
+      if (!data || !data.email || !data.name) {
         throw new BadRequestException();
       }
 
@@ -50,8 +49,7 @@ export class AuthService {
         return { user: newUser, accessToken: this.jwtService.sign(payload) };
       }
     } catch (e) {
-      console.log(e);
-      throw new UnauthorizedException();
+      throw new BadRequestException();
     }
   };
 }

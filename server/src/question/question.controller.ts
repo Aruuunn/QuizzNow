@@ -12,7 +12,7 @@ import {
   Param,
   Delete,
 } from '@nestjs/common';
-import JwtGaurd from 'src/auth/jwt.gaurd';
+import JwtGaurd from '../auth/jwt.gaurd';
 import NewQuestionDto from './dto/new.question';
 import UpdateQuestionDto from './dto/update.question';
 import { QuestionService } from './question.service';

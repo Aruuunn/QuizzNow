@@ -6,7 +6,9 @@ import { UserModule } from './user/user.module';
 import { QuestionModule } from './question/question.module';
 import { QuizzModule } from './quizz/quizz.module';
 import { QuizAttemptGateway } from './quizz/quizz-attempt.gateway';
-import TypeOrmConfig from 'config/typeorm.config';
+import TypeOrmConfig from '../config/typeorm.config';
+import { QuestionController } from './question/question.controller';
+import { QuizController } from './quizz/quizz.controller';
 
 @Module({
   imports: [
@@ -16,7 +18,7 @@ import TypeOrmConfig from 'config/typeorm.config';
     QuestionModule,
     QuizzModule,
   ],
-  controllers: [AuthController],
+  controllers: [AuthController,QuestionController,QuizController],
   providers: [QuizAttemptGateway],
 })
 export class AppModule {}

@@ -402,8 +402,8 @@
         "affectsGlobalScope": false
       },
       "../config/env.ts": {
-        "version": "aa388b626e5e8628dd53fe694b3a892557a0fa2728cdea6dd46c8ff43747d26e",
-        "signature": "b189a50dcc5ad6955d4ffcc17cbfe6eb4365a8ce176d7c2255457e7e226034d5",
+        "version": "cbf6cf42c8c9e90e2f901299746ee836ba400f84942c27f19bd403a949d9ebf9",
+        "signature": "7d8410bd7da5f3bc10ad571fb8e5d213683c05551d28fc10306c6ff54b6be878",
         "affectsGlobalScope": false
       },
       "../node_modules/reflect-metadata/index.d.ts": {
@@ -2712,7 +2712,7 @@
         "affectsGlobalScope": false
       },
       "../config/typeorm.config.ts": {
-        "version": "55c50d42d9fe693e9f4c471a81121331161a9b46624ab1d33ab7c6dca3b4fde6",
+        "version": "50e6b1550c01e2aefa389446c671035209db4264ca1f450c8df76c553c162b08",
         "signature": "7173c3e1b8f4143ca15cf2770ce22bb4b864f0a99d441ae4391da69e75de5d1b",
         "affectsGlobalScope": false
       },
@@ -2792,28 +2792,28 @@
         "affectsGlobalScope": false
       },
       "../src/question/question.entity.ts": {
-        "version": "d964b46b0c50d500a9efaff86373bee038f14cf464aec967fe7a0a12ac531914",
-        "signature": "b55ef1bb01e5d586a0204e2593a645e058a71229bbecf22b988530f6796e4b8b",
+        "version": "7cedc7d3d0e714f5b3cdfee267b7b14a346eb308d51447db4ddd70e8ccddbafd",
+        "signature": "82e6143b316752b1f5a12df3ff8d014da19a530748c6bac007a5b4304c80c7b9",
         "affectsGlobalScope": false
       },
       "../src/quizz/entities/question_attempt.entity.ts": {
-        "version": "5e9bf7c0bbd4a1887993d623736c7f50591f962093c689cdfa2839c26e571da0",
+        "version": "4087f09f295a438cff705fbd30b4689f92c0cf3a0a8c84871b7ab51eb2987126",
         "signature": "17bb8d6481318c181bc66b60ee0b942c8bd3fffd8cb74eec278d35e2ddfc1868",
         "affectsGlobalScope": false
       },
       "../src/quizz/entities/quizz_attempts.entity.ts": {
-        "version": "1b323551da379eceebeedefff769c8c5bddc5b3608e678985ba4438e2ae23fa2",
-        "signature": "a7486cabc27fa1ccdfe428e15001eea278c579ce8d3f99fe127f11252005441f",
+        "version": "de7d231bddb69a2aebb8652b0ea1ac643494d7b99e82a53f092a92decd54f151",
+        "signature": "3033b740722bc6fa9d33be39b81dadb8304d84bb9bbe5608c96705586492b3ea",
         "affectsGlobalScope": false
       },
       "../src/quizz/entities/quizz.entity.ts": {
-        "version": "e17f655092e70d551096c865980d1c30bbf9cb7f056a92f82ab24aca7f614743",
-        "signature": "e43ceb853e7ef7c8d206ec80eeeecc0138e2abf18c4ab0bb261a69893cd93b1d",
+        "version": "f33bfdb66ce9453268437e91ebb55cabc2f6876afedddd6d4fbaa6b61c3621e3",
+        "signature": "db79752aba4228418b1e8560ea44b513d8d0fe7faf925b8a76a44e7d05c33403",
         "affectsGlobalScope": false
       },
       "../src/user/user.entity.ts": {
-        "version": "db006385f517e8ad2797659ed3788b863650aa37bbc7e7cdfd88e1aedfe5af49",
-        "signature": "4ff7a30c5cfbc6c343f1097f3d8338f28d9919149559681e8fb24c13e9163f33",
+        "version": "ebf1c5524e9b0716d20f60c0a8a64f1f52bbd379836a01179e8a5999957aad18",
+        "signature": "96fe8c871f513c7b0ad71eec77f74d299ae2376cedb22746afd5d080fade0220",
         "affectsGlobalScope": false
       },
       "../src/user/user.service.ts": {
@@ -2827,8 +2827,8 @@
         "affectsGlobalScope": false
       },
       "../src/auth/auth.service.ts": {
-        "version": "19181fc22b6e73c3fa9d406c615e18c07fd4d50747337ebfffdd0d70fe387965",
-        "signature": "bff70cd2a7ed11efaaddc2d436beb39268d84a91c708dc2b5727e2df2a1176be",
+        "version": "2a419a34e1c3cb129c6af0d50e1c2511a1949a39e7bd6957a9f76166a18cfe46",
+        "signature": "5319b574d1916c9e10b6fa0e8a7e794d78428cc17ce963c62dfb87d629c2862a",
         "affectsGlobalScope": false
       },
       "../src/auth/auth.controller.ts": {
@@ -2947,12 +2947,12 @@
         "affectsGlobalScope": false
       },
       "../src/auth/Jwt.strategy.ts": {
-        "version": "a81d27f6e5aefdf474bfeb19795d2150915bf6229e0f67e7c6d6a2f3155c9868",
-        "signature": "d98bd93ce35a6ee47b74fb254db8f66c13ff12911086c3581e5a6ca3fc2b46bc",
+        "version": "4b9d6cb3c93f2b0374dfc4d2587eaf36c48963ffe0127590da380501a8f543be",
+        "signature": "b0ac89b7d0407a1d5155dae13efe26cfd4aa5395cf10fbdbb029f758518e0c73",
         "affectsGlobalScope": false
       },
       "../src/auth/auth.module.ts": {
-        "version": "e2107dfffb133262beab610aa8ba5ff8f1a294098b3977c9019ee858eb27530c",
+        "version": "58f9a29012252f574af622964be2442fa61d80be89842b2e6c7a5e1b49367707",
         "signature": "a28b5c0c372fb375910b3fe3c3ce4331509bc18ccef7cc39c9ee9d8daf8225d1",
         "affectsGlobalScope": false
       },
@@ -3767,8 +3767,8 @@
         "affectsGlobalScope": false
       },
       "../src/question/question.service.ts": {
-        "version": "ed4c32995f88689fa0710e6316f9992863409f2cb5f5d03d963c1c23cab5519e",
-        "signature": "f8430d348d3a2a9bab2dcd27fb3edd944b078e859956437639d1142df4ef928e",
+        "version": "3499cc1d7ea0ea5b1d2bf024ad106dfaedd54eed0842e6f735d1cd8f3e5f0b3a",
+        "signature": "73719a270005feeb533fe64c453c100cdbfc3bfd0ad10cff28c95267eeaa8d81",
         "affectsGlobalScope": false
       },
       "../src/auth/jwt.gaurd.ts": {
@@ -3777,7 +3777,7 @@
         "affectsGlobalScope": false
       },
       "../src/question/question.controller.ts": {
-        "version": "dd356e2ee9aca3a61f995ab316b2739a3d3abf7655367c0d38070598884ee6ae",
+        "version": "066f60f668e5bf9fe4fc7a9f1c4ea2270131f61da277af6ffa8146ee186d9774",
         "signature": "9cdcc2756818dd40b77146e38926aa2a0388578b5b735c8b91884395a92e397b",
         "affectsGlobalScope": false
       },
@@ -3937,17 +3937,17 @@
         "affectsGlobalScope": false
       },
       "../src/quizz/quizz.service.ts": {
-        "version": "cba7bc6b11cdc7cb2a96f78f3772b3d40d576e0a4dd19584c1d9a8838d25bd25",
-        "signature": "ad467ff6f191e08221ecc406edb577f51b6123ab5121e0c6435774f10c48dc6e",
+        "version": "24f874158ac21d7be774add90e25bc49ec4b4758698465be65a0b6b26a44f605",
+        "signature": "323074f41708f157a267f1bac1708dc776e7f7307b962a44c08850da48d956ff",
         "affectsGlobalScope": false
       },
       "../src/quizz/quizz.controller.ts": {
-        "version": "776dfe9a9fbfd56f2f8f2eb73547828783204218e8e0a1e1465e79a01b004ca3",
-        "signature": "70725f015778437b00c01357bb99787fe43fcc7dea7b2688bb158cbefc9143dc",
+        "version": "7ee2a22ff00df1c5939914a0ff70a677f75b12e177da2fb9746acc1d4013c4b9",
+        "signature": "b2f5aa4413c276b15647f35780656883f04e635627e2b142b670b3b12c4e9c0c",
         "affectsGlobalScope": false
       },
       "../src/quizz/quizz.module.ts": {
-        "version": "e7aa9fd96b6bcf30941d92cba8e760f671279bda64ad8d53a86b06592ac7ce34",
+        "version": "960f82bc8d73dff38f8a8a55da706540c892170471d5c052fa94acd8fc8cde99",
         "signature": "01ee21917bfd565b64d9eb636a010550dacad907819599308dfeeb2c0f3d25f2",
         "affectsGlobalScope": false
       },
@@ -3962,8 +3962,8 @@
         "affectsGlobalScope": false
       },
       "../src/auth/ws.gaurd.ts": {
-        "version": "a03d09030904678d1686e25d18dce6dbfa198f30ecefdf3138639d0279afe43e",
-        "signature": "6f9701c2f6ac63be17db180e79ba063923abce4e93c74e20079cef1369dea5ff",
+        "version": "56f620fe34906bf862d7fbd399e7ca2bdbf744571bc9a472ec1417ad6ab5f50a",
+        "signature": "afeb9d0dc1d7fe434583eab90e28497481897fb86e8cb4b9b3fa8883e1afecfe",
         "affectsGlobalScope": false
       },
       "../src/quizz/quizz-attempt.gateway.ts": {
@@ -3972,7 +3972,7 @@
         "affectsGlobalScope": false
       },
       "../src/app.module.ts": {
-        "version": "9677ae263bb45fd126b5e7aaad63a2c292b0f4de7070b8744a73b0528fa949b6",
+        "version": "04722334640f3f4ad150aa6f312078a6cfbd7c60f77928372f1f6a7b93ba6d90",
         "signature": "b82491e2990291580288c5602d4c017238977749d52b17391f0e45d9a29be644",
         "affectsGlobalScope": false
       },
@@ -4226,6 +4226,11 @@
         "signature": "725d9be2fd48440256f4deb00649adffdbc5ecd282b09e89d4e200663792c34c",
         "affectsGlobalScope": false
       },
+      "../node_modules/@types/faker/index.d.ts": {
+        "version": "9e37b889a98fba478f4f6c05eedc0bf6fbd2ad2d8bbb92b4b8cadf25c9364974",
+        "signature": "9e37b889a98fba478f4f6c05eedc0bf6fbd2ad2d8bbb92b4b8cadf25c9364974",
+        "affectsGlobalScope": true
+      },
       "../node_modules/@types/graceful-fs/index.d.ts": {
         "version": "2c7dca525f4e2e5f2b357dacb58ab6c8777995e6d505ef652bcbbf9789ac558f",
         "signature": "2c7dca525f4e2e5f2b357dacb58ab6c8777995e6d505ef652bcbbf9789ac558f",
@@ -4414,6 +4419,8 @@
       "outDir": "./",
       "baseUrl": "..",
       "incremental": true,
+      "allowJs": true,
+      "preserveWatchOutput": true,
       "configFilePath": "../tsconfig.build.json"
     },
     "referencedMap": {
@@ -7507,8 +7514,10 @@
         "../node_modules/@nestjs/typeorm/index.d.ts",
         "../src/auth/auth.controller.ts",
         "../src/auth/auth.module.ts",
+        "../src/question/question.controller.ts",
         "../src/question/question.module.ts",
         "../src/quizz/quizz-attempt.gateway.ts",
+        "../src/quizz/quizz.controller.ts",
         "../src/quizz/quizz.module.ts",
         "../src/user/user.module.ts"
       ],
@@ -7531,8 +7540,7 @@
         "../node_modules/@nestjs/passport/index.d.ts",
         "../src/auth/Jwt.strategy.ts",
         "../src/auth/auth.service.ts",
-        "../src/user/user.module.ts",
-        "../src/user/user.service.ts"
+        "../src/user/user.module.ts"
       ],
       "../src/auth/auth.service.ts": [
         "../config/env.ts",
@@ -7602,7 +7610,6 @@
       ],
       "../src/quizz/entities/question_attempt.entity.ts": [
         "../node_modules/typeorm/index.d.ts",
-        "../src/question/question.entity.ts",
         "../src/quizz/entities/quizz_attempts.entity.ts"
       ],
       "../src/quizz/entities/quizz.entity.ts": [
@@ -11135,6 +11142,7 @@
       "../node_modules/@types/express-serve-static-core/index.d.ts",
       "../node_modules/@types/express-session/index.d.ts",
       "../node_modules/@types/express/index.d.ts",
+      "../node_modules/@types/faker/index.d.ts",
       "../node_modules/@types/graceful-fs/index.d.ts",
       "../node_modules/@types/ioredis/index.d.ts",
       "../node_modules/@types/istanbul-lib-coverage/index.d.ts",

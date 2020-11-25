@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { QuestionModule } from 'src/question/question.module';
-import { UserModule } from 'src/user/user.module';
+import { QuestionModule } from '../question/question.module';
+import { UserModule } from '../user/user.module';
 import { QuestionAttemptEntity } from './entities/question_attempt.entity';
 import { QuizController } from './quizz.controller';
 import { QuizzService } from './quizz.service';

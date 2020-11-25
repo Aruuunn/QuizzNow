@@ -7,13 +7,13 @@ services:
     environment: 
       - POSTGRES_PASSWORD=postgres_password
       - POSTGRES_DB=QN
-    ports: 
-        - "5432:5432"
-
+    ports:
+      - "5432:5432"
+    
   cache:
     image: "redis:latest"
     restart: always
-
+  
   client:
     build: 
       dockerfile: Dockerfile.dev
@@ -26,8 +26,6 @@ services:
 
 
   api:
-    stdin_open: true
-    tty: true
     build:
       dockerfile: Dockerfile.dev
       context: ./server
@@ -40,9 +38,32 @@ services:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres_password
       - POSTGRES_DATABASE=QN
-      - REDIS_SESSION_STORE_HOST=cache
-      - REDIS_SESSION_STORE_PORT=6379
+      - DB_CACHE_HOST=cache
+      - DB_CACHE_PORT=6379
+      - NODE_ENV=dev
+      
     ports: 
         - "5000:5000"
+  
+  apitest:
+    stdin_open: true
+    tty: true
+    command: ["npm","run","test:watch"]
+    build:
+      dockerfile: Dockerfile.dev
+      context: ./server
+    volumes:
+      # - /app/node_modules
+      - ./server:/app
+    environment:
+      - POSTGRES_HOST=db
+      - POSTGRES_PORT=5432
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres_password
+      - POSTGRES_DATABASE=QN
+      - DB_CACHE_HOST=cache
+      - DB_CACHE_PORT=6379
+      - NODE_ENV=test
+
 
 
