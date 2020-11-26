@@ -6,21 +6,22 @@ import { JWT_SECRET } from '../../config/env';
 import { JwtStrategy } from './Jwt.strategy';
 import { AuthService } from './auth.service';
 
+export const passportAuthModules = [
+  PassportModule.register({
+    defaultStrategy: 'jwt',
+    session: false,
+  }),
+  JwtModule.register({
+    secret: JWT_SECRET,
+    signOptions: {
+      expiresIn: '7d',
+    },
+  }),
+];
+
 @Module({
-  imports: [
-    PassportModule.register({
-      defaultStrategy: 'jwt',
-      session: false,
-    }),
-    UserModule,
-    JwtModule.register({
-      secret: JWT_SECRET,
-      signOptions: {
-        expiresIn: '7d',
-      },
-    }),
-  ],
-  providers: [ JwtStrategy, AuthService],
+  imports: [...passportAuthModules, UserModule],
+  providers: [JwtStrategy, AuthService],
   exports: [JwtStrategy, AuthService],
 })
 export class AuthModule {}

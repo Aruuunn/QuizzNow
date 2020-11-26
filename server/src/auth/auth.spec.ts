@@ -3,12 +3,12 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { getRepositoryToken } from '@nestjs/typeorm';
 import UserEntity from '../user/user.entity';
 import { Repository } from 'typeorm';
-import { UserModule } from '../user/user.module';
 import { UserService } from '../user/user.service';
-
 import { AuthController } from './auth.controller';
-
 import { AuthService } from './auth.service';
+import { VALID_ID_TOKEN } from '../../config/env';
+
+
 
 describe('--- Auth Module ---', () => {
   let authService: AuthService;
@@ -19,14 +19,20 @@ describe('--- Auth Module ---', () => {
   let jwtService = {};
 
   beforeAll(async () => {
+    if (!VALID_ID_TOKEN) {
+      console.error("Valid Id Token Not provided for testing")
+    }
     module = await Test.createTestingModule({
-      imports: [
-       
+      imports: [],
+      providers: [
+        AuthService,
+        {
+          provide: getRepositoryToken(UserEntity),
+          useFactory: repositoryMockFactory,
+        },
+        UserService,
+        JwtService,
       ],
-      providers: [AuthService, {
-        provide: getRepositoryToken(UserEntity),
-        useFactory: repositoryMockFactory,
-      },UserService,JwtService],
       controllers: [AuthController],
     })
       .overrideProvider(UserService)
@@ -48,6 +54,45 @@ describe('--- Auth Module ---', () => {
           done();
         });
     });
+
+    it('should fail if id_token is not passed', done => {
+      authController
+        .auth(undefined)
+        .then(() => done.fail('Should have Thrown BadRequest error'))
+        .catch(err => {
+          expect(err.status).toBe(400);
+          done();
+        });
+    });
+
+    it("should create a new user entity when id_token is valid and user does not exist", (done) => {
+      const user = new UserEntity();
+      const ACCESS_TOKEN= ""
+      
+      jest.spyOn(userService, "findByEmail").mockResolvedValue(undefined);
+      jest.spyOn(authService, "createUserEntity").mockResolvedValue(user);
+      jest.spyOn(authService,"getUserAndAccessToken").mockReturnValue({user,accessToken:ACCESS_TOKEN})
+      authController.auth(VALID_ID_TOKEN).then(res => {
+        expect(res.user).toBe(user);
+        expect(res.accessToken).toEqual(ACCESS_TOKEN);
+        done();
+      }
+      ).catch(err => done.fail());
+    })
+    it("should not create a new user entity when id_token is valid and user does exist", (done) => {
+      const user = new UserEntity();
+      const ACCESS_TOKEN= ""
+      
+      jest.spyOn(userService, "findByEmail").mockResolvedValue(user);
+      jest.spyOn(authService, "createUserEntity").mockResolvedValue(user);
+      jest.spyOn(authService,"getUserAndAccessToken").mockReturnValue({user,accessToken:ACCESS_TOKEN})
+      authController.auth(VALID_ID_TOKEN).then(res => {
+        expect(res.user).toBe(user);
+        expect(res.accessToken).toEqual(ACCESS_TOKEN);
+        done();
+      }
+      ).catch(err => done.fail());
+    })
   });
 
   beforeEach(() => {

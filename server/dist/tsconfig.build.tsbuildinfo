@@ -402,8 +402,8 @@
         "affectsGlobalScope": false
       },
       "../config/env.ts": {
-        "version": "cbf6cf42c8c9e90e2f901299746ee836ba400f84942c27f19bd403a949d9ebf9",
-        "signature": "7d8410bd7da5f3bc10ad571fb8e5d213683c05551d28fc10306c6ff54b6be878",
+        "version": "ffe5f5d3ee4ed32f212ba4c684a4e08c13cbf1369bfe34b4ad0d32e399a713d4",
+        "signature": "38d99f575846a239bf2b039cf4007e062d682df4eacef77b48c4bc0a8b49af70",
         "affectsGlobalScope": false
       },
       "../node_modules/reflect-metadata/index.d.ts": {
@@ -2827,12 +2827,12 @@
         "affectsGlobalScope": false
       },
       "../src/auth/auth.service.ts": {
-        "version": "2a419a34e1c3cb129c6af0d50e1c2511a1949a39e7bd6957a9f76166a18cfe46",
-        "signature": "5319b574d1916c9e10b6fa0e8a7e794d78428cc17ce963c62dfb87d629c2862a",
+        "version": "7638b720c5024e9dd7b02bdbd418fd714d510fbab41d0476b039472ed05c480d",
+        "signature": "ed0ceaaa9982fd4240c27c843ea814e85f9f2b83b2ce8e55e2b03fc88c13ca34",
         "affectsGlobalScope": false
       },
       "../src/auth/auth.controller.ts": {
-        "version": "0d33b490b2766f8bae62da120e0c7e2aab716bff1aa4cdb0363cdc48ecc1b59b",
+        "version": "74a6c4de77632d6a9f6cd7e442f7e5b95ed54aa44d592031bc48f659ce711139",
         "signature": "590464ae80bfaa8611b7e22b9bde6c6461e6156703eada52215eca13394fa4d0",
         "affectsGlobalScope": false
       },
@@ -2952,8 +2952,8 @@
         "affectsGlobalScope": false
       },
       "../src/auth/auth.module.ts": {
-        "version": "58f9a29012252f574af622964be2442fa61d80be89842b2e6c7a5e1b49367707",
-        "signature": "a28b5c0c372fb375910b3fe3c3ce4331509bc18ccef7cc39c9ee9d8daf8225d1",
+        "version": "bed2ec71938266b09e61345d0679c84318443daa3c4c78dc476ee93ca03f2696",
+        "signature": "6dfdbe2edc9891a682162f29813414590ad5f9733701b8263bb98558026c061a",
         "affectsGlobalScope": false
       },
       "../node_modules/@nestjs/swagger/dist/decorators/api-basic.decorator.d.ts": {
@@ -10779,6 +10779,9 @@
       "../src/auth/auth.controller.ts": [
         "../src/auth/auth.service.ts",
         "../src/user/user.entity.ts"
+      ],
+      "../src/auth/auth.module.ts": [
+        "../node_modules/@nestjs/common/index.d.ts"
       ],
       "../src/auth/auth.service.ts": [
         "../node_modules/@nestjs/jwt/index.d.ts",

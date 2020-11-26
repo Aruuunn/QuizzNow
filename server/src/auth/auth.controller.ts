@@ -6,7 +6,8 @@ export class AuthController {
   constructor(private authService: AuthService) {}
 
   @Post('google')
-  async auth(@Body('id_token') id_token: string) {
+  async auth(
+    @Body('id_token') id_token: string) {
   return await this.authService.authenticateUser(id_token);
   }
 }

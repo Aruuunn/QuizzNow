@@ -1,7 +1,4 @@
-import {
-  BadRequestException,
-  Injectable,
-} from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import axios from 'axios';
 import UserEntity from '../user/user.entity';
@@ -16,11 +13,28 @@ export class AuthService {
     private jwtService: JwtService,
   ) {}
 
-  verifyJwt =  (token: string) => {
+  createUserEntity = async (
+    email: string,
+    name: string,
+    photoURL: string,
+  ) => {
+    const newUser = new UserEntity();
+    newUser.userEmail = email;
+    newUser.userName = name;
+    newUser.userPhotoURL = photoURL || '';
+    await newUser.save();
+    return newUser;
+  };
+  verifyJwt = (token: string) => {
     return this.jwtService.verify(token, {
       ignoreExpiration: false,
       secret: JWT_SECRET,
     });
+  };
+
+  getUserAndAccessToken = (user: UserEntity) => {
+    const payload: JwtPayload = { email: user.userEmail };
+    return { user, accessToken: this.jwtService.sign(payload) };
   };
 
   authenticateUser = async (id_token: string) => {
@@ -36,17 +50,15 @@ export class AuthService {
       const user = await this.userService.findByEmail(data.email);
 
       if (user) {
-        const payload: JwtPayload = { email: user.userEmail };
-        return { user, accessToken: this.jwtService.sign(payload) };
+        return this.getUserAndAccessToken(user);
       } else {
-        const newUser = new UserEntity();
-        newUser.userEmail = data.email;
-        newUser.userName = data.name;
-        newUser.userPhotoURL = data.picture || '';
-        newUser.save();
-        const payload: JwtPayload = { email: newUser.userEmail };
+        const newUser = await this.createUserEntity(
+          data.email,
+          data.name,
+          data.picture,
+        );
 
-        return { user: newUser, accessToken: this.jwtService.sign(payload) };
+        return this.getUserAndAccessToken(newUser);
       }
     } catch (e) {
       throw new BadRequestException();

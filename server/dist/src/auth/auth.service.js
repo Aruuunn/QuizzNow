@@ -20,11 +20,23 @@ let AuthService = class AuthService {
     constructor(userService, jwtService) {
         this.userService = userService;
         this.jwtService = jwtService;
+        this.createUserEntity = async (email, name, photoURL) => {
+            const newUser = new user_entity_1.default();
+            newUser.userEmail = email;
+            newUser.userName = name;
+            newUser.userPhotoURL = photoURL || '';
+            await newUser.save();
+            return newUser;
+        };
         this.verifyJwt = (token) => {
             return this.jwtService.verify(token, {
                 ignoreExpiration: false,
                 secret: env_1.JWT_SECRET,
             });
+        };
+        this.getUserAndAccessToken = (user) => {
+            const payload = { email: user.userEmail };
+            return { user, accessToken: this.jwtService.sign(payload) };
         };
         this.authenticateUser = async (id_token) => {
             try {
@@ -34,17 +46,11 @@ let AuthService = class AuthService {
                 }
                 const user = await this.userService.findByEmail(data.email);
                 if (user) {
-                    const payload = { email: user.userEmail };
-                    return { user, accessToken: this.jwtService.sign(payload) };
+                    return this.getUserAndAccessToken(user);
                 }
                 else {
-                    const newUser = new user_entity_1.default();
-                    newUser.userEmail = data.email;
-                    newUser.userName = data.name;
-                    newUser.userPhotoURL = data.picture || '';
-                    newUser.save();
-                    const payload = { email: newUser.userEmail };
-                    return { user: newUser, accessToken: this.jwtService.sign(payload) };
+                    const newUser = await this.createUserEntity(data.email, data.name, data.picture);
+                    return this.getUserAndAccessToken(newUser);
                 }
             }
             catch (e) {

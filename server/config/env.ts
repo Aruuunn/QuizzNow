@@ -16,4 +16,5 @@ export const {
   NODE_ENV,// should be one of {"dev","test","prod"}
   //-------------------------
   JWT_SECRET,// FROM .env
+  VALID_ID_TOKEN// used for testing purpose
 } = process.env;
