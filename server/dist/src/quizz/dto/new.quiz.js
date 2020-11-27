@@ -20,7 +20,7 @@ __decorate([
     class_validator_1.IsNotEmpty(),
     class_validator_1.IsString(),
     __metadata("design:type", String)
-], NewQuizDto.prototype, "quizztitle", void 0);
+], NewQuizDto.prototype, "quizzTitle", void 0);
 __decorate([
     swagger_1.ApiProperty(),
     class_validator_1.IsNotEmpty(),

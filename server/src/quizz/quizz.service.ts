@@ -43,7 +43,7 @@ export class QuizzService {
       quiz.endDatetime.getTime() > Date.now() &&
       (!checkForPreviousAttempts ||
         user.userAttemptedQuizzes.reduce((t, c) => {
-          if (quiz.quizzId === c.quiz.quizzId) {
+          if (quiz.quizzId === c.quizz.quizzId) {
             return !c.attemptFinished;
           } else {
             return t;
@@ -65,13 +65,13 @@ export class QuizzService {
 
     this.logger.debug(quizAttempt, 'fetchQuestionForQuizAttempt');
     if (
-      this.canAttemptQuiz(quizAttempt.quiz, user, false) &&
+      this.canAttemptQuiz(quizAttempt.quizz, user, false) &&
       !quizAttempt.attemptFinished &&
       quizAttempt.user.userId === user.userId &&
       questionNumber >= 0 &&
-      questionNumber < quizAttempt.quiz.questions.length
+      questionNumber < quizAttempt.quizz.questions.length
     ) {
-      const question = quizAttempt.quiz.questions[questionNumber];
+      const question = quizAttempt.quizz.questions[questionNumber];
       const selectedOption = quizAttempt.questionAttempts.reduce((t, c) => {
         if (question && c.questionId === question.questionId) {
           return c.optionChoosed;
@@ -91,10 +91,10 @@ export class QuizzService {
 
   async attemptQuiz(user: UserEntity, quizId: string): Promise<string> {
     const quiz = await this.quizRepo.findOne(quizId, {
-      relations: ['attempts'],
+      relations: ['quizzAttemptsByUsers'],
     });
     const quizAttempt = user.userAttemptedQuizzes.reduce((t, c) => {
-      if (c.quiz.quizzId === quiz.quizzId) {
+      if (c.quizz.quizzId === quiz.quizzId) {
         return c;
       } else {
         return t;
@@ -111,7 +111,7 @@ export class QuizzService {
 
     const newQuizAttempt = new QuizzAttemptEntity();
     newQuizAttempt.user = user;
-    newQuizAttempt.quiz = quiz;
+    newQuizAttempt.quizz = quiz;
     newQuizAttempt.questionAttempts = [];
     await newQuizAttempt.save();
     return newQuizAttempt.quizzAttemptId;
@@ -133,7 +133,7 @@ export class QuizzService {
       if (
         !question ||
         !quizAttempt ||
-        !this.canAttemptQuiz(quizAttempt.quiz, user, false)
+        !this.canAttemptQuiz(quizAttempt.quizz, user, false)
       ) {
         this.logger.error('Cannot Attempt Question');
         throw new BadRequestException();
@@ -186,7 +186,7 @@ export class QuizzService {
     newQuiz.startDatetime = new Date(quizData.startDatetime);
     newQuiz.endDatetime = new Date(quizData.endDatetime);
     newQuiz.createdBy = user;
-    newQuiz.quizzTitle = quizData.quizztitle;
+    newQuiz.quizzTitle = quizData.quizzTitle;
 
     const questions: QAEntity[] = [];
     if (quizData.questions.length !== 0)

@@ -12,10 +12,10 @@ import {
   FETCH_ATTEMPT_ID,
   ATTEMPT_QUESTION,
   FINISH,
+  NOT_FOUND,
 } from "../../common/ws.event.types";
 import { wsApiURL } from "../../config/domain";
-
-export const clone = (obj: Object) => Object.create(obj);
+import { QuizzDetailsType } from "../../reduxStore";
 
 export const setUp = () => {
   const socket = io(wsApiURL, {
@@ -37,34 +37,35 @@ export const onUnAuthorized = (
   socket: SocketIOClient.Socket,
   callback: () => void
 ) => {
-  const socketClone = clone(socket);
-  socketClone.on(UNAUTHORIZED, callback);
-  return socketClone;
+
+  socket.on(UNAUTHORIZED, callback);
+  return socket;
 };
+
+export const onNotFound = (
+  socket: SocketIOClient.Socket,
+  callback: () => void
+) => {
+
+  socket.on(NOT_FOUND, callback);
+  return socket;
+};
+
 
 export const fetchQuizzDetails = (
   socket: SocketIOClient.Socket,
   quizzId: string,
   callback: (data: {
-    payload: {
-      id: string;
-      title: string,
-      createdBy: {
-        name: string,
-        photoURL?:string
-      },
-      startDatetime: string;
-      endDatetime: string;
-    }
+    payload:QuizzDetailsType
   }) => void
-) => {
-  const socketClone = clone(socket);
-  socketClone.emit(FETCH_QUIZ_DETAILS, {
+):SocketIOClient.Socket => {
+
+  socket.emit(FETCH_QUIZ_DETAILS, {
     payload: { quizzId },
   });
 
-  socketClone.on(RECEIVED_QUIZ_DETAILS, callback);
-  return socketClone;
+  socket.on(RECEIVED_QUIZ_DETAILS, callback);
+  return socket;
 };
 
 export const fetchQuestion = (
@@ -78,10 +79,10 @@ export const fetchQuestion = (
     };
   }) => void
 ) => {
-  const socketClone = clone(socket);
-  socketClone.emit(FETCH_QUESTION, { payload: { attemptId, questionNumber } });
-  socketClone.on(RECEIVED_QUESTION, callback);
-  return socketClone;
+
+  socket.emit(FETCH_QUESTION, { payload: { attemptId, questionNumber } });
+  socket.on(RECEIVED_QUESTION, callback);
+  return socket;
 };
 
 export const startQuizz = (
@@ -89,10 +90,9 @@ export const startQuizz = (
   quizId: string,
   callback: (data: { payload: { attemptId: string } }) => void
 ) => {
-  const socketClone = clone(socket);
-  socketClone.emit(START, { payload: { quizId } });
-  socketClone.on(FETCH_ATTEMPT_ID, callback);
-  return socketClone;
+  socket.emit(START, { payload: { quizId } });
+  socket.on(FETCH_ATTEMPT_ID, callback);
+  return socket;
 };
 
 export const attemptQuestion = (
@@ -101,8 +101,7 @@ export const attemptQuestion = (
   questionId: string,
   attemptId: string
 ) => {
-  const socketClone = clone(socket);
-  socketClone.emit(ATTEMPT_QUESTION, {
+  socket.emit(ATTEMPT_QUESTION, {
     payload: {
       selectedOption,
       questionId,
@@ -110,7 +109,7 @@ export const attemptQuestion = (
     },
   });
 
-  return socketClone;
+  return socket;
 };
 
 export const finishQuizAttempt = (
@@ -118,8 +117,7 @@ export const finishQuizAttempt = (
   attemptId: string,
   callback: () => void = () => {}
 ) => {
-  const socketClone = clone(socket);
-  socketClone.emit(FINISH, { payload: { attemptId } });
+  socket.emit(FINISH, { payload: { attemptId } });
   callback();
-  return socketClone;
+  return socket;
 };

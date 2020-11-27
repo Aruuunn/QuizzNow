@@ -45,7 +45,7 @@ __decorate([
 ], QuizzEntity.prototype, "createdBy", void 0);
 __decorate([
     class_transformer_1.Exclude(),
-    typeorm_1.OneToMany(type => quizz_attempts_entity_1.default, quizAttempt => quizAttempt.quiz, { onDelete: 'CASCADE' }),
+    typeorm_1.OneToMany(type => quizz_attempts_entity_1.default, quizAttempt => quizAttempt.quizz, { onDelete: 'CASCADE' }),
     __metadata("design:type", Array)
 ], QuizzEntity.prototype, "quizzAttemptsByUsers", void 0);
 __decorate([

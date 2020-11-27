@@ -1,39 +1,87 @@
-export interface QuizState {
-  [quizId: string]: {
-    title: string;
+import { QuizzActionTypes } from "../types";
+
+export interface Quizz {
+  quizzId: string;
+  startDatetime: string;
+  quizzTitle: string;
+  endDatetime: string;
+}
+
+export type QuizzDetailsType = {
+  quizzTitle: string;
+  startDatetime: string;
+  endDatetime: string;
+  createdBy: { userName: string };
+  canAttemptQuizz: boolean;
+  totalNumberOfQuestions: number;
+  isQuizzAttemptFinished: boolean;
+  isQuizzStarted: boolean;
+  isQuizzAttempted: boolean;
+  quizzId: string;
+};
+export interface QuizzState {
+  socket: SocketIOClient.Socket | null,
+  quizzes: {
+     [quizzId: string]: {
+    quizzTitle: string;
     startDatetime: string;
     endDatetime: string;
-    createdBy: string;
-    canAttemptQuiz: boolean;
+    createdBy: { userName: string };
+    canAttemptQuizz: boolean;
     totalNumberOfQuestions: number;
-    isQuizAttemptFinished: boolean;
-    isQuizStarted: boolean;
-    isQuiAttempted: boolean;
+    isQuizzAttemptFinished: boolean;
+    isQuizzStarted: boolean;
+    isQuizzAttempted: boolean;
     cacheQuestion: {
       [key: number]: {
         selectedOption: number | null;
-        question: string;
-        options: string[];
-        id: string;
+        questionTitle: string;
+        multipleChoices: string[];
+        questionId: string;
       };
     };
-    attemptId: string;
+    quizzAttemptId?: string;
   };
-}
-
-export type QuizAction  = {
-  type: any;
-  payload: any;
-}
-
-
-export const quizInitialState: QuizState = {};
-
-export const quizStateReducer = (quizState: QuizState = quizInitialState, quizAction:QuizAction):QuizState => {
-  switch (quizAction.type) {
-    default:
-      return quizState;
   }
+ 
 }
 
-export default quizStateReducer;
+
+
+export type QuizzAction = {
+  type: QuizzActionTypes;
+  payload: QuizzDetailsType | SocketIOClient.Socket;
+};
+
+const saveQuizzDetails = (state: QuizzState, payload: QuizzDetailsType):QuizzState => {
+  const { quizzId, ...rest } = payload;
+
+  return {
+    ...state,
+    quizzes: {
+      ...state.quizzes,
+      [quizzId]: {
+        cacheQuestion: {},
+        ...rest,
+      },
+   }
+  };
+};
+
+export const quizInitialState: QuizzState = {socket:null,quizzes:{}};
+
+export const quizzStateReducer = (
+  quizzState: QuizzState = quizInitialState,
+  quizzAction: QuizzAction
+): QuizzState => {
+  switch (quizzAction.type) {
+    case QuizzActionTypes.SAVE_QUIZ_DETAILS:
+      return saveQuizzDetails(quizzState, quizzAction.payload as QuizzDetailsType);
+    case QuizzActionTypes.SET_SOCKET:
+      return {...quizzState,socket:quizzAction.payload as SocketIOClient.Socket}
+    default:
+      return quizzState;
+  }
+};
+
+export default quizzStateReducer;

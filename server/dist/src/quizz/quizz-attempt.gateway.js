@@ -43,10 +43,16 @@ let QuizAttemptGateway = class QuizAttemptGateway {
     async fetchQuizDetails(server, data) {
         const { user, payload: { quizzId }, } = data;
         try {
-            const quiz = await this.quizService.getQuiz(quizzId, ['createdBy']);
+            let quiz;
+            try {
+                quiz = await this.quizService.getQuiz(quizzId, ['createdBy']);
+            }
+            catch (e) {
+                return server.emit(ws_event_types_1.NOT_FOUND);
+            }
             server.emit(ws_event_types_1.RECEIVED_QUIZ_DETAILS, {
-                payload: Object.assign(Object.assign({}, class_transformer_1.classToPlain(quiz)), { canAttemptQuiz: this.quizService.canAttemptQuiz(quiz, data.user), totalQuestions: quiz.questions.length, hasAttempted: user.userAttemptedQuizzes.reduce((t, c) => {
-                        if (c.quiz.quizzId === quizzId) {
+                payload: Object.assign(Object.assign({}, class_transformer_1.classToPlain(quiz)), { canAttemptQuizz: this.quizService.canAttemptQuiz(quiz, data.user), totalNumberOfQuestions: quiz.questions.length, isQuizzAttemptFinished: user.userAttemptedQuizzes.reduce((t, c) => {
+                        if (c.quizz.quizzId === quizzId) {
                             return c.attemptFinished ||
                                 quiz.endDatetime.getTime() < Date.now()
                                 ? true
@@ -60,7 +66,7 @@ let QuizAttemptGateway = class QuizAttemptGateway {
         }
         catch (e) {
             console.log(e);
-            server.emit(ws_event_types_1.RECEIVED_QUIZ_DETAILS, { payload: null });
+            server.emit(ws_event_types_1.ERROR);
         }
     }
     async startQuiz(server, data) {

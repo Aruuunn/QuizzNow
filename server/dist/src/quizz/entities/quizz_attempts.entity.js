@@ -23,7 +23,7 @@ __decorate([
 __decorate([
     typeorm_1.ManyToOne(type => quizz_entity_1.QuizzEntity, quiz => quiz.quizzAttemptsByUsers, { eager: true, onDelete: 'CASCADE' }),
     __metadata("design:type", quizz_entity_1.QuizzEntity)
-], QuizzAttemptEntity.prototype, "quiz", void 0);
+], QuizzAttemptEntity.prototype, "quizz", void 0);
 __decorate([
     typeorm_1.ManyToOne(type => user_entity_1.default, user => user.userAttemptedQuizzes),
     __metadata("design:type", user_entity_1.default)

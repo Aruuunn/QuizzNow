@@ -11,3 +11,4 @@ export declare const FETCH_ATTEMPT_ID = "FETCH_ATTEMPT_ID";
 export declare const FETCH_QUESTION = "FETCH_QUESTION";
 export declare const RECEIVED_QUESTION = "RECEIVED_QUESTION";
 export declare const FINISHED = "FINISHED";
+export declare const NOT_FOUND = "NOT_FOUND";

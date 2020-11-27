@@ -37,7 +37,7 @@ let QuizzService = class QuizzService {
             newQuiz.startDatetime = new Date(quizData.startDatetime);
             newQuiz.endDatetime = new Date(quizData.endDatetime);
             newQuiz.createdBy = user;
-            newQuiz.quizzTitle = quizData.quizztitle;
+            newQuiz.quizzTitle = quizData.quizzTitle;
             const questions = [];
             if (quizData.questions.length !== 0)
                 for (let i of quizData.questions) {
@@ -160,7 +160,7 @@ let QuizzService = class QuizzService {
             quiz.endDatetime.getTime() > Date.now() &&
             (!checkForPreviousAttempts ||
                 user.userAttemptedQuizzes.reduce((t, c) => {
-                    if (quiz.quizzId === c.quiz.quizzId) {
+                    if (quiz.quizzId === c.quizz.quizzId) {
                         return !c.attemptFinished;
                     }
                     else {
@@ -175,12 +175,12 @@ let QuizzService = class QuizzService {
             relations: ['user'],
         });
         this.logger.debug(quizAttempt, 'fetchQuestionForQuizAttempt');
-        if (this.canAttemptQuiz(quizAttempt.quiz, user, false) &&
+        if (this.canAttemptQuiz(quizAttempt.quizz, user, false) &&
             !quizAttempt.attemptFinished &&
             quizAttempt.user.userId === user.userId &&
             questionNumber >= 0 &&
-            questionNumber < quizAttempt.quiz.questions.length) {
-            const question = quizAttempt.quiz.questions[questionNumber];
+            questionNumber < quizAttempt.quizz.questions.length) {
+            const question = quizAttempt.quizz.questions[questionNumber];
             const selectedOption = quizAttempt.questionAttempts.reduce((t, c) => {
                 if (question && c.questionId === question.questionId) {
                     return c.optionChoosed;
@@ -198,10 +198,10 @@ let QuizzService = class QuizzService {
     }
     async attemptQuiz(user, quizId) {
         const quiz = await this.quizRepo.findOne(quizId, {
-            relations: ['attempts'],
+            relations: ['quizzAttemptsByUsers'],
         });
         const quizAttempt = user.userAttemptedQuizzes.reduce((t, c) => {
-            if (c.quiz.quizzId === quiz.quizzId) {
+            if (c.quizz.quizzId === quiz.quizzId) {
                 return c;
             }
             else {
@@ -216,7 +216,7 @@ let QuizzService = class QuizzService {
         }
         const newQuizAttempt = new quizz_attempts_entity_1.default();
         newQuizAttempt.user = user;
-        newQuizAttempt.quiz = quiz;
+        newQuizAttempt.quizz = quiz;
         newQuizAttempt.questionAttempts = [];
         await newQuizAttempt.save();
         return newQuizAttempt.quizzAttemptId;
@@ -230,7 +230,7 @@ let QuizzService = class QuizzService {
             const question = await this.questionService.findbyID(questionId);
             if (!question ||
                 !quizAttempt ||
-                !this.canAttemptQuiz(quizAttempt.quiz, user, false)) {
+                !this.canAttemptQuiz(quizAttempt.quizz, user, false)) {
                 this.logger.error('Cannot Attempt Question');
                 throw new common_1.BadRequestException();
             }

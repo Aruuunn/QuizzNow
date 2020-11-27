@@ -12,29 +12,36 @@ import moment from "moment";
 
 import CopyToClipboard from "react-copy-to-clipboard";
 import { ConfirmDialog } from "../../components";
-import axios from '../../common/axios';
+import axios from "../../common/axios";
 
 export const QuizListItem = (props: {
   key: any;
-  title: string;
+  quizzTitle: string;
   startDatetime: string;
   endDatetime: string;
-  id: string;
+  quizzId: string;
   fetchData: () => Promise<void>;
 }) => {
+  const {
+    key,
+    quizzTitle,
+    quizzId,
+    endDatetime,
+    fetchData,
+    startDatetime,
+  } = props;
   const [isCopied, setCopied] = React.useState(false);
   const [deleteIt, setDelete] = React.useState(false);
 
-  const onDelete = async () :Promise<void> => {
-   
-    await axios.delete(`/quizz/${props.id}`, {
+  const onDelete = async (): Promise<void> => {
+    await axios.delete(`/quizz/${props.quizzId}`, {
       headers: {
-        Authorization: `Bearer ${localStorage.getItem("accessToken")}`
-      }
+        Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+      },
     });
-    
+
     await props.fetchData();
-  }
+  };
 
   return (
     <Card
@@ -49,7 +56,7 @@ export const QuizListItem = (props: {
       <ConfirmDialog
         open={deleteIt}
         onClose={() => setDelete(false)}
-        title={`Delete ${props.title} ?`}
+        title={`Delete ${quizzTitle} ?`}
         description="There is no going back after you have deleted the Quiz"
         successButtonText="Delete"
         onSuccess={onDelete}
@@ -57,12 +64,15 @@ export const QuizListItem = (props: {
       />
       <CardContent>
         <Grid container justify="space-between" alignItems="center">
-          <Typography variant="h5">{props.title}</Typography>
+          <Typography variant="h5">{quizzTitle}</Typography>
           <div>
             {" "}
-            <IconButton size="small" onClick={() => {
-              setDelete(true);
-            }}>
+            <IconButton
+              size="small"
+              onClick={() => {
+                setDelete(true);
+              }}
+            >
               <SvgIcon fontSize="small">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -83,7 +93,7 @@ export const QuizListItem = (props: {
                 setCopied(true);
                 setTimeout(() => setCopied(false), 2000);
               }}
-              text={`${window.location.href}attempt/${props.id}`}
+              text={`${window.location.href}attempt/${quizzId}`}
             >
               <IconButton>
                 <Tooltip
@@ -110,12 +120,12 @@ export const QuizListItem = (props: {
 
         <div style={{ color: "grey", marginTop: "10px" }}>
           <Typography variant="body1">
-            Start : {new Date(props.startDatetime).toLocaleString()} (
-            {moment(props.startDatetime).fromNow()})
+            Start : {new Date(startDatetime).toLocaleString()} (
+            {moment(startDatetime).fromNow()})
           </Typography>
           <Typography variant="body1">
-            End : {new Date(props.endDatetime).toLocaleString()} (
-            {moment(props.endDatetime).fromNow()})
+            End : {new Date(endDatetime).toLocaleString()} (
+            {moment(endDatetime).fromNow()})
           </Typography>
         </div>
       </CardContent>

@@ -5,8 +5,8 @@ import { RouteComponentProps, withRouter } from "react-router-dom";
 
 import axios from "../../common/axios";
 import { NavBar } from "../../components";
-import QuizListItem from "./quizItem";
-import { RootState, Quiz } from "../../reduxStore/reducers";
+import QuizzListItem from "./quizItem";
+import { RootState, Quizz } from "../../reduxStore/reducers";
 import { AuthActionTypes } from "../../reduxStore/types";
 
 export { default as AuthView } from "../Auth";
@@ -25,7 +25,7 @@ interface State {
   limit: number;
   page: number;
   loading: boolean;
-  quizzes: Quiz[];
+  quizzes: Quizz[];
 }
 
 class Home extends Component<Props, State> {
@@ -99,8 +99,8 @@ class Home extends Component<Props, State> {
           >
             Created Quizzes
           </Typography>
-          {(this.state.quizzes as Quiz[]).map((o, i) => {
-            return <QuizListItem fetchData={this.fetchData} key={i} {...o} />;
+          {(this.state.quizzes as Quizz[]).map((o, i) => {
+            return <QuizzListItem fetchData={this.fetchData} key={i} {...o} />;
           })}
           {this.state.quizzes.length === 0 && (
             <div

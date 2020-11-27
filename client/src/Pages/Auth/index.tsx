@@ -51,14 +51,12 @@ class Auth extends Component<Props, State> {
       return;
     }
     const id_token = (response as GoogleLoginResponse).tokenObj.id_token;
-    console.log(id_token);
     this.setState({ loading: true });
     axios
       .post("/auth/google", {
         id_token,
       })
       .then((res) => {
-        console.log(res.data);
         this.props.setUser(res.data.user);
         this.props.saveAccessToken(res.data.accessToken);
         this.setState({ loading: false }, () => {

@@ -20,7 +20,7 @@ export class QuizzAttemptEntity extends BaseEntity {
     quiz => quiz.quizzAttemptsByUsers,
     { eager: true, onDelete: 'CASCADE' },
   )
-  quiz: QuizzEntity;
+  quizz: QuizzEntity;
 
   @ManyToOne(
     type => UserEntity,

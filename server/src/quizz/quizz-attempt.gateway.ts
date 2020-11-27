@@ -20,11 +20,12 @@ import {
   START,
   RECEIVED_QUESTION,
   FINISH,
+  NOT_FOUND,
 } from '../../common/ws.event.types';
 import UserEntity from '../user/user.entity';
 import { QuizzService } from './quizz.service';
 import { classToPlain } from 'class-transformer';
-
+import QuizzEntity from './entities/quizz.entity';
 
 @UseGuards(WsGuard)
 @WebSocketGateway(undefined, { transports: ['websocket', 'polling'] })
@@ -78,14 +79,22 @@ export class QuizAttemptGateway
       payload: { quizzId },
     } = data;
     try {
-      const quiz = await this.quizService.getQuiz(quizzId, ['createdBy']);
-      server.emit(RECEIVED_QUIZ_DETAILS,{
+
+      let quiz: QuizzEntity;
+
+      try {
+        quiz = await this.quizService.getQuiz(quizzId, ['createdBy']);
+      } catch (e) {
+        return server.emit(NOT_FOUND);
+      }
+
+      server.emit(RECEIVED_QUIZ_DETAILS, {
         payload: {
           ...classToPlain(quiz),
-          canAttemptQuiz: this.quizService.canAttemptQuiz(quiz, data.user),
-          totalQuestions: quiz.questions.length,
-          hasAttempted: user.userAttemptedQuizzes.reduce((t, c) => {
-            if (c.quiz.quizzId === quizzId) {
+          canAttemptQuizz: this.quizService.canAttemptQuiz(quiz, data.user),
+          totalNumberOfQuestions: quiz.questions.length,
+          isQuizzAttemptFinished: user.userAttemptedQuizzes.reduce((t, c) => {
+            if (c.quizz.quizzId === quizzId) {
               return c.attemptFinished ||
                 quiz.endDatetime.getTime() < Date.now()
                 ? true
@@ -98,7 +107,7 @@ export class QuizAttemptGateway
       });
     } catch (e) {
       console.log(e);
-      server.emit(RECEIVED_QUIZ_DETAILS, { payload: null });
+      server.emit(ERROR);
     }
   }
 

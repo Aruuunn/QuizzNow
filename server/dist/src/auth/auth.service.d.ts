@@ -11,6 +11,7 @@ export declare class AuthService {
         user: UserEntity;
         accessToken: string;
     };
+    fetchData: (id_token: string) => Promise<any>;
     authenticateUser: (id_token: string) => Promise<{
         user: UserEntity;
         accessToken: string;

@@ -13,7 +13,7 @@ export class NewQuizDto {
   @ApiProperty()
   @IsNotEmpty()
   @IsString()
-  quizztitle: string;
+  quizzTitle: string;
 
   @ApiProperty()
   @IsNotEmpty()

@@ -21,7 +21,7 @@ export declare class QuizAttemptGateway implements OnGatewayInit, OnGatewayConne
             quizzId: string;
         };
         user: UserEntity;
-    }): Promise<void>;
+    }): Promise<import("socket.io").Namespace>;
     startQuiz(server: Server, data: {
         payload: {
             quizId: string;

@@ -38,9 +38,12 @@ let AuthService = class AuthService {
             const payload = { email: user.userEmail };
             return { user, accessToken: this.jwtService.sign(payload) };
         };
+        this.fetchData = async (id_token) => {
+            return (await axios_1.default.get(`https://www.googleapis.com/oauth2/v3/tokeninfo?id_token=${id_token.trim()}`)).data;
+        };
         this.authenticateUser = async (id_token) => {
             try {
-                const { data } = await axios_1.default.get(`https://www.googleapis.com/oauth2/v3/tokeninfo?id_token=${id_token.trim()}`);
+                const data = await this.fetchData(id_token);
                 if (!data || !data.email || !data.name) {
                     throw new common_1.BadRequestException();
                 }

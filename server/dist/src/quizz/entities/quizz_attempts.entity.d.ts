@@ -4,7 +4,7 @@ import { QuestionAttemptEntity } from './question_attempt.entity';
 import UserEntity from '../../user/user.entity';
 export declare class QuizzAttemptEntity extends BaseEntity {
     quizzAttemptId: string;
-    quiz: QuizzEntity;
+    quizz: QuizzEntity;
     user: UserEntity;
     questionAttempts: QuestionAttemptEntity[];
     totalScore: number;

@@ -20,12 +20,12 @@ import { NavBar } from "../../components";
 import axios from "../../common/axios";
 
 interface Question {
-  question: string;
-  options: string[];
-  correctAnswer: number | null;
+  questionTitle: string;
+  multipleChoices: string[];
+  correctAnswer: string | null;
 }
 interface State {
-  title: string;
+  quizzTitle: string;
   activeNow: boolean;
   startDatetime: Date;
   endDatetime: Date;
@@ -34,8 +34,8 @@ interface State {
 
 const NewQuiz = () => {
   const initialNewQuestionState = {
-    question: "",
-    options: [],
+    questionTitle: "",
+    multipleChoices: [],
     correctAnswer: null,
     addOptionMode: false,
     input: "",
@@ -53,7 +53,7 @@ const NewQuiz = () => {
   >(initialNewQuestionState);
 
   const [state, setState] = useState<State>({
-    title: "",
+    quizzTitle: "",
     activeNow: false,
     questions: [],
     startDatetime: new Date(Date.now() + 600000),
@@ -69,7 +69,7 @@ const NewQuiz = () => {
 
   const isOptionValid = () =>
     newQuestionState.input.trim() !== "" &&
-    newQuestionState.options.reduce((t, c) => {
+    newQuestionState.multipleChoices.reduce((t, c) => {
       if (c.trim() === newQuestionState.input.trim()) {
         return false;
       } else return t;
@@ -80,21 +80,26 @@ const NewQuiz = () => {
 
   const isNewQuestionValid = () =>
     newQuestionState.correctAnswer !== null &&
-    newQuestionState.correctAnswer < newQuestionState.options.length &&
-    newQuestionState.options.length >= 2 &&
-    newQuestionState.question.trim() !== "";
+    newQuestionState.multipleChoices.length >= 2 &&
+    newQuestionState.questionTitle.trim() !== "";
 
   const addNewQuestion = () => {
     if (
       newQuestionState.correctAnswer === null ||
-      newQuestionState.correctAnswer >= newQuestionState.options.length
+      newQuestionState.multipleChoices.reduce((t:boolean, c) => {
+        if (c === newQuestionState.correctAnswer) {
+          return false;
+        } else {
+          return t;
+        }
+      }, true)
     ) {
       Alert(
         "Provide a Correct Answer for the Question. Click a Option to make it the correct answer!"
       );
-    } else if (newQuestionState.options.length < 2) {
+    } else if (newQuestionState.multipleChoices.length < 2) {
       Alert("Provide atleast Two Options for the Question");
-    } else if (newQuestionState.question.trim() === "") {
+    } else if (newQuestionState.questionTitle.trim() === "") {
       Alert("Provide a Valid Question!");
     } else if (isNewQuestionValid()) {
       setState((s) => ({
@@ -102,8 +107,8 @@ const NewQuiz = () => {
         questions: [
           ...s.questions,
           {
-            question: newQuestionState.question,
-            options: newQuestionState.options,
+            questionTitle: newQuestionState.questionTitle,
+            multipleChoices: newQuestionState.multipleChoices,
             correctAnswer: newQuestionState.correctAnswer,
           },
         ],
@@ -113,7 +118,7 @@ const NewQuiz = () => {
   };
 
   const handleFinish = async () => {
-    if (state.title.trim() === "") {
+    if (state.quizzTitle.trim() === "") {
       Alert("Quiz Title Should not be Empty");
     } else if (state.questions.length === 0) {
       Alert("Create Atleast one question");
@@ -132,15 +137,13 @@ const NewQuiz = () => {
       setLoading(true);
       try {
         const data = {
-          title: state.title,
-          startDatetime: state.activeNow
-            ? new Date()
-            : state.startDatetime,
+          quizzTitle: state.quizzTitle,
+          startDatetime: state.activeNow ? new Date() : state.startDatetime,
           endDatetime: state.endDatetime,
           questions: state.questions,
         };
-     
-        await axios.post("/quiz/new", data, {
+
+        await axios.post("/quizz/new", data, {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
           },
@@ -206,10 +209,10 @@ const NewQuiz = () => {
             inputProps={{
               style: { color: "white", padding: "20px", fontSize: "26px" },
             }}
-            value={state.title}
+            value={state.quizzTitle}
             onChange={(e) => {
               e.persist();
-              setState((s) => ({ ...s, title: e.target.value }));
+              setState((s) => ({ ...s, quizzTitle: e.target.value }));
             }}
             color="secondary"
             style={{ marginBottom: "20px" }}
@@ -310,26 +313,29 @@ const NewQuiz = () => {
         {open ? (
           <Paper style={{ padding: "10px", marginBottom: "30px" }}>
             <TextField
-              value={newQuestionState.question}
+              value={newQuestionState.questionTitle}
               multiline
               variant="filled"
               placeholder="Question Title"
               required
               fullWidth
               onChange={(e) =>
-                setNewQuestionState((s) => ({ ...s, question: e.target.value }))
+                setNewQuestionState((s) => ({
+                  ...s,
+                  questionTitle: e.target.value,
+                }))
               }
               inputProps={{
                 style: { color: "white", padding: "10px", fontSize: "23px" },
               }}
             />
 
-            {newQuestionState.options.map((o, i) => (
+            {newQuestionState.multipleChoices.map((o, i) => (
               <Paper
                 key={i}
                 onClick={() => {
                   if (!loading) {
-                    setNewQuestionState((s) => ({ ...s, correctAnswer: i }));
+                    setNewQuestionState((s) => ({ ...s, correctAnswer: o }));
                   }
                 }}
                 variant="outlined"
@@ -337,7 +343,7 @@ const NewQuiz = () => {
                   color: "white",
                   marginTop: "10px",
                   backgroundColor:
-                    i === newQuestionState.correctAnswer
+                    o === newQuestionState.correctAnswer
                       ? "#0069FF"
                       : "#163855",
                   padding: "10px",
@@ -349,18 +355,15 @@ const NewQuiz = () => {
                     <IconButton
                       disabled={loading}
                       size="small"
-                      onClick={() =>
+                      onClick={() => {
                         setNewQuestionState((s) => ({
                           ...s,
-                          correctAnswer:
-                            !s.correctAnswer || s.correctAnswer === i
-                              ? null
-                              : s.correctAnswer > i
-                              ? s.correctAnswer - 1
-                              : s.correctAnswer,
-                          options: s.options.filter((e) => e !== o),
-                        }))
-                      }
+                          correctAnswer: null,
+                          multipleChoices: s.multipleChoices.filter(
+                            (e) => e !== o
+                          ),
+                        }));
+                      }}
                     >
                       <SvgIcon fontSize="small">
                         <svg
@@ -427,7 +430,10 @@ const NewQuiz = () => {
                         setNewQuestionState((s) => ({
                           ...s,
                           addOptionMode: false,
-                          options: [...s.options, s.input.trim()],
+                          multipleChoices: [
+                            ...s.multipleChoices,
+                            s.input.trim(),
+                          ],
                           input: "",
                         }));
                       }
@@ -491,7 +497,7 @@ const NewQuiz = () => {
             <Grid container justify="space-between">
               {" "}
               <Typography variant="h5" style={{ color: "white" }}>
-                {o.question}
+                {o.questionTitle}
               </Typography>
               <div>
                 {" "}
@@ -548,7 +554,7 @@ const NewQuiz = () => {
               </div>
             </Grid>
 
-            {o.options.map((e, i) => (
+            {o.multipleChoices.map((e, i) => (
               <Paper
                 key={i}
                 variant="outlined"
@@ -556,7 +562,7 @@ const NewQuiz = () => {
                   color: "white",
                   marginTop: "20px",
                   backgroundColor:
-                    i === o.correctAnswer ? "#0069FF" : "#163855",
+                    e === o.correctAnswer ? "#0069FF" : "#163855",
                   padding: "10px",
                 }}
               >

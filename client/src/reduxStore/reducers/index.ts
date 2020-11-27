@@ -5,9 +5,10 @@ import sessionStorage from "redux-persist/lib/storage/session";
 
 import authReducer, { AuthState } from "./auth.reducer";
 import userReducer, { UserState } from "./user.reducer";
-import quizReducer, { QuizState } from "./quiz.reducer";
+import quizzReducer, { QuizzState } from "./quiz.reducer";
 export * from "./auth.reducer";
 export * from "./user.reducer";
+export * from "./quiz.reducer";
 
 const persistConfig = {
   key: "root",
@@ -23,13 +24,13 @@ const sessionStorePersistConfig = {
 export type RootState = {
   auth: AuthState;
   user: UserState;
-  quiz: QuizState;
+  quizz: QuizzState;
 };
 
 export const rootReducer = combineReducers({
   auth: persistReducer(persistConfig, authReducer),
   user: persistReducer(persistConfig, userReducer),
-  quiz: persistReducer(sessionStorePersistConfig, quizReducer),
+  quizz: quizzReducer,
 });
 
 export default rootReducer;

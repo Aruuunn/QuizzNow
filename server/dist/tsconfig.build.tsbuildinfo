@@ -162,8 +162,8 @@
         "affectsGlobalScope": false
       },
       "../common/ws.event.types.ts": {
-        "version": "1fa941d0e6451c0f5478d5e83f6cda1f2074eee0bf30cf01a671dd1188d23d34",
-        "signature": "a3b15e80d287bd3996dd9bcbf1c68c02114d1d802ded8ef2016645d9271ecfc5",
+        "version": "e31cee2896afd95bf3fab7c1e073aa1151bff9dfb1daf56b7b0a58e357b41f24",
+        "signature": "bc095d1117944df9d5a99d007f2b0203a516b0a9b41f07fd85c215f3d9f7bc58",
         "affectsGlobalScope": false
       },
       "../node_modules/@types/node/globals.d.ts": {
@@ -402,8 +402,8 @@
         "affectsGlobalScope": false
       },
       "../config/env.ts": {
-        "version": "ffe5f5d3ee4ed32f212ba4c684a4e08c13cbf1369bfe34b4ad0d32e399a713d4",
-        "signature": "38d99f575846a239bf2b039cf4007e062d682df4eacef77b48c4bc0a8b49af70",
+        "version": "cbf6cf42c8c9e90e2f901299746ee836ba400f84942c27f19bd403a949d9ebf9",
+        "signature": "7d8410bd7da5f3bc10ad571fb8e5d213683c05551d28fc10306c6ff54b6be878",
         "affectsGlobalScope": false
       },
       "../node_modules/reflect-metadata/index.d.ts": {
@@ -2802,12 +2802,12 @@
         "affectsGlobalScope": false
       },
       "../src/quizz/entities/quizz_attempts.entity.ts": {
-        "version": "de7d231bddb69a2aebb8652b0ea1ac643494d7b99e82a53f092a92decd54f151",
-        "signature": "3033b740722bc6fa9d33be39b81dadb8304d84bb9bbe5608c96705586492b3ea",
+        "version": "0ef023fd5d91e4fa68af48fe1851a9203d5072b0d5b3b8ec4dd73a5653572a84",
+        "signature": "8531f363dc67f7031bd1b0f2503812ea66e97d2255fb3b4a19a68a0f5921ab74",
         "affectsGlobalScope": false
       },
       "../src/quizz/entities/quizz.entity.ts": {
-        "version": "f33bfdb66ce9453268437e91ebb55cabc2f6876afedddd6d4fbaa6b61c3621e3",
+        "version": "8034075b56b59f9f31d0f0547d1f0e4d7abf34903e3bd37fb0b9ca39f5014f52",
         "signature": "db79752aba4228418b1e8560ea44b513d8d0fe7faf925b8a76a44e7d05c33403",
         "affectsGlobalScope": false
       },
@@ -2827,8 +2827,8 @@
         "affectsGlobalScope": false
       },
       "../src/auth/auth.service.ts": {
-        "version": "7638b720c5024e9dd7b02bdbd418fd714d510fbab41d0476b039472ed05c480d",
-        "signature": "ed0ceaaa9982fd4240c27c843ea814e85f9f2b83b2ce8e55e2b03fc88c13ca34",
+        "version": "93ff2e517a03db4ef6d0b317ac11ce75f0fed2519f42f252b199929f8dfdc819",
+        "signature": "118aa6c1eac4efd0b946be1f6e195865bdc7fd9cab2f0995915ce08f8b9c54c2",
         "affectsGlobalScope": false
       },
       "../src/auth/auth.controller.ts": {
@@ -3807,8 +3807,8 @@
         "affectsGlobalScope": false
       },
       "../src/quizz/dto/new.quiz.ts": {
-        "version": "17c90cd0b231c61b24c6d06b2ee8ff8a9a12de0fb12c133c3e7887d8b9e7646d",
-        "signature": "b5ecb49e5a98a2365a0c27f05752eff925eb62e268d2ee4125bf366276695b27",
+        "version": "415d90a270813d19e3e5472809daa7140d6fe4a5c46a1cfb0ffaf8dd195aaa99",
+        "signature": "7a10b131702571f65b8c6b9744e89a7eeb0760df2f58719e239685395ee315f1",
         "affectsGlobalScope": false
       },
       "../node_modules/@nestjs/websockets/adapters/ws-adapter.d.ts": {
@@ -3937,7 +3937,7 @@
         "affectsGlobalScope": false
       },
       "../src/quizz/quizz.service.ts": {
-        "version": "24f874158ac21d7be774add90e25bc49ec4b4758698465be65a0b6b26a44f605",
+        "version": "21109b713b751afd875b61ff90d9cb5b03634c1726ca1bf7a0081b90867c6737",
         "signature": "323074f41708f157a267f1bac1708dc776e7f7307b962a44c08850da48d956ff",
         "affectsGlobalScope": false
       },
@@ -3967,8 +3967,8 @@
         "affectsGlobalScope": false
       },
       "../src/quizz/quizz-attempt.gateway.ts": {
-        "version": "81f3d3c827d74264f2ac934f5dddd10513a69ab4e4df00c46b9c896eaf4fb8ac",
-        "signature": "f794e039b0a609ec0523accc2aa1df97a3bab496c28641a666b8009b483bc3cd",
+        "version": "267992550e7089041bcc1f8b953256fceeafdf34d43fcd610b52979da2ace0af",
+        "signature": "bb4868f5fa1689ea53f87783ed8b8257341c712c722df3058b562a542afbb749",
         "affectsGlobalScope": false
       },
       "../src/app.module.ts": {
@@ -7632,6 +7632,7 @@
         "../node_modules/@types/socket.io/index.d.ts",
         "../node_modules/class-transformer/index.d.ts",
         "../src/auth/ws.gaurd.ts",
+        "../src/quizz/entities/quizz.entity.ts",
         "../src/quizz/quizz.service.ts",
         "../src/user/user.entity.ts"
       ],

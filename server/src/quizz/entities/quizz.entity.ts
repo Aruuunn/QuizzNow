@@ -44,7 +44,7 @@ export class QuizzEntity extends BaseEntity {
   @Exclude()
   @OneToMany(
     type => QuizAttemptEntity,
-    quizAttempt => quizAttempt.quiz,
+    quizAttempt => quizAttempt.quizz,
     { onDelete: 'CASCADE' },
   )
   quizzAttemptsByUsers: QuizAttemptEntity[];

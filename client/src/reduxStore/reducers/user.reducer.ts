@@ -1,22 +1,10 @@
 import { UserActionTypes } from "../types";
 
-export interface Quiz {
-  id: string;
-  startDatetime: string;
-  title: string;
-  endDatetime: string;
-  createdAt: string;
-  updatedAt: string;
-}
-
 export interface UserState {
-  id: string | null;
-  name: string | null;
-  email: string | null;
-  photoURL: string | null;
-  quizzes: Quiz[];
-  attendedQuizzes: Quiz[];
-  createdQuestions: Quiz[];
+  userId: string | null;
+  userName: string | null;
+  userEmail: string | null;
+  userPhotoURL: string | null;
 }
 
 export interface Action {
@@ -25,13 +13,10 @@ export interface Action {
 }
 
 const initialState: UserState = {
-  id: null,
-  name: null,
-  email: null,
-  photoURL: null,
-  quizzes: [],
-  attendedQuizzes: [],
-  createdQuestions:[]
+  userId: null,
+  userName: null,
+  userEmail: null,
+  userPhotoURL: null,
 }
 
 export const UserReducer =  (state: UserState=initialState, action:Action): UserState => {
