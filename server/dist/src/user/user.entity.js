@@ -42,7 +42,7 @@ __decorate([
     class_transformer_1.Exclude(),
     typeorm_1.OneToMany(type => quizz_attempts_entity_1.QuizzAttemptEntity, quizAttempt => quizAttempt.user, { eager: true }),
     __metadata("design:type", Array)
-], UserEntity.prototype, "userAttemptedQuizzes", void 0);
+], UserEntity.prototype, "userQuizAttempts", void 0);
 __decorate([
     typeorm_1.OneToMany(type => question_entity_1.default, qa => qa.createdBy),
     __metadata("design:type", Array)

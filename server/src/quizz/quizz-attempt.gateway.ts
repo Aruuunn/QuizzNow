@@ -87,14 +87,15 @@ export class QuizAttemptGateway
       } catch (e) {
         return server.emit(NOT_FOUND);
       }
-
+      
       server.emit(RECEIVED_QUIZ_DETAILS, {
         payload: {
           ...classToPlain(quiz),
           canAttemptQuizz: this.quizService.canAttemptQuiz(quiz, data.user),
           totalNumberOfQuestions: quiz.questions.length,
-          isQuizzAttemptFinished: user.userAttemptedQuizzes.reduce((t, c) => {
+          isQuizzAttemptFinished: user.userQuizAttempts.reduce((t, c) => {
             if (c.quizz.quizzId === quizzId) {
+             
               return c.attemptFinished ||
                 quiz.endDatetime.getTime() < Date.now()
                 ? true

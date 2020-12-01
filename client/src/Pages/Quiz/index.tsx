@@ -1,11 +1,11 @@
 import React from "react";
-import { Route, Switch, Redirect,useHistory } from "react-router-dom";
+import { Route, Switch, Redirect, useHistory } from "react-router-dom";
 import { connect, ConnectedProps } from "react-redux";
 
 import { QuizzActionTypes, RootState } from "../../reduxStore";
-import { setUp as wsSetUp,onUnAuthorized, onNotFound } from "./ws";
-import { QuizInfo } from './components';
-
+import { setUp as wsSetUp, onUnAuthorized, onNotFound } from "./ws";
+import { QuizInfo } from "./components";
+import QuestionAttempt from "./components/QuestionAttempt";
 
 const mapStateToProps = (state: RootState) => ({
   quizz: state.quizz,
@@ -20,8 +20,6 @@ const connector = connect(mapStateToProps, mapDispatchToProps);
 type reduxProps = ConnectedProps<typeof connector>;
 type Props = reduxProps;
 
-
-
 export const Quizz = (props: Props) => {
   const {
     setSocket,
@@ -29,15 +27,15 @@ export const Quizz = (props: Props) => {
   } = props;
 
   const history = useHistory();
-  
+
   if (socket === null) {
     let newSocket = wsSetUp();
     newSocket = onUnAuthorized(newSocket, () => {
-      history.push('/auth');
-    })
+      history.push("/auth");
+    });
     newSocket = onNotFound(newSocket, () => {
-      history.push('/not-found');
-    })
+      history.push("/not-found");
+    });
     setSocket(newSocket);
   }
 
@@ -49,11 +47,7 @@ export const Quizz = (props: Props) => {
           from="/attempt/:quizzId"
           to="/attempt/:quizzId/details"
         />
-        <Route
-          path={`/attempt/:quizzId/details`}
-          exact
-          component={QuizInfo}
-        />
+        <Route path={`/attempt/:quizzId/details`} exact component={QuizInfo} />
         <Route
           path={`/attempt/:quizzId/finish`}
           exact
@@ -62,7 +56,7 @@ export const Quizz = (props: Props) => {
         <Route
           path={`/attempt/:quizzId/q/:qno`}
           exact
-          component={() => <h1>Q</h1>}
+          component={QuestionAttempt}
         />
         <Redirect to="/not-found" />
       </Switch>

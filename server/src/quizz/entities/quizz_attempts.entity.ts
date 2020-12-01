@@ -18,13 +18,13 @@ export class QuizzAttemptEntity extends BaseEntity {
   @ManyToOne(
     type => QuizzEntity,
     quiz => quiz.quizzAttemptsByUsers,
-    { eager: true, onDelete: 'CASCADE' },
+    { eager: true,nullable:false },
   )
   quizz: QuizzEntity;
 
   @ManyToOne(
     type => UserEntity,
-    user => user.userAttemptedQuizzes,
+    user => user.userQuizAttempts,
   )
   user: UserEntity;
 

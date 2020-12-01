@@ -51,7 +51,7 @@ let QuizAttemptGateway = class QuizAttemptGateway {
                 return server.emit(ws_event_types_1.NOT_FOUND);
             }
             server.emit(ws_event_types_1.RECEIVED_QUIZ_DETAILS, {
-                payload: Object.assign(Object.assign({}, class_transformer_1.classToPlain(quiz)), { canAttemptQuizz: this.quizService.canAttemptQuiz(quiz, data.user), totalNumberOfQuestions: quiz.questions.length, isQuizzAttemptFinished: user.userAttemptedQuizzes.reduce((t, c) => {
+                payload: Object.assign(Object.assign({}, class_transformer_1.classToPlain(quiz)), { canAttemptQuizz: this.quizService.canAttemptQuiz(quiz, data.user), totalNumberOfQuestions: quiz.questions.length, isQuizzAttemptFinished: user.userQuizAttempts.reduce((t, c) => {
                         if (c.quizz.quizzId === quizzId) {
                             return c.attemptFinished ||
                                 quiz.endDatetime.getTime() < Date.now()

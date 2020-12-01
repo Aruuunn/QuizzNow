@@ -2802,18 +2802,18 @@
         "affectsGlobalScope": false
       },
       "../src/quizz/entities/quizz_attempts.entity.ts": {
-        "version": "0ef023fd5d91e4fa68af48fe1851a9203d5072b0d5b3b8ec4dd73a5653572a84",
+        "version": "106d9ef9803f1f35afdaa52a57b9ea5ddcbbe075c93c502562e252dd28a092ed",
         "signature": "8531f363dc67f7031bd1b0f2503812ea66e97d2255fb3b4a19a68a0f5921ab74",
         "affectsGlobalScope": false
       },
       "../src/quizz/entities/quizz.entity.ts": {
-        "version": "8034075b56b59f9f31d0f0547d1f0e4d7abf34903e3bd37fb0b9ca39f5014f52",
+        "version": "6c1c367ebf086524520cb9b11a22bd2cb7b994d468db4536d8721686746006ba",
         "signature": "db79752aba4228418b1e8560ea44b513d8d0fe7faf925b8a76a44e7d05c33403",
         "affectsGlobalScope": false
       },
       "../src/user/user.entity.ts": {
-        "version": "ebf1c5524e9b0716d20f60c0a8a64f1f52bbd379836a01179e8a5999957aad18",
-        "signature": "96fe8c871f513c7b0ad71eec77f74d299ae2376cedb22746afd5d080fade0220",
+        "version": "6a7f62cf3a1ca539e4971c593f279062b1e4e39fea8071eb5cc474338d34a957",
+        "signature": "56aa0b874260207e6bd6c0247df565b34cd3c689608d76f397b2edbd77c7b1a8",
         "affectsGlobalScope": false
       },
       "../src/user/user.service.ts": {
@@ -3937,12 +3937,12 @@
         "affectsGlobalScope": false
       },
       "../src/quizz/quizz.service.ts": {
-        "version": "21109b713b751afd875b61ff90d9cb5b03634c1726ca1bf7a0081b90867c6737",
+        "version": "8641536756a7d3a86946970ccf42c94e77f6f5b94752fb3c49d63bec9fac28ad",
         "signature": "323074f41708f157a267f1bac1708dc776e7f7307b962a44c08850da48d956ff",
         "affectsGlobalScope": false
       },
       "../src/quizz/quizz.controller.ts": {
-        "version": "7ee2a22ff00df1c5939914a0ff70a677f75b12e177da2fb9746acc1d4013c4b9",
+        "version": "d0416807ea72893ca89d69d096abfe0efb5c0468019827521f69f79aa437cbc2",
         "signature": "b2f5aa4413c276b15647f35780656883f04e635627e2b142b670b3b12c4e9c0c",
         "affectsGlobalScope": false
       },
@@ -3967,7 +3967,7 @@
         "affectsGlobalScope": false
       },
       "../src/quizz/quizz-attempt.gateway.ts": {
-        "version": "267992550e7089041bcc1f8b953256fceeafdf34d43fcd610b52979da2ace0af",
+        "version": "d55f540d79901b89df53a732bea1c4a4029016c3d797044c891f50f0341f101c",
         "signature": "bb4868f5fa1689ea53f87783ed8b8257341c712c722df3058b562a542afbb749",
         "affectsGlobalScope": false
       },
@@ -7642,7 +7642,8 @@
         "../src/auth/jwt.gaurd.ts",
         "../src/question/dto/new.question.ts",
         "../src/quizz/dto/new.quiz.ts",
-        "../src/quizz/quizz.service.ts"
+        "../src/quizz/quizz.service.ts",
+        "../src/user/user.entity.ts"
       ],
       "../src/quizz/quizz.module.ts": [
         "../node_modules/@nestjs/common/index.d.ts",

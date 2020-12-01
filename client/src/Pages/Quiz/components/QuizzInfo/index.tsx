@@ -36,9 +36,12 @@ const mapDispatchToProps = {
     type: QuizzActionTypes.SET_SOCKET,
     payload: socket,
   }),
-  setAttemptId: (id: string) => ({
+  setAttemptId: (id: string,quizzId:string) => ({
     type: QuizzActionTypes.SAVE_ATTEMPT_ID,
-    payload: id,
+    payload: {
+      attemptId: id,
+      quizzId
+    },
   }),
 };
 const connector = connect(mapStateToProps, mapDispatchToProps);
@@ -175,7 +178,7 @@ function QuizInfo(props: Props): ReactElement {
                       socket as SocketIOClient.Socket,
                       quizzId,
                       ({ payload: { attemptId } }) => {
-                        setAttemptId(attemptId);
+                        setAttemptId(attemptId,quizzId);
                         history.push(`/attempt/${quizzId}/q/0`);
                       }
                     );

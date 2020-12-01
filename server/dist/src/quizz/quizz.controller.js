@@ -14,6 +14,7 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.QuizController = void 0;
 const common_1 = require("@nestjs/common");
+const user_entity_1 = require("../user/user.entity");
 const jwt_gaurd_1 = require("../auth/jwt.gaurd");
 const new_question_1 = require("../question/dto/new.question");
 const new_quiz_1 = require("./dto/new.quiz");
@@ -46,7 +47,7 @@ let QuizController = class QuizController {
         return await this.quizService.getQuizzes(req.user, options);
     }
     async deleteQuiz(id, req, res) {
-        await this.quizService.deleteQuiz(id, req.user.id);
+        await this.quizService.deleteQuiz(id, req.user.userId);
         return res.sendStatus(common_1.HttpStatus.OK);
     }
 };

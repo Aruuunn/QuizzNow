@@ -8,7 +8,7 @@ declare class UserEntity extends BaseEntity {
     userEmail: string;
     userPhotoURL: string;
     userCreatedQuizzes: QuizzEntity[];
-    userAttemptedQuizzes: QuizzAttemptEntity[];
+    userQuizAttempts: QuizzAttemptEntity[];
     userCreatedQuestions: QAEntity[];
 }
 export default UserEntity;

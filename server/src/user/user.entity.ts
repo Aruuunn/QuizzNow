@@ -39,7 +39,7 @@ class UserEntity extends BaseEntity {
     quizAttempt => quizAttempt.user,
     { eager: true },
   )
-  userAttemptedQuizzes: QuizzAttemptEntity[];
+  userQuizAttempts: QuizzAttemptEntity[];
 
   @OneToMany(
     type => QAEntity,

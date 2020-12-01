@@ -15,7 +15,7 @@ import {
   NOT_FOUND,
 } from "../../common/ws.event.types";
 import { wsApiURL } from "../../config/domain";
-import { QuizzDetailsType } from "../../reduxStore";
+import { QuestionDetails, QuizzDetailsType } from "../../reduxStore";
 
 export const setUp = () => {
   const socket = io(wsApiURL, {
@@ -73,10 +73,7 @@ export const fetchQuestion = (
   attemptId: string,
   questionNumber: number,
   callback: (data: {
-    payload: {
-      question: { id: string; question: string; options: string[] };
-      selectedOption?: number;
-    };
+    payload: QuestionDetails;
   }) => void
 ) => {
 
@@ -97,7 +94,7 @@ export const startQuizz = (
 
 export const attemptQuestion = (
   socket: SocketIOClient.Socket,
-  selectedOption: number,
+  selectedOption: string,
   questionId: string,
   attemptId: string
 ) => {

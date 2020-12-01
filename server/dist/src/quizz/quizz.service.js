@@ -129,10 +129,10 @@ let QuizzService = class QuizzService {
         };
         this.deleteQuiz = async (quizzId, userId) => {
             const quiz = await this.quizRepo.findOne(quizzId, { relations: ['createdBy'] });
-            console.log(quiz);
             if (!quiz) {
                 throw new common_1.BadRequestException();
             }
+            console.debug(quiz.createdBy.userId, userId);
             if (quiz.createdBy.userId === userId) {
                 await this.quizRepo.delete(quizzId);
             }
@@ -159,7 +159,7 @@ let QuizzService = class QuizzService {
             quiz.startDatetime.getTime() < Date.now() &&
             quiz.endDatetime.getTime() > Date.now() &&
             (!checkForPreviousAttempts ||
-                user.userAttemptedQuizzes.reduce((t, c) => {
+                user.userQuizAttempts.reduce((t, c) => {
                     if (quiz.quizzId === c.quizz.quizzId) {
                         return !c.attemptFinished;
                     }
@@ -200,7 +200,7 @@ let QuizzService = class QuizzService {
         const quiz = await this.quizRepo.findOne(quizId, {
             relations: ['quizzAttemptsByUsers'],
         });
-        const quizAttempt = user.userAttemptedQuizzes.reduce((t, c) => {
+        const quizAttempt = user.userQuizAttempts.reduce((t, c) => {
             if (c.quizz.quizzId === quiz.quizzId) {
                 return c;
             }

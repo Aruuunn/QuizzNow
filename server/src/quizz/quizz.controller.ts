@@ -15,6 +15,7 @@ import {
   Query
 } from '@nestjs/common';
 import { IPaginationOptions } from 'nestjs-typeorm-paginate';
+import UserEntity from 'src/user/user.entity';
 import JwtGaurd from '../auth/jwt.gaurd';
 import NewQuestionDto from '../question/dto/new.question';
 import { NewQuizDto } from './dto/new.quiz';
@@ -95,7 +96,7 @@ export class QuizController {
   @Delete(':id')
   @UseGuards(JwtGaurd)
   async deleteQuiz(@Param('id') id:string,@Req() req,@Res() res) {
-    await this.quizService.deleteQuiz(id, req.user.id);
+    await this.quizService.deleteQuiz(id, (req.user as UserEntity).userId);
     return res.sendStatus(HttpStatus.OK);
   }
 
