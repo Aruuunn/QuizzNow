@@ -1,0 +1,15 @@
+declare function _possibleConstructorReturn(self: any, call: any): any;
+declare function _assertThisInitialized(self: any): any;
+declare function _get(target: any, property: any, receiver: any): any;
+declare function _superPropBase(object: any, property: any): any;
+declare function _getPrototypeOf(o: any): any;
+declare function _inherits(subClass: any, superClass: any): void;
+declare function _setPrototypeOf(o: any, p: any): any;
+declare function _toConsumableArray(arr: any): void | any[];
+declare function _nonIterableSpread(): void;
+declare function _iterableToArray(iter: any): any[];
+declare function _arrayWithoutHoles(arr: any): any[];
+declare function _defineProperties(target: any, props: any): void;
+declare function _createClass(Constructor: any, protoProps: any, staticProps: any): any;
+declare function _classCallCheck(instance: any, Constructor: any): void;
+declare function _typeof(obj: any): any;

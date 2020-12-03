@@ -72,7 +72,7 @@ function QuestionAttempt(props: Props): ReactElement {
         }
       );
     }
-  }, []);
+  }, [quizzId, questionNumber]);
 
   if (!quizz) {
     history.push(`/attempt/${quizzId}`);
@@ -154,17 +154,31 @@ function QuestionAttempt(props: Props): ReactElement {
           <Button
             size="large"
             style={{ marginRight: "20px" }}
-            variant="text"
+            variant={questionNumber === 0 ? "contained" : "text"}
+      
             color="secondary"
+            disabled={questionNumber === 0}
+            onClick={() => {
+              if (questionNumber !== 0) {
+                history.push(`/attempt/${quizzId}/q/${questionNumber - 1}`);
+              }
+            }}
           >
             Previous
           </Button>
-          {Object.keys(quizz.cacheQuestion).length - 1 === questionNumber ? (
+          {quizz.totalNumberOfQuestions - 1 === questionNumber ? (
             <Button size="large" variant="outlined" color="secondary">
               Finish
             </Button>
           ) : (
-            <Button size="large" variant="contained" color="secondary">
+            <Button
+              size="large"
+              variant="contained"
+              color="secondary"
+              onClick={() => {
+                history.push(`/attempt/${quizzId}/q/${questionNumber + 1}`);
+              }}
+            >
               Next
             </Button>
           )}

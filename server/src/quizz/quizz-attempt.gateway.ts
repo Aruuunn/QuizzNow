@@ -34,7 +34,7 @@ export class QuizAttemptGateway
   constructor(private quizService: QuizzService) {}
 
   @WebSocketServer() server: Server;
-  private logger: Logger = new Logger('AppGateway');
+  private logger: Logger = new Logger('QuizzGateway');
 
   afterInit() {
     this.logger.log('Init');
@@ -56,6 +56,7 @@ export class QuizAttemptGateway
   async finishQuiz(
     server: Server,
     data: { payload: { attemptId: string }; user: UserEntity },
+    ack:() => void
   ) {
     try {
       const {
@@ -63,6 +64,7 @@ export class QuizAttemptGateway
         user,
       } = data;
       await this.quizService.finishQuizAttempt(attemptId, user);
+      ack();
     } catch (e) {
       console.log(e);
       server.emit(ERROR);
@@ -79,7 +81,6 @@ export class QuizAttemptGateway
       payload: { quizzId },
     } = data;
     try {
-
       let quiz: QuizzEntity;
 
       try {
@@ -87,7 +88,7 @@ export class QuizAttemptGateway
       } catch (e) {
         return server.emit(NOT_FOUND);
       }
-      
+
       server.emit(RECEIVED_QUIZ_DETAILS, {
         payload: {
           ...classToPlain(quiz),
@@ -95,7 +96,6 @@ export class QuizAttemptGateway
           totalNumberOfQuestions: quiz.questions.length,
           isQuizzAttemptFinished: user.userQuizAttempts.reduce((t, c) => {
             if (c.quizz.quizzId === quizzId) {
-             
               return c.attemptFinished ||
                 quiz.endDatetime.getTime() < Date.now()
                 ? true
@@ -142,7 +142,7 @@ export class QuizAttemptGateway
         payload: { attemptId, questionNumber },
         user,
       } = data;
-
+      this.logger.debug(questionNumber,"QuestionNumber")
       const {
         question,
         selectedOption,
@@ -150,8 +150,8 @@ export class QuizAttemptGateway
         attemptId,
         questionNumber,
         user,
-      );
-
+        ); 
+      
       server.emit(RECEIVED_QUESTION, {
         payload: { question: classToPlain(question), selectedOption },
       });

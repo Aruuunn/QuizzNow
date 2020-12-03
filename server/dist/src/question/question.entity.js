@@ -28,14 +28,12 @@ __decorate([
     __metadata("design:type", String)
 ], QuestionEntity.prototype, "correctAnswer", void 0);
 __decorate([
-    class_transformer_1.Transform(options => options.map((o) => String.fromCharCode.apply(null, new Uint16Array(o)) ||
-        String.fromCharCode.apply(null, new Uint16Array(o.data)))),
-    typeorm_1.Column('bytea', { array: true }),
+    typeorm_1.Column('text', { array: true }),
     __metadata("design:type", Array)
 ], QuestionEntity.prototype, "multipleChoices", void 0);
 __decorate([
     class_transformer_1.Exclude(),
-    typeorm_1.ManyToOne(type => user_entity_1.default, user => user.userCreatedQuestions),
+    typeorm_1.ManyToOne(type => user_entity_1.default, user => user.userCreatedQuestions, { onDelete: 'CASCADE' }),
     __metadata("design:type", user_entity_1.default)
 ], QuestionEntity.prototype, "createdBy", void 0);
 QuestionEntity = __decorate([

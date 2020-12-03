@@ -169,6 +169,13 @@ export const quizzStateReducer = (
         },
       };
     }
+    case QuizzActionTypes.FINISH_ATTEMPT: {
+      const { quizzId } = quizzAction.payload as { quizzId: string };
+      if (!quizzId) {
+        return quizzState;
+      }
+      return { ...quizzState };
+    }
 
     default:
       return quizzState;

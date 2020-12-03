@@ -219,6 +219,7 @@ let QuizzService = class QuizzService {
         newQuizAttempt.quizz = quiz;
         newQuizAttempt.questionAttempts = [];
         await newQuizAttempt.save();
+        this.logger.debug(newQuizAttempt, "[new attemptQuiz]");
         return newQuizAttempt.quizzAttemptId;
     }
     async attemptQuestion(user, questionId, choosedOption, attemptId) {

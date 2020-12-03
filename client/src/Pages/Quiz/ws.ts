@@ -37,7 +37,6 @@ export const onUnAuthorized = (
   socket: SocketIOClient.Socket,
   callback: () => void
 ) => {
-
   socket.on(UNAUTHORIZED, callback);
   return socket;
 };
@@ -46,20 +45,15 @@ export const onNotFound = (
   socket: SocketIOClient.Socket,
   callback: () => void
 ) => {
-
   socket.on(NOT_FOUND, callback);
   return socket;
 };
 
-
 export const fetchQuizzDetails = (
   socket: SocketIOClient.Socket,
   quizzId: string,
-  callback: (data: {
-    payload:QuizzDetailsType
-  }) => void
-):SocketIOClient.Socket => {
-
+  callback: (data: { payload: QuizzDetailsType }) => void
+): SocketIOClient.Socket => {
   socket.emit(FETCH_QUIZ_DETAILS, {
     payload: { quizzId },
   });
@@ -72,11 +66,8 @@ export const fetchQuestion = (
   socket: SocketIOClient.Socket,
   attemptId: string,
   questionNumber: number,
-  callback: (data: {
-    payload: QuestionDetails;
-  }) => void
+  callback: (data: { payload: QuestionDetails }) => void
 ) => {
-
   socket.emit(FETCH_QUESTION, { payload: { attemptId, questionNumber } });
   socket.on(RECEIVED_QUESTION, callback);
   return socket;
@@ -114,7 +105,8 @@ export const finishQuizAttempt = (
   attemptId: string,
   callback: () => void = () => {}
 ) => {
-  socket.emit(FINISH, { payload: { attemptId } });
-  callback();
+  socket.emit(FINISH, { payload: { attemptId } }, () => {
+    callback();
+  });
   return socket;
 };

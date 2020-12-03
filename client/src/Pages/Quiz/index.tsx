@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Route, Switch, Redirect, useHistory } from "react-router-dom";
 import { connect, ConnectedProps } from "react-redux";
 
@@ -11,7 +11,7 @@ const mapStateToProps = (state: RootState) => ({
   quizz: state.quizz,
 });
 const mapDispatchToProps = {
-  setSocket: (socket: SocketIOClient.Socket) => ({
+  setSocket: (socket: SocketIOClient.Socket | null) => ({
     type: QuizzActionTypes.SET_SOCKET,
     payload: socket,
   }),
@@ -38,6 +38,7 @@ export const Quizz = (props: Props) => {
     });
     setSocket(newSocket);
   }
+
 
   return (
     <div>

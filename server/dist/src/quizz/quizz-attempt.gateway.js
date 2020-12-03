@@ -19,7 +19,7 @@ const class_transformer_1 = require("class-transformer");
 let QuizAttemptGateway = class QuizAttemptGateway {
     constructor(quizService) {
         this.quizService = quizService;
-        this.logger = new common_1.Logger('AppGateway');
+        this.logger = new common_1.Logger('QuizzGateway');
     }
     afterInit() {
         this.logger.log('Init');
@@ -30,10 +30,11 @@ let QuizAttemptGateway = class QuizAttemptGateway {
     handleConnection(client, ...args) {
         this.logger.log(`Client connected: ${client.id} ${client.conn.remoteAddress}`);
     }
-    async finishQuiz(server, data) {
+    async finishQuiz(server, data, ack) {
         try {
             const { payload: { attemptId }, user, } = data;
             await this.quizService.finishQuizAttempt(attemptId, user);
+            ack();
         }
         catch (e) {
             console.log(e);
@@ -82,6 +83,7 @@ let QuizAttemptGateway = class QuizAttemptGateway {
     async fetchQuestion(server, data) {
         try {
             const { payload: { attemptId, questionNumber }, user, } = data;
+            this.logger.debug(questionNumber, "QuestionNumber");
             const { question, selectedOption, } = await this.quizService.fetchQuestionForQuizAttempt(attemptId, questionNumber, user);
             server.emit(ws_event_types_1.RECEIVED_QUESTION, {
                 payload: { question: class_transformer_1.classToPlain(question), selectedOption },
@@ -110,7 +112,7 @@ __decorate([
 __decorate([
     websockets_1.SubscribeMessage(ws_event_types_1.FINISH),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object, Object]),
+    __metadata("design:paramtypes", [Object, Object, Function]),
     __metadata("design:returntype", Promise)
 ], QuizAttemptGateway.prototype, "finishQuiz", null);
 __decorate([

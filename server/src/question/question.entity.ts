@@ -20,20 +20,14 @@ class QuestionEntity extends BaseEntity {
   @Exclude()
   correctAnswer: string;
 
-  @Transform(options =>
-    options.map(
-      (o: any) =>
-        String.fromCharCode.apply(null, new Uint16Array(o)) ||
-        String.fromCharCode.apply(null, new Uint16Array(o.data)),
-    ),
-  )
-  @Column('bytea', { array: true })
+  @Column('text', { array: true })
   multipleChoices: string[];
 
   @Exclude()
   @ManyToOne(
     type => UserEntity,
     user => user.userCreatedQuestions,
+    { onDelete: 'CASCADE' },
   )
   createdBy: UserEntity;
 }

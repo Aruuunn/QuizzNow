@@ -1,0 +1,1430 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>server documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	      <link rel="stylesheet" href="../styles/style.css">
+    </head>
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top visible-xs">
+            <a href="../" class="navbar-brand">server documentation</a>
+            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content injectable">
+                   <div class="content-data">
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li>Injectables</li>
+  <li>QuizzService</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="active">
+            <a href="#info" role="tab" id="info-tab" data-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li >
+            <a href="#source" role="tab" id="source-tab" data-toggle="tab" data-link="source">Source</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="c-info">
+        <p class="comment">
+            <h3>File</h3>
+        </p>
+        <p class="comment">
+            <code>src/quizz/quizz.service.ts</code>
+        </p>
+
+
+
+
+            <section>
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#addNewQuestion">addNewQuestion</a>
+                            </li>
+                            <li>
+                                <a href="#addOldQuestion">addOldQuestion</a>
+                            </li>
+                            <li>
+                                <a href="#createNewQuiz">createNewQuiz</a>
+                            </li>
+                            <li>
+                                <a href="#deleteQuiz">deleteQuiz</a>
+                            </li>
+                            <li>
+                                <a href="#finishQuizAttempt">finishQuizAttempt</a>
+                            </li>
+                            <li>
+                                <a href="#getQuiz">getQuiz</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#logger">logger</a>
+                            </li>
+                            <li>
+                                <a href="#removeAllQuestions">removeAllQuestions</a>
+                            </li>
+                            <li>
+                                <a href="#removeQuestion">removeQuestion</a>
+                            </li>
+                            <li>
+                                <a href="#updateQuiz">updateQuiz</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Async</span>
+                                <a href="#attemptQuestion">attemptQuestion</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Async</span>
+                                <a href="#attemptQuiz">attemptQuiz</a>
+                            </li>
+                            <li>
+                                <a href="#canAttemptQuiz">canAttemptQuiz</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Async</span>
+                                <a href="#fetchQuestionForQuizAttempt">fetchQuestionForQuizAttempt</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Async</span>
+                                <a href="#getQuizzes">getQuizzes</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+            <section>
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor(questionService: <a href="../injectables/QuestionService.html">QuestionService</a>, quizRepo: <a href="../classes/QuizzEntity.html">Repository<QuizzEntity></a>, quizAttemptRepo: <a href="../classes/QuizzAttemptEntity.html">Repository<QuizzAttemptEntity></a>, questionAttemptRepo: <a href="../classes/QuestionAttemptEntity.html">Repository<QuestionAttemptEntity></a>)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="22" class="link-to-prism">src/quizz/quizz.service.ts:22</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>questionService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/QuestionService.html" target="_self" >QuestionService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>quizRepo</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../classes/QuizzEntity.html" target="_self" >Repository&lt;QuizzEntity&gt;</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>quizAttemptRepo</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../classes/QuizzAttemptEntity.html" target="_self" >Repository&lt;QuizzAttemptEntity&gt;</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>questionAttemptRepo</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../classes/QuestionAttemptEntity.html" target="_self" >Repository&lt;QuestionAttemptEntity&gt;</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+            <section>
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="attemptQuestion"></a>
+                    <span class="name">
+                        <b>
+                            <span class="modifier">Async</span>
+                            attemptQuestion
+                        </b>
+                        <a href="#attemptQuestion"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>attemptQuestion(user: <a href="../classes/UserEntity.html">UserEntity</a>, questionId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, choosedOption: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, attemptId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="120"
+                            class="link-to-prism">src/quizz/quizz.service.ts:120</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>user</td>
+                                    <td>
+                                                <code><a href="../classes/UserEntity.html" target="_self" >UserEntity</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                                <tr>
+                                    <td>questionId</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                                <tr>
+                                    <td>choosedOption</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                                <tr>
+                                    <td>attemptId</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="attemptQuiz"></a>
+                    <span class="name">
+                        <b>
+                            <span class="modifier">Async</span>
+                            attemptQuiz
+                        </b>
+                        <a href="#attemptQuiz"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>attemptQuiz(user: <a href="../classes/UserEntity.html">UserEntity</a>, quizId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="92"
+                            class="link-to-prism">src/quizz/quizz.service.ts:92</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>user</td>
+                                    <td>
+                                                <code><a href="../classes/UserEntity.html" target="_self" >UserEntity</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                                <tr>
+                                    <td>quizId</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>    <code>Promise&lt;string&gt;</code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="canAttemptQuiz"></a>
+                    <span class="name">
+                        <b>
+                            canAttemptQuiz
+                        </b>
+                        <a href="#canAttemptQuiz"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>canAttemptQuiz(quiz: <a href="../classes/QuizzEntity.html">QuizzEntity</a>, user: <a href="../classes/UserEntity.html">UserEntity</a>, checkForPreviousAttempts: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank">boolean</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="35"
+                            class="link-to-prism">src/quizz/quizz.service.ts:35</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                    <td>Default value</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>quiz</td>
+                                    <td>
+                                                <code><a href="../classes/QuizzEntity.html" target="_self" >QuizzEntity</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+                                    <td>
+                                    </td>
+
+                                </tr>
+                                <tr>
+                                    <td>user</td>
+                                    <td>
+                                                <code><a href="../classes/UserEntity.html" target="_self" >UserEntity</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+                                    <td>
+                                    </td>
+
+                                </tr>
+                                <tr>
+                                    <td>checkForPreviousAttempts</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+                                    <td>
+                                        <code>true</code>
+                                    </td>
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="fetchQuestionForQuizAttempt"></a>
+                    <span class="name">
+                        <b>
+                            <span class="modifier">Async</span>
+                            fetchQuestionForQuizAttempt
+                        </b>
+                        <a href="#fetchQuestionForQuizAttempt"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>fetchQuestionForQuizAttempt(attemptId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, questionNumber: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>, user: <a href="../classes/UserEntity.html">UserEntity</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="57"
+                            class="link-to-prism">src/quizz/quizz.service.ts:57</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>attemptId</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                                <tr>
+                                    <td>questionNumber</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                                <tr>
+                                    <td>user</td>
+                                    <td>
+                                                <code><a href="../classes/UserEntity.html" target="_self" >UserEntity</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>    <code>{}</code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getQuizzes"></a>
+                    <span class="name">
+                        <b>
+                            <span class="modifier">Async</span>
+                            getQuizzes
+                        </b>
+                        <a href="#getQuizzes"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>getQuizzes(user: <a href="../classes/UserEntity.html">UserEntity</a>, options: IPaginationOptions)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="335"
+                            class="link-to-prism">src/quizz/quizz.service.ts:335</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>user</td>
+                                    <td>
+                                                <code><a href="../classes/UserEntity.html" target="_self" >UserEntity</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                                <tr>
+                                    <td>options</td>
+                                    <td>
+                                            <code>IPaginationOptions</code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>    <code>{}</code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+            <section>
+    
+        <h3 id="inputs">
+            Properties
+        </h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="addNewQuestion"></a>
+                        <span class="name">
+                            <b>
+                            addNewQuestion</b>
+                            <a href="#addNewQuestion"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>() &#x3D;&gt; {...}</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="201" class="link-to-prism">src/quizz/quizz.service.ts:201</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="addOldQuestion"></a>
+                        <span class="name">
+                            <b>
+                            addOldQuestion</b>
+                            <a href="#addOldQuestion"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>() &#x3D;&gt; {...}</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="230" class="link-to-prism">src/quizz/quizz.service.ts:230</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="createNewQuiz"></a>
+                        <span class="name">
+                            <b>
+                            createNewQuiz</b>
+                            <a href="#createNewQuiz"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>() &#x3D;&gt; {...}</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="183" class="link-to-prism">src/quizz/quizz.service.ts:183</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="deleteQuiz"></a>
+                        <span class="name">
+                            <b>
+                            deleteQuiz</b>
+                            <a href="#deleteQuiz"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>() &#x3D;&gt; {...}</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="343" class="link-to-prism">src/quizz/quizz.service.ts:343</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="finishQuizAttempt"></a>
+                        <span class="name">
+                            <b>
+                            finishQuizAttempt</b>
+                            <a href="#finishQuizAttempt"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>() &#x3D;&gt; {...}</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="358" class="link-to-prism">src/quizz/quizz.service.ts:358</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="getQuiz"></a>
+                        <span class="name">
+                            <b>
+                            getQuiz</b>
+                            <a href="#getQuiz"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>() &#x3D;&gt; {...}</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="179" class="link-to-prism">src/quizz/quizz.service.ts:179</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="logger"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Private</span>
+                            logger</b>
+                            <a href="#logger"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code>Logger</code>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>new Logger(&#x27;QuizzService&#x27;)</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="33" class="link-to-prism">src/quizz/quizz.service.ts:33</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="removeAllQuestions"></a>
+                        <span class="name">
+                            <b>
+                            removeAllQuestions</b>
+                            <a href="#removeAllQuestions"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>() &#x3D;&gt; {...}</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="282" class="link-to-prism">src/quizz/quizz.service.ts:282</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="removeQuestion"></a>
+                        <span class="name">
+                            <b>
+                            removeQuestion</b>
+                            <a href="#removeQuestion"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>() &#x3D;&gt; {...}</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="256" class="link-to-prism">src/quizz/quizz.service.ts:256</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="updateQuiz"></a>
+                        <span class="name">
+                            <b>
+                            updateQuiz</b>
+                            <a href="#updateQuiz"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>() &#x3D;&gt; {...}</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="300" class="link-to-prism">src/quizz/quizz.service.ts:300</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+</section>
+
+    </div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="c-source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import {
+  BadRequestException,
+  Injectable,
+  Logger,
+  UnauthorizedException,
+} from &#x27;@nestjs/common&#x27;;
+import { InjectRepository } from &#x27;@nestjs/typeorm&#x27;;
+import { IPaginationOptions, paginate } from &#x27;nestjs-typeorm-paginate&#x27;;
+import NewQuestionDto from &#x27;../question/dto/new.question&#x27;;
+import QAEntity from &#x27;../question/question.entity&#x27;;
+import { QuestionService } from &#x27;../question/question.service&#x27;;
+import UserEntity from &#x27;../user/user.entity&#x27;;
+import { Repository } from &#x27;typeorm&#x27;;
+import { NewQuizDto } from &#x27;./dto/new.quiz&#x27;;
+import { QuestionAttemptEntity } from &#x27;./entities/question_attempt.entity&#x27;;
+import { QuizzEntity } from &#x27;./entities/quizz.entity&#x27;;
+
+import  QuizzAttemptEntity  from &#x27;./entities/quizz_attempts.entity&#x27;;
+import { WsException } from &#x27;@nestjs/websockets&#x27;;
+
+@Injectable()
+export class QuizzService {
+  constructor(
+    private questionService: QuestionService,
+    @InjectRepository(QuizzEntity)
+    private quizRepo: Repository&lt;QuizzEntity&gt;,
+    @InjectRepository(QuizzAttemptEntity)
+    private quizAttemptRepo: Repository&lt;QuizzAttemptEntity&gt;,
+    @InjectRepository(QuestionAttemptEntity)
+    private questionAttemptRepo: Repository&lt;QuestionAttemptEntity&gt;,
+  ) {}
+
+  private logger: Logger &#x3D; new Logger(&#x27;QuizzService&#x27;);
+
+  canAttemptQuiz(
+    quiz: QuizzEntity,
+    user: UserEntity,
+    checkForPreviousAttempts: boolean &#x3D; true,
+  ) {
+    const result &#x3D;
+      quiz &amp;&amp;
+      quiz.startDatetime.getTime() &lt; Date.now() &amp;&amp;
+      quiz.endDatetime.getTime() &gt; Date.now() &amp;&amp;
+      (!checkForPreviousAttempts ||
+        user.userQuizAttempts.reduce((t, c) &#x3D;&gt; {
+          if (quiz.quizzId &#x3D;&#x3D;&#x3D; c.quizz.quizzId) {
+            return !c.attemptFinished;
+          } else {
+            return t;
+          }
+        }, true));
+
+    this.logger.debug(result, &#x27;canAttemptQuiz&#x27;);
+    return result;
+  }
+
+  async fetchQuestionForQuizAttempt(
+    attemptId: string,
+    questionNumber: number,
+    user: UserEntity,
+  ) {
+    const quizAttempt &#x3D; await this.quizAttemptRepo.findOne(attemptId, {
+      relations: [&#x27;user&#x27;],
+    });
+
+    this.logger.debug(quizAttempt, &#x27;fetchQuestionForQuizAttempt&#x27;);
+    if (
+      this.canAttemptQuiz(quizAttempt.quizz, user, false) &amp;&amp;
+      !quizAttempt.attemptFinished &amp;&amp;
+      quizAttempt.user.userId &#x3D;&#x3D;&#x3D; user.userId &amp;&amp;
+      questionNumber &gt;&#x3D; 0 &amp;&amp;
+      questionNumber &lt; quizAttempt.quizz.questions.length
+    ) {
+      const question &#x3D; quizAttempt.quizz.questions[questionNumber];
+      const selectedOption &#x3D; quizAttempt.questionAttempts.reduce((t, c) &#x3D;&gt; {
+        if (question &amp;&amp; c.questionId &#x3D;&#x3D;&#x3D; question.questionId) {
+          return c.optionChoosed;
+        } else {
+          return t;
+        }
+      }, undefined);
+      this.logger.debug(
+        question,
+        &#x60;Question returned by fetchQuestionForQuizAttempt for Question Number - ${questionNumber}&#x60;,
+      );
+      return { question, selectedOption };
+    } else {
+      throw new BadRequestException();
+    }
+  }
+
+  async attemptQuiz(user: UserEntity, quizId: string): Promise&lt;string&gt; {
+    const quiz &#x3D; await this.quizRepo.findOne(quizId, {
+      relations: [&#x27;quizzAttemptsByUsers&#x27;],
+    });
+    const quizAttempt &#x3D; user.userQuizAttempts.reduce((t, c) &#x3D;&gt; {
+      if (c.quizz.quizzId &#x3D;&#x3D;&#x3D; quiz.quizzId) {
+        return c;
+      } else {
+        return t;
+      }
+    }, undefined);
+
+    if (!this.canAttemptQuiz(quiz, user)) {
+      throw new BadRequestException();
+    }
+
+    if (quizAttempt) {
+      return quizAttempt.quizzAttemptId;
+    }
+
+    const newQuizAttempt &#x3D; new QuizzAttemptEntity();
+    newQuizAttempt.user &#x3D; user;
+    newQuizAttempt.quizz &#x3D; quiz;
+    newQuizAttempt.questionAttempts &#x3D; [];
+    await newQuizAttempt.save();
+    return newQuizAttempt.quizzAttemptId;
+  }
+
+  async attemptQuestion(
+    user: UserEntity,
+    questionId: string,
+    choosedOption: string,
+    attemptId: string,
+  ) {
+    try {
+      let isNew &#x3D; false;
+      const quizAttempt &#x3D; await this.quizAttemptRepo.findOne(attemptId, {
+        relations: [],
+      });
+      const question &#x3D; await this.questionService.findbyID(questionId);
+
+      if (
+        !question ||
+        !quizAttempt ||
+        !this.canAttemptQuiz(quizAttempt.quizz, user, false)
+      ) {
+        this.logger.error(&#x27;Cannot Attempt Question&#x27;);
+        throw new BadRequestException();
+      }
+      let questionAttempt &#x3D; await this.questionAttemptRepo.findOne(
+        {
+          questionId,
+          quizAttempt: { quizzAttemptId: quizAttempt.quizzAttemptId },
+        },
+        { relations: [&#x27;quizAttempt&#x27;] },
+      );
+
+      this.logger.debug(
+        { question, quizAttempt, questionAttempt },
+        &#x27;attemptQuestion()&#x27;,
+      );
+
+      if (!questionAttempt) {
+        isNew &#x3D; true;
+        questionAttempt &#x3D; new QuestionAttemptEntity();
+        this.logger.debug(question,&quot;Question&quot;)
+        questionAttempt.questionId &#x3D; question.questionId;
+        questionAttempt.quizAttempt &#x3D; quizAttempt;
+      } else {
+        quizAttempt.totalScore -&#x3D;
+          questionAttempt.optionChoosed &#x3D;&#x3D;&#x3D; question.correctAnswer ? 1 : 0;
+      }
+
+      questionAttempt.optionChoosed &#x3D; choosedOption;
+
+      if (isNew) {
+        quizAttempt.questionAttempts.push(questionAttempt);
+      }
+      quizAttempt.totalScore +&#x3D;
+        questionAttempt.optionChoosed &#x3D;&#x3D;&#x3D; question.correctAnswer ? 1 : 0;
+      questionAttempt.save();
+      quizAttempt.save();
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
+  getQuiz &#x3D; async (id: string, relations: string[] &#x3D; []) &#x3D;&gt; {
+    return await this.quizRepo.findOneOrFail(id, { relations });
+  };
+
+  createNewQuiz &#x3D; async (user: UserEntity, quizData: NewQuizDto) &#x3D;&gt; {
+    const newQuiz &#x3D; new QuizzEntity();
+
+    newQuiz.startDatetime &#x3D; new Date(quizData.startDatetime);
+    newQuiz.endDatetime &#x3D; new Date(quizData.endDatetime);
+    newQuiz.createdBy &#x3D; user;
+    newQuiz.quizzTitle &#x3D; quizData.quizzTitle;
+
+    const questions: QAEntity[] &#x3D; [];
+    if (quizData.questions.length !&#x3D;&#x3D; 0)
+      for (let i of quizData.questions) {
+        questions.push(await this.questionService.createNewQuestion(user, i));
+      }
+    newQuiz.questions &#x3D; questions;
+    await newQuiz.save();
+    return newQuiz;
+  };
+
+  addNewQuestion &#x3D; async (
+    user: UserEntity,
+    question: NewQuestionDto,
+    quizzId: string,
+  ) &#x3D;&gt; {
+    const newQuestion &#x3D; await this.questionService.createNewQuestion(user, question);
+
+    const quiz &#x3D; await this.quizRepo.findOne(
+      { quizzId },
+      { relations: [&#x27;createdBy&#x27;] },
+    );
+
+    if (quiz.createdBy.userId !&#x3D;&#x3D; user.userId) {
+      throw new UnauthorizedException();
+    }
+
+    if (!quiz) {
+      throw new BadRequestException(&#x27;Invalid Quiz ID&#x27;);
+    }
+
+    if (!quiz.questions) {
+      quiz.questions &#x3D; [];
+    }
+
+    quiz.questions.push(newQuestion);
+    await quiz.save();
+    return quiz;
+  };
+
+  addOldQuestion &#x3D; async (
+    user: UserEntity,
+    questionId: string,
+    quizzId: string,
+  ) &#x3D;&gt; {
+    const question &#x3D; await this.questionService.findbyID(questionId);
+    const quiz &#x3D; await this.quizRepo.findOne(
+      {  quizzId },
+      { relations: [&#x27;createdBy&#x27;] },
+    );
+    if (!question || !quiz) {
+      throw new BadRequestException(&#x27;No Question/Quiz Found with the given ID&#x27;);
+    }
+    if (!quiz.questions) {
+      quiz.questions &#x3D; [];
+    }
+
+    if (quiz.createdBy.userId !&#x3D;&#x3D; user.userId) {
+      throw new UnauthorizedException();
+    }
+    quiz.questions.push(question);
+
+    await quiz.save();
+    return quiz;
+  };
+
+  removeQuestion &#x3D; async (
+    user: UserEntity,
+    questionId: string,
+    quizzId: string,
+  ) &#x3D;&gt; {
+    const quiz &#x3D; await this.quizRepo.findOne(
+      {  quizzId },
+      { relations: [&#x27;createdBy&#x27;] },
+    );
+    if (!quiz) {
+      throw new BadRequestException(&#x27;No Quiz Found with the given ID&#x27;);
+    }
+    if (!quiz.questions) {
+      quiz.questions &#x3D; [];
+    }
+
+    if (quiz.createdBy.userId !&#x3D;&#x3D; user.userId) {
+      throw new UnauthorizedException();
+    }
+
+    quiz.questions &#x3D; quiz.questions.filter(q &#x3D;&gt; q.questionId !&#x3D;&#x3D; questionId);
+
+    await quiz.save();
+    return quiz;
+  };
+
+  removeAllQuestions &#x3D; async (user: UserEntity, quizzId: string) &#x3D;&gt; {
+    const quiz &#x3D; await this.quizRepo.findOne(
+      {  quizzId },
+      { relations: [&#x27;createdBy&#x27;] },
+    );
+    if (!quiz) {
+      throw new BadRequestException(&#x27;No Quiz Found with the given ID&#x27;);
+    }
+
+    if (quiz.createdBy.userId !&#x3D;&#x3D; user.userId) {
+      throw new UnauthorizedException();
+    }
+
+    quiz.questions &#x3D; [];
+    await quiz.save();
+    return quiz;
+  };
+
+  updateQuiz &#x3D; async (
+    user: UserEntity,
+    quizzId: string,
+    startDatetime?: string,
+    endDatetime?: string,
+    quizzTitle?: string,
+  ) &#x3D;&gt; {
+    const quiz &#x3D; await this.quizRepo.findOne(
+      {  quizzId },
+      { relations: [&#x27;createdBy&#x27;] },
+    );
+    if (!quiz) {
+      throw new BadRequestException(&#x27;No Quiz Found with the given ID&#x27;);
+    }
+
+    if (quizzTitle) {
+      quiz.quizzTitle &#x3D; quizzTitle;
+    }
+
+    if (quiz.createdBy.userId !&#x3D;&#x3D; user.userId) {
+      throw new UnauthorizedException();
+    }
+
+    if (!startDatetime &amp;&amp; !endDatetime) {
+      throw new BadRequestException();
+    }
+
+    if (startDatetime) quiz.startDatetime &#x3D; new Date(startDatetime);
+
+    if (endDatetime) quiz.endDatetime &#x3D; new Date(endDatetime);
+
+    await quiz.save();
+    return quiz;
+  };
+
+  async getQuizzes(user: UserEntity, options: IPaginationOptions) {
+    const q &#x3D; this.quizRepo.createQueryBuilder(&#x27;q&#x27;);
+    q.where(&#x27;q.createdBy&#x3D; :userId&#x27;, { userId: user.userId });
+    q.orderBy(&#x27;q.updatedAt&#x27;, &#x27;DESC&#x27;);
+
+    return await paginate&lt;QuizzEntity&gt;(q, options);
+  }
+
+  deleteQuiz &#x3D; async (quizzId: string, userId: string) &#x3D;&gt; {
+    const quiz &#x3D; await this.quizRepo.findOne(quizzId, { relations: [&#x27;createdBy&#x27;] });
+
+    if (!quiz) {
+      throw new BadRequestException();
+    }
+    console.debug(quiz.createdBy.userId,userId)
+
+    if (quiz.createdBy.userId &#x3D;&#x3D;&#x3D; userId) {
+      await this.quizRepo.delete(quizzId);
+    } else {
+      throw new UnauthorizedException();
+    }
+  };
+
+  finishQuizAttempt &#x3D; async (attemptId: string, user: UserEntity) &#x3D;&gt; {
+    const quizAttempt &#x3D; await this.quizAttemptRepo.findOne(attemptId, {
+      relations: [&#x27;user&#x27;],
+    });
+    if (user.userId !&#x3D;&#x3D; quizAttempt.user.userId) {
+      throw new WsException(&#x27;Forbidden&#x27;);
+    }
+    if (!quizAttempt) {
+      throw new WsException(&#x27;No Quiz Attempt Found&#x27;);
+    }
+    quizAttempt.attemptFinished &#x3D; true;
+    quizAttempt.save();
+  };
+}
+</code></pre>
+    </div>
+
+</div>
+
+
+
+
+
+
+
+                   
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> result-matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'injectable';
+            var COMPODOC_CURRENT_PAGE_URL = 'QuizzService.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+       <!-- Required to polyfill modern browsers as code is ES5 for IE... -->
+       <script src="../js/libs/custom-elements-es5-adapter.js" charset="utf-8" defer></script>
+       <script src="../js/menu-wc.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

@@ -2721,6 +2721,106 @@
         "signature": "c173c46c3bd3cd1df18336855b2422d40d387331e546708b14cc8a9391057301",
         "affectsGlobalScope": false
       },
+      "../documentation/js/compodoc.js": {
+        "version": "5583010629ef3ef1d606e17887f1708c71a667e6ac357255441a78631011792e",
+        "signature": "bc483c3a009729fd872fa326d02a469d6f1e7dd9fb1ed8ca31bf3a4d377ba03a",
+        "affectsGlobalScope": true
+      },
+      "../documentation/js/lazy-load-graphs.js": {
+        "version": "1f97637f57a8fa4b2d9b926b0aa17d58a2e64a50011aae6cf0556e1008a87200",
+        "signature": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "affectsGlobalScope": true
+      },
+      "../documentation/js/menu-wc.js": {
+        "version": "c44535c74020200d6452a7bb441d051efc6a548073f886d407f4d9486020819e",
+        "signature": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "affectsGlobalScope": true
+      },
+      "../documentation/js/menu.js": {
+        "version": "5d005204aab872807ebc2102063fa6fe2cce3a45b96f676f246505a97c4fd77e",
+        "signature": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "affectsGlobalScope": true
+      },
+      "../documentation/js/routes.js": {
+        "version": "d18071fff990bc74b849836ea247106d97efd55ac2f7547069ea81c8f5c1ad20",
+        "signature": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "affectsGlobalScope": true
+      },
+      "../documentation/js/sourceCode.js": {
+        "version": "872592e1e97949692a8adb3ee08aad2019c350e8dbbff95a5ad259d89afbef57",
+        "signature": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "affectsGlobalScope": true
+      },
+      "../documentation/js/svg-pan-zoom.controls.js": {
+        "version": "811101f62162c7a9bebebbd33b351182c154feac4fe603361ad80d6fdd1952bf",
+        "signature": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "affectsGlobalScope": true
+      },
+      "../documentation/js/tabs.js": {
+        "version": "c3447ca348892653c802a25277f20fa7454e8ffaae3b9a6ad22439bd2ffddd8a",
+        "signature": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "affectsGlobalScope": true
+      },
+      "../documentation/js/tree.js": {
+        "version": "5b7b7269cf33d4652b42f7fac09b1b41f021d602319464a28a9c2dc920d737bb",
+        "signature": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "affectsGlobalScope": true
+      },
+      "../documentation/js/libs/EventDispatcher.js": {
+        "version": "4a774038086a97a23af0ef209b694887dc26b0b90fd112956ff4f8d1d16e8160",
+        "signature": "d1b7a406ffd468a0ccb6dd9ad60ac8d9470854bd74bd6b1db3152853b2b1df86",
+        "affectsGlobalScope": true
+      },
+      "../documentation/js/libs/bootstrap-native.js": {
+        "version": "783f9de880fb802c14507b6331457722e24f4537cb45e5af3e8254e807a209cc",
+        "signature": "0ab7deea7ff3a36604f2ec0f8ae34de5ecd77414fb13ebb4227ed0dff20c3d55",
+        "affectsGlobalScope": true
+      },
+      "../documentation/js/libs/custom-elements-es5-adapter.js": {
+        "version": "7034ae8d8aaa077dc02a62b5b4a0b9d0eefacc5619832a2637a9afd4ef626cc6",
+        "signature": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "affectsGlobalScope": true
+      },
+      "../documentation/js/libs/deep-iterator.js": {
+        "version": "b3491d4a136f4cc25d576b39d999d9483eb0e2156bc08317156c1b6644651504",
+        "signature": "7e278e7e1306bd6007c9d157a4821c0e15f69ee65eff5b1dc3b59c9a0c61c2e1",
+        "affectsGlobalScope": true
+      },
+      "../documentation/js/libs/htmlparser.js": {
+        "version": "db3a7e31e437a11296f2e68c42d4b8898d931b865394a21f29e962e4b188e2a3",
+        "signature": "8e609bb71c20b858c77f0e9f90bb1319db8477b13f9f965f1a1e18524bf50881",
+        "affectsGlobalScope": true
+      },
+      "../documentation/js/libs/innersvg.js": {
+        "version": "8ee65254917dfd4f25f8d58b9a38d2ef6f6c5f178e0e61e04499e1f8218aea89",
+        "signature": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "affectsGlobalScope": true
+      },
+      "../documentation/js/libs/lit-html.js": {
+        "version": "54edadd071c79eee35345fb7ad576e59beba9128e764892c2b32ffd5f1dd8a36",
+        "signature": "7c7b06de807c8b1e8f9371a0e6fec1190920f261eb81b495c3d8f1eb28932477",
+        "affectsGlobalScope": true
+      },
+      "../documentation/js/libs/prism.js": {
+        "version": "4fdb6ca344c14fad594d246a9eb9ce94e5451514c7eb515c0631935ebd78836d",
+        "signature": "a46b1ae18db013e55143dbcdf8e543b1d7dc5be8929c351230594df3dd62699f",
+        "affectsGlobalScope": true
+      },
+      "../documentation/js/search/search-lunr.js": {
+        "version": "e7b11f7d436306054cb29be55a106b09930e5f7a93239069e70a86388fa57ac7",
+        "signature": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "affectsGlobalScope": true
+      },
+      "../documentation/js/search/search.js": {
+        "version": "72f4e832ca4f7e81583814e34e68fe743410647ceaa6154e4bf0848a662c405b",
+        "signature": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "affectsGlobalScope": true
+      },
+      "../documentation/js/search/search_index.js": {
+        "version": "b013838d8e79e60ae2574b998481075780343c9b1cf1a70050a181e58009f05d",
+        "signature": "1b83ff2a8b51e3d2dfa11ecd4e75cd8d36ace38b1256785757ba617c2bb2263b",
+        "affectsGlobalScope": true
+      },
       "../node_modules/@types/jsonwebtoken/index.d.ts": {
         "version": "f67c920eba6ab8e4558cb9ab661d900188f101c5657e19b1e15829a1d491d46e",
         "signature": "f67c920eba6ab8e4558cb9ab661d900188f101c5657e19b1e15829a1d491d46e",
@@ -2792,7 +2892,7 @@
         "affectsGlobalScope": false
       },
       "../src/question/question.entity.ts": {
-        "version": "7cedc7d3d0e714f5b3cdfee267b7b14a346eb308d51447db4ddd70e8ccddbafd",
+        "version": "d9459f9e14d7d24fb18c9712979e0d434f8e7bc9866dede5b1ff723b344275a6",
         "signature": "82e6143b316752b1f5a12df3ff8d014da19a530748c6bac007a5b4304c80c7b9",
         "affectsGlobalScope": false
       },
@@ -3937,7 +4037,7 @@
         "affectsGlobalScope": false
       },
       "../src/quizz/quizz.service.ts": {
-        "version": "8641536756a7d3a86946970ccf42c94e77f6f5b94752fb3c49d63bec9fac28ad",
+        "version": "4beb2a6aaad150861de317c65427cf06c71cc9eb5d769d2c4ca5ced93fb180ee",
         "signature": "323074f41708f157a267f1bac1708dc776e7f7307b962a44c08850da48d956ff",
         "affectsGlobalScope": false
       },
@@ -3967,8 +4067,8 @@
         "affectsGlobalScope": false
       },
       "../src/quizz/quizz-attempt.gateway.ts": {
-        "version": "d55f540d79901b89df53a732bea1c4a4029016c3d797044c891f50f0341f101c",
-        "signature": "bb4868f5fa1689ea53f87783ed8b8257341c712c722df3058b562a542afbb749",
+        "version": "fc4a978d735aae41984d8474d33c4fe4b0a9cb3f2888029ed97794807ee44e94",
+        "signature": "481053863849fb1388902ef913c09da7e9c7635d7454560f4c7eee2f6f67563a",
         "affectsGlobalScope": false
       },
       "../src/app.module.ts": {
@@ -4430,6 +4530,9 @@
       "../config/typeorm.config.ts": [
         "../config/env.ts",
         "../node_modules/@nestjs/typeorm/index.d.ts"
+      ],
+      "../documentation/js/libs/htmlparser.js": [
+        "../node_modules/@types/node/stream.d.ts"
       ],
       "../node_modules/@babel/parser/typings/babel-parser.d.ts": [
         "../node_modules/@babel/types/lib/index.d.ts"
@@ -10875,6 +10978,26 @@
       "../config/env.ts",
       "../config/typeorm.config.ts",
       "../config/url.ts",
+      "../documentation/js/compodoc.js",
+      "../documentation/js/lazy-load-graphs.js",
+      "../documentation/js/libs/EventDispatcher.js",
+      "../documentation/js/libs/bootstrap-native.js",
+      "../documentation/js/libs/custom-elements-es5-adapter.js",
+      "../documentation/js/libs/deep-iterator.js",
+      "../documentation/js/libs/htmlparser.js",
+      "../documentation/js/libs/innersvg.js",
+      "../documentation/js/libs/lit-html.js",
+      "../documentation/js/libs/prism.js",
+      "../documentation/js/menu-wc.js",
+      "../documentation/js/menu.js",
+      "../documentation/js/routes.js",
+      "../documentation/js/search/search-lunr.js",
+      "../documentation/js/search/search.js",
+      "../documentation/js/search/search_index.js",
+      "../documentation/js/sourceCode.js",
+      "../documentation/js/svg-pan-zoom.controls.js",
+      "../documentation/js/tabs.js",
+      "../documentation/js/tree.js",
       "../node_modules/@babel/parser/typings/babel-parser.d.ts",
       "../node_modules/@babel/types/lib/index.d.ts",
       "../node_modules/@nestjs/common/cache/cache.constants.d.ts",

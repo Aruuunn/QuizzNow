@@ -114,6 +114,7 @@ export class QuizzService {
     newQuizAttempt.quizz = quiz;
     newQuizAttempt.questionAttempts = [];
     await newQuizAttempt.save();
+     this.logger.debug(newQuizAttempt,"[new attemptQuiz]")
     return newQuizAttempt.quizzAttemptId;
   }
 
