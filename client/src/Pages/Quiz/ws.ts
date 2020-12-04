@@ -105,7 +105,8 @@ export const finishQuizAttempt = (
   attemptId: string,
   callback: () => void = () => {}
 ) => {
-  socket.emit(FINISH, { payload: { attemptId } }, () => {
+  socket.emit(FINISH, { payload: { attemptId } }, (res: any) => {
+    console.log(res);
     callback();
   });
   return socket;

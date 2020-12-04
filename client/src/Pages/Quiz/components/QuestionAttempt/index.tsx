@@ -3,7 +3,7 @@ import { connect, ConnectedProps } from "react-redux";
 import { useParams, useHistory } from "react-router-dom";
 import { Container, Paper, Typography, Button } from "@material-ui/core";
 
-import { fetchQuestion, attemptQuestion } from "../../ws";
+import { fetchQuestion, attemptQuestion, finishQuizAttempt } from "../../ws";
 import {
   QuizzActionTypes,
   RootState,
@@ -21,7 +21,7 @@ const mapDispatchToProps = {
     type: QuizzActionTypes.SAVE_QUIZ_DETAILS,
     payload,
   }),
-  setSocket: (socket: SocketIOClient.Socket) => ({
+  setSocket: (socket: SocketIOClient.Socket | null) => ({
     type: QuizzActionTypes.SET_SOCKET,
     payload: socket,
   }),
@@ -34,6 +34,10 @@ const mapDispatchToProps = {
     questionNumber: number;
     selectedOption: string;
   }) => ({ type: QuizzActionTypes.SELECT_QUESTION_OPTION, payload: data }),
+  finishAttempt: (quizzId: string) => ({
+    payload: { quizzId },
+    type: QuizzActionTypes.FINISH_ATTEMPT,
+  }),
 };
 
 const connector = connect(mapStateToProps, mapDispatchToProps);
@@ -42,6 +46,9 @@ type Props = reduxProps;
 
 function QuestionAttempt(props: Props): ReactElement {
   const { quizzId, qno } = useParams() as { quizzId: string; qno: string };
+  const {
+    quizz: { socket },
+  } = props;
   const history = useHistory();
   const [loading, setLoading] = useState(false);
 
@@ -74,7 +81,7 @@ function QuestionAttempt(props: Props): ReactElement {
     }
   }, [quizzId, questionNumber]);
 
-  if (!quizz) {
+  if (!quizz || !socket) {
     history.push(`/attempt/${quizzId}`);
   }
 
@@ -97,6 +104,23 @@ function QuestionAttempt(props: Props): ReactElement {
       props.setSelectedOption({ quizzId, questionNumber, selectedOption });
     } else {
       console.error("Unable to Select Option");
+    }
+  };
+
+  const onFinish = () => {
+    if (quizz?.quizzAttemptId) {
+      finishQuizAttempt(
+        socket as SocketIOClient.Socket,
+        quizz?.quizzAttemptId as string,
+        () => {
+          socket?.close();
+          props.setSocket(null);
+          props.finishAttempt(quizzId);
+          history.push(`/attempt/${quizzId}`);
+        }
+      );
+    } else {
+      console.error("unable to finish the Quizz");
     }
   };
 
@@ -155,7 +179,6 @@ function QuestionAttempt(props: Props): ReactElement {
             size="large"
             style={{ marginRight: "20px" }}
             variant={questionNumber === 0 ? "contained" : "text"}
-      
             color="secondary"
             disabled={questionNumber === 0}
             onClick={() => {
@@ -167,7 +190,12 @@ function QuestionAttempt(props: Props): ReactElement {
             Previous
           </Button>
           {quizz.totalNumberOfQuestions - 1 === questionNumber ? (
-            <Button size="large" variant="outlined" color="secondary">
+            <Button
+              size="large"
+              variant="outlined"
+              onClick={() => onFinish()}
+              color="secondary"
+            >
               Finish
             </Button>
           ) : (

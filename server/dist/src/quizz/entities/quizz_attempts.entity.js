@@ -21,7 +21,7 @@ __decorate([
     __metadata("design:type", String)
 ], QuizzAttemptEntity.prototype, "quizzAttemptId", void 0);
 __decorate([
-    typeorm_1.ManyToOne(type => quizz_entity_1.QuizzEntity, quiz => quiz.quizzAttemptsByUsers, { eager: true, nullable: false }),
+    typeorm_1.ManyToOne(type => quizz_entity_1.QuizzEntity, quiz => quiz.quizzAttemptsByUsers, { eager: true, nullable: false, onDelete: 'CASCADE' }),
     __metadata("design:type", quizz_entity_1.QuizzEntity)
 ], QuizzAttemptEntity.prototype, "quizz", void 0);
 __decorate([

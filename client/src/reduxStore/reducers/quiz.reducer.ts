@@ -172,9 +172,20 @@ export const quizzStateReducer = (
     case QuizzActionTypes.FINISH_ATTEMPT: {
       const { quizzId } = quizzAction.payload as { quizzId: string };
       if (!quizzId) {
+        console.error("quizzId is not provided!!");
         return quizzState;
       }
-      return { ...quizzState };
+      return {
+        ...quizzState,
+        quizzes: {
+          ...quizzState.quizzes,
+          [quizzId]: {
+            ...quizzState.quizzes[quizzId],
+            isQuizzAttemptFinished: true,
+            isQuizzStarted: false,
+          },
+        },
+      };
     }
 
     default:

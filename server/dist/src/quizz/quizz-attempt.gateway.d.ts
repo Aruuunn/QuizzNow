@@ -15,7 +15,7 @@ export declare class QuizAttemptGateway implements OnGatewayInit, OnGatewayConne
             attemptId: string;
         };
         user: UserEntity;
-    }, ack: () => void): Promise<void>;
+    }): Promise<string>;
     fetchQuizDetails(server: Server, data: {
         payload: {
             quizzId: string;

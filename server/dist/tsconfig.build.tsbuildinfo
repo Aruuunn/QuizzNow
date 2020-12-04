@@ -2902,7 +2902,7 @@
         "affectsGlobalScope": false
       },
       "../src/quizz/entities/quizz_attempts.entity.ts": {
-        "version": "106d9ef9803f1f35afdaa52a57b9ea5ddcbbe075c93c502562e252dd28a092ed",
+        "version": "3e8e56301b940027c9ca285a3f7295a6e414c3f262a21efdcc43e1f389eb1937",
         "signature": "8531f363dc67f7031bd1b0f2503812ea66e97d2255fb3b4a19a68a0f5921ab74",
         "affectsGlobalScope": false
       },
@@ -4067,8 +4067,8 @@
         "affectsGlobalScope": false
       },
       "../src/quizz/quizz-attempt.gateway.ts": {
-        "version": "fc4a978d735aae41984d8474d33c4fe4b0a9cb3f2888029ed97794807ee44e94",
-        "signature": "481053863849fb1388902ef913c09da7e9c7635d7454560f4c7eee2f6f67563a",
+        "version": "6b8e9875b1e4f48a6522c338eae1794b81e62c0df68d66a042dac163f0a8329d",
+        "signature": "0e2fbdf29c5fdbe11e05c2bdf4e02c75f6f9042c196792780aac9b9686d6948b",
         "affectsGlobalScope": false
       },
       "../src/app.module.ts": {

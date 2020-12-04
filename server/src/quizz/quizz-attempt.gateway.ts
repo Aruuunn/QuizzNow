@@ -6,7 +6,7 @@ import {
   OnGatewayConnection,
   OnGatewayDisconnect,
 } from '@nestjs/websockets';
-import { Logger, UseGuards } from '@nestjs/common';
+import { Logger, Req, UseGuards } from '@nestjs/common';
 import { Socket, Server } from 'socket.io';
 
 import { WsGuard } from '../auth/ws.gaurd';
@@ -56,15 +56,16 @@ export class QuizAttemptGateway
   async finishQuiz(
     server: Server,
     data: { payload: { attemptId: string }; user: UserEntity },
-    ack:() => void
   ) {
     try {
       const {
         payload: { attemptId },
         user,
       } = data;
+
       await this.quizService.finishQuizAttempt(attemptId, user);
-      ack();
+   
+      return 'FINISHED';
     } catch (e) {
       console.log(e);
       server.emit(ERROR);
@@ -142,7 +143,7 @@ export class QuizAttemptGateway
         payload: { attemptId, questionNumber },
         user,
       } = data;
-      this.logger.debug(questionNumber,"QuestionNumber")
+      this.logger.debug(questionNumber, 'QuestionNumber');
       const {
         question,
         selectedOption,
@@ -150,8 +151,8 @@ export class QuizAttemptGateway
         attemptId,
         questionNumber,
         user,
-        ); 
-      
+      );
+
       server.emit(RECEIVED_QUESTION, {
         payload: { question: classToPlain(question), selectedOption },
       });
