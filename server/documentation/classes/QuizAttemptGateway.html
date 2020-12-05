@@ -347,8 +347,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="163"
-                            class="link-to-prism">src/quizz/quizz-attempt.gateway.ts:163</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="166"
+                            class="link-to-prism">src/quizz/quizz-attempt.gateway.ts:166</a></div>
                 </td>
             </tr>
 
@@ -438,8 +438,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="131"
-                            class="link-to-prism">src/quizz/quizz-attempt.gateway.ts:131</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="134"
+                            class="link-to-prism">src/quizz/quizz-attempt.gateway.ts:134</a></div>
                 </td>
             </tr>
 
@@ -529,8 +529,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="73"
-                            class="link-to-prism">src/quizz/quizz-attempt.gateway.ts:73</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="76"
+                            class="link-to-prism">src/quizz/quizz-attempt.gateway.ts:76</a></div>
                 </td>
             </tr>
 
@@ -670,7 +670,7 @@
                     <div>
                     </div>
                     <div class="io-description">
-                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                        <b>Returns : </b>    <code>{}</code>
 
                     </div>
                     <div class="io-description">
@@ -863,8 +863,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="114"
-                            class="link-to-prism">src/quizz/quizz-attempt.gateway.ts:114</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="117"
+                            class="link-to-prism">src/quizz/quizz-attempt.gateway.ts:117</a></div>
                 </td>
             </tr>
 
@@ -941,7 +941,7 @@
   OnGatewayConnection,
   OnGatewayDisconnect,
 } from &#x27;@nestjs/websockets&#x27;;
-import { Logger, UseGuards } from &#x27;@nestjs/common&#x27;;
+import { Logger, Req, UseGuards } from &#x27;@nestjs/common&#x27;;
 import { Socket, Server } from &#x27;socket.io&#x27;;
 
 import { WsGuard } from &#x27;../auth/ws.gaurd&#x27;;
@@ -997,7 +997,10 @@ export class QuizAttemptGateway
         payload: { attemptId },
         user,
       } &#x3D; data;
+
       await this.quizService.finishQuizAttempt(attemptId, user);
+   
+      return &#x27;FINISHED&#x27;;
     } catch (e) {
       console.log(e);
       server.emit(ERROR);
@@ -1075,7 +1078,7 @@ export class QuizAttemptGateway
         payload: { attemptId, questionNumber },
         user,
       } &#x3D; data;
-
+      this.logger.debug(questionNumber, &#x27;QuestionNumber&#x27;);
       const {
         question,
         selectedOption,
@@ -1083,8 +1086,8 @@ export class QuizAttemptGateway
         attemptId,
         questionNumber,
         user,
-        ); 
-      
+      );
+
       server.emit(RECEIVED_QUESTION, {
         payload: { question: classToPlain(question), selectedOption },
       });

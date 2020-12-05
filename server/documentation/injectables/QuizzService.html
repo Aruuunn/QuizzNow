@@ -262,8 +262,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="120"
-                            class="link-to-prism">src/quizz/quizz.service.ts:120</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="121"
+                            class="link-to-prism">src/quizz/quizz.service.ts:121</a></div>
                 </td>
             </tr>
 
@@ -652,8 +652,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="335"
-                            class="link-to-prism">src/quizz/quizz.service.ts:335</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="336"
+                            class="link-to-prism">src/quizz/quizz.service.ts:336</a></div>
                 </td>
             </tr>
 
@@ -737,7 +737,7 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="201" class="link-to-prism">src/quizz/quizz.service.ts:201</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="202" class="link-to-prism">src/quizz/quizz.service.ts:202</a></div>
                             </td>
                         </tr>
 
@@ -763,7 +763,7 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="230" class="link-to-prism">src/quizz/quizz.service.ts:230</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="231" class="link-to-prism">src/quizz/quizz.service.ts:231</a></div>
                             </td>
                         </tr>
 
@@ -789,7 +789,7 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="183" class="link-to-prism">src/quizz/quizz.service.ts:183</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="184" class="link-to-prism">src/quizz/quizz.service.ts:184</a></div>
                             </td>
                         </tr>
 
@@ -815,7 +815,7 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="343" class="link-to-prism">src/quizz/quizz.service.ts:343</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="344" class="link-to-prism">src/quizz/quizz.service.ts:344</a></div>
                             </td>
                         </tr>
 
@@ -841,7 +841,7 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="358" class="link-to-prism">src/quizz/quizz.service.ts:358</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="359" class="link-to-prism">src/quizz/quizz.service.ts:359</a></div>
                             </td>
                         </tr>
 
@@ -867,7 +867,7 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="179" class="link-to-prism">src/quizz/quizz.service.ts:179</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="180" class="link-to-prism">src/quizz/quizz.service.ts:180</a></div>
                             </td>
                         </tr>
 
@@ -926,7 +926,7 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="282" class="link-to-prism">src/quizz/quizz.service.ts:282</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="283" class="link-to-prism">src/quizz/quizz.service.ts:283</a></div>
                             </td>
                         </tr>
 
@@ -952,7 +952,7 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="256" class="link-to-prism">src/quizz/quizz.service.ts:256</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="257" class="link-to-prism">src/quizz/quizz.service.ts:257</a></div>
                             </td>
                         </tr>
 
@@ -978,7 +978,7 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="300" class="link-to-prism">src/quizz/quizz.service.ts:300</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="301" class="link-to-prism">src/quizz/quizz.service.ts:301</a></div>
                             </td>
                         </tr>
 
@@ -1107,6 +1107,7 @@ export class QuizzService {
     newQuizAttempt.quizz &#x3D; quiz;
     newQuizAttempt.questionAttempts &#x3D; [];
     await newQuizAttempt.save();
+     this.logger.debug(newQuizAttempt,&quot;[new attemptQuiz]&quot;)
     return newQuizAttempt.quizzAttemptId;
   }
 

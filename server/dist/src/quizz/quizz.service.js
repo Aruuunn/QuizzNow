@@ -128,7 +128,9 @@ let QuizzService = class QuizzService {
             return quiz;
         };
         this.deleteQuiz = async (quizzId, userId) => {
-            const quiz = await this.quizRepo.findOne(quizzId, { relations: ['createdBy'] });
+            const quiz = await this.quizRepo.findOne(quizzId, {
+                relations: ['createdBy'],
+            });
             if (!quiz) {
                 throw new common_1.BadRequestException();
             }
@@ -169,6 +171,39 @@ let QuizzService = class QuizzService {
                 }, true));
         this.logger.debug(result, 'canAttemptQuiz');
         return result;
+    }
+    async fetchQuizzResults(user, quizzId) {
+        var _a;
+        try {
+            const quizzAttempt = user.userQuizAttempts.reduce((t, c) => {
+                if (c.quizz.quizzId === quizzId) {
+                    return c;
+                }
+                else
+                    return t;
+            }, undefined);
+            if (!quizzAttempt) {
+                throw new common_1.BadRequestException('Quizz Not Found');
+            }
+            if (quizzAttempt.quizz.endDatetime.getTime() < Date.now()) {
+                throw new common_1.BadRequestException('Quizz has not ended Yet. You can only see the results after the Quizz has ended');
+            }
+            const questions = (_a = quizzAttempt === null || quizzAttempt === void 0 ? void 0 : quizzAttempt.quizz) === null || _a === void 0 ? void 0 : _a.questions;
+            const cacheQuestion = {};
+            for (let i = 0; i < (questions === null || questions === void 0 ? void 0 : questions.length); i++) {
+                cacheQuestion[questions[i].questionId] = i;
+            }
+            return quizzAttempt === null || quizzAttempt === void 0 ? void 0 : quizzAttempt.questionAttempts.map((o, index) => {
+                return {
+                    option: o === null || o === void 0 ? void 0 : o.optionChoosed,
+                    question: questions[cacheQuestion[o === null || o === void 0 ? void 0 : o.questionId]],
+                };
+            });
+        }
+        catch (e) {
+            this.logger.error(e);
+            throw new common_1.InternalServerErrorException();
+        }
     }
     async fetchQuestionForQuizAttempt(attemptId, questionNumber, user) {
         const quizAttempt = await this.quizAttemptRepo.findOne(attemptId, {
@@ -219,7 +254,7 @@ let QuizzService = class QuizzService {
         newQuizAttempt.quizz = quiz;
         newQuizAttempt.questionAttempts = [];
         await newQuizAttempt.save();
-        this.logger.debug(newQuizAttempt, "[new attemptQuiz]");
+        this.logger.debug(newQuizAttempt, '[new attemptQuiz]');
         return newQuizAttempt.quizzAttemptId;
     }
     async attemptQuestion(user, questionId, choosedOption, attemptId) {
@@ -243,7 +278,7 @@ let QuizzService = class QuizzService {
             if (!questionAttempt) {
                 isNew = true;
                 questionAttempt = new question_attempt_entity_1.QuestionAttemptEntity();
-                this.logger.debug(question, "Question");
+                this.logger.debug(question, 'Question');
                 questionAttempt.questionId = question.questionId;
                 questionAttempt.quizAttempt = quizAttempt;
             }

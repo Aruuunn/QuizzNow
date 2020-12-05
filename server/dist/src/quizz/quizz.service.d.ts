@@ -16,6 +16,10 @@ export declare class QuizzService {
     constructor(questionService: QuestionService, quizRepo: Repository<QuizzEntity>, quizAttemptRepo: Repository<QuizzAttemptEntity>, questionAttemptRepo: Repository<QuestionAttemptEntity>);
     private logger;
     canAttemptQuiz(quiz: QuizzEntity, user: UserEntity, checkForPreviousAttempts?: boolean): boolean;
+    fetchQuizzResults(user: UserEntity, quizzId: string): Promise<{
+        option: string;
+        question: QAEntity;
+    }[]>;
     fetchQuestionForQuizAttempt(attemptId: string, questionNumber: number, user: UserEntity): Promise<{
         question: QAEntity;
         selectedOption: string | QuestionAttemptEntity;

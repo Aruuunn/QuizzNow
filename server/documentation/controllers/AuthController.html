@@ -64,6 +64,14 @@
                 <code>auth</code>
             </p>
 
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>Auth Controller
+base path  : /api/auth</p>
+
+            </p>
 
 
 
@@ -133,8 +141,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="9"
-                            class="link-to-prism">src/auth/auth.controller.ts:9</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="18"
+                            class="link-to-prism">src/auth/auth.controller.ts:18</a></div>
                 </td>
             </tr>
 
@@ -150,6 +158,7 @@
                                     <td>Name</td>
                                     <td>Type</td>
                                     <td>Optional</td>
+                                    <td>Description</td>
                                 </tr>
                             </thead>
                             <tbody>
@@ -164,6 +173,12 @@
                                     </td>
 
 
+                                    <td>
+                                        <ul>
+<li>expects the id_token got after google authorization</li>
+</ul>
+
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>
@@ -171,11 +186,12 @@
                     <div>
                     </div>
                     <div class="io-description">
-                        <b>Returns : </b>    <code>{}</code>
+                        <b>Returns : </b>    <code>Promise&lt;literal type&gt;</code>
 
                     </div>
                     <div class="io-description">
-                        
+                        <p>Promise&lt;{ user: UserEntity; accessToken: string }&gt;</p>
+
                     </div>
                 </td>
             </tr>
@@ -186,16 +202,26 @@
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Body, Controller, Post } from &#x27;@nestjs/common&#x27;;
+import UserEntity from &#x27;src/user/user.entity&#x27;;
 import { AuthService } from &#x27;./auth.service&#x27;;
 
+/**
+ * Auth Controller
+ * base path  : /api/auth
+ */
 @Controller(&#x27;auth&#x27;)
 export class AuthController {
   constructor(private authService: AuthService) {}
 
+  /**
+   * @param id_token - expects the id_token got after google authorization
+   * @returns Promise&lt;{ user: UserEntity; accessToken: string }&gt;
+   */
   @Post(&#x27;google&#x27;)
   async auth(
-    @Body(&#x27;id_token&#x27;) id_token: string) {
-  return await this.authService.authenticateUser(id_token);
+    @Body(&#x27;id_token&#x27;) id_token: string,
+  ): Promise&lt;{ user: UserEntity; accessToken: string }&gt; {
+    return await this.authService.authenticateUser(id_token);
   }
 }
 </code></pre>

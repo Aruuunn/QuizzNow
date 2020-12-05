@@ -108,6 +108,12 @@ declare namespace COMPODOC_SEARCH_INDEX {
             _index: number;
             title: {};
             body: {
+                "controllers/AuthController.html": {};
+            };
+        })[] | (string | {
+            _index: number;
+            title: {};
+            body: {
                 "classes/NewQuestionDto.html": {};
                 "classes/NewQuizDto.html": {};
             };
@@ -214,12 +220,6 @@ declare namespace COMPODOC_SEARCH_INDEX {
             body: {
                 "classes/QuizAttemptGateway.html": {};
                 "injectables/QuizzService.html": {};
-            };
-        })[] | (string | {
-            _index: number;
-            title: {};
-            body: {
-                "controllers/AuthController.html": {};
             };
         })[] | (string | {
             _index: number;
@@ -923,6 +923,13 @@ declare namespace COMPODOC_SEARCH_INDEX {
             };
             body: {
                 "miscellaneous/functions.html": {};
+            };
+        })[] | (string | {
+            _index: number;
+            title: {};
+            body: {
+                "controllers/AuthController.html": {};
+                "dependencies.html": {};
             };
         })[] | (string | {
             _index: number;
@@ -1401,6 +1408,7 @@ declare namespace COMPODOC_SEARCH_INDEX {
             _index: number;
             title: {};
             body: {
+                "controllers/AuthController.html": {};
                 "injectables/QuestionService.html": {};
                 "injectables/QuizzService.html": {};
                 "guards/WsGuard.html": {};
@@ -1693,6 +1701,14 @@ declare namespace COMPODOC_SEARCH_INDEX {
             body: {
                 "dependencies.html": {};
                 "miscellaneous/variables.html": {};
+            };
+        })[] | (string | {
+            _index: number;
+            title: {};
+            body: {
+                "controllers/QuestionController.html": {};
+                "classes/QuizAttemptGateway.html": {};
+                "controllers/QuizController.html": {};
             };
         })[] | (string | {
             _index: number;
@@ -1853,6 +1869,13 @@ declare namespace COMPODOC_SEARCH_INDEX {
             _index: number;
             title: {};
             body: {
+                "controllers/AuthController.html": {};
+                "controllers/QuizController.html": {};
+            };
+        })[] | (string | {
+            _index: number;
+            title: {};
+            body: {
                 "classes/UserEntity.html": {};
                 "coverage.html": {};
             };
@@ -1924,6 +1947,16 @@ declare namespace COMPODOC_SEARCH_INDEX {
                 "classes/UserEntity.html": {};
                 "guards/WsGuard.html": {};
                 "miscellaneous/variables.html": {};
+            };
+        })[] | (string | {
+            _index: number;
+            title: {};
+            body: {
+                "injectables/AuthService.html": {};
+                "injectables/QuestionService.html": {};
+                "classes/QuizAttemptGateway.html": {};
+                "injectables/QuizzService.html": {};
+                "guards/WsGuard.html": {};
             };
         })[] | (string | {
             _index: number;
@@ -2025,14 +2058,6 @@ declare namespace COMPODOC_SEARCH_INDEX {
             _index: number;
             title: {};
             body: {
-                "controllers/QuestionController.html": {};
-                "classes/QuizAttemptGateway.html": {};
-                "controllers/QuizController.html": {};
-            };
-        })[] | (string | {
-            _index: number;
-            title: {};
-            body: {
                 "injectables/AuthService.html": {};
                 "injectables/JwtStrategy.html": {};
                 "classes/QuestionEntity.html": {};
@@ -2076,6 +2101,7 @@ declare namespace COMPODOC_SEARCH_INDEX {
                 "classes/UserEntity.html": {};
             };
             body: {
+                "controllers/AuthController.html": {};
                 "injectables/AuthService.html": {};
                 "classes/QuestionEntity.html": {};
                 "injectables/QuestionService.html": {};

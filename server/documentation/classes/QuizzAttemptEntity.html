@@ -217,7 +217,7 @@
                             <b>Decorators : </b>
                             <br />
                             <code>
-                                @ManyToOne(undefined, undefined, {eager: true, nullable: false})<br />
+                                @ManyToOne(undefined, undefined, {eager: true, nullable: false, onDelete: &#x27;CASCADE&#x27;})<br />
                             </code>
                         </td>
                     </tr>
@@ -370,7 +370,7 @@ export class QuizzAttemptEntity extends BaseEntity {
   @ManyToOne(
     type &#x3D;&gt; QuizzEntity,
     quiz &#x3D;&gt; quiz.quizzAttemptsByUsers,
-    { eager: true,nullable:false },
+    { eager: true,nullable:false ,onDelete:&#x27;CASCADE&#x27;},
   )
   quizz: QuizzEntity;
 

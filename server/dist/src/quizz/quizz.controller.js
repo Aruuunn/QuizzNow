@@ -14,6 +14,7 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.QuizController = void 0;
 const common_1 = require("@nestjs/common");
+const user_decorator_1 = require("../../common/user.decorator");
 const user_entity_1 = require("../user/user.entity");
 const jwt_gaurd_1 = require("../auth/jwt.gaurd");
 const new_question_1 = require("../question/dto/new.question");
@@ -23,20 +24,23 @@ let QuizController = class QuizController {
     constructor(quizService) {
         this.quizService = quizService;
     }
-    async newQuiz(data, req, res) {
-        await this.quizService.createNewQuiz(req.user, data);
+    async newQuiz(data, user, res) {
+        await this.quizService.createNewQuiz(user, data);
         return res.sendStatus(common_1.HttpStatus.CREATED);
     }
-    async newQuestion(questionData, quizId, req, res) {
-        await this.quizService.addNewQuestion(req.user, questionData, quizId);
+    async fetchQuizzResults(id, user) {
+        return await this.quizService.fetchQuizzResults(user, id);
+    }
+    async newQuestion(questionData, quizId, user, res) {
+        await this.quizService.addNewQuestion(user, questionData, quizId);
         return res.sendStatus(common_1.HttpStatus.CREATED);
     }
-    async removeQuestion(questionID, quizId, req, res) {
-        await this.quizService.removeQuestion(req.user, questionID, quizId);
+    async removeQuestion(questionID, quizId, user, res) {
+        await this.quizService.removeQuestion(user, questionID, quizId);
         return res.sendStatus(common_1.HttpStatus.OK);
     }
-    async removeAllQuestions(quizId, req, res) {
-        await this.quizService.removeAllQuestions(req.user, quizId);
+    async removeAllQuestions(quizId, user, res) {
+        await this.quizService.removeAllQuestions(user, quizId);
         return res.sendStatus(common_1.HttpStatus.OK);
     }
     async updateQuizTime(startDatetime, endDatetime, quizId, req, res) {
@@ -55,21 +59,29 @@ __decorate([
     common_1.Post('new'),
     common_1.UseGuards(jwt_gaurd_1.default),
     common_1.UsePipes(common_1.ValidationPipe),
-    __param(0, common_1.Body()), __param(1, common_1.Req()), __param(2, common_1.Res()),
+    __param(0, common_1.Body()), __param(1, user_decorator_1.User()), __param(2, common_1.Res()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [new_quiz_1.NewQuizDto, Object, Object]),
+    __metadata("design:paramtypes", [new_quiz_1.NewQuizDto, user_entity_1.default, Object]),
     __metadata("design:returntype", Promise)
 ], QuizController.prototype, "newQuiz", null);
+__decorate([
+    common_1.Get(":id/results"),
+    common_1.UseGuards(jwt_gaurd_1.default),
+    __param(0, common_1.Param("id")), __param(1, user_decorator_1.User()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String, user_entity_1.default]),
+    __metadata("design:returntype", Promise)
+], QuizController.prototype, "fetchQuizzResults", null);
 __decorate([
     common_1.Post(':qid/question/new'),
     common_1.UseGuards(jwt_gaurd_1.default),
     common_1.UsePipes(common_1.ValidationPipe),
     __param(0, common_1.Body()),
     __param(1, common_1.Param('qid')),
-    __param(2, common_1.Req()),
+    __param(2, user_decorator_1.User()),
     __param(3, common_1.Res()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [new_question_1.default, String, Object, Object]),
+    __metadata("design:paramtypes", [new_question_1.default, String, user_entity_1.default, Object]),
     __metadata("design:returntype", Promise)
 ], QuizController.prototype, "newQuestion", null);
 __decorate([
@@ -78,10 +90,10 @@ __decorate([
     common_1.UsePipes(common_1.ValidationPipe),
     __param(0, common_1.Param('questionID')),
     __param(1, common_1.Param('qid')),
-    __param(2, common_1.Req()),
+    __param(2, user_decorator_1.User()),
     __param(3, common_1.Res()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String, String, Object, Object]),
+    __metadata("design:paramtypes", [String, String, user_entity_1.default, Object]),
     __metadata("design:returntype", Promise)
 ], QuizController.prototype, "removeQuestion", null);
 __decorate([
@@ -89,10 +101,10 @@ __decorate([
     common_1.UseGuards(jwt_gaurd_1.default),
     common_1.UsePipes(common_1.ValidationPipe),
     __param(0, common_1.Param('qid')),
-    __param(1, common_1.Req()),
+    __param(1, user_decorator_1.User()),
     __param(2, common_1.Res()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String, Object, Object]),
+    __metadata("design:paramtypes", [String, user_entity_1.default, Object]),
     __metadata("design:returntype", Promise)
 ], QuizController.prototype, "removeAllQuestions", null);
 __decorate([

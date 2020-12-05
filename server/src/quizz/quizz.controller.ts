@@ -14,6 +14,7 @@ import {
   Get,
   Query
 } from '@nestjs/common';
+import { User } from 'common/user.decorator';
 import { IPaginationOptions } from 'nestjs-typeorm-paginate';
 import UserEntity from 'src/user/user.entity';
 import JwtGaurd from '../auth/jwt.gaurd';
@@ -28,11 +29,18 @@ export class QuizController {
   @Post('new')
   @UseGuards(JwtGaurd)
   @UsePipes(ValidationPipe)
-  async newQuiz(@Body() data: NewQuizDto, @Req() req, @Res() res) {
-   await this.quizService.createNewQuiz(req.user, data);
+  async newQuiz(@Body() data: NewQuizDto, @User() user: UserEntity, @Res() res) {
+   await this.quizService.createNewQuiz(user, data);
   return res.sendStatus(HttpStatus.CREATED);
   }
 
+
+
+  @Get(":id/results")
+  @UseGuards(JwtGaurd)
+  async fetchQuizzResults(@Param("id") id: string,@User() user : UserEntity) {
+    return await this.quizService.fetchQuizzResults(user, id);
+  }
 
   @Post(':qid/question/new')
   @UseGuards(JwtGaurd)
@@ -40,10 +48,10 @@ export class QuizController {
   async newQuestion(
     @Body() questionData: NewQuestionDto,
     @Param('qid') quizId: string,
-    @Req() req,
+    @User() user:UserEntity,
     @Res() res,
   ) {
-    await this.quizService.addNewQuestion(req.user, questionData, quizId);
+    await this.quizService.addNewQuestion(user, questionData, quizId);
     return res.sendStatus(HttpStatus.CREATED);
   }
 
@@ -53,10 +61,10 @@ export class QuizController {
   async removeQuestion(
     @Param('questionID') questionID: string,
     @Param('qid') quizId: string,
-    @Req() req,
+    @User() user:UserEntity,
     @Res() res,
   ) {
-    await this.quizService.removeQuestion(req.user, questionID, quizId);
+    await this.quizService.removeQuestion(user, questionID, quizId);
     return res.sendStatus(HttpStatus.OK);
   }
 
@@ -65,10 +73,10 @@ export class QuizController {
   @UsePipes(ValidationPipe)
   async removeAllQuestions(
     @Param('qid') quizId: string,
-    @Req() req,
+    @User() user:UserEntity,
     @Res() res,
   ) {
-    await this.quizService.removeAllQuestions(req.user, quizId);
+    await this.quizService.removeAllQuestions(user, quizId);
     return res.sendStatus(HttpStatus.OK);
   }
 
@@ -88,8 +96,7 @@ export class QuizController {
 
   @Get()
   @UseGuards(JwtGaurd)
-  async get(@Query() options: IPaginationOptions, @Req() req) {
-   
+  async get(@Query() options: IPaginationOptions, @Req() req) { 
     return await  this.quizService.getQuizzes(req.user, options);
   }
 
