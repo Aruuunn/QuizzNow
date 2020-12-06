@@ -3,14 +3,14 @@ import { connect, ConnectedProps } from "react-redux";
 import { useParams, useHistory } from "react-router-dom";
 import { Container, Paper, Typography, Button } from "@material-ui/core";
 
-import { fetchQuestion, attemptQuestion, finishQuizAttempt } from "../../ws";
+import { fetchQuestion, attemptQuestion, finishQuizAttempt,setUp,onNotFound,onUnAuthorized } from "./ws";
 import {
   QuizzActionTypes,
   RootState,
   QuizzDetailsType,
   QuestionDetails,
-} from "../../../../reduxStore";
-import { LoadingIndicator, NavBar } from "../../../../components";
+} from "../../reduxStore";
+import { LoadingIndicator, NavBar } from "../../components";
 
 const mapStateToProps = (state: RootState) => ({
   quizz: state.quizz,
@@ -20,10 +20,6 @@ const mapDispatchToProps = {
   saveQuizzDetails: (payload: QuizzDetailsType) => ({
     type: QuizzActionTypes.SAVE_QUIZ_DETAILS,
     payload,
-  }),
-  setSocket: (socket: SocketIOClient.Socket | null) => ({
-    type: QuizzActionTypes.SET_SOCKET,
-    payload: socket,
   }),
   cacheQuestion: (
     data: { questionNumber: number; quizzId: string } & QuestionDetails
@@ -46,10 +42,9 @@ type Props = reduxProps;
 
 function QuestionAttempt(props: Props): ReactElement {
   const { quizzId, qno } = useParams() as { quizzId: string; qno: string };
-  const {
-    quizz: { socket },
-  } = props;
+
   const history = useHistory();
+  const [socket, setSocket] = useState<null | SocketIOClient.Socket>(null);
   const [loading, setLoading] = useState(false);
 
   let questionNumber: number = 0;
@@ -63,14 +58,28 @@ function QuestionAttempt(props: Props): ReactElement {
   const quizz = props.quizz.quizzes[quizzId];
 
   useEffect(() => {
+
+    if (!socket) {
+      const socket = setUp();
+      onNotFound(socket, () => {
+        socket.close();
+        history.push('/not-found');
+      });
+      onUnAuthorized(socket, () => {
+        socket.close();
+        history.push('/auth');
+      })
+      setSocket(socket);
+    }
+
     if (
       !quizz?.cacheQuestion[questionNumber] &&
       quizz?.quizzAttemptId &&
-      !loading
+      !loading && socket
     ) {
       setLoading(true);
       fetchQuestion(
-        props.quizz.socket as SocketIOClient.Socket,
+        socket as SocketIOClient.Socket,
         quizz?.quizzAttemptId as string,
         questionNumber,
         (data) => {
@@ -79,20 +88,15 @@ function QuestionAttempt(props: Props): ReactElement {
         }
       );
     }
-  }, [quizzId, questionNumber]);
+  }, [quizzId, questionNumber,socket]);
 
-  if (!quizz || !socket) {
-    history.push(`/attempt/${quizzId}`);
-  }
-
-  if (!quizz?.isQuizzStarted || !quizz?.quizzAttemptId) {
+  if (!quizz?.isQuizzStarted) {
     history.push(`/attempt/${quizzId}`);
   }
 
   const question = quizz?.cacheQuestion[questionNumber]?.question;
 
   const selectOption = (selectedOption: string) => {
-    const socket = props.quizz?.socket;
     if (socket && question && quizz?.quizzAttemptId) {
       attemptQuestion(
         socket as SocketIOClient.Socket,
@@ -100,7 +104,7 @@ function QuestionAttempt(props: Props): ReactElement {
         question.questionId,
         quizz?.quizzAttemptId
       );
-      props.setSocket(socket);
+
       props.setSelectedOption({ quizzId, questionNumber, selectedOption });
     } else {
       console.error("Unable to Select Option");
@@ -114,7 +118,7 @@ function QuestionAttempt(props: Props): ReactElement {
         quizz?.quizzAttemptId as string,
         () => {
           socket?.close();
-          props.setSocket(null);
+          setSocket(null);
           props.finishAttempt(quizzId);
           history.push(`/attempt/${quizzId}`);
         }

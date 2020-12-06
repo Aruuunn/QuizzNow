@@ -7,8 +7,25 @@ export declare class QuizController {
     private quizService;
     constructor(quizService: QuizzService);
     newQuiz(data: NewQuizDto, user: UserEntity, res: any): Promise<any>;
+    startQuizz(quizzId: string, user: UserEntity): Promise<{
+        attemptId: string;
+    }>;
+    fetchQuizzDetails(quizzId: string, user: UserEntity): Promise<{
+        canAttemptQuizz: boolean;
+        totalNumberOfQuestions: number;
+        isQuizzAttemptFinished: boolean;
+        quizzId: string;
+        quizzTitle: string;
+        startDatetime: Date;
+        endDatetime: Date;
+        questions: import("../question/question.entity").default[];
+        createdBy: UserEntity;
+        quizzAttemptsByUsers: import("./entities/quizz_attempts.entity").QuizzAttemptEntity[];
+        createdAt: Date;
+        updatedAt: Date;
+    }>;
     fetchQuizzResults(id: string, user: UserEntity): Promise<{
-        option: string;
+        optionChoosed: string;
         question: import("../question/question.entity").default;
     }[]>;
     newQuestion(questionData: NewQuestionDto, quizId: string, user: UserEntity, res: any): Promise<any>;

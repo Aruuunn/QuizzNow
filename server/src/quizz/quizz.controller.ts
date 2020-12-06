@@ -12,7 +12,8 @@ import {
   Delete,
   Patch,
   Get,
-  Query
+  Query,
+  ClassSerializerInterceptor,
 } from '@nestjs/common';
 import { User } from 'common/user.decorator';
 import { IPaginationOptions } from 'nestjs-typeorm-paginate';
@@ -29,16 +30,36 @@ export class QuizController {
   @Post('new')
   @UseGuards(JwtGaurd)
   @UsePipes(ValidationPipe)
-  async newQuiz(@Body() data: NewQuizDto, @User() user: UserEntity, @Res() res) {
-   await this.quizService.createNewQuiz(user, data);
-  return res.sendStatus(HttpStatus.CREATED);
+  async newQuiz(
+    @Body() data: NewQuizDto,
+    @User() user: UserEntity,
+    @Res() res,
+  ) {
+    await this.quizService.createNewQuiz(user, data);
+    return res.sendStatus(HttpStatus.CREATED);
   }
 
-
-
-  @Get(":id/results")
+  @Get(':qid/start')
   @UseGuards(JwtGaurd)
-  async fetchQuizzResults(@Param("id") id: string,@User() user : UserEntity) {
+  async startQuizz(@Param('qid') quizzId: string, @User() user: UserEntity):Promise<{attemptId:string}> {
+    const attemptId = await this.quizService.attemptQuiz(user, quizzId);
+    return { attemptId };
+  }
+
+  @Get(':id/details')
+  @UsePipes(ClassSerializerInterceptor)
+  @UseGuards(JwtGaurd)
+  async fetchQuizzDetails(
+    @Param('id') quizzId: string,
+    @User() user: UserEntity,
+  ) {
+    return await this.quizService.fetchQuizzDetails(user, quizzId);
+  }
+
+  @Get(':id/results')
+  @UsePipes(ClassSerializerInterceptor)
+  @UseGuards(JwtGaurd)
+  async fetchQuizzResults(@Param('id') id: string, @User() user: UserEntity) {
     return await this.quizService.fetchQuizzResults(user, id);
   }
 
@@ -48,7 +69,7 @@ export class QuizController {
   async newQuestion(
     @Body() questionData: NewQuestionDto,
     @Param('qid') quizId: string,
-    @User() user:UserEntity,
+    @User() user: UserEntity,
     @Res() res,
   ) {
     await this.quizService.addNewQuestion(user, questionData, quizId);
@@ -61,7 +82,7 @@ export class QuizController {
   async removeQuestion(
     @Param('questionID') questionID: string,
     @Param('qid') quizId: string,
-    @User() user:UserEntity,
+    @User() user: UserEntity,
     @Res() res,
   ) {
     await this.quizService.removeQuestion(user, questionID, quizId);
@@ -73,7 +94,7 @@ export class QuizController {
   @UsePipes(ValidationPipe)
   async removeAllQuestions(
     @Param('qid') quizId: string,
-    @User() user:UserEntity,
+    @User() user: UserEntity,
     @Res() res,
   ) {
     await this.quizService.removeAllQuestions(user, quizId);
@@ -90,21 +111,25 @@ export class QuizController {
     @Req() req,
     @Res() res,
   ) {
-    await this.quizService.updateQuiz(req.user,quizId,startDatetime,endDatetime );
+    await this.quizService.updateQuiz(
+      req.user,
+      quizId,
+      startDatetime,
+      endDatetime,
+    );
     return res.sendStatus(HttpStatus.OK);
   }
 
   @Get()
   @UseGuards(JwtGaurd)
-  async get(@Query() options: IPaginationOptions, @Req() req) { 
-    return await  this.quizService.getQuizzes(req.user, options);
+  async get(@Query() options: IPaginationOptions, @Req() req) {
+    return await this.quizService.getQuizzes(req.user, options);
   }
 
   @Delete(':id')
   @UseGuards(JwtGaurd)
-  async deleteQuiz(@Param('id') id:string,@Req() req,@Res() res) {
+  async deleteQuiz(@Param('id') id: string, @Req() req, @Res() res) {
     await this.quizService.deleteQuiz(id, (req.user as UserEntity).userId);
     return res.sendStatus(HttpStatus.OK);
   }
-
 }

@@ -109,6 +109,9 @@
                             <a href="#UNAUTHORIZED" title="common/ws.event.types.ts"><b>UNAUTHORIZED</b>&nbsp;&nbsp;&nbsp;(common/.../ws.event.types.ts)</a>
                         </li>
                         <li>
+                            <a href="#User" title="common/user.decorator.ts"><b>User</b>&nbsp;&nbsp;&nbsp;(common/.../user.decorator.ts)</a>
+                        </li>
+                        <li>
                             <a href="#" title="config/env.ts"><b></b>&nbsp;&nbsp;&nbsp;(config/.../env.ts)</a>
                         </li>
                     </ul>
@@ -604,6 +607,37 @@
   },
   synchronize: true,
 }</code>
+                        </td>
+                    </tr>
+
+
+            </tbody>
+        </table>
+</section>
+    <h3>common/user.decorator.ts</h3>
+    <section>
+    <h3></h3>        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="User"></a>
+                        <span class="name">
+                            <b>
+                            User</b>
+                            <a href="#User"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>createParamDecorator(
+  (data: string, ctx: ExecutionContext) &#x3D;&gt; {
+    const request &#x3D; ctx.switchToHttp().getRequest();
+    const user &#x3D; request.user;
+
+    return data ? user?.[data] : user;
+  },
+)</code>
                         </td>
                     </tr>
 

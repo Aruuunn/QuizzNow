@@ -172,6 +172,26 @@ let QuizzService = class QuizzService {
         this.logger.debug(result, 'canAttemptQuiz');
         return result;
     }
+    async fetchQuizzDetails(user, quizzId) {
+        let quizz;
+        try {
+            quizz = await this.getQuiz(quizzId, ['createdBy']);
+        }
+        catch (_a) {
+            throw new common_1.NotFoundException('Quizz Not Found');
+        }
+        const data = Object.assign(Object.assign({}, quizz), { canAttemptQuizz: this.canAttemptQuiz(quizz, user), totalNumberOfQuestions: quizz.questions.length, isQuizzAttemptFinished: user.userQuizAttempts.reduce((t, c) => {
+                if (c.quizz.quizzId === quizzId) {
+                    return c.attemptFinished || quizz.endDatetime.getTime() < Date.now()
+                        ? true
+                        : false;
+                }
+                else {
+                    return t;
+                }
+            }, false) });
+        return data;
+    }
     async fetchQuizzResults(user, quizzId) {
         var _a;
         try {
@@ -195,7 +215,7 @@ let QuizzService = class QuizzService {
             }
             return quizzAttempt === null || quizzAttempt === void 0 ? void 0 : quizzAttempt.questionAttempts.map((o, index) => {
                 return {
-                    option: o === null || o === void 0 ? void 0 : o.optionChoosed,
+                    optionChoosed: o === null || o === void 0 ? void 0 : o.optionChoosed,
                     question: questions[cacheQuestion[o === null || o === void 0 ? void 0 : o.questionId]],
                 };
             });

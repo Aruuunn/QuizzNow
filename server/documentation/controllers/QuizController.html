@@ -87,6 +87,14 @@
                             </li>
                             <li>
                                     <span class="modifier">Async</span>
+                                <a href="#fetchQuizzDetails">fetchQuizzDetails</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Async</span>
+                                <a href="#fetchQuizzResults">fetchQuizzResults</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Async</span>
                                 <a href="#get">get</a>
                             </li>
                             <li>
@@ -104,6 +112,10 @@
                             <li>
                                     <span class="modifier">Async</span>
                                 <a href="#removeQuestion">removeQuestion</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Async</span>
+                                <a href="#startQuizz">startQuizz</a>
                             </li>
                             <li>
                                     <span class="modifier">Async</span>
@@ -157,8 +169,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="98"
-                            class="link-to-prism">src/quizz/quizz.controller.ts:98</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="131"
+                            class="link-to-prism">src/quizz/quizz.controller.ts:131</a></div>
                 </td>
             </tr>
 
@@ -231,6 +243,188 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
+                    <a name="fetchQuizzDetails"></a>
+                    <span class="name">
+                        <b>
+                            <span class="modifier">Async</span>
+                            fetchQuizzDetails
+                        </b>
+                        <a href="#fetchQuizzDetails"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>fetchQuizzDetails(quizzId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, user: <a href="../classes/UserEntity.html">UserEntity</a>)</code>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <b>Decorators : </b>
+                    <br />
+                    <code>@Get(&#x27;:id/details&#x27;)<br />@UsePipes(ClassSerializerInterceptor)<br />@UseGuards(JwtGaurd)<br /></code>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="52"
+                            class="link-to-prism">src/quizz/quizz.controller.ts:52</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>quizzId</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                                <tr>
+                                    <td>user</td>
+                                    <td>
+                                                <code><a href="../classes/UserEntity.html" target="_self" >UserEntity</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>    <code>{}</code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="fetchQuizzResults"></a>
+                    <span class="name">
+                        <b>
+                            <span class="modifier">Async</span>
+                            fetchQuizzResults
+                        </b>
+                        <a href="#fetchQuizzResults"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>fetchQuizzResults(id: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, user: <a href="../classes/UserEntity.html">UserEntity</a>)</code>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <b>Decorators : </b>
+                    <br />
+                    <code>@Get(&#x27;:id/results&#x27;)<br />@UsePipes(ClassSerializerInterceptor)<br />@UseGuards(JwtGaurd)<br /></code>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="62"
+                            class="link-to-prism">src/quizz/quizz.controller.ts:62</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>id</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                                <tr>
+                                    <td>user</td>
+                                    <td>
+                                                <code><a href="../classes/UserEntity.html" target="_self" >UserEntity</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>    <code>{}</code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
                     <a name="get"></a>
                     <span class="name">
                         <b>
@@ -258,8 +452,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="91"
-                            class="link-to-prism">src/quizz/quizz.controller.ts:91</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="125"
+                            class="link-to-prism">src/quizz/quizz.controller.ts:125</a></div>
                 </td>
             </tr>
 
@@ -334,7 +528,7 @@
             <tr>
                 <td class="col-md-4">
                     <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>newQuestion(questionData: <a href="../classes/NewQuestionDto.html">NewQuestionDto</a>, quizId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, req, res)</code>
+                    <code>newQuestion(questionData: <a href="../classes/NewQuestionDto.html">NewQuestionDto</a>, quizId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, user: <a href="../classes/UserEntity.html">UserEntity</a>, res)</code>
                 </td>
             </tr>
 
@@ -348,8 +542,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="40"
-                            class="link-to-prism">src/quizz/quizz.controller.ts:40</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="69"
+                            class="link-to-prism">src/quizz/quizz.controller.ts:69</a></div>
                 </td>
             </tr>
 
@@ -393,8 +587,9 @@
 
                                 </tr>
                                 <tr>
-                                    <td>req</td>
+                                    <td>user</td>
                                     <td>
+                                                <code><a href="../classes/UserEntity.html" target="_self" >UserEntity</a></code>
                                     </td>
 
                                     <td>
@@ -447,7 +642,7 @@
             <tr>
                 <td class="col-md-4">
                     <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>newQuiz(data: <a href="../classes/NewQuizDto.html">NewQuizDto</a>, req, res)</code>
+                    <code>newQuiz(data: <a href="../classes/NewQuizDto.html">NewQuizDto</a>, user: <a href="../classes/UserEntity.html">UserEntity</a>, res)</code>
                 </td>
             </tr>
 
@@ -461,8 +656,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="31"
-                            class="link-to-prism">src/quizz/quizz.controller.ts:31</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="33"
+                            class="link-to-prism">src/quizz/quizz.controller.ts:33</a></div>
                 </td>
             </tr>
 
@@ -494,8 +689,9 @@
 
                                 </tr>
                                 <tr>
-                                    <td>req</td>
+                                    <td>user</td>
                                     <td>
+                                                <code><a href="../classes/UserEntity.html" target="_self" >UserEntity</a></code>
                                     </td>
 
                                     <td>
@@ -548,7 +744,7 @@
             <tr>
                 <td class="col-md-4">
                     <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>removeAllQuestions(quizId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, req, res)</code>
+                    <code>removeAllQuestions(quizId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, user: <a href="../classes/UserEntity.html">UserEntity</a>, res)</code>
                 </td>
             </tr>
 
@@ -562,8 +758,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="66"
-                            class="link-to-prism">src/quizz/quizz.controller.ts:66</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="95"
+                            class="link-to-prism">src/quizz/quizz.controller.ts:95</a></div>
                 </td>
             </tr>
 
@@ -595,8 +791,9 @@
 
                                 </tr>
                                 <tr>
-                                    <td>req</td>
+                                    <td>user</td>
                                     <td>
+                                                <code><a href="../classes/UserEntity.html" target="_self" >UserEntity</a></code>
                                     </td>
 
                                     <td>
@@ -649,7 +846,7 @@
             <tr>
                 <td class="col-md-4">
                     <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>removeQuestion(questionID: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, quizId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, req, res)</code>
+                    <code>removeQuestion(questionID: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, quizId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, user: <a href="../classes/UserEntity.html">UserEntity</a>, res)</code>
                 </td>
             </tr>
 
@@ -663,8 +860,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="53"
-                            class="link-to-prism">src/quizz/quizz.controller.ts:53</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="82"
+                            class="link-to-prism">src/quizz/quizz.controller.ts:82</a></div>
                 </td>
             </tr>
 
@@ -708,8 +905,9 @@
 
                                 </tr>
                                 <tr>
-                                    <td>req</td>
+                                    <td>user</td>
                                     <td>
+                                                <code><a href="../classes/UserEntity.html" target="_self" >UserEntity</a></code>
                                     </td>
 
                                     <td>
@@ -736,6 +934,97 @@
                     </div>
                     <div class="io-description">
                         <b>Returns : </b>    <code>{}</code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="startQuizz"></a>
+                    <span class="name">
+                        <b>
+                            <span class="modifier">Async</span>
+                            startQuizz
+                        </b>
+                        <a href="#startQuizz"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>startQuizz(quizzId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, user: <a href="../classes/UserEntity.html">UserEntity</a>)</code>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <b>Decorators : </b>
+                    <br />
+                    <code>@Get(&#x27;:qid/start&#x27;)<br />@UseGuards(JwtGaurd)<br /></code>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="44"
+                            class="link-to-prism">src/quizz/quizz.controller.ts:44</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>quizzId</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                                <tr>
+                                    <td>user</td>
+                                    <td>
+                                                <code><a href="../classes/UserEntity.html" target="_self" >UserEntity</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>    <code>Promise&lt;literal type&gt;</code>
 
                     </div>
                     <div class="io-description">
@@ -776,8 +1065,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="78"
-                            class="link-to-prism">src/quizz/quizz.controller.ts:78</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="107"
+                            class="link-to-prism">src/quizz/quizz.controller.ts:107</a></div>
                 </td>
             </tr>
 
@@ -887,8 +1176,10 @@
   Delete,
   Patch,
   Get,
-  Query
+  Query,
+  ClassSerializerInterceptor,
 } from &#x27;@nestjs/common&#x27;;
+import { User } from &#x27;common/user.decorator&#x27;;
 import { IPaginationOptions } from &#x27;nestjs-typeorm-paginate&#x27;;
 import UserEntity from &#x27;src/user/user.entity&#x27;;
 import JwtGaurd from &#x27;../auth/jwt.gaurd&#x27;;
@@ -903,11 +1194,38 @@ export class QuizController {
   @Post(&#x27;new&#x27;)
   @UseGuards(JwtGaurd)
   @UsePipes(ValidationPipe)
-  async newQuiz(@Body() data: NewQuizDto, @Req() req, @Res() res) {
-   await this.quizService.createNewQuiz(req.user, data);
-  return res.sendStatus(HttpStatus.CREATED);
+  async newQuiz(
+    @Body() data: NewQuizDto,
+    @User() user: UserEntity,
+    @Res() res,
+  ) {
+    await this.quizService.createNewQuiz(user, data);
+    return res.sendStatus(HttpStatus.CREATED);
   }
 
+  @Get(&#x27;:qid/start&#x27;)
+  @UseGuards(JwtGaurd)
+  async startQuizz(@Param(&#x27;qid&#x27;) quizzId: string, @User() user: UserEntity):Promise&lt;{attemptId:string}&gt; {
+    const attemptId &#x3D; await this.quizService.attemptQuiz(user, quizzId);
+    return { attemptId };
+  }
+
+  @Get(&#x27;:id/details&#x27;)
+  @UsePipes(ClassSerializerInterceptor)
+  @UseGuards(JwtGaurd)
+  async fetchQuizzDetails(
+    @Param(&#x27;id&#x27;) quizzId: string,
+    @User() user: UserEntity,
+  ) {
+    return await this.quizService.fetchQuizzDetails(user, quizzId);
+  }
+
+  @Get(&#x27;:id/results&#x27;)
+  @UsePipes(ClassSerializerInterceptor)
+  @UseGuards(JwtGaurd)
+  async fetchQuizzResults(@Param(&#x27;id&#x27;) id: string, @User() user: UserEntity) {
+    return await this.quizService.fetchQuizzResults(user, id);
+  }
 
   @Post(&#x27;:qid/question/new&#x27;)
   @UseGuards(JwtGaurd)
@@ -915,10 +1233,10 @@ export class QuizController {
   async newQuestion(
     @Body() questionData: NewQuestionDto,
     @Param(&#x27;qid&#x27;) quizId: string,
-    @Req() req,
+    @User() user: UserEntity,
     @Res() res,
   ) {
-    await this.quizService.addNewQuestion(req.user, questionData, quizId);
+    await this.quizService.addNewQuestion(user, questionData, quizId);
     return res.sendStatus(HttpStatus.CREATED);
   }
 
@@ -928,10 +1246,10 @@ export class QuizController {
   async removeQuestion(
     @Param(&#x27;questionID&#x27;) questionID: string,
     @Param(&#x27;qid&#x27;) quizId: string,
-    @Req() req,
+    @User() user: UserEntity,
     @Res() res,
   ) {
-    await this.quizService.removeQuestion(req.user, questionID, quizId);
+    await this.quizService.removeQuestion(user, questionID, quizId);
     return res.sendStatus(HttpStatus.OK);
   }
 
@@ -940,10 +1258,10 @@ export class QuizController {
   @UsePipes(ValidationPipe)
   async removeAllQuestions(
     @Param(&#x27;qid&#x27;) quizId: string,
-    @Req() req,
+    @User() user: UserEntity,
     @Res() res,
   ) {
-    await this.quizService.removeAllQuestions(req.user, quizId);
+    await this.quizService.removeAllQuestions(user, quizId);
     return res.sendStatus(HttpStatus.OK);
   }
 
@@ -957,24 +1275,27 @@ export class QuizController {
     @Req() req,
     @Res() res,
   ) {
-    await this.quizService.updateQuiz(req.user,quizId,startDatetime,endDatetime );
+    await this.quizService.updateQuiz(
+      req.user,
+      quizId,
+      startDatetime,
+      endDatetime,
+    );
     return res.sendStatus(HttpStatus.OK);
   }
 
   @Get()
   @UseGuards(JwtGaurd)
   async get(@Query() options: IPaginationOptions, @Req() req) {
-   
-    return await  this.quizService.getQuizzes(req.user, options);
+    return await this.quizService.getQuizzes(req.user, options);
   }
 
   @Delete(&#x27;:id&#x27;)
   @UseGuards(JwtGaurd)
-  async deleteQuiz(@Param(&#x27;id&#x27;) id:string,@Req() req,@Res() res) {
+  async deleteQuiz(@Param(&#x27;id&#x27;) id: string, @Req() req, @Res() res) {
     await this.quizService.deleteQuiz(id, (req.user as UserEntity).userId);
     return res.sendStatus(HttpStatus.OK);
   }
-
 }
 </code></pre>
     </div>

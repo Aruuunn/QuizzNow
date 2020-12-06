@@ -2822,8 +2822,8 @@
         "affectsGlobalScope": true
       },
       "../documentation/js/search/search_index.js": {
-        "version": "7588104df7b2d60f381b205ffa941d77f9213c921158803c8c37397507a22422",
-        "signature": "a42b6010a5be1964ca38d473f8555d6b6636679f00b3355df68dd321155648f3",
+        "version": "586a352219260556d8837ce2ea17c4185627180cb264fd94ccc380d8821a0a16",
+        "signature": "673a005385f554ac0cca5369d6b6f6ec484ea145f880ab85254875c943c7b5d2",
         "affectsGlobalScope": true
       },
       "../node_modules/class-transformer/ClassTransformOptions.d.ts": {
@@ -4042,13 +4042,13 @@
         "affectsGlobalScope": false
       },
       "../src/quizz/quizz.service.ts": {
-        "version": "602b738d6e8915f90501f705c8448d264a9ed1a3b4c3dda8694fc73c09207a25",
-        "signature": "86103aa84832ff1393abb63efcff6c0e60c7e62f7370f89227fac1c0e667e43b",
+        "version": "a386d88f5bb8760d4290d334415e72b3ff8a9a8c4fa17cf548b4170236881500",
+        "signature": "61a829d719f4cd40c2097db07ed40ebb437635a45c4be72ed55df1a7a36f0bb9",
         "affectsGlobalScope": false
       },
       "../src/quizz/quizz.controller.ts": {
-        "version": "e8a583ccdc3fc1f6eba6e0649426154b1d1ad15316db414fbe872563bdd8cc90",
-        "signature": "1d55a9b0eb72cb242ba4f2739fe5e55b53f4da4c62858c025a95b92bc1ac3be7",
+        "version": "7e2bb6cc680f25f7cb91081c87b86b28523e2df65237f551f83f5f56b1a07792",
+        "signature": "7525e77f139658570898446b1cd5395757f980e3f20ea9ad3061b9b854401811",
         "affectsGlobalScope": false
       },
       "../src/quizz/quizz.module.ts": {
@@ -4072,7 +4072,7 @@
         "affectsGlobalScope": false
       },
       "../src/quizz/quizz-attempt.gateway.ts": {
-        "version": "6b8e9875b1e4f48a6522c338eae1794b81e62c0df68d66a042dac163f0a8329d",
+        "version": "b9fb8c744c259207a6c30ab4af4e9fa5901febdd9411f7a7e991b07bee1de5b3",
         "signature": "0e2fbdf29c5fdbe11e05c2bdf4e02c75f6f9042c196792780aac9b9686d6948b",
         "affectsGlobalScope": false
       },
@@ -10962,6 +10962,7 @@
         "../src/question/question.entity.ts",
         "../src/quizz/dto/new.quiz.ts",
         "../src/quizz/entities/quizz.entity.ts",
+        "../src/quizz/entities/quizz_attempts.entity.ts",
         "../src/quizz/quizz.service.ts",
         "../src/user/user.entity.ts"
       ],

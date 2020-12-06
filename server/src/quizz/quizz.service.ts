@@ -3,6 +3,7 @@ import {
   Injectable,
   InternalServerErrorException,
   Logger,
+  NotFoundException,
   UnauthorizedException,
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -55,6 +56,32 @@ export class QuizzService {
     return result;
   }
 
+  async fetchQuizzDetails(user: UserEntity, quizzId: string) {
+    let quizz: QuizzEntity;
+    try {
+      quizz = await this.getQuiz(quizzId, ['createdBy']);
+    } catch {
+      throw new NotFoundException('Quizz Not Found');
+    }
+
+    const data = {
+      ...quizz,
+      canAttemptQuizz: this.canAttemptQuiz(quizz, user),
+      totalNumberOfQuestions: quizz.questions.length,
+      isQuizzAttemptFinished: user.userQuizAttempts.reduce((t, c) => {
+        if (c.quizz.quizzId === quizzId) {
+          return c.attemptFinished || quizz.endDatetime.getTime() < Date.now()
+            ? true
+            : false;
+        } else {
+          return t;
+        }
+      }, false),
+    };
+
+    return data;
+  }
+
   async fetchQuizzResults(user: UserEntity, quizzId: string) {
     try {
       const quizzAttempt = user.userQuizAttempts.reduce((t, c) => {
@@ -84,7 +111,7 @@ export class QuizzService {
 
       return quizzAttempt?.questionAttempts.map((o, index) => {
         return {
-          option: o?.optionChoosed,
+          optionChoosed: o?.optionChoosed,
           question: questions[cacheQuestion[o?.questionId]],
         };
       });

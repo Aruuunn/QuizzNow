@@ -28,6 +28,13 @@ let QuizController = class QuizController {
         await this.quizService.createNewQuiz(user, data);
         return res.sendStatus(common_1.HttpStatus.CREATED);
     }
+    async startQuizz(quizzId, user) {
+        const attemptId = await this.quizService.attemptQuiz(user, quizzId);
+        return { attemptId };
+    }
+    async fetchQuizzDetails(quizzId, user) {
+        return await this.quizService.fetchQuizzDetails(user, quizzId);
+    }
     async fetchQuizzResults(id, user) {
         return await this.quizService.fetchQuizzResults(user, id);
     }
@@ -59,15 +66,37 @@ __decorate([
     common_1.Post('new'),
     common_1.UseGuards(jwt_gaurd_1.default),
     common_1.UsePipes(common_1.ValidationPipe),
-    __param(0, common_1.Body()), __param(1, user_decorator_1.User()), __param(2, common_1.Res()),
+    __param(0, common_1.Body()),
+    __param(1, user_decorator_1.User()),
+    __param(2, common_1.Res()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [new_quiz_1.NewQuizDto, user_entity_1.default, Object]),
+    __metadata("design:paramtypes", [new_quiz_1.NewQuizDto,
+        user_entity_1.default, Object]),
     __metadata("design:returntype", Promise)
 ], QuizController.prototype, "newQuiz", null);
 __decorate([
-    common_1.Get(":id/results"),
+    common_1.Get(':qid/start'),
     common_1.UseGuards(jwt_gaurd_1.default),
-    __param(0, common_1.Param("id")), __param(1, user_decorator_1.User()),
+    __param(0, common_1.Param('qid')), __param(1, user_decorator_1.User()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String, user_entity_1.default]),
+    __metadata("design:returntype", Promise)
+], QuizController.prototype, "startQuizz", null);
+__decorate([
+    common_1.Get(':id/details'),
+    common_1.UsePipes(common_1.ClassSerializerInterceptor),
+    common_1.UseGuards(jwt_gaurd_1.default),
+    __param(0, common_1.Param('id')),
+    __param(1, user_decorator_1.User()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String, user_entity_1.default]),
+    __metadata("design:returntype", Promise)
+], QuizController.prototype, "fetchQuizzDetails", null);
+__decorate([
+    common_1.Get(':id/results'),
+    common_1.UsePipes(common_1.ClassSerializerInterceptor),
+    common_1.UseGuards(jwt_gaurd_1.default),
+    __param(0, common_1.Param('id')), __param(1, user_decorator_1.User()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String, user_entity_1.default]),
     __metadata("design:returntype", Promise)
