@@ -64,7 +64,7 @@ export class QuizAttemptGateway
       } = data;
 
       await this.quizService.finishQuizAttempt(attemptId, user);
-   
+
       return 'FINISHED';
     } catch (e) {
       console.log(e);

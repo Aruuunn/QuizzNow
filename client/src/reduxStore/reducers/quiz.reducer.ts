@@ -29,7 +29,6 @@ export type QuestionDetails = {
   selectedOption?: string;
 };
 export interface QuizzState {
-  socket: SocketIOClient.Socket | null;
   quizzes: {
     [quizzId: string]: {
       quizzTitle: string;
@@ -77,7 +76,7 @@ const saveQuizzDetails = (
   };
 };
 
-export const quizInitialState: QuizzState = { socket: null, quizzes: {} };
+export const quizInitialState: QuizzState = { quizzes: {} };
 
 export const quizzStateReducer = (
   quizzState: QuizzState = quizInitialState,
@@ -107,11 +106,6 @@ export const quizzStateReducer = (
         quizzState,
         quizzAction.payload as QuizzDetailsType
       );
-    case QuizzActionTypes.SET_SOCKET:
-      return {
-        ...quizzState,
-        socket: quizzAction.payload as SocketIOClient.Socket,
-      };
     case QuizzActionTypes.CACHE_QUESTION:
       const payload = quizzAction.payload as {
         questionNumber: number;

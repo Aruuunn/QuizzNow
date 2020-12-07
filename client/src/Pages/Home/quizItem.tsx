@@ -93,7 +93,7 @@ export const QuizListItem = (props: {
                 setCopied(true);
                 setTimeout(() => setCopied(false), 2000);
               }}
-              text={`${window.location.href}attempt/${quizzId}`}
+              text={`${window.location.href}quizz/${quizzId}`}
             >
               <IconButton>
                 <Tooltip

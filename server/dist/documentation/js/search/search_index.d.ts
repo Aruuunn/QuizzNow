@@ -219,6 +219,14 @@ declare namespace COMPODOC_SEARCH_INDEX {
             title: {};
             body: {
                 "classes/QuizAttemptGateway.html": {};
+                "controllers/QuizController.html": {};
+                "injectables/QuizzService.html": {};
+            };
+        })[] | (string | {
+            _index: number;
+            title: {};
+            body: {
+                "classes/QuizAttemptGateway.html": {};
                 "injectables/QuizzService.html": {};
             };
         })[] | (string | {
@@ -528,9 +536,11 @@ declare namespace COMPODOC_SEARCH_INDEX {
                 "injectables/JwtStrategy.html": {};
                 "injectables/QuestionService.html": {};
                 "classes/QuizAttemptGateway.html": {};
+                "controllers/QuizController.html": {};
                 "injectables/QuizzService.html": {};
                 "injectables/UserService.html": {};
                 "guards/WsGuard.html": {};
+                "miscellaneous/variables.html": {};
             };
         })[] | (string | {
             _index: number;
@@ -638,7 +648,9 @@ declare namespace COMPODOC_SEARCH_INDEX {
                 "injectables/AuthService.html": {};
                 "classes/QuizAttemptGateway.html": {};
                 "controllers/QuizController.html": {};
+                "injectables/QuizzService.html": {};
                 "guards/WsGuard.html": {};
+                "miscellaneous/variables.html": {};
             };
         })[] | (string | {
             _index: number;
@@ -1410,6 +1422,7 @@ declare namespace COMPODOC_SEARCH_INDEX {
             body: {
                 "controllers/AuthController.html": {};
                 "injectables/QuestionService.html": {};
+                "controllers/QuizController.html": {};
                 "injectables/QuizzService.html": {};
                 "guards/WsGuard.html": {};
             };
@@ -1613,6 +1626,7 @@ declare namespace COMPODOC_SEARCH_INDEX {
             body: {
                 "controllers/QuizController.html": {};
                 "classes/QuizzAttemptEntity.html": {};
+                "injectables/QuizzService.html": {};
             };
         })[] | (string | {
             _index: number;
@@ -1668,6 +1682,7 @@ declare namespace COMPODOC_SEARCH_INDEX {
             title: {};
             body: {
                 "classes/QuizAttemptGateway.html": {};
+                "controllers/QuizController.html": {};
                 "classes/QuizzEntity.html": {};
                 "injectables/QuizzService.html": {};
             };
@@ -1709,6 +1724,22 @@ declare namespace COMPODOC_SEARCH_INDEX {
                 "controllers/QuestionController.html": {};
                 "classes/QuizAttemptGateway.html": {};
                 "controllers/QuizController.html": {};
+            };
+        })[] | (string | {
+            _index: number;
+            title: {};
+            body: {
+                "controllers/AuthController.html": {};
+                "injectables/AuthService.html": {};
+                "injectables/JwtStrategy.html": {};
+                "controllers/QuestionController.html": {};
+                "injectables/QuestionService.html": {};
+                "classes/QuizAttemptGateway.html": {};
+                "controllers/QuizController.html": {};
+                "injectables/QuizzService.html": {};
+                "injectables/UserService.html": {};
+                "guards/WsGuard.html": {};
+                "miscellaneous/variables.html": {};
             };
         })[] | (string | {
             _index: number;
@@ -2063,11 +2094,14 @@ declare namespace COMPODOC_SEARCH_INDEX {
                 "classes/QuestionEntity.html": {};
                 "injectables/QuestionService.html": {};
                 "classes/QuizAttemptGateway.html": {};
+                "controllers/QuizController.html": {};
                 "classes/QuizzAttemptEntity.html": {};
                 "classes/QuizzEntity.html": {};
                 "injectables/QuizzService.html": {};
                 "injectables/UserService.html": {};
                 "guards/WsGuard.html": {};
+                "coverage.html": {};
+                "miscellaneous/variables.html": {};
             };
         })[] | (string | {
             _index: number;

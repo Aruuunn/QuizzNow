@@ -999,7 +999,7 @@ export class QuizAttemptGateway
       } &#x3D; data;
 
       await this.quizService.finishQuizAttempt(attemptId, user);
-   
+
       return &#x27;FINISHED&#x27;;
     } catch (e) {
       console.log(e);
