@@ -91,7 +91,7 @@ function QuestionAttempt(props: Props): ReactElement {
   }, [quizzId, questionNumber,socket]);
 
   if (!quizz?.isQuizzStarted) {
-    history.push(`/attempt/${quizzId}`);
+    history.push(`/quizz/${quizzId}`);
   }
 
   const question = quizz?.cacheQuestion[questionNumber]?.question;
@@ -120,7 +120,7 @@ function QuestionAttempt(props: Props): ReactElement {
           socket?.close();
           setSocket(null);
           props.finishAttempt(quizzId);
-          history.push(`/attempt/${quizzId}`);
+          history.push(`/quizz/${quizzId}`);
         }
       );
     } else {

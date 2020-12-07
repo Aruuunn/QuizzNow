@@ -6,9 +6,11 @@ import {
   Typography,
   Grid,
   Button,
+  IconButton,
+  SvgIcon,
 } from "@material-ui/core";
 import { connect, ConnectedProps } from "react-redux";
-import { RouteComponentProps, withRouter,Link } from "react-router-dom";
+import { RouteComponentProps, withRouter, Link } from "react-router-dom";
 
 import { RootState, AuthActionTypes } from "../../reduxStore";
 
@@ -45,13 +47,31 @@ const NavBar = (props: Props) => {
               style={{
                 color: theme.palette.secondary.main,
                 fontFamily: "'Fredoka One', cursive",
-                textDecoration:'none'
+                textDecoration: "none",
               }}
             >
               Quiz Now
             </Typography>
             <div>
               {props.children}
+              <IconButton
+                color="secondary"
+                style={{ marginRight: "10px" }}
+                component={Link}
+                to="/"
+              >
+                <SvgIcon>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    width="24"
+                  >
+                    <path d="M0 0h24v24H0z" fill="none" />
+                    <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" />
+                  </svg>
+                </SvgIcon>
+              </IconButton>
               {props.auth.accessToken !== null ? (
                 <Button
                   variant="outlined"

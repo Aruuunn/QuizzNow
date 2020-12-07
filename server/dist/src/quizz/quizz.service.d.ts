@@ -31,9 +31,13 @@ export declare class QuizzService {
         updatedAt: Date;
     }>;
     fetchQuizzResults(user: UserEntity, quizzId: string): Promise<{
-        optionChoosed: string;
-        question: QAEntity;
-    }[]>;
+        score: number;
+        maxScore: number;
+        questions: {
+            optionChoosed: string;
+            question: QAEntity;
+        }[];
+    }>;
     fetchQuestionForQuizAttempt(attemptId: string, questionNumber: number, user: UserEntity): Promise<{
         question: QAEntity;
         selectedOption: string | QuestionAttemptEntity;

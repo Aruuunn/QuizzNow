@@ -25,9 +25,13 @@ export declare class QuizController {
         updatedAt: Date;
     }>;
     fetchQuizzResults(id: string, user: UserEntity): Promise<{
-        optionChoosed: string;
-        question: import("../question/question.entity").default;
-    }[]>;
+        score: number;
+        maxScore: number;
+        questions: {
+            optionChoosed: string;
+            question: import("../question/question.entity").default;
+        }[];
+    }>;
     newQuestion(questionData: NewQuestionDto, quizId: string, user: UserEntity, res: any): Promise<any>;
     removeQuestion(questionID: string, quizId: string, user: UserEntity, res: any): Promise<any>;
     removeAllQuestions(quizId: string, user: UserEntity, res: any): Promise<any>;

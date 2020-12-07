@@ -205,7 +205,7 @@ let QuizzService = class QuizzService {
             if (!quizzAttempt) {
                 throw new common_1.BadRequestException('Quizz Not Found');
             }
-            if (quizzAttempt.quizz.endDatetime.getTime() < Date.now()) {
+            if (quizzAttempt.quizz.endDatetime.getTime() > Date.now()) {
                 throw new common_1.BadRequestException('Quizz has not ended Yet. You can only see the results after the Quizz has ended');
             }
             const questions = (_a = quizzAttempt === null || quizzAttempt === void 0 ? void 0 : quizzAttempt.quizz) === null || _a === void 0 ? void 0 : _a.questions;
@@ -213,12 +213,17 @@ let QuizzService = class QuizzService {
             for (let i = 0; i < (questions === null || questions === void 0 ? void 0 : questions.length); i++) {
                 cacheQuestion[questions[i].questionId] = i;
             }
-            return quizzAttempt === null || quizzAttempt === void 0 ? void 0 : quizzAttempt.questionAttempts.map((o, index) => {
+            const questions_ = quizzAttempt === null || quizzAttempt === void 0 ? void 0 : quizzAttempt.questionAttempts.map((o, index) => {
                 return {
                     optionChoosed: o === null || o === void 0 ? void 0 : o.optionChoosed,
                     question: questions[cacheQuestion[o === null || o === void 0 ? void 0 : o.questionId]],
                 };
             });
+            return {
+                score: quizzAttempt.totalScore,
+                maxScore: questions.length,
+                questions: questions_
+            };
         }
         catch (e) {
             this.logger.error(e);

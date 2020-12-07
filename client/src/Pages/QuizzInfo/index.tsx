@@ -20,6 +20,7 @@ import axios from "../../common/axios";
 import { LoadingIndicator, NavBar } from "../../components";
 import { ACCESS_TOKEN } from "../../common/constants";
 
+
 const CustomTableCell = (props: any) => {
   return <TableCell {...props} style={{ borderBottom: "none" }} />;
 };
@@ -48,7 +49,7 @@ type Props = reduxProps;
 
 function QuizInfo(props: Props): ReactElement {
   const { quizzId } = useParams() as { quizzId: string };
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
   const history = useHistory();
@@ -67,7 +68,17 @@ function QuizInfo(props: Props): ReactElement {
       history.push(`/attempt/${quizzId}/q/0`);
     } catch (e) {
       console.error(e);
+    } finally {
+      setLoading(false);
     }
+  };
+
+  const isResultsAvailable = (): boolean => {
+    return (
+      quizz?.isQuizzAttemptFinished &&
+      Boolean(quizz?.endDatetime) &&
+      new Date(quizz?.endDatetime).getTime() < Date.now()
+    );
   };
 
   const quizz = props.quizz.quizzes[quizzId];
@@ -197,6 +208,17 @@ function QuizInfo(props: Props): ReactElement {
                     {quizz.isQuizzStarted ? "Resume Quizz" : "Start Quizz"}
                   </Button>
                 ) : null}
+                {isResultsAvailable()?<Button
+                    variant="contained"
+                    style={{ marginTop: "20px" }}
+                    color="primary"
+                    size="large"
+                    onClick={() => {
+                      history.push(`/quizz/${quizzId}/results`)
+                    }}
+                  >
+                    View Results
+                  </Button> :null}
               </div>
             )}
           </Container>

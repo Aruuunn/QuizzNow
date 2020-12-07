@@ -94,7 +94,7 @@ export class QuizzService {
         throw new BadRequestException('Quizz Not Found');
       }
 
-      if (quizzAttempt.quizz.endDatetime.getTime() < Date.now()) {
+      if (quizzAttempt.quizz.endDatetime.getTime() > Date.now()) {
         throw new BadRequestException(
           'Quizz has not ended Yet. You can only see the results after the Quizz has ended',
         );
@@ -109,12 +109,18 @@ export class QuizzService {
         cacheQuestion[questions[i].questionId] = i;
       }
 
-      return quizzAttempt?.questionAttempts.map((o, index) => {
+      const questions_ =  quizzAttempt?.questionAttempts.map((o, index) => {
         return {
           optionChoosed: o?.optionChoosed,
           question: questions[cacheQuestion[o?.questionId]],
         };
       });
+
+      return {
+        score: quizzAttempt.totalScore,
+        maxScore: questions.length, 
+        questions : questions_
+      }
     } catch (e) {
       this.logger.error(e);
       throw new InternalServerErrorException();
