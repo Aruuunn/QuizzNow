@@ -47,6 +47,36 @@ let QuizzService = class QuizzService {
             await newQuiz.save();
             return newQuiz;
         };
+        this.updateQuizz = async (user, quizzData, quizzId) => {
+            const { endDatetime, questions, quizzTitle, startDatetime } = quizzData;
+            const quizz = await this.getQuiz(quizzId, ["createdBy"]);
+            if (!quizz || quizz.createdBy.userId !== user.userId) {
+                throw new common_1.BadRequestException();
+            }
+            if (endDatetime) {
+                quizz.endDatetime = new Date(endDatetime);
+            }
+            if (startDatetime) {
+                quizz.startDatetime = new Date(startDatetime);
+            }
+            if (quizzTitle) {
+                quizz.quizzTitle = quizzTitle;
+            }
+            if (questions) {
+                const newQuestions = [];
+                for (let question of questions) {
+                    if (question.questionId) {
+                        await this.questionService.updateQuestion(user, question, question.questionId);
+                    }
+                    else {
+                        const newQuestion = await this.questionService.createNewQuestion(user, question);
+                        newQuestions.push(newQuestion);
+                    }
+                }
+                quizz.questions = [...quizz.questions, ...newQuestions];
+            }
+            await quizz.save();
+        };
         this.addNewQuestion = async (user, question, quizzId) => {
             const newQuestion = await this.questionService.createNewQuestion(user, question);
             const quiz = await this.quizRepo.findOne({ quizzId }, { relations: ['createdBy'] });
@@ -103,27 +133,6 @@ let QuizzService = class QuizzService {
                 throw new common_1.UnauthorizedException();
             }
             quiz.questions = [];
-            await quiz.save();
-            return quiz;
-        };
-        this.updateQuiz = async (user, quizzId, startDatetime, endDatetime, quizzTitle) => {
-            const quiz = await this.quizRepo.findOne({ quizzId }, { relations: ['createdBy'] });
-            if (!quiz) {
-                throw new common_1.BadRequestException('No Quiz Found with the given ID');
-            }
-            if (quizzTitle) {
-                quiz.quizzTitle = quizzTitle;
-            }
-            if (quiz.createdBy.userId !== user.userId) {
-                throw new common_1.UnauthorizedException();
-            }
-            if (!startDatetime && !endDatetime) {
-                throw new common_1.BadRequestException();
-            }
-            if (startDatetime)
-                quiz.startDatetime = new Date(startDatetime);
-            if (endDatetime)
-                quiz.endDatetime = new Date(endDatetime);
             await quiz.save();
             return quiz;
         };

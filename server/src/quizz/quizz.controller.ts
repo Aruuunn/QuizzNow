@@ -14,6 +14,9 @@ import {
   Get,
   Query,
   ClassSerializerInterceptor,
+  NotFoundException,
+  BadRequestException,
+  UseInterceptors,
 } from '@nestjs/common';
 import { User } from 'common/user.decorator';
 import { IPaginationOptions } from 'nestjs-typeorm-paginate';
@@ -21,6 +24,7 @@ import UserEntity from 'src/user/user.entity';
 import JwtGaurd from '../auth/jwt.gaurd';
 import NewQuestionDto from '../question/dto/new.question';
 import { NewQuizDto } from './dto/new.quiz';
+import { UpdateQuizDto } from './dto/update.quizz';
 import { QuizzService } from './quizz.service';
 
 @Controller('quizz')
@@ -41,7 +45,10 @@ export class QuizController {
 
   @Get(':qid/start')
   @UseGuards(JwtGaurd)
-  async startQuizz(@Param('qid') quizzId: string, @User() user: UserEntity):Promise<{attemptId:string}> {
+  async startQuizz(
+    @Param('qid') quizzId: string,
+    @User() user: UserEntity,
+  ): Promise<{ attemptId: string }> {
     const attemptId = await this.quizService.attemptQuiz(user, quizzId);
     return { attemptId };
   }
@@ -101,24 +108,43 @@ export class QuizController {
     return res.sendStatus(HttpStatus.OK);
   }
 
+  @Get(':quizzId/data')
+  @UseGuards(JwtGaurd)
+  async getQuizzData(
+    @User() user: UserEntity,
+    @Param('quizzId') quizzId: string,
+  ) {
+    try {
+      const quizz = await this.quizService.getQuiz(quizzId, ["createdBy"]);
+      if (quizz.createdBy.userId !== user.userId) {
+        throw new BadRequestException();
+      }
+      delete quizz.createdBy;
+      return quizz;
+    } catch (e) {
+      console.log(e)
+      throw new NotFoundException();
+    }
+  }
+
   @Patch(':qid')
   @UseGuards(JwtGaurd)
   @UsePipes(ValidationPipe)
   async updateQuizTime(
-    @Body('startDatetime') startDatetime: string,
-    @Body('endDatetime') endDatetime: string,
+    @Body() quizzData:UpdateQuizDto,
     @Param('qid') quizId,
-    @Req() req,
+    @User() user:UserEntity,
     @Res() res,
   ) {
-    await this.quizService.updateQuiz(
-      req.user,
+    await this.quizService.updateQuizz(
+      user,
+      quizzData,
       quizId,
-      startDatetime,
-      endDatetime,
     );
     return res.sendStatus(HttpStatus.OK);
   }
+
+ 
 
   @Get()
   @UseGuards(JwtGaurd)

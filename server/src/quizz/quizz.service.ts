@@ -14,11 +14,14 @@ import { QuestionService } from '../question/question.service';
 import UserEntity from '../user/user.entity';
 import { Repository } from 'typeorm';
 import { NewQuizDto } from './dto/new.quiz';
+import {UpdateQuizDto } from './dto/update.quizz';
 import { QuestionAttemptEntity } from './entities/question_attempt.entity';
 import { QuizzEntity } from './entities/quizz.entity';
 
 import QuizzAttemptEntity from './entities/quizz_attempts.entity';
 import { WsException } from '@nestjs/websockets';
+import QuestionEntity from '../question/question.entity';
+
 
 @Injectable()
 export class QuizzService {
@@ -272,6 +275,48 @@ export class QuizzService {
     return newQuiz;
   };
 
+
+
+  updateQuizz = async (user: UserEntity, quizzData: UpdateQuizDto, quizzId: string) => {
+
+    const { endDatetime,questions,quizzTitle,startDatetime } = quizzData;
+
+    const quizz = await this.getQuiz(quizzId, ["createdBy"]);
+    
+    if (!quizz || quizz.createdBy.userId !== user.userId) {
+      throw new BadRequestException();
+    }
+
+    if (endDatetime) {
+      quizz.endDatetime = new Date(endDatetime);
+    }
+
+    if (startDatetime) {
+      quizz.startDatetime = new Date(startDatetime);
+    }   
+
+    if (quizzTitle) {
+      quizz.quizzTitle = quizzTitle;
+    }
+
+    if (questions) {
+      const newQuestions:QuestionEntity[]=[];
+      for (let question of questions) {
+        if (question.questionId) {
+          await this.questionService.updateQuestion(user, question, question.questionId);
+        } else {
+          const newQuestion = await this.questionService.createNewQuestion(user, question as NewQuestionDto);
+          newQuestions.push(newQuestion);
+        }
+      }
+      quizz.questions = [...quizz.questions, ...newQuestions];
+    }
+
+    await quizz.save();
+  }
+
+
+
   addNewQuestion = async (
     user: UserEntity,
     question: NewQuestionDto,
@@ -370,41 +415,6 @@ export class QuizzService {
     }
 
     quiz.questions = [];
-    await quiz.save();
-    return quiz;
-  };
-
-  updateQuiz = async (
-    user: UserEntity,
-    quizzId: string,
-    startDatetime?: string,
-    endDatetime?: string,
-    quizzTitle?: string,
-  ) => {
-    const quiz = await this.quizRepo.findOne(
-      { quizzId },
-      { relations: ['createdBy'] },
-    );
-    if (!quiz) {
-      throw new BadRequestException('No Quiz Found with the given ID');
-    }
-
-    if (quizzTitle) {
-      quiz.quizzTitle = quizzTitle;
-    }
-
-    if (quiz.createdBy.userId !== user.userId) {
-      throw new UnauthorizedException();
-    }
-
-    if (!startDatetime && !endDatetime) {
-      throw new BadRequestException();
-    }
-
-    if (startDatetime) quiz.startDatetime = new Date(startDatetime);
-
-    if (endDatetime) quiz.endDatetime = new Date(endDatetime);
-
     await quiz.save();
     return quiz;
   };

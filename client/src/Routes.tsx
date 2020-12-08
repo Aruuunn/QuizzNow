@@ -10,7 +10,8 @@ function Routes(): ReactElement {
     <div>
       <Switch>
         <Route path="/auth" component={AuthView} />
-        <PrivateRoute path="/new" component={NewQuizView} />
+        <PrivateRoute path="/new" component={() => <NewQuizView editQuizz={false} />} />
+        <PrivateRoute path="/edit/:quizzId" component={() => <NewQuizView editQuizz={true}/>} />
         <PrivateRoute path="/attempt/:quizzId/q/:qno" exact component={QuestionAttemptView} />
         <PrivateRoute path="/quizz/:quizzId/results" exact component={QuizzResultsView} />
         <PrivateRoute path="/quizz/:quizzId" exact component={QuizInfoView}/>

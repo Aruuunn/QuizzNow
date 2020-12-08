@@ -9,40 +9,35 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.UpdateQuestionDto = void 0;
+exports.UpdateQuizDto = void 0;
 const swagger_1 = require("@nestjs/swagger");
 const class_validator_1 = require("class-validator");
-class UpdateQuestionDto {
+const update_question_1 = require("../../question/dto/update.question");
+class UpdateQuizDto {
 }
 __decorate([
-    swagger_1.ApiPropertyOptional(),
+    swagger_1.ApiProperty(),
     class_validator_1.IsNotEmpty(),
     class_validator_1.IsString(),
     __metadata("design:type", String)
-], UpdateQuestionDto.prototype, "questionId", void 0);
+], UpdateQuizDto.prototype, "quizzTitle", void 0);
 __decorate([
-    swagger_1.ApiPropertyOptional(),
+    swagger_1.ApiProperty(),
     class_validator_1.IsNotEmpty(),
-    class_validator_1.IsString(),
-    class_validator_1.MinLength(5),
-    class_validator_1.MaxLength(100),
+    class_validator_1.IsDateString(),
     __metadata("design:type", String)
-], UpdateQuestionDto.prototype, "correctAnswer", void 0);
+], UpdateQuizDto.prototype, "startDatetime", void 0);
 __decorate([
-    swagger_1.ApiPropertyOptional(),
+    swagger_1.ApiProperty(),
     class_validator_1.IsNotEmpty(),
-    class_validator_1.IsString(),
-    class_validator_1.MinLength(5),
-    class_validator_1.MaxLength(100),
+    class_validator_1.IsDateString(),
     __metadata("design:type", String)
-], UpdateQuestionDto.prototype, "questionTitle", void 0);
+], UpdateQuizDto.prototype, "endDatetime", void 0);
 __decorate([
-    swagger_1.ApiPropertyOptional(),
+    swagger_1.ApiProperty(),
     class_validator_1.IsNotEmpty(),
-    class_validator_1.IsArray(),
-    class_validator_1.ArrayMinSize(2),
+    class_validator_1.ArrayMinSize(1),
     __metadata("design:type", Array)
-], UpdateQuestionDto.prototype, "multipleChoices", void 0);
-exports.UpdateQuestionDto = UpdateQuestionDto;
-exports.default = UpdateQuestionDto;
-//# sourceMappingURL=update.question.js.map
+], UpdateQuizDto.prototype, "questions", void 0);
+exports.UpdateQuizDto = UpdateQuizDto;
+//# sourceMappingURL=update.quizz.js.map

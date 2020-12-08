@@ -56,7 +56,7 @@ const NavBar = (props: Props) => {
               {props.children}
               <IconButton
                 color="secondary"
-                style={{ marginRight: "10px" }}
+                style={{ marginRight: "20px" }}
                 component={Link}
                 to="/"
               >

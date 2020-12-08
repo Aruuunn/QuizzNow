@@ -9,6 +9,12 @@ import {
 } from 'class-validator';
 
 export class UpdateQuestionDto {
+
+  @ApiPropertyOptional()
+  @IsNotEmpty()
+  @IsString()
+  questionId?: string;
+
   @ApiPropertyOptional()
   @IsNotEmpty()
   @IsString()

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState , useEffect } from "react";
 import MomentUtils from "@date-io/moment";
 import {
   Grid,
@@ -14,12 +14,14 @@ import {
 } from "@material-ui/core";
 import { DateTimePicker, MuiPickersUtilsProvider } from "@material-ui/pickers";
 import MuiAlert from "@material-ui/lab/Alert";
-import { useHistory } from "react-router-dom";
+import { useHistory,useParams  } from "react-router-dom";
 
 import { NavBar } from "../../components";
 import axios from "../../common/axios";
+import { ACCESS_TOKEN } from "../../common/constants";
 
 interface Question {
+  questionId?: string;
   questionTitle: string;
   multipleChoices: string[];
   correctAnswer: string | null;
@@ -32,7 +34,7 @@ interface State {
   questions: Question[];
 }
 
-const NewQuiz = () => {
+const NewQuiz = (props: { editQuizz: boolean }) => {
   const initialNewQuestionState = {
     questionTitle: "",
     multipleChoices: [],
@@ -42,6 +44,7 @@ const NewQuiz = () => {
   };
 
   const history = useHistory();
+  const { quizzId } = useParams() as {quizzId:string};
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
   const [errorDialogState, setErrorDialogState] = useState({
@@ -50,7 +53,7 @@ const NewQuiz = () => {
   });
   const [newQuestionState, setNewQuestionState] = useState<
     Question & { addOptionMode: boolean; input: string }
-  >(initialNewQuestionState);
+    >(initialNewQuestionState);
 
   const [state, setState] = useState<State>({
     quizzTitle: "",
@@ -59,6 +62,14 @@ const NewQuiz = () => {
     startDatetime: new Date(Date.now() + 600000),
     endDatetime: new Date(Date.now() + 2400000),
   });
+
+  useEffect(() => {
+
+    if (props.editQuizz) {
+      populateData();
+    }
+   
+  }, [props.editQuizz])
 
   const Alert = (title: string) => {
     setErrorDialogState((s) => ({ ...s, open: true, title }));
@@ -86,7 +97,7 @@ const NewQuiz = () => {
   const addNewQuestion = () => {
     if (
       newQuestionState.correctAnswer === null ||
-      newQuestionState.multipleChoices.reduce((t:boolean, c) => {
+      newQuestionState.multipleChoices.reduce((t: boolean, c) => {
         if (c === newQuestionState.correctAnswer) {
           return false;
         } else {
@@ -117,6 +128,28 @@ const NewQuiz = () => {
     }
   };
 
+
+
+  const populateData = async () => {
+    if (!props.editQuizz)
+      return;
+    
+    setLoading(true);
+    try { 
+      const res =  await axios.get(`/quizz/${quizzId}/data`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem(ACCESS_TOKEN)}`
+        }
+      })
+      setState(s => ({ ...s, ...res.data,startDatetime:new Date(res.data.startDatetime), endDatetime:new Date(res.data.endDatetime) }));
+    } catch (e) {
+      console.error(e);
+    }
+    finally {
+      setLoading(false);
+    }
+  }
+
   const handleFinish = async () => {
     if (state.quizzTitle.trim() === "") {
       Alert("Quiz Title Should not be Empty");
@@ -142,12 +175,20 @@ const NewQuiz = () => {
           endDatetime: state.endDatetime,
           questions: state.questions,
         };
-
-        await axios.post("/quizz/new", data, {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-          },
-        });
+        if (!props.editQuizz) {
+          await axios.post("/quizz/new", data, {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem(ACCESS_TOKEN)}`,
+            },
+          });
+        } else {
+          await axios.patch(`/quizz/${quizzId}`, data, {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem(ACCESS_TOKEN)}`,
+            },
+          })
+        }
+       
         setTimeout(() => {
           history.push("/");
         }, 0);
