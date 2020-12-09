@@ -40,7 +40,6 @@ __decorate([
     __metadata("design:type", Array)
 ], QuizzEntity.prototype, "questions", void 0);
 __decorate([
-    class_transformer_1.Exclude(),
     typeorm_1.ManyToOne(type => user_entity_1.default, user => user.userCreatedQuizzes, { onDelete: 'CASCADE' }),
     __metadata("design:type", user_entity_1.default)
 ], QuizzEntity.prototype, "createdBy", void 0);

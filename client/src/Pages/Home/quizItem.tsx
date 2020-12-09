@@ -9,6 +9,7 @@ import {
   Tooltip,
 } from "@material-ui/core";
 import moment from "moment";
+import { useHistory } from "react-router-dom";
 
 import CopyToClipboard from "react-copy-to-clipboard";
 import { ConfirmDialog } from "../../components";
@@ -32,6 +33,7 @@ export const QuizListItem = (props: {
   } = props;
   const [isCopied, setCopied] = React.useState(false);
   const [deleteIt, setDelete] = React.useState(false);
+  const history = useHistory();
 
   const onDelete = async (): Promise<void> => {
     await axios.delete(`/quizz/${props.quizzId}`, {
@@ -40,7 +42,7 @@ export const QuizListItem = (props: {
       },
     });
 
-    await props.fetchData();
+    await fetchData();
   };
 
   return (
@@ -52,6 +54,7 @@ export const QuizListItem = (props: {
         margin: "10px",
         maxWidth: "500px",
       }}
+
     >
       <ConfirmDialog
         open={deleteIt}
@@ -62,11 +65,32 @@ export const QuizListItem = (props: {
         onSuccess={onDelete}
         cancelButtonText="Cancel"
       />
-      <CardContent>
+      <CardContent onClick={() => {
+        history.push(`/quizz/${quizzId}/attempts`);
+      }}>
         <Grid container justify="space-between" alignItems="center">
           <Typography variant="h5">{quizzTitle}</Typography>
           <div>
-            {" "}
+            <IconButton
+              onClick={() => {
+                history.push(`/edit/${quizzId}`);
+              }}
+            >
+              <SvgIcon fontSize="small">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  width="24"
+                >
+                  <path d="M0 0h24v24H0z" fill="none" />
+                  <path
+                    d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"
+                    fill="#9C4668"
+                  />
+                </svg>
+              </SvgIcon>
+            </IconButton>
             <IconButton
               size="small"
               onClick={() => {

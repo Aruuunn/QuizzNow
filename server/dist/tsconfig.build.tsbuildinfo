@@ -2872,12 +2872,12 @@
         "affectsGlobalScope": false
       },
       "../src/quizz/entities/quizz_attempts.entity.ts": {
-        "version": "3e8e56301b940027c9ca285a3f7295a6e414c3f262a21efdcc43e1f389eb1937",
+        "version": "570732a9d0d41838ca06dac4dfcaeb10c1a6cf618e9a4cd053b030d2eed2ea1c",
         "signature": "8531f363dc67f7031bd1b0f2503812ea66e97d2255fb3b4a19a68a0f5921ab74",
         "affectsGlobalScope": false
       },
       "../src/quizz/entities/quizz.entity.ts": {
-        "version": "0371075808aba696875307ac67a825664ec2218d8513a4b695207b6771f6cf74",
+        "version": "6c1c367ebf086524520cb9b11a22bd2cb7b994d468db4536d8721686746006ba",
         "signature": "db79752aba4228418b1e8560ea44b513d8d0fe7faf925b8a76a44e7d05c33403",
         "affectsGlobalScope": false
       },
@@ -4047,13 +4047,13 @@
         "affectsGlobalScope": false
       },
       "../src/quizz/quizz.service.ts": {
-        "version": "4ca11a0781e6c8bfca1fade90d9fa87e4d98e3ac3703634539050abad9edd220",
-        "signature": "ade036a7fbe78bcc5e021bb25e1f5f3f07817abb8376cb744037798fa9fac873",
+        "version": "7d90a65372ec7ffa94500f82f6aa2e3f7e74f7e77c3b2721114ff4a7884246a1",
+        "signature": "215305dbeea97f6b3598f6e5011b7187e49a0117ac814c17f5c7f05e62a11ad0",
         "affectsGlobalScope": false
       },
       "../src/quizz/quizz.controller.ts": {
-        "version": "fb6a43bdcdc0dc8c460922aef5f54f53ac491e2ffd88f57c243fe3cc5da8fce2",
-        "signature": "048eb7f6dc9c07ca7373ba585fb9820f4303389d72652c0d6249ea31f4481097",
+        "version": "6bbd03b006931947281a97cb1eaf0cf1be0cebaf78cc362bfef976b6017bcd26",
+        "signature": "822de252c97318d254c8f1b299a281bf2c305cfe26168fa8b3a1e55a8b089b5b",
         "affectsGlobalScope": false
       },
       "../src/quizz/quizz.module.ts": {
@@ -7742,6 +7742,7 @@
         "../src/user/user.entity.ts"
       ],
       "../src/quizz/entities/quizz_attempts.entity.ts": [
+        "../node_modules/class-transformer/index.d.ts",
         "../node_modules/typeorm/index.d.ts",
         "../src/quizz/entities/question_attempt.entity.ts",
         "../src/quizz/entities/quizz.entity.ts",

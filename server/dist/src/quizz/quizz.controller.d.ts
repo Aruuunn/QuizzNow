@@ -38,6 +38,7 @@ export declare class QuizController {
     removeAllQuestions(quizId: string, user: UserEntity, res: any): Promise<any>;
     getQuizzData(user: UserEntity, quizzId: string): Promise<import("./entities/quizz.entity").QuizzEntity>;
     updateQuizTime(quizzData: UpdateQuizDto, quizId: any, user: UserEntity, res: any): Promise<any>;
+    getAttemptData(options: IPaginationOptions, user: UserEntity, quizzId: string): Promise<import("nestjs-typeorm-paginate").Pagination<import("./entities/quizz_attempts.entity").QuizzAttemptEntity>>;
     get(options: IPaginationOptions, req: any): Promise<import("nestjs-typeorm-paginate").Pagination<import("./entities/quizz.entity").QuizzEntity>>;
     deleteQuiz(id: string, req: any, res: any): Promise<any>;
 }

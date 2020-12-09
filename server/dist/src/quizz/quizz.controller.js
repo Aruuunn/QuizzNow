@@ -69,6 +69,10 @@ let QuizController = class QuizController {
         await this.quizService.updateQuizz(user, quizzData, quizId);
         return res.sendStatus(common_1.HttpStatus.OK);
     }
+    async getAttemptData(options, user, quizzId) {
+        console.log(options);
+        return await this.quizService.getQuizzAttemptData(quizzId, user, options);
+    }
     async get(options, req) {
         return await this.quizService.getQuizzes(req.user, options);
     }
@@ -173,6 +177,14 @@ __decorate([
     __metadata("design:paramtypes", [update_quizz_1.UpdateQuizDto, Object, user_entity_1.default, Object]),
     __metadata("design:returntype", Promise)
 ], QuizController.prototype, "updateQuizTime", null);
+__decorate([
+    common_1.Get(":qid/attempt-details"),
+    common_1.UseGuards(jwt_gaurd_1.default),
+    __param(0, common_1.Query()), __param(1, user_decorator_1.User()), __param(2, common_1.Param('qid')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object, user_entity_1.default, String]),
+    __metadata("design:returntype", Promise)
+], QuizController.prototype, "getAttemptData", null);
 __decorate([
     common_1.Get(),
     common_1.UseGuards(jwt_gaurd_1.default),

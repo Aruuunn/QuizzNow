@@ -34,7 +34,6 @@ export class QuizzEntity extends BaseEntity {
   @JoinTable()
   questions: QuestionEntity[];
 
-  @Exclude()
   @ManyToOne(
     type => UserEntity,
     user => user.userCreatedQuizzes,

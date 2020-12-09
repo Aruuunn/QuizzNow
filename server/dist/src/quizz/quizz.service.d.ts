@@ -46,6 +46,7 @@ export declare class QuizzService {
     attemptQuiz(user: UserEntity, quizId: string): Promise<string>;
     attemptQuestion(user: UserEntity, questionId: string, choosedOption: string, attemptId: string): Promise<void>;
     getQuiz: (id: string, relations?: string[]) => Promise<QuizzEntity>;
+    getQuizzAttemptData: (quizzId: string, user: UserEntity, options: IPaginationOptions) => Promise<import("nestjs-typeorm-paginate").Pagination<QuizzAttemptEntity>>;
     createNewQuiz: (user: UserEntity, quizData: NewQuizDto) => Promise<QuizzEntity>;
     updateQuizz: (user: UserEntity, quizzData: UpdateQuizDto, quizzId: string) => Promise<void>;
     addNewQuestion: (user: UserEntity, question: NewQuestionDto, quizzId: string) => Promise<QuizzEntity>;

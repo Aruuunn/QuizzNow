@@ -144,6 +144,13 @@ export class QuizController {
     return res.sendStatus(HttpStatus.OK);
   }
 
+  @Get(":qid/attempt-details")
+  @UseGuards(JwtGaurd)
+  async getAttemptData(@Query() options: IPaginationOptions, @User() user: UserEntity, @Param('qid') quizzId: string) {
+    console.log(options)
+    return await this.quizService.getQuizzAttemptData(quizzId, user, options);
+  }
+
  
 
   @Get()
