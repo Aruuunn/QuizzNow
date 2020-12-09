@@ -54,7 +54,6 @@ export const QuizListItem = (props: {
         margin: "10px",
         maxWidth: "500px",
       }}
-
     >
       <ConfirmDialog
         open={deleteIt}
@@ -65,11 +64,16 @@ export const QuizListItem = (props: {
         onSuccess={onDelete}
         cancelButtonText="Cancel"
       />
-      <CardContent onClick={() => {
-        history.push(`/quizz/${quizzId}/attempts`);
-      }}>
+      <CardContent>
         <Grid container justify="space-between" alignItems="center">
-          <Typography variant="h5">{quizzTitle}</Typography>
+          <Typography
+            variant="h5"
+            onClick={() => {
+              history.push(`/quizz/${quizzId}/attempts`);
+            }}
+          >
+            {quizzTitle}
+          </Typography>
           <div>
             <IconButton
               onClick={() => {
