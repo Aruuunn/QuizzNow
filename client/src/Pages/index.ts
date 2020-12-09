@@ -5,3 +5,4 @@ export { default as QuizInfoView } from "./QuizzInfo";
 export { default as NotFoundView } from './NotFound';
 export { default as QuestionAttemptView } from './QuestionAttempt';
 export { default as QuizzResultsView } from './QuizzResults';
+export { default as QuizzAttemptsByUsersView } from './QuizzAttempts';

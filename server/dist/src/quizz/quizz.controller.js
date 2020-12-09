@@ -19,6 +19,7 @@ const user_entity_1 = require("../user/user.entity");
 const jwt_gaurd_1 = require("../auth/jwt.gaurd");
 const new_question_1 = require("../question/dto/new.question");
 const new_quiz_1 = require("./dto/new.quiz");
+const update_quizz_1 = require("./dto/update.quizz");
 const quizz_service_1 = require("./quizz.service");
 let QuizController = class QuizController {
     constructor(quizService) {
@@ -50,9 +51,27 @@ let QuizController = class QuizController {
         await this.quizService.removeAllQuestions(user, quizId);
         return res.sendStatus(common_1.HttpStatus.OK);
     }
-    async updateQuizTime(startDatetime, endDatetime, quizId, req, res) {
-        await this.quizService.updateQuiz(req.user, quizId, startDatetime, endDatetime);
+    async getQuizzData(user, quizzId) {
+        try {
+            const quizz = await this.quizService.getQuiz(quizzId, ["createdBy"]);
+            if (quizz.createdBy.userId !== user.userId) {
+                throw new common_1.BadRequestException();
+            }
+            delete quizz.createdBy;
+            return quizz;
+        }
+        catch (e) {
+            console.log(e);
+            throw new common_1.NotFoundException();
+        }
+    }
+    async updateQuizTime(quizzData, quizId, user, res) {
+        await this.quizService.updateQuizz(user, quizzData, quizId);
         return res.sendStatus(common_1.HttpStatus.OK);
+    }
+    async getAttemptData(options, user, quizzId) {
+        console.log(options);
+        return await this.quizService.getQuizzAttemptData(quizzId, user, options);
     }
     async get(options, req) {
         return await this.quizService.getQuizzes(req.user, options);
@@ -77,7 +96,8 @@ __decorate([
 __decorate([
     common_1.Get(':qid/start'),
     common_1.UseGuards(jwt_gaurd_1.default),
-    __param(0, common_1.Param('qid')), __param(1, user_decorator_1.User()),
+    __param(0, common_1.Param('qid')),
+    __param(1, user_decorator_1.User()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String, user_entity_1.default]),
     __metadata("design:returntype", Promise)
@@ -137,18 +157,34 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], QuizController.prototype, "removeAllQuestions", null);
 __decorate([
+    common_1.Get(':quizzId/data'),
+    common_1.UseGuards(jwt_gaurd_1.default),
+    __param(0, user_decorator_1.User()),
+    __param(1, common_1.Param('quizzId')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [user_entity_1.default, String]),
+    __metadata("design:returntype", Promise)
+], QuizController.prototype, "getQuizzData", null);
+__decorate([
     common_1.Patch(':qid'),
     common_1.UseGuards(jwt_gaurd_1.default),
     common_1.UsePipes(common_1.ValidationPipe),
-    __param(0, common_1.Body('startDatetime')),
-    __param(1, common_1.Body('endDatetime')),
-    __param(2, common_1.Param('qid')),
-    __param(3, common_1.Req()),
-    __param(4, common_1.Res()),
+    __param(0, common_1.Body()),
+    __param(1, common_1.Param('qid')),
+    __param(2, user_decorator_1.User()),
+    __param(3, common_1.Res()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String, String, Object, Object, Object]),
+    __metadata("design:paramtypes", [update_quizz_1.UpdateQuizDto, Object, user_entity_1.default, Object]),
     __metadata("design:returntype", Promise)
 ], QuizController.prototype, "updateQuizTime", null);
+__decorate([
+    common_1.Get(":qid/attempt-details"),
+    common_1.UseGuards(jwt_gaurd_1.default),
+    __param(0, common_1.Query()), __param(1, user_decorator_1.User()), __param(2, common_1.Param('qid')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object, user_entity_1.default, String]),
+    __metadata("design:returntype", Promise)
+], QuizController.prototype, "getAttemptData", null);
 __decorate([
     common_1.Get(),
     common_1.UseGuards(jwt_gaurd_1.default),

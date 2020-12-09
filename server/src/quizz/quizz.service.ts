@@ -14,11 +14,13 @@ import { QuestionService } from '../question/question.service';
 import UserEntity from '../user/user.entity';
 import { Repository } from 'typeorm';
 import { NewQuizDto } from './dto/new.quiz';
+import { UpdateQuizDto } from './dto/update.quizz';
 import { QuestionAttemptEntity } from './entities/question_attempt.entity';
 import { QuizzEntity } from './entities/quizz.entity';
 
 import QuizzAttemptEntity from './entities/quizz_attempts.entity';
 import { WsException } from '@nestjs/websockets';
+import QuestionEntity from '../question/question.entity';
 
 @Injectable()
 export class QuizzService {
@@ -66,7 +68,9 @@ export class QuizzService {
 
     const data = {
       ...quizz,
-      canAttemptQuizz: this.canAttemptQuiz(quizz, user),
+      canAttemptQuizz:
+        this.canAttemptQuiz(quizz, user) &&
+        quizz.createdBy.userId !== user.userId,
       totalNumberOfQuestions: quizz.questions.length,
       isQuizzAttemptFinished: user.userQuizAttempts.reduce((t, c) => {
         if (c.quizz.quizzId === quizzId) {
@@ -109,7 +113,7 @@ export class QuizzService {
         cacheQuestion[questions[i].questionId] = i;
       }
 
-      const questions_ =  quizzAttempt?.questionAttempts.map((o, index) => {
+      const questions_ = quizzAttempt?.questionAttempts.map((o, index) => {
         return {
           optionChoosed: o?.optionChoosed,
           question: questions[cacheQuestion[o?.questionId]],
@@ -118,9 +122,9 @@ export class QuizzService {
 
       return {
         score: quizzAttempt.totalScore,
-        maxScore: questions.length, 
-        questions : questions_
-      }
+        maxScore: questions.length,
+        questions: questions_,
+      };
     } catch (e) {
       this.logger.error(e);
       throw new InternalServerErrorException();
@@ -164,7 +168,7 @@ export class QuizzService {
 
   async attemptQuiz(user: UserEntity, quizId: string): Promise<string> {
     const quiz = await this.quizRepo.findOne(quizId, {
-      relations: ['quizzAttemptsByUsers'],
+      relations: ['quizzAttemptsByUsers', 'createdBy'],
     });
     const quizAttempt = user.userQuizAttempts.reduce((t, c) => {
       if (c.quizz.quizzId === quiz.quizzId) {
@@ -174,7 +178,10 @@ export class QuizzService {
       }
     }, undefined);
 
-    if (!this.canAttemptQuiz(quiz, user)) {
+    if (
+      !this.canAttemptQuiz(quiz, user) ||
+      quiz.createdBy.userId === user.userId
+    ) {
       throw new BadRequestException();
     }
 
@@ -254,6 +261,29 @@ export class QuizzService {
     return await this.quizRepo.findOneOrFail(id, { relations });
   };
 
+  getQuizzAttemptData = async (
+    quizzId: string,
+    user: UserEntity,
+    options: IPaginationOptions,
+  ) => {
+
+    const quizz = await this.getQuiz(quizzId, ['createdBy']);
+    
+    if (!quizz || quizz?.createdBy?.userId !== user.userId) {
+      throw new BadRequestException();
+    }
+
+    const q = this.quizAttemptRepo.createQueryBuilder('q');
+    q.andWhere('q.quizz.quizzId= :quizzId', { quizzId });
+    q.orderBy('q.totalScore', 'DESC');
+    q.leftJoinAndSelect('q.user', 'user');
+
+
+    const data = await paginate<QuizzAttemptEntity>(q, options);
+    console.log(data);
+    return data;
+  };
+
   createNewQuiz = async (user: UserEntity, quizData: NewQuizDto) => {
     const newQuiz = new QuizzEntity();
 
@@ -270,6 +300,54 @@ export class QuizzService {
     newQuiz.questions = questions;
     await newQuiz.save();
     return newQuiz;
+  };
+
+  updateQuizz = async (
+    user: UserEntity,
+    quizzData: UpdateQuizDto,
+    quizzId: string,
+  ) => {
+    const { endDatetime, questions, quizzTitle, startDatetime } = quizzData;
+
+    const quizz = await this.getQuiz(quizzId, ['createdBy']);
+
+    if (!quizz || quizz.createdBy.userId !== user.userId) {
+      throw new BadRequestException();
+    }
+
+    if (endDatetime) {
+      quizz.endDatetime = new Date(endDatetime);
+    }
+
+    if (startDatetime) {
+      quizz.startDatetime = new Date(startDatetime);
+    }
+
+    if (quizzTitle) {
+      quizz.quizzTitle = quizzTitle;
+    }
+
+    if (questions) {
+      const newQuestions: QuestionEntity[] = [];
+      for (let question of questions) {
+        if (question.questionId) {
+          await this.questionService.updateQuestion(
+            user,
+            question,
+            question.questionId,
+          );
+        } else {
+          const newQuestion = await this.questionService.createNewQuestion(
+            user,
+            question as NewQuestionDto,
+          );
+          newQuestions.push(newQuestion);
+        }
+      }
+      quizz.questions = [...quizz.questions, ...newQuestions];
+    }
+
+    await quizz.save();
   };
 
   addNewQuestion = async (
@@ -370,41 +448,6 @@ export class QuizzService {
     }
 
     quiz.questions = [];
-    await quiz.save();
-    return quiz;
-  };
-
-  updateQuiz = async (
-    user: UserEntity,
-    quizzId: string,
-    startDatetime?: string,
-    endDatetime?: string,
-    quizzTitle?: string,
-  ) => {
-    const quiz = await this.quizRepo.findOne(
-      { quizzId },
-      { relations: ['createdBy'] },
-    );
-    if (!quiz) {
-      throw new BadRequestException('No Quiz Found with the given ID');
-    }
-
-    if (quizzTitle) {
-      quiz.quizzTitle = quizzTitle;
-    }
-
-    if (quiz.createdBy.userId !== user.userId) {
-      throw new UnauthorizedException();
-    }
-
-    if (!startDatetime && !endDatetime) {
-      throw new BadRequestException();
-    }
-
-    if (startDatetime) quiz.startDatetime = new Date(startDatetime);
-
-    if (endDatetime) quiz.endDatetime = new Date(endDatetime);
-
     await quiz.save();
     return quiz;
   };

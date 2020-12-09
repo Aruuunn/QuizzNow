@@ -6,26 +6,26 @@ import {
   IsString,
 } from 'class-validator';
 
-import NewQuestionDto from 'src/question/dto/new.question';
+import UpdateQuestionDto from 'src/question/dto/update.question';
 
-export class NewQuizDto {
+export class UpdateQuizDto {
   @ApiProperty()
   @IsNotEmpty()
   @IsString()
-  quizzTitle: string;
+  quizzTitle?: string;
 
   @ApiProperty()
   @IsNotEmpty()
   @IsDateString()
-  startDatetime: string;
+  startDatetime?: string;
 
   @ApiProperty()
   @IsNotEmpty()
   @IsDateString()
-  endDatetime: string;
+  endDatetime?: string;
 
   @ApiProperty()
   @IsNotEmpty()
   @ArrayMinSize(1)
-  questions: NewQuestionDto[];
+  questions?: UpdateQuestionDto[];
 }

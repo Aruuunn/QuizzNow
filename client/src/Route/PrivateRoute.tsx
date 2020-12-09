@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import {Route, RouteProps, useHistory} from 'react-router-dom'
+import { ACCESS_TOKEN } from '../common/constants';
 
 import { RootState } from '../reduxStore';
 
@@ -13,7 +14,7 @@ const PrivateRoute = (props: {isLoggedIn:boolean} & RouteProps) => {
 
   const { isLoggedIn, ...rest } = props;
 
-  if (!isLoggedIn) {
+  if (!isLoggedIn || !localStorage.getItem(ACCESS_TOKEN)) {
       history.push('/auth')    
   }
   return (

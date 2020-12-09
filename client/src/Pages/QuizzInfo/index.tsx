@@ -102,7 +102,7 @@ function QuizInfo(props: Props): ReactElement {
           setError("Something went wrong. Try again later");
         });
     }
-  }, [quizzId]);
+  }, [quizzId,props]);
 
   return (
     <div>
